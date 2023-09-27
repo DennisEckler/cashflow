@@ -1,6 +1,9 @@
 version: '3.8'
 services:
-  db:
+  postgres:
     image: postgres:16
+    container_name: postgres
     environment:
-      POSTGRES_PASSWORD: $POSTGRES_PW
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
