@@ -25,6 +25,7 @@ replay_pid*
 # Maven
 HELP.md
 target/
+!Backend/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 ### STS ###
