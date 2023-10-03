@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>dev.eckler</groupId>
 	<artifactId>myData</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>myData</name>
-	<description>Demo project for Spring Boot</description>
+	<description>This is the backend for my myData expenses service</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
