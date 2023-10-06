@@ -11,14 +11,15 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
-  # pgadmin:
-  #   image: dpage/pgadmin4:latest
-  #   container_name: pgadmin
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-  #   ports:
-  #     - "5050:80"
+  backend:
+    image: backend
+    container_name: backend
+    working_dir: /app
+    ports:
+      - "8080:8080"
+      # Volume is only for developing locally and auto reload
+    volumes:
+    - ./Backend:/app
 
 volumes:
   postgres:
