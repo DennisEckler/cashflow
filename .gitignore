@@ -2,6 +2,7 @@
 .DS_Store
 Thumbs.db
 .env
+command.txt
 ############## JAVA ##############
 # Compiled class files
 *.class
