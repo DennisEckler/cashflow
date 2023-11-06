@@ -1,6 +1,9 @@
-CREATE TABLE expense (
+CREATE TABLE transaktion (
     id SERIAL PRIMARY KEY,
-    description VARCHAR(255) NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL,
-    expense_date DATE NOT NULL
+    valuta DATE NOT NULL,
+    client_or_recipient VARCHAR(255) NOT NULL,
+    booking_text VARCHAR(255) NOT NULL,
+    purpose VARCHAR(255) NOT NULL,
+    value FLOAT(2) NOT NULL,
+    category VARCHAR(50)
 );
