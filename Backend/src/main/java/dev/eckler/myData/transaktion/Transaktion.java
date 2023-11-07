@@ -20,7 +20,7 @@ public class Transaktion {
   @NotNull
   private Date valutaDate;
   @NotNull
-  private String user;
+  private String agent;
   @NotNull
   private String bookingText;
   @NotNull
@@ -30,8 +30,52 @@ public class Transaktion {
   @Enumerated(EnumType.STRING)
   private Category category;
 
-  public Transaktion() {
+  public Transaktion(Date valutaDate, String agent, String bookingText, String purpose, float amount) {
+    this.valutaDate = valutaDate;
+    this.agent = agent;
+    this.bookingText = bookingText;
+    this.purpose = purpose;
+    this.amount = amount;
+  }
 
+  public Date getDate() {
+    return this.valutaDate;
+  }
+
+  public void setDate(Date valutaDate) {
+    this.valutaDate = valutaDate;
+  }
+
+  public String getAgent() {
+    return this.agent;
+  }
+
+  public void setAgent(String agent) {
+    this.agent = agent;
+  }
+
+  public String getBookingText() {
+    return this.bookingText;
+  }
+
+  public void setBookingText(String bookingText) {
+    this.bookingText = bookingText;
+  }
+
+  public String getPurpose() {
+    return this.purpose;
+  }
+
+  public void setPurpose(String purpose) {
+    this.purpose = purpose;
+  }
+
+  public float getAmount() {
+    return this.amount;
+  }
+
+  public void setAmount(float amount) {
+    this.amount = amount;
   }
 
 }
