@@ -1,0 +1,4 @@
+<h2>Upload your csv file here:</h2>
+<input type="file" class="fileUpload" (change)="onChange($event)" />
+<button (click)="onClick()">Upload</button>
+<p *ngIf="message">{{ message }}</p>
