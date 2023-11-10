@@ -1,0 +1,24 @@
+.fileUpload {
+  background-color: grey;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 1px red;
+
+  &_heading {
+    justify-self: center;
+    color: aqua;
+  }
+
+  &_hidden {
+    display: none;
+  }
+
+  &_choseButton {
+    border: 1px solid black;
+    border-radius: 10%;
+  }
+
+  &_sendButton {
+  }
+}
