@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateListComponent } from './components/update-list/update-list.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, FileUploadComponent, UpdateListComponent],
@@ -15,6 +16,7 @@ import { UpdateListComponent } from './components/update-list/update-list.compon
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

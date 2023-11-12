@@ -2,6 +2,7 @@ package dev.eckler.myData.transaktion;
 
 import java.sql.Date;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +17,12 @@ public class TransaktionController {
     this.transaktionRepository = transaktionRepository;
   }
 
-  @GetMapping("/transaktion")
-  public Iterable<Transaktion> getTransaktions() {
+  @CrossOrigin(origins = "http://localhost:4200")
+  @GetMapping("/update-list")
+  public Transaktion getTransaktion() {
     Date date = new Date(20231010);
-    this.transaktionRepository.save(
-        new Transaktion(date, "agent", "some bookin done", "the purpose", 2.23f));
-    return transaktionRepository.findAll();
+    Transaktion transaktion = new Transaktion(date, "agent", "bookingText", "the purpose", 21.3f);
+    return transaktion;
   }
 
   @PostMapping("/add")
