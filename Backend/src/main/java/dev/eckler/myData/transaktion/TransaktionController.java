@@ -1,5 +1,6 @@
 package dev.eckler.myData.transaktion;
 
+import java.io.File;
 import java.sql.Date;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class TransaktionController {
 
   private final TransaktionRepository transaktionRepository;
@@ -28,6 +30,12 @@ public class TransaktionController {
   @PostMapping("/add")
   public Transaktion addTransaktion(@RequestBody Transaktion request) {
     return this.transaktionRepository.save(request);
+  }
+
+  @PostMapping("/file-upload")
+  public void uploadFile(@RequestBody File csvFile) {
+    System.out.println(csvFile.getName());
+
   }
 
 }
