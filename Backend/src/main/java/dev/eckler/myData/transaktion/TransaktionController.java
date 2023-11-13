@@ -1,12 +1,11 @@
 package dev.eckler.myData.transaktion;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TransaktionController {
 
   private final TransaktionRepository transaktionRepository;
+  private final TransaktionService transaktionService;
 
-  public TransaktionController(TransaktionRepository transaktionRepository) {
+  public TransaktionController(TransaktionRepository transaktionRepository, TransaktionService transaktionService) {
     this.transaktionRepository = transaktionRepository;
+    this.transaktionService = transaktionService;
   }
 
   @CrossOrigin(origins = "http://localhost:4200")
@@ -41,12 +42,11 @@ public class TransaktionController {
   @PostMapping("/file-upload")
   public void uploadFile(@RequestParam("file") MultipartFile csvFile) throws IOException {
     InputStream stream = csvFile.getInputStream();
-    Scanner s = new Scanner(stream);
-    while (s.hasNext()) {
-      System.out.println(s.nextLine());
-    }
-    s.close();
-    System.out.println(csvFile.getOriginalFilename() + csvFile.getContentType() + csvFile.getSize());
+    List<Transaktion> transaktions = new ArrayList<>();
+    transaktions.addAll(this.transaktionService.convertCsvToTransaktionList(stream));
+    transaktions.forEach((ele) -> {
+      System.out.println(ele.toString());
+    });
 
   }
 

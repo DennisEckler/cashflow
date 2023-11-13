@@ -78,4 +78,10 @@ public class Transaktion {
     this.amount = amount;
   }
 
+  @Override
+  public String toString() {
+
+    return this.valutaDate + " " + this.amount + " " + this.purpose + " " + this.bookingText;
+  }
+
 }
