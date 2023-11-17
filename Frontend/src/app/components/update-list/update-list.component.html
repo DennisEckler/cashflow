@@ -1,2 +1,4 @@
-<button mat-raised-button color="primary" (click)="onClick()">getList</button>
-<p *ngIf="transaktion">Transaktion: {{ transaktion.purpose }}</p>
+<div class="box">
+  <button mat-raised-button color="primary" (click)="onClick()">getList</button>
+</div>
+<li class="box" *ngFor="let item of transaktions">{{ item.purpose }}</li>

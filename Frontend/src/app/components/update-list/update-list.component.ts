@@ -8,7 +8,7 @@ import { Transaktion } from 'src/app/shared/model/transaktion';
   styleUrls: ['./update-list.component.scss'],
 })
 export class UpdateListComponent implements OnInit {
-  transaktion?: Transaktion = undefined;
+  transaktions?: Transaktion[] = undefined;
 
   ngOnInit(): void {}
   constructor(private updateListService: UpdateListService) {}
@@ -16,8 +16,7 @@ export class UpdateListComponent implements OnInit {
   onClick() {
     this.updateListService.getList().subscribe({
       next: (v) => {
-        this.transaktion = v as Transaktion;
-        console.log(`next: ${v}`);
+        this.transaktions = v;
       },
       error: (e) => console.log(`error: ${e}`),
       complete: () => console.log('complete'),

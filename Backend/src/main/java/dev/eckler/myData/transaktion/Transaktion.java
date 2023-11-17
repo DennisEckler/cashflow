@@ -38,6 +38,9 @@ public class Transaktion {
     this.amount = amount;
   }
 
+  public Transaktion() {
+  };
+
   public Date getDate() {
     return this.valutaDate;
   }
