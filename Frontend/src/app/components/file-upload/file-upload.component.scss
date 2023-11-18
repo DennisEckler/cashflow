@@ -1,12 +1,8 @@
 .fileUpload {
-  background-color: grey;
-  max-width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  border: solid 1px red;
+  border: solid 2px cyan;
+  border-radius: 10px;
 
   &_heading {
-    justify-self: center;
     color: aqua;
   }
 
@@ -15,11 +11,8 @@
   }
 
   &_choseButton {
-    border: 1px solid black;
     border-radius: 10%;
-    color: black;
-  }
-
-  &_sendButton {
+    background-color: cyan;
+    margin: 5px;
   }
 }

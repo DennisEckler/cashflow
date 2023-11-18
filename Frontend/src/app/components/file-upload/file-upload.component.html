@@ -1,25 +1,32 @@
-<div class="fileUpload">
-  <h2 class="fileUpload_heading">Upload your csv file here:</h2>
-  <input
-    type="file"
-    id="fileUpload_hidden"
-    class="fileUpload_hidden"
-    name="fileUpload_hidden"
-    (change)="onChange($event)"
-  />
-  <label class="fileUpload_choseButton" for="fileUpload_hidden"
-    >Select File</label
-  >
-  <p *ngIf="message">{{ message }}</p>
-  <button
-    mat-raised-button
-    color="primary"
-    class="fileUpload_sendButton"
-    (click)="onUpload()"
-  >
-    Send
-  </button>
-  <div *ngIf="loading">
-    <h3>Loading...</h3>
-  </div>
-</div>
+<mat-grid-list cols="12" rowHeight="150px" gutterSize="5px">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile colspan="4">
+    <div class="fileUpload">
+      <h2 class="fileUpload_heading">Upload your csv file here:</h2>
+      <input
+        id="fileUpload_hidden"
+        class="fileUpload_hidden"
+        name="fileUpload_hidden"
+        (change)="onChange($event)"
+      />
+      <label class="fileUpload_choseButton" for="fileUpload_hidden"
+        >Select File</label
+      >
+      <p *ngIf="message">{{ message }}</p>
+      <button
+        mat-raised-button
+        color="primary"
+        class="fileUpload_sendButton"
+        (click)="onUpload()"
+      >
+        Send
+      </button>
+      <div *ngIf="loading">
+        <h3>Loading...</h3>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
