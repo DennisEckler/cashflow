@@ -1,1 +1,19 @@
-export enum Category {}
+export enum Category {
+  DENNIS,
+  SVETI,
+  GUTSCHRIFT,
+  MIETE,
+  STROM,
+  INTERNET,
+  HANDY,
+  VERSICHERUNG,
+  GEZ,
+  ABONNEMENT,
+  LEBENSMITTEL,
+  HAUSHALTSMITTEL,
+  KLEIDUNG,
+  MOBILITÄT,
+  GESCHENKE,
+  AUSGEHEN,
+  SONSTIGES,
+}

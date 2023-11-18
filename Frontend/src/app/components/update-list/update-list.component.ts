@@ -18,7 +18,11 @@ export class UpdateListComponent implements OnInit {
       next: (v) => {
         this.transaktions = v;
       },
-      error: (e) => console.log(`error: ${e}`),
+      error: (e) => {
+        this.transaktions = this.updateListService.getFake();
+        console.log(`error: ${e}`);
+        console.log(this.transaktions);
+      },
       complete: () => console.log('complete'),
     });
   }
