@@ -11,7 +11,14 @@
     >Select File</label
   >
   <p *ngIf="message">{{ message }}</p>
-  <button class="fileUpload_sendButton" (click)="onUpload()">Send</button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="fileUpload_sendButton"
+    (click)="onUpload()"
+  >
+    Send
+  </button>
   <div *ngIf="loading">
     <h3>Loading...</h3>
   </div>

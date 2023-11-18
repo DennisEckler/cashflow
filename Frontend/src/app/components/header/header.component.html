@@ -1,9 +1,21 @@
-<img
-  class="logo"
-  src="../../../assets/Logo_Kostenbuch.png"
-  alt="Logo an open book"
-/>
-<nav class="box">
-  <a routerLink="/file-upload" mat-raised-button>file-upload</a>
-  <a routerLink="/update-list" mat-raised-button>update-list</a>
-</nav>
+<mat-grid-list cols="12" rowHeight="150px" gutterSize="5px">
+  <mat-grid-tile>
+    <img
+      class="logo"
+      src="../../../assets/Logo_Kostenbuch.png"
+      alt="Logo an open book"
+    />
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <button routerLink="/file-upload" mat-raised-button color="primary">
+      file-upload
+    </button>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <button routerLink="/update-list" mat-raised-button color="primary">
+      update-list
+    </button>
+  </mat-grid-tile>
+</mat-grid-list>
