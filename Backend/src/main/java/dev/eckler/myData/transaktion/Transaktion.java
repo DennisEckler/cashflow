@@ -30,6 +30,16 @@ public class Transaktion {
   @Enumerated(EnumType.STRING)
   private Category category;
 
+  public Transaktion(Date valutaDate, String agent, String bookingText, String purpose, float amount,
+      Category category) {
+    this.valutaDate = valutaDate;
+    this.agent = agent;
+    this.bookingText = bookingText;
+    this.purpose = purpose;
+    this.amount = amount;
+    this.category = category;
+  }
+
   public Transaktion(Date valutaDate, String agent, String bookingText, String purpose, float amount) {
     this.valutaDate = valutaDate;
     this.agent = agent;
