@@ -1,0 +1,6 @@
+<h2>List of Transaktions</h2>
+<ng-container *ngIf="transaktions.length > 0">
+  <ol>
+    <li *ngFor="let transaktion of transaktions">{{ transaktion.amount }}</li>
+  </ol>
+</ng-container>

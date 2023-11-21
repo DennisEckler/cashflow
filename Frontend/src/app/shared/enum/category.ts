@@ -16,4 +16,5 @@ export enum Category {
   GESCHENKE,
   AUSGEHEN,
   SONSTIGES,
+  LEER,
 }

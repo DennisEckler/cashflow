@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UpdateListService } from './update-list.service';
 import { Transaktion } from 'src/app/shared/model/transaktion';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-list',
@@ -17,11 +18,14 @@ export class UpdateListComponent implements OnInit {
     this.updateListService.getList().subscribe({
       next: (v) => {
         this.transaktions = v;
+        console.log(
+          'get request was succesfull and transaktions are filled with length of: ' +
+            this.transaktions?.length,
+        );
       },
-      error: (e) => {
+      error: (error: HttpErrorResponse) => {
         this.transaktions = this.updateListService.getFake();
-        console.log(`error: ${e}`);
-        console.log(this.transaktions);
+        console.log(`error: ${error.message}`);
       },
       complete: () => console.log('complete'),
     });
