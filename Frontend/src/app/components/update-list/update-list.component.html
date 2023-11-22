@@ -1,15 +1,10 @@
-<mat-grid-list cols="12" rowHeight="150px" gutterSize="5px">
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile colspan="2">
-    <div class="box">
-      <button mat-raised-button color="primary" (click)="onClick()">
-        getList
-      </button>
-    </div>
-    <!--<li class="box" *ngFor="let item of transaktions">{{ item.purpose }}</li>-->
-  </mat-grid-tile>
-</mat-grid-list>
+<h2>List of Transaktions</h2>
+<ol>
+  @for (transaktion of transaktions; track transaktion.id){ @if ($index === 0){
+  <li>test</li>
+  }
+  <li>Agent: {{ transaktion.agent }} Category: {{ transaktion.category }}</li>
+  } @empty{
+  <h2>Empty list</h2>
+  }
+</ol>

@@ -11,10 +11,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class UpdateListComponent implements OnInit {
   transaktions?: Transaktion[] = undefined;
 
-  ngOnInit(): void {}
   constructor(private updateListService: UpdateListService) {}
-
-  onClick() {
+  ngOnInit(): void {
     this.updateListService.getList().subscribe({
       next: (v) => {
         this.transaktions = v;
@@ -22,6 +20,7 @@ export class UpdateListComponent implements OnInit {
           'get request was succesfull and transaktions are filled with length of: ' +
             this.transaktions?.length,
         );
+        console.log(this.transaktions);
       },
       error: (error: HttpErrorResponse) => {
         this.transaktions = this.updateListService.getFake();

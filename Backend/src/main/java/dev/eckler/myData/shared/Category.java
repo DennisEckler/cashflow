@@ -17,5 +17,6 @@ public enum Category {
   MOBILITAET,
   GESCHENKE,
   AUSGEHEN,
-  SONSTIGES
+  SONSTIGES,
+  LEER
 }

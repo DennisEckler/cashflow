@@ -16,7 +16,9 @@
       <label class="fileUpload_choseButton" for="fileUpload_hidden"
         >Select File</label
       >
-      <p *ngIf="message">{{ message }}</p>
+      @if (message){
+      <p>{{ message }}</p>
+      }
       <button
         mat-raised-button
         color="primary"
@@ -25,9 +27,9 @@
       >
         Send
       </button>
-      <div *ngIf="loading">
-        <h3>Loading...</h3>
-      </div>
+      @if (loading){
+      <h3>Loading...</h3>
+      }
     </div>
   </mat-grid-tile>
 </mat-grid-list>

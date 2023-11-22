@@ -24,9 +24,14 @@ public class TransaktionController {
     this.transaktionService = transaktionService;
   }
 
-  @CrossOrigin(origins = "http://localhost:4200")
   @GetMapping("/update-list")
   public Iterable<Transaktion> getTransaktion() {
+    System.out.println(transaktionRepository.findAllByCategoryIsNull());
+    return transaktionRepository.findAllByCategoryIsNull();
+  }
+
+  @GetMapping("/show-transaktions")
+  public Iterable<Transaktion> getTransaktions() {
     return transaktionRepository.findAll();
   }
 

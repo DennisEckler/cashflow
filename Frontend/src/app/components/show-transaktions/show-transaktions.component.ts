@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaktion } from 'src/app/shared/model/transaktion';
 import { ShowTransaktionsService } from './show-transaktions.service';
-import { Category } from 'src/app/shared/enum/category';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-show-transaktions',
@@ -17,14 +17,10 @@ export class ShowTransaktionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.transaktions.push({
-      id: 1,
-      valutaDate: new Date(20101010),
-      agent: 'agent1',
-      purpose: 'purpose1',
-      bookingText: 'bookin1',
-      amount: 100,
-      category: Category.GEZ,
+    this.showTransaktionsService.getTransaktions().subscribe({
+      next: (v) => (this.transaktions = v),
+      error: (error: HttpErrorResponse) => console.log(error.message),
+      complete: () => console.log('load transaktions complete'),
     });
   }
 }
