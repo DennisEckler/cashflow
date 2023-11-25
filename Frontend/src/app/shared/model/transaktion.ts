@@ -2,7 +2,7 @@ import { Category } from '../enum/category';
 
 export class Transaktion {
   id: number;
-  valutaDate: Date;
+  date: Date;
   agent: string;
   bookingText: string;
   purpose: string;
@@ -11,7 +11,7 @@ export class Transaktion {
 
   constructor(
     id: number,
-    valutaDate: Date,
+    date: Date,
     agent: string,
     bookingText: string,
     purpose: string,
@@ -19,7 +19,7 @@ export class Transaktion {
     category: Category,
   ) {
     this.id = id;
-    this.valutaDate = valutaDate;
+    this.date = date;
     this.agent = agent;
     this.bookingText = bookingText;
     this.purpose = purpose;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UpdateListService } from './update-list.service';
 import { Transaktion } from 'src/app/shared/model/transaktion';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Category } from '../../shared/enum/category';
 
 @Component({
   selector: 'app-update-list',
@@ -10,6 +11,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class UpdateListComponent implements OnInit {
   transaktions?: Transaktion[] = undefined;
+  categories: Category[] = Object.values(Category);
+
+  onClick() {
+    if (this.transaktions) {
+      this.transaktions.forEach((transaktion) => {
+        console.log('Category: ' + transaktion.category);
+      });
+    }
+  }
 
   constructor(private updateListService: UpdateListService) {}
   ngOnInit(): void {
@@ -23,7 +33,6 @@ export class UpdateListComponent implements OnInit {
         console.log(this.transaktions);
       },
       error: (error: HttpErrorResponse) => {
-        this.transaktions = this.updateListService.getFake();
         console.log(`error: ${error.message}`);
       },
       complete: () => console.log('complete'),

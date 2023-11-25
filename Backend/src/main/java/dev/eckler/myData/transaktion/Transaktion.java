@@ -15,7 +15,7 @@ import jakarta.validation.constraints.NotNull;
 public class Transaktion {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @NotNull
   private Date valutaDate;
@@ -27,6 +27,7 @@ public class Transaktion {
   private String purpose;
   @NotNull
   private float amount;
+  @NotNull
   @Enumerated(EnumType.STRING)
   private Category category;
 
@@ -40,16 +41,12 @@ public class Transaktion {
     this.category = category;
   }
 
-  public Transaktion(Date valutaDate, String agent, String bookingText, String purpose, float amount) {
-    this.valutaDate = valutaDate;
-    this.agent = agent;
-    this.bookingText = bookingText;
-    this.purpose = purpose;
-    this.amount = amount;
-  }
-
   public Transaktion() {
   };
+
+  public Long getID() {
+    return this.id;
+  }
 
   public Date getDate() {
     return this.valutaDate;
@@ -91,10 +88,19 @@ public class Transaktion {
     this.amount = amount;
   }
 
+  public Category getCategory() {
+    return this.category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
   @Override
   public String toString() {
 
-    return this.valutaDate + " " + this.amount + " " + this.purpose + " " + this.bookingText;
+    return this.valutaDate + " " + this.amount + " " + this.purpose + " " + this.bookingText + " " + this.category + " "
+        + this.agent + "id: " + this.id;
   }
 
 }

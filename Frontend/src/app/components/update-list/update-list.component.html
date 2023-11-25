@@ -1,10 +1,35 @@
-<h2>List of Transaktions</h2>
-<ol>
-  @for (transaktion of transaktions; track transaktion.id){ @if ($index === 0){
-  <li>test</li>
-  }
-  <li>Agent: {{ transaktion.agent }} Category: {{ transaktion.category }}</li>
-  } @empty{
-  <h2>Empty list</h2>
-  }
-</ol>
+<button (click)="onClick()">Save</button>
+<table>
+  <thead>
+    <tr>
+      <th colspan="4">
+        <h2>List of Transaktions</h2>
+      </th>
+    </tr>
+    <tr>
+      <th>Agent</th>
+      <th>Purpose</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(transaktion of transaktions; track transaktion.category){
+    <tr>
+      <td>{{ transaktion.agent }}</td>
+      <td>{{ transaktion.purpose }}</td>
+      <td>
+        <form>
+          <mat-form-field>
+            <mat-label>LEER</mat-label>
+            <mat-select [(ngModel)]="transaktion.category" name="category">
+              @for (category of categories; track category) {
+              <mat-option [value]="category">{{ category }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </form>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

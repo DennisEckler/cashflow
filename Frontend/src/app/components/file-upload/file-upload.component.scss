@@ -1,18 +1,18 @@
 .fileUpload {
-  border: solid 2px cyan;
-  border-radius: 10px;
-
-  &_heading {
-    color: aqua;
-  }
-
   &_hidden {
     display: none;
   }
 
   &_choseButton {
-    border-radius: 10%;
-    background-color: cyan;
-    margin: 5px;
+    color: black;
+    width: 100px;
+    border-radius: 5%;
+    background-color: rgb(98, 196, 189);
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+  }
+
+  &_sendButton {
   }
 }

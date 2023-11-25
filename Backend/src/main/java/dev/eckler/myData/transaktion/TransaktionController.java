@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import dev.eckler.myData.shared.Category;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class TransaktionController {
 
   private final TransaktionRepository transaktionRepository;
   private final TransaktionService transaktionService;
+  private static final Category LEER = Category.LEER;
 
   public TransaktionController(TransaktionRepository transaktionRepository, TransaktionService transaktionService) {
     this.transaktionRepository = transaktionRepository;
@@ -26,13 +28,13 @@ public class TransaktionController {
 
   @GetMapping("/update-list")
   public Iterable<Transaktion> getTransaktion() {
-    System.out.println(transaktionRepository.findAllByCategoryIsNull());
-    return transaktionRepository.findAllByCategoryIsNull();
+    return transaktionRepository.findAllByCategory(LEER);
   }
 
   @GetMapping("/show-transaktions")
   public Iterable<Transaktion> getTransaktions() {
-    return transaktionRepository.findAll();
+    transaktionRepository.findAllByCategoryNot(LEER).forEach(transaktion -> System.out.println(transaktion.toString()));
+    return transaktionRepository.findAllByCategoryNot(LEER);
   }
 
   @PostMapping("/file-upload")
@@ -43,4 +45,9 @@ public class TransaktionController {
     transaktionRepository.saveAll(transaktions);
   }
 
+  // @PatchMapping("/categorize")
+  // public void categorizeTransaktions(@RequestParam("json?") JSONObject json){
+  //
+  // }
+  //
 }

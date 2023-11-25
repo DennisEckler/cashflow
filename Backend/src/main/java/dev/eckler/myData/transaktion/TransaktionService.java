@@ -39,14 +39,8 @@ public class TransaktionService {
         String purpose = columns[4];
         Category category = categorize(agent, purpose);
 
-        if (category == null) {
-          Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount);
-          transaktions.add(transaktion);
-        } else {
-          Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
-          transaktions.add(transaktion);
-          System.out.println(category.toString());
-        }
+        Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
+        transaktions.add(transaktion);
 
       } catch (ParseException e) {
         System.out.println(e);
@@ -59,8 +53,6 @@ public class TransaktionService {
   }
 
   public Category categorize(String agent, String purpose) {
-    Category category = null;
-
     Map<Category, String[]> map = new HashMap<Category, String[]>() {
       {
         put(Category.DENNIS, new String[] { "bertelsmann", "abas", "neschen", "mait", "arvato" });
@@ -95,7 +87,7 @@ public class TransaktionService {
     }
     ;
 
-    return category;
+    return Category.LEER;
   }
 
 }

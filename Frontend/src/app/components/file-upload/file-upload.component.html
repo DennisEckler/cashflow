@@ -1,35 +1,44 @@
-<mat-grid-list cols="12" rowHeight="150px" gutterSize="5px">
+<mat-grid-list cols="12" rowHeight="50px" gutterSize="5px">
   <mat-grid-tile></mat-grid-tile>
   <mat-grid-tile></mat-grid-tile>
   <mat-grid-tile></mat-grid-tile>
   <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile colspan="4">
-    <div class="fileUpload">
-      <h2 class="fileUpload_heading">Upload your csv file here:</h2>
-      <input
-        type="file"
-        id="fileUpload_hidden"
-        class="fileUpload_hidden"
-        name="fileUpload_hidden"
-        (change)="onChange($event)"
-      />
-      <label class="fileUpload_choseButton" for="fileUpload_hidden"
-        >Select File</label
-      >
-      @if (message){
-      <p>{{ message }}</p>
-      }
-      <button
-        mat-raised-button
-        color="primary"
-        class="fileUpload_sendButton"
-        (click)="onUpload()"
-      >
-        Send
-      </button>
-      @if (loading){
-      <h3>Loading...</h3>
-      }
-    </div>
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <input
+      type="file"
+      id="fileUpload_hidden"
+      class="fileUpload_hidden"
+      name="fileUpload_hidden"
+      (change)="onChange($event)"
+    />
+    <label class="fileUpload_choseButton" for="fileUpload_hidden"
+      >Select File</label
+    >
+  </mat-grid-tile>
+  <mat-grid-tile> </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="12" rowHeight="50px">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    @if (message){
+    <button
+      mat-raised-button
+      color="primary"
+      class="fileUpload_sendButton"
+      (click)="onUpload()"
+    >
+      Send
+    </button>
+    }
+  </mat-grid-tile>
+  <mat-grid-tile>
+    @if (loading){
+    <h3>Loading...</h3>
+    }
   </mat-grid-tile>
 </mat-grid-list>
