@@ -4,6 +4,11 @@ import { Transaktion } from 'src/app/shared/model/transaktion';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from '../../shared/enum/category';
 
+export interface CategoryIdentifier {
+  id: number;
+  category: String;
+}
+
 @Component({
   selector: 'app-update-list',
   templateUrl: './update-list.component.html',
@@ -12,12 +17,28 @@ import { Category } from '../../shared/enum/category';
 export class UpdateListComponent implements OnInit {
   transaktions?: Transaktion[] = undefined;
   categories: Category[] = Object.values(Category);
+  minimizedTransaktion: CategoryIdentifier[] = [];
 
   onClick() {
     if (this.transaktions) {
       this.transaktions.forEach((transaktion) => {
-        console.log('Category: ' + transaktion.category);
+        if (transaktion.category.toString() !== 'LEER') {
+          this.minimizedTransaktion.push({
+            id: transaktion.id,
+            category: transaktion.category.toUpperCase(),
+          });
+        }
       });
+
+      if (this.minimizedTransaktion.length > 0) {
+        console.log('sending');
+        this.updateListService.saveList(this.minimizedTransaktion).subscribe({
+          next: (v) => console.log(v),
+          error: (error: HttpErrorResponse) =>
+            console.log(`Error message: ${error.message}`),
+        });
+        this.minimizedTransaktion.length = 0;
+      }
     }
   }
 

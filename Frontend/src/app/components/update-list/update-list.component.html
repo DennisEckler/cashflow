@@ -15,6 +15,7 @@
   <tbody>
     @for(transaktion of transaktions; track transaktion.category){
     <tr>
+      <td>{{ transaktion.id }}</td>
       <td>{{ transaktion.agent }}</td>
       <td>{{ transaktion.purpose }}</td>
       <td>

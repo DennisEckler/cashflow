@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transaktion } from 'src/app/shared/model/transaktion';
+import { CategoryIdentifier } from './update-list.component';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,9 @@ export class UpdateListService {
     return this.http.get<Transaktion>(this.url + 'update-list');
   }
 
-  saveList(transaktions: Transaktion[]): Observable<any> {
-    return this.http.put(this.url + 'categorize', transaktions);
+  saveList(transaktions: CategoryIdentifier[]): Observable<any> {
+    return this.http.patch(this.url + 'categorize', transaktions, {
+      responseType: 'text',
+    });
   }
 }

@@ -4,14 +4,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import dev.eckler.myData.shared.Category;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -33,7 +37,6 @@ public class TransaktionController {
 
   @GetMapping("/show-transaktions")
   public Iterable<Transaktion> getTransaktions() {
-    transaktionRepository.findAllByCategoryNot(LEER).forEach(transaktion -> System.out.println(transaktion.toString()));
     return transaktionRepository.findAllByCategoryNot(LEER);
   }
 
@@ -45,9 +48,18 @@ public class TransaktionController {
     transaktionRepository.saveAll(transaktions);
   }
 
-  // @PatchMapping("/categorize")
-  // public void categorizeTransaktions(@RequestParam("json?") JSONObject json){
-  //
-  // }
-  //
+  @PatchMapping("/categorize")
+  public ResponseEntity<?> categorizeTransaktions(@RequestBody List<MinimizedTransaktion> patchValues) {
+
+    patchValues.forEach(entry -> {
+      Optional<Transaktion> transaktionFromDB = this.transaktionRepository.findById(entry.getId());
+      if (transaktionFromDB.isPresent()) {
+        transaktionFromDB.get().setCategory(entry.getCategory());
+        transaktionRepository.save(transaktionFromDB.get());
+      }
+
+    });
+    return ResponseEntity.ok("updated values successfully");
+  }
+
 }
