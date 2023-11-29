@@ -7,30 +7,26 @@
       </th>
     </tr>
     <tr>
+      <th>ID</th>
       <th>Agent</th>
       <th>Purpose</th>
       <th>Category</th>
     </tr>
   </thead>
   <tbody>
-    @for(transaktion of transaktions; track transaktion.category){
-    <tr>
-      <td>{{ transaktion.id }}</td>
-      <td>{{ transaktion.agent }}</td>
-      <td>{{ transaktion.purpose }}</td>
-      <td>
-        <form>
-          <mat-form-field>
-            <mat-label>LEER</mat-label>
-            <mat-select [(ngModel)]="transaktion.category" name="category">
-              @for (category of categories; track category) {
-              <mat-option [value]="category">{{ category }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </form>
-      </td>
-    </tr>
+    @for (transaktion of transaktions; track transaktion.category) {
+      <tr>
+        <td>{{ transaktion.id }}</td>
+        <td>{{ transaktion.agent }}</td>
+        <td>{{ transaktion.purpose }}</td>
+        <td>
+          <select [(ngModel)]="transaktion.category" name="category">
+            @for (category of categories; track category) {
+              <option [value]="category">{{ category }}</option>
+            }
+          </select>
+        </td>
+      </tr>
     }
   </tbody>
 </table>

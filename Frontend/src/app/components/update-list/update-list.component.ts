@@ -19,6 +19,25 @@ export class UpdateListComponent implements OnInit {
   categories: Category[] = Object.values(Category);
   minimizedTransaktion: CategoryIdentifier[] = [];
 
+  constructor(private updateListService: UpdateListService) {}
+
+  ngOnInit(): void {
+    this.updateListService.getList().subscribe({
+      next: (v) => {
+        this.transaktions = v;
+        console.log(
+          'get request was succesfull and transaktions are filled with length of: ' +
+            this.transaktions?.length,
+        );
+        console.log(this.transaktions);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(`error: ${error.message}`);
+      },
+      complete: () => console.log('complete'),
+    });
+  }
+
   onClick() {
     if (this.transaktions) {
       this.transaktions.forEach((transaktion) => {
@@ -40,23 +59,6 @@ export class UpdateListComponent implements OnInit {
         this.minimizedTransaktion.length = 0;
       }
     }
-  }
-
-  constructor(private updateListService: UpdateListService) {}
-  ngOnInit(): void {
-    this.updateListService.getList().subscribe({
-      next: (v) => {
-        this.transaktions = v;
-        console.log(
-          'get request was succesfull and transaktions are filled with length of: ' +
-            this.transaktions?.length,
-        );
-        console.log(this.transaktions);
-      },
-      error: (error: HttpErrorResponse) => {
-        console.log(`error: ${error.message}`);
-      },
-      complete: () => console.log('complete'),
-    });
+    this.ngOnInit();
   }
 }
