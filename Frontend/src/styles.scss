@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+$myGreen: rgb(98, 196, 189);
+$myPurple: rgb(148, 134, 250);
+$myBlue: rgb(110, 175, 213);
+
 html {
   box-sizing: border-box;
   background-color: #0d1f2d;
@@ -14,7 +19,5 @@ html {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: rgb(98, 196, 189); //gruen
-  // rgb(148, 134, 250) lila
-  // rgb(110, 175, 213) blau
+  color: rgb(98, 196, 189);
 }
