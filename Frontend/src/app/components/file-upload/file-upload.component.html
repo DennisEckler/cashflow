@@ -5,16 +5,9 @@
   name="fileUpload_hidden"
   (change)="onChange($event)"
 />
-<label class="fileUpload_choseButton" for="fileUpload_hidden"
-  >Select File</label
->
+<label class="btn" for="fileUpload_hidden">Select File</label>
 @if (message) {
-  <button
-    mat-raised-button
-    color="primary"
-    class="fileUpload_sendButton"
-    (click)="onUpload()"
-  >
+  <button mat-raised-button color="primary" class="btn" (click)="onUpload()">
     Send
   </button>
 }

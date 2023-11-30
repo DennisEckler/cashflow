@@ -1,16 +1,14 @@
+@import "../../../styles.scss";
+
+:host {
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
 .fileUpload {
   &_hidden {
     display: none;
-  }
-
-  &_choseButton {
-    color: black;
-    width: 100px;
-    border-radius: 5%;
-    background-color: rgb(98, 196, 189);
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
   }
 
   &_sendButton {

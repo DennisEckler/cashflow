@@ -23,13 +23,18 @@ public class TransaktionService {
   public List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream) throws IOException {
     List<Transaktion> transaktions = new ArrayList<>();
     String line = "";
+    Category category = null;
+    int counter = 0;
 
     BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
 
     reader.readLine();
     while ((line = reader.readLine()) != null) {
-
+      System.out.println(++counter + "  " + line);
       String[] columns = line.split(";");
+      if (columns.length == 0 || columns.length < 8) {
+        continue;
+      }
       SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
       try {
         Date date = new Date(formatter.parse(columns[1]).getTime());
@@ -37,7 +42,11 @@ public class TransaktionService {
         String agent = columns[2];
         String bookingText = columns[3];
         String purpose = columns[4];
-        Category category = categorize(agent, purpose);
+        if (columns[7].trim() == "") {
+          category = categorize(agent, purpose);
+        } else {
+          category = Enum.valueOf(Category.class, columns[7].toUpperCase());
+        }
 
         Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
         transaktions.add(transaktion);

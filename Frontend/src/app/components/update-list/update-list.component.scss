@@ -2,6 +2,11 @@ table {
   margin-left: auto;
   margin-right: auto;
 }
+thead {
+  position: sticky;
+  top: 0px;
+  background: #0d1f2d;
+}
 td,
 th {
   height: 35px;
@@ -9,7 +14,7 @@ th {
   padding-right: 15px;
   border: 2px solid rgb(110, 175, 213); //blau
 }
-
-// rgb(148, 134, 250) lila
-// rgb(110, 175, 213) blau
-// rgb(98, 196, 189) gruen
+h2 {
+  display: inline-block;
+  margin-right: 20px;
+}

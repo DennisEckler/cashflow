@@ -2,8 +2,16 @@
 
 .logo {
   width: 150px;
+  position: absolute;
+  left: 10px;
 }
-
-.btn {
-  background-color: $myGreen;
+:host {
+  display: grid;
+  height: 170px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, 200px);
+  gap: 10px;
+  padding: 10px;
 }
