@@ -4,9 +4,10 @@ import { ShowTransaktionsService } from './show-transaktions.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-show-transaktions',
-  templateUrl: './show-transaktions.component.html',
-  styleUrls: ['./show-transaktions.component.scss'],
+    selector: 'app-show-transaktions',
+    templateUrl: './show-transaktions.component.html',
+    styleUrls: ['./show-transaktions.component.scss'],
+    standalone: true,
 })
 export class ShowTransaktionsComponent implements OnInit {
   transaktions: Transaktion[] = new Array();

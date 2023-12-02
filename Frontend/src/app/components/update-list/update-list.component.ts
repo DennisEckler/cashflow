@@ -3,6 +3,7 @@ import { UpdateListService } from './update-list.service';
 import { Transaktion } from 'src/app/shared/model/transaktion';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from '../../shared/enum/category';
+import { FormsModule } from '@angular/forms';
 
 export interface CategoryIdentifier {
   id: number;
@@ -10,9 +11,11 @@ export interface CategoryIdentifier {
 }
 
 @Component({
-  selector: 'app-update-list',
-  templateUrl: './update-list.component.html',
-  styleUrls: ['./update-list.component.scss'],
+    selector: 'app-update-list',
+    templateUrl: './update-list.component.html',
+    styleUrls: ['./update-list.component.scss'],
+    standalone: true,
+    imports: [FormsModule],
 })
 export class UpdateListComponent implements OnInit {
   transaktions?: Transaktion[] = undefined;

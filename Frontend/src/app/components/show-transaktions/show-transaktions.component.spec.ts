@@ -8,8 +8,8 @@ describe('ShowTransaktionsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ShowTransaktionsComponent]
-    });
+    imports: [ShowTransaktionsComponent]
+});
     fixture = TestBed.createComponent(ShowTransaktionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
