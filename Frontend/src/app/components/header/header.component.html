@@ -1,7 +1,10 @@
 <img
   class="logo"
-  src="../../../assets/Logo_Kostenbuch.png"
+  [ngSrc]="logo"
+  height="100"
+  width="100"
   alt="Logo an open book"
+  priority
 />
 <button class="btn" routerLink="/show-transaktions">Transaktions</button>
 <button class="btn" routerLink="/file-upload">Upload File</button>
