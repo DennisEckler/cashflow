@@ -1,32 +1,28 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { UpdateListService } from './update-list.service';
-import { Transaktion } from 'src/app/shared/model/transaktion';
+import { CategorizeService } from '../../core/services/categorize.service';
+import { Transaktion } from 'src/app/core/model/transaktion';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Category } from '../../shared/enum/category';
+import { Category } from '../../core/enum/category';
 import { FormsModule } from '@angular/forms';
-
-export interface CategoryIdentifier {
-  id: number;
-  category: String;
-}
+import { TransaktionDTO } from 'src/app/core/model/transaktion-dto';
 
 @Component({
-  selector: 'app-update-list',
-  templateUrl: './update-list.component.html',
-  styleUrls: ['./update-list.component.scss'],
+  selector: 'app-categorize',
+  templateUrl: './categorize.component.html',
+  styleUrls: ['./categorize.component.scss'],
   standalone: true,
   imports: [FormsModule],
 })
-export class UpdateListComponent implements OnInit {
-  private updateListService = inject(UpdateListService);
+export class CategorizeComponent implements OnInit {
+  private categorizeService = inject(CategorizeService);
   transaktions?: Transaktion[] = undefined;
   categories: Category[] = Object.values(Category);
-  minimizedTransaktion: CategoryIdentifier[] = [];
+  transaktionDTO: TransaktionDTO[] = [];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.updateListService.getList().subscribe({
+    this.categorizeService.getList().subscribe({
       next: (v) => {
         this.transaktions = v;
         console.log(
@@ -46,21 +42,21 @@ export class UpdateListComponent implements OnInit {
     if (this.transaktions) {
       this.transaktions.forEach((transaktion) => {
         if (transaktion.category.toString() !== 'LEER') {
-          this.minimizedTransaktion.push({
+          this.transaktionDTO.push({
             id: transaktion.id,
             category: transaktion.category.toUpperCase(),
           });
         }
       });
 
-      if (this.minimizedTransaktion.length > 0) {
+      if (this.transaktionDTO.length > 0) {
         console.log('sending');
-        this.updateListService.saveList(this.minimizedTransaktion).subscribe({
+        this.categorizeService.saveList(this.transaktionDTO).subscribe({
           next: (v) => console.log(v),
           error: (error: HttpErrorResponse) =>
             console.log(`Error message: ${error.message}`),
         });
-        this.minimizedTransaktion.length = 0;
+        this.transaktionDTO.length = 0;
       }
     }
     this.ngOnInit();

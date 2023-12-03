@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Transaktion } from 'src/app/shared/model/transaktion';
-import { ShowTransaktionsService } from './show-transaktions.service';
+import { Transaktion } from 'src/app/core/model/transaktion';
+import { ShowTransaktionsService } from '../../core/services/show-transaktions.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
