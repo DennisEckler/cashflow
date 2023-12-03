@@ -7,9 +7,7 @@
 />
 <label class="btn" for="fileUpload_hidden">Select File</label>
 @if (message) {
-  <button mat-raised-button color="primary" class="btn" (click)="onUpload()">
-    Send
-  </button>
+  <button class="btn" (click)="onUpload()">Send</button>
 }
 @if (loading) {
   <h3>Loading...</h3>

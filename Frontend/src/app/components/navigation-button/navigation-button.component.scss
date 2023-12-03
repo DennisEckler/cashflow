@@ -1,24 +1,4 @@
-$myGreen: rgb(98, 196, 189);
-$myPurple: rgb(148, 134, 250);
-$myBlue: rgb(110, 175, 213);
-
-html {
-  box-sizing: border-box;
-  background-color: #0d1f2d;
-  font-size: 100%;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: rgb(98, 196, 189);
-}
+@import "../../../styles.scss";
 
 .btn {
   display: inline-block;

@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FileUploadService } from './file-upload.service';
 
 @Component({
-    selector: 'app-file-upload',
-    templateUrl: './file-upload.component.html',
-    styleUrls: ['./file-upload.component.scss'],
-    standalone: true,
+  selector: 'app-file-upload',
+  templateUrl: './file-upload.component.html',
+  styleUrls: ['./file-upload.component.scss'],
+  standalone: true,
+  imports: [],
 })
 export class FileUploadComponent implements OnInit {
+  private fileUploadService = inject(FileUploadService);
   csvFile: File | null = null;
   message: string = '';
   loading: boolean = false;
 
-  constructor(private fileUploadService: FileUploadService) {}
+  constructor() {}
   ngOnInit(): void {}
 
   onChange(event: any) {

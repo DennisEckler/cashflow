@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UpdateListService } from './update-list.service';
 import { Transaktion } from 'src/app/shared/model/transaktion';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,18 +11,19 @@ export interface CategoryIdentifier {
 }
 
 @Component({
-    selector: 'app-update-list',
-    templateUrl: './update-list.component.html',
-    styleUrls: ['./update-list.component.scss'],
-    standalone: true,
-    imports: [FormsModule],
+  selector: 'app-update-list',
+  templateUrl: './update-list.component.html',
+  styleUrls: ['./update-list.component.scss'],
+  standalone: true,
+  imports: [FormsModule],
 })
 export class UpdateListComponent implements OnInit {
+  private updateListService = inject(UpdateListService);
   transaktions?: Transaktion[] = undefined;
   categories: Category[] = Object.values(Category);
   minimizedTransaktion: CategoryIdentifier[] = [];
 
-  constructor(private updateListService: UpdateListService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.updateListService.getList().subscribe({
