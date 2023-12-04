@@ -7,7 +7,7 @@
 />
 <label class="btn" for="fileUpload_hidden">Select File</label>
 @if (message) {
-  <button class="btn" (click)="onUpload()">Send</button>
+  <navigation-button label="Send" (click)="onUpload()" />
 }
 @if (loading) {
   <h3>Loading...</h3>

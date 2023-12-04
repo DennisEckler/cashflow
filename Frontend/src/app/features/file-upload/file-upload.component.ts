@@ -1,12 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FileUploadService } from '../../core/services/file-upload.service';
+import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
   standalone: true,
-  imports: [],
+  imports: [NavigationButtonComponent],
 })
 export class FileUploadComponent implements OnInit {
   private fileUploadService = inject(FileUploadService);

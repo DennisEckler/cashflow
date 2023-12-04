@@ -5,13 +5,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from '../../core/enum/category';
 import { FormsModule } from '@angular/forms';
 import { TransaktionDTO } from 'src/app/core/model/transaktion-dto';
+import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 
 @Component({
   selector: 'app-categorize',
   templateUrl: './categorize.component.html',
   styleUrls: ['./categorize.component.scss'],
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NavigationButtonComponent],
 })
 export class CategorizeComponent implements OnInit {
   private categorizeService = inject(CategorizeService);

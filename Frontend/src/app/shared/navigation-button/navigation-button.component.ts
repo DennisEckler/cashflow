@@ -4,12 +4,10 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'navigation-button',
+  templateUrl: './navigation-button.component.html',
+  styleUrl: './navigation-button.component.scss',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  template: `<button class="btn" routerLink="{{ routerLink }}">
-    {{ label }}
-  </button>`,
-  styleUrl: './navigation-button.component.scss',
 })
 export class NavigationButtonComponent {
   @Input() label = '';
