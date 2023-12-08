@@ -1,0 +1,5 @@
+<button (click)="changeValue()">send</button>
+<input type="text" [(ngModel)]="message" />
+<h4>{{ message }}</h4>
+
+<app-test [name]="message"></app-test>

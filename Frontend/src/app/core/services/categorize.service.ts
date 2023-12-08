@@ -13,7 +13,7 @@ export class CategorizeService {
   constructor(private http: HttpClient) {}
 
   getList(): Observable<any> {
-    return this.http.get<Transaktion>(this.url + 'update-list');
+    return this.http.get<Transaktion>(this.url + 'get-empty-category-entries');
   }
 
   saveList(transaktions: TransaktionDTO[]): Observable<any> {

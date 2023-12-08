@@ -1,6 +1,6 @@
-$myGreen: rgb(98, 196, 189);
-$myPurple: rgb(148, 134, 250);
-$myBlue: rgb(110, 175, 213);
+$myGreen: rgba(98, 196, 189, 0.5);
+$myPurple: rgba(148, 134, 250, 0.7);
+$myBlue: rgba(110, 175, 213, 0.6);
 
 html {
   box-sizing: border-box;
@@ -17,7 +17,7 @@ html {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: rgb(98, 196, 189);
+  color: rgba(98, 196, 189, 0.8);
 }
 
 .btn {

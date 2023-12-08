@@ -30,7 +30,7 @@ public class TransaktionController {
     this.transaktionService = transaktionService;
   }
 
-  @GetMapping("/update-list")
+  @GetMapping("/get-empty-category-entries")
   public Iterable<Transaktion> getTransaktion() {
     return transaktionRepository.findAllByCategory(LEER);
   }

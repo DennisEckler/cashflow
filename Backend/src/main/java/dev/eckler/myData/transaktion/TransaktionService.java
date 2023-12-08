@@ -20,22 +20,56 @@ import java.util.HashMap;
 @Service
 public class TransaktionService {
 
-  public List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream) throws IOException {
+  private static final Map<Category, String[]> IDENTIFIER = new HashMap<Category, String[]>() {
+    {
+      put(Category.DENNIS, new String[] { "bertelsmann", "abas", "neschen", "mait", "arvato" });
+      put(Category.SVETI, new String[] { "kammann" });
+      put(Category.MIETE, new String[] { "rainer klenke" });
+      put(Category.STROM, new String[] { "e.on energie" });
+      put(Category.INTERNET, new String[] { "vodafone" });
+      put(Category.HANDY, new String[] { "telefonica" });
+      put(Category.VERSICHERUNG, new String[] { "lvm landw.versicherungsverein" });
+      put(Category.GEZ, new String[] { "beitragsservice von ard" });
+      put(Category.ABONNEMENT, new String[] { "spotify ab", "igm herford", "netflix" });
+      put(Category.LEBENSMITTEL, new String[] { "wez" });
+      put(Category.HAUSHALTSMITTEL, new String[] { "rossmann" });
+      put(Category.KLEIDUNG, new String[] { "c+a", "zalando" });
+      put(Category.MOBILITAET, new String[] { "hauptzollamt bielefeld", "unicredit", "aral ag", "jet dankt" });
+      put(Category.GESCHENKE, new String[] {});
+      put(Category.AUSGEHEN, new String[] { "landbaeckerei niemeyer" });
+      put(Category.SONSTIGES, new String[] { "elsner catering", "ing" });
+
+    }
+  };
+
+  private TransaktionRepository transaktionRepository;
+  private boolean monthCheckCalled = false;
+
+  private TransaktionService(TransaktionRepository transaktionRepository) {
+    this.transaktionRepository = transaktionRepository;
+  }
+
+  List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream) throws IOException {
     List<Transaktion> transaktions = new ArrayList<>();
     String line = "";
     Category category = null;
-    int counter = 0;
-
     BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
+    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
     reader.readLine();
     while ((line = reader.readLine()) != null) {
-      System.out.println(++counter + "  " + line);
+
       String[] columns = line.split(";");
+
       if (columns.length == 0 || columns.length < 8) {
         continue;
       }
-      SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+      if (!monthCheckCalled) {
+        if (skipIfMonthYearAlreadyExist(columns)) {
+          return transaktions;
+        }
+      }
+
       try {
         Date date = new Date(formatter.parse(columns[1]).getTime());
         float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
@@ -52,39 +86,27 @@ public class TransaktionService {
         transaktions.add(transaktion);
 
       } catch (ParseException e) {
-        System.out.println(e);
-
+        e.printStackTrace();
       }
     }
-    reader.close();
 
+    this.monthCheckCalled = false;
+    reader.close();
     return transaktions;
   }
 
-  public Category categorize(String agent, String purpose) {
-    Map<Category, String[]> map = new HashMap<Category, String[]>() {
-      {
-        put(Category.DENNIS, new String[] { "bertelsmann", "abas", "neschen", "mait", "arvato" });
-        put(Category.SVETI, new String[] { "kammann" });
-        put(Category.MIETE, new String[] { "rainer klenke" });
-        put(Category.STROM, new String[] { "e.on energie" });
-        put(Category.INTERNET, new String[] { "vodafone" });
-        put(Category.HANDY, new String[] { "telefonica" });
-        put(Category.VERSICHERUNG, new String[] { "lvm landw.versicherungsverein" });
-        put(Category.GEZ, new String[] { "beitragsservice von ard" });
-        put(Category.ABONNEMENT, new String[] { "spotify ab", "igm herford", "netflix" });
-        put(Category.LEBENSMITTEL, new String[] { "wez" });
-        put(Category.HAUSHALTSMITTEL, new String[] { "rossmann" });
-        put(Category.KLEIDUNG, new String[] { "c+a", "zalando" });
-        put(Category.MOBILITAET, new String[] { "hauptzollamt bielefeld", "unicredit", "aral ag", "jet dankt" });
-        put(Category.GESCHENKE, new String[] {});
-        put(Category.AUSGEHEN, new String[] { "landbaeckerei niemeyer" });
-        put(Category.SONSTIGES, new String[] { "elsner catering", "ing" });
+  private boolean skipIfMonthYearAlreadyExist(String[] columns) {
+    String year = columns[1].substring(6, 10);
+    String month = columns[1].substring(3, 5);
+    this.monthCheckCalled = true;
+    if (this.transaktionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
+      return true;
+    }
+    return false;
+  }
 
-      }
-    };
-
-    for (Map.Entry<Category, String[]> elementOfMap : map.entrySet()) {
+  private Category categorize(String agent, String purpose) {
+    for (Map.Entry<Category, String[]> elementOfMap : IDENTIFIER.entrySet()) {
       Category entryCategory = elementOfMap.getKey();
       String[] values = elementOfMap.getValue();
 
@@ -95,7 +117,6 @@ public class TransaktionService {
       }
     }
     ;
-
     return Category.LEER;
   }
 
