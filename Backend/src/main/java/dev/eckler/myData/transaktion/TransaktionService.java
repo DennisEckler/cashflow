@@ -43,13 +43,13 @@ public class TransaktionService {
   };
 
   private TransaktionRepository transaktionRepository;
-  private boolean monthCheckCalled = false;
 
   private TransaktionService(TransaktionRepository transaktionRepository) {
     this.transaktionRepository = transaktionRepository;
   }
 
   List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream) throws IOException {
+    boolean monthCheckCalled = false;
     List<Transaktion> transaktions = new ArrayList<>();
     String line = "";
     Category category = null;
@@ -68,6 +68,7 @@ public class TransaktionService {
         if (skipIfMonthYearAlreadyExist(columns)) {
           return transaktions;
         }
+        monthCheckCalled = true;
       }
 
       try {
@@ -90,7 +91,6 @@ public class TransaktionService {
       }
     }
 
-    this.monthCheckCalled = false;
     reader.close();
     return transaktions;
   }
@@ -98,7 +98,6 @@ public class TransaktionService {
   private boolean skipIfMonthYearAlreadyExist(String[] columns) {
     String year = columns[1].substring(6, 10);
     String month = columns[1].substring(3, 5);
-    this.monthCheckCalled = true;
     if (this.transaktionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
       return true;
     }
