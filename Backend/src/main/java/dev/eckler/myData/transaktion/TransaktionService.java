@@ -50,49 +50,62 @@ public class TransaktionService {
 
   List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream) throws IOException {
     boolean monthCheckCalled = false;
+    int counter = 0;
     List<Transaktion> transaktions = new ArrayList<>();
     String line = "";
     Category category = null;
     BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
-    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
     reader.readLine();
     while ((line = reader.readLine()) != null) {
-
+      System.out.println(++counter);
       String[] columns = line.split(";");
 
-      if (columns.length == 0 || columns.length < 8) {
-        continue;
-      }
-      if (!monthCheckCalled) {
-        if (skipIfMonthYearAlreadyExist(columns)) {
-          return transaktions;
-        }
-        monthCheckCalled = true;
+      // if (columns.length == 0 || columns.length < 8) {
+      // continue;
+      // }
+      // if (!monthCheckCalled) {
+      // if (skipIfMonthYearAlreadyExist(columns)) {
+      // return transaktions;
+      // }
+      // monthCheckCalled = true;
+      // }
+      //
+      Date date = formatDateToDatabaseFormat(columns[1]);
+      float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
+      String agent = columns[2];
+      String bookingText = columns[3];
+      String purpose = columns[4];
+      if (columns[7].equals("x")) {
+        category = categorize(agent, purpose);
+      } else {
+        category = Enum.valueOf(Category.class, columns[7].toUpperCase());
       }
 
-      try {
-        Date date = new Date(formatter.parse(columns[1]).getTime());
-        float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
-        String agent = columns[2];
-        String bookingText = columns[3];
-        String purpose = columns[4];
-        if (columns[7].trim() == "") {
-          category = categorize(agent, purpose);
-        } else {
-          category = Enum.valueOf(Category.class, columns[7].toUpperCase());
-        }
+      Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
+      transaktions.add(transaktion);
 
-        Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
-        transaktions.add(transaktion);
-
-      } catch (ParseException e) {
-        e.printStackTrace();
-      }
     }
 
     reader.close();
     return transaktions;
+  }
+
+  private Date formatDateToDatabaseFormat(String unformattedDate) {
+    SimpleDateFormat dotsFormatter = new SimpleDateFormat("dd.MM.yyyy");
+    SimpleDateFormat slashFormatter = new SimpleDateFormat("dd/MM/yyyy");
+    try {
+      return new Date(dotsFormatter.parse(unformattedDate).getTime());
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    try {
+      return new Date(slashFormatter.parse(unformattedDate).getTime());
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return null;
+
   }
 
   private boolean skipIfMonthYearAlreadyExist(String[] columns) {
@@ -115,7 +128,6 @@ public class TransaktionService {
         }
       }
     }
-    ;
     return Category.LEER;
   }
 
