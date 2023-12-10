@@ -9,16 +9,17 @@ import dev.eckler.myData.transaktion.TransaktionRepository;
 @CrossOrigin(origins = "http://localhost:4200")
 public class OverviewController {
   TransaktionRepository transaktionRepository;
+  OverviewService overviewService;
 
-  OverviewController(TransaktionRepository transaktionRepository) {
+  OverviewController(TransaktionRepository transaktionRepository, OverviewService overviewService) {
     this.transaktionRepository = transaktionRepository;
+    this.overviewService = overviewService;
+
   }
 
   @GetMapping("/overview")
   public void getOverview() {
-    this.transaktionRepository.getOverview()
-        .forEach(entry -> {
-        });
+    this.overviewService.createOverviewRows(this.transaktionRepository.getOverview());
   }
 
 }
