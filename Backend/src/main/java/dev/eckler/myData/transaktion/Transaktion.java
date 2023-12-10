@@ -18,7 +18,7 @@ public class Transaktion {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @NotNull
-  private Date valutaDate;
+  private Date date;
   @NotNull
   private String agent;
   @NotNull
@@ -31,9 +31,9 @@ public class Transaktion {
   @Enumerated(EnumType.STRING)
   private Category category;
 
-  public Transaktion(Date valutaDate, String agent, String bookingText, String purpose, float amount,
+  public Transaktion(Date date, String agent, String bookingText, String purpose, float amount,
       Category category) {
-    this.valutaDate = valutaDate;
+    this.date = date;
     this.agent = agent;
     this.bookingText = bookingText;
     this.purpose = purpose;
@@ -49,11 +49,11 @@ public class Transaktion {
   }
 
   public Date getDate() {
-    return this.valutaDate;
+    return this.date;
   }
 
-  public void setDate(Date valutaDate) {
-    this.valutaDate = valutaDate;
+  public void setDate(Date date) {
+    this.date = date;
   }
 
   public String getAgent() {
@@ -99,7 +99,7 @@ public class Transaktion {
   @Override
   public String toString() {
 
-    return this.valutaDate + " " + this.amount + " " + this.purpose + " " + this.bookingText + " " + this.category + " "
+    return this.date + " " + this.amount + " " + this.purpose + " " + this.bookingText + " " + this.category + " "
         + this.agent + "id: " + this.id;
   }
 
