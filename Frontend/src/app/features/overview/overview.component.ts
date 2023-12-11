@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OverviewService } from './overview.service';
-import { HttpErrorResponse, HttpHeaderResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { OverviewRow } from 'src/app/core/model/overviewRow';
 
 @Component({
   selector: 'app-overview',
@@ -11,11 +12,12 @@ import { HttpErrorResponse, HttpHeaderResponse } from '@angular/common/http';
   styleUrl: './overview.component.scss',
 })
 export class OverviewComponent implements OnInit {
+  overviewSummary: OverviewRow[] = [];
   constructor(private overviewService: OverviewService) {}
   ngOnInit() {
     this.overviewService.getOverview().subscribe({
-      next: (v: HttpHeaderResponse) => {
-        console.log(v.statusText);
+      next: (v) => {
+        this.overviewSummary = v;
       },
       error: (error: HttpErrorResponse) => console.log(error.message),
     });

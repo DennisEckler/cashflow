@@ -37,4 +37,18 @@ export class FileUploadComponent implements OnInit {
       });
     }
   }
+
+  onInitUpload() {
+    this.loading = !this.loading;
+    if (this.csvFile) {
+      console.log('uploading this file: ' + this.csvFile.name);
+      this.fileUploadService
+        .uploadInit(this.csvFile)
+        .subscribe((event: any) => {
+          if (typeof event === 'object') {
+            this.loading = false;
+          }
+        });
+    }
+  }
 }

@@ -126,4 +126,80 @@ public class OverviewRow {
         + haushaltsmittel + "  " + kleidung + "  " + mobilitaet + "  " + geschenke + "  " + ausgehen + "  " + sonstiges;
   }
 
+  public String getYear() {
+    return year;
+  }
+
+  public String getMonth() {
+    return month;
+  }
+
+  public float getDennis() {
+    return dennis;
+  }
+
+  public float getSveti() {
+    return sveti;
+  }
+
+  public float getGutschrift() {
+    return gutschrift;
+  }
+
+  public float getMiete() {
+    return miete;
+  }
+
+  public float getStrom() {
+    return strom;
+  }
+
+  public float getInternet() {
+    return internet;
+  }
+
+  public float getHandy() {
+    return handy;
+  }
+
+  public float getVersicherung() {
+    return versicherung;
+  }
+
+  public float getGez() {
+    return gez;
+  }
+
+  public float getAbonnement() {
+    return abonnement;
+  }
+
+  public float getLebensmittel() {
+    return lebensmittel;
+  }
+
+  public float getHaushaltsmittel() {
+    return haushaltsmittel;
+  }
+
+  public float getKleidung() {
+    return kleidung;
+  }
+
+  public float getMobilitaet() {
+    return mobilitaet;
+  }
+
+  public float getGeschenke() {
+    return geschenke;
+  }
+
+  public float getAusgehen() {
+    return ausgehen;
+  }
+
+  public float getSonstiges() {
+    return sonstiges;
+  }
+
 }

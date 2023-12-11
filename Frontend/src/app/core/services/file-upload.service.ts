@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FileUploadService {
-  url = 'http://localhost:8080/file-upload';
+  url = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) {}
 
@@ -15,6 +15,13 @@ export class FileUploadService {
     if (file) {
       formData.append('file', file, file.name);
     }
-    return this.http.post(this.url, formData);
+    return this.http.post(this.url + 'file-upload', formData);
+  }
+  uploadInit(file: File): Observable<any> {
+    const formData = new FormData();
+    if (file) {
+      formData.append('file', file, file.name);
+    }
+    return this.http.post(this.url + 'file-upload-init', formData);
   }
 }

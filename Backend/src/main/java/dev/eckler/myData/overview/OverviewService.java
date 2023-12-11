@@ -8,14 +8,26 @@ import java.util.ArrayList;
 public class OverviewService {
   private String year = "";
   private String month = "";
+  private int index = 0;
   private OverviewRow overviewRow = new OverviewRow();
 
-  public void createOverviewRows(List<OverviewEntry> overviewEntries) {
+  public List<OverviewRow> createOverviewRows(List<OverviewEntry> overviewEntries) {
     List<OverviewRow> overviewSummary = new ArrayList<>();
+
     overviewEntries.forEach(entry -> {
+
+      if (index == 0) {
+        this.year = entry.getYear();
+        this.month = entry.getMonth();
+        this.overviewRow.setYear(entry.getYear());
+        this.overviewRow.setMonth(entry.getMonth());
+        index++;
+      }
+
       if (entry.getYear().equals(year) && entry.getMonth().equals(month)) {
         overviewRow.mapCategoryAmount(entry.getCategory(), entry.getAmount());
       } else {
+
         System.out.println(overviewRow.toString());
         overviewSummary.add(overviewRow);
         this.year = entry.getYear();
@@ -23,9 +35,14 @@ public class OverviewService {
         this.overviewRow = new OverviewRow();
         this.overviewRow.setYear(entry.getYear());
         this.overviewRow.setMonth(entry.getMonth());
+
       }
     });
 
+    this.year = "";
+    this.month = "";
+    this.index = 0;
+    return overviewSummary;
   }
 
 }

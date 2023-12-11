@@ -59,22 +59,10 @@ public class TransaktionService {
     String line = "";
     Category category = null;
     BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
-
     reader.readLine();
     while ((line = reader.readLine()) != null) {
       System.out.println(++counter);
       String[] columns = line.split(";");
-
-      // if (columns.length == 0 || columns.length < 8) {
-      // continue;
-      // }
-      // if (!monthCheckCalled) {
-      // if (skipIfMonthYearAlreadyExist(columns)) {
-      // return transaktions;
-      // }
-      // monthCheckCalled = true;
-      // }
-      //
       Date date = formatDateToDatabaseFormat(columns[1]);
       float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
       String agent = columns[2];
@@ -85,12 +73,59 @@ public class TransaktionService {
       } else {
         category = Enum.valueOf(Category.class, columns[7].toUpperCase());
       }
-
       Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
       transaktions.add(transaktion);
-
     }
+    reader.close();
+    return transaktions;
+  }
 
+  private boolean skipIfMonthYearAlreadyExist(String[] columns) {
+    String year = columns[1].substring(6, 10);
+    String month = columns[1].substring(3, 5);
+    if (this.transaktionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  private Category categorize(String agent, String purpose) {
+    for (Map.Entry<Category, String[]> elementOfMap : IDENTIFIER.entrySet()) {
+      Category entryCategory = elementOfMap.getKey();
+      String[] values = elementOfMap.getValue();
+
+      for (String identifier : values) {
+        if (agent.trim().toLowerCase().contains(identifier.toLowerCase())
+            || purpose.trim().toLowerCase().contains(identifier.toLowerCase())) {
+          return entryCategory;
+        }
+      }
+    }
+    return Category.LEER;
+  }
+
+  List<Transaktion> convertCsvToTransaktionListInit(InputStream fileInputStream) throws IOException {
+    List<Transaktion> transaktions = new ArrayList<>();
+    String line = "";
+    Category category = null;
+    BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
+
+    reader.readLine();
+    while ((line = reader.readLine()) != null) {
+      String[] columns = line.split(";");
+      Date date = formatDateToDatabaseFormat(columns[1]);
+      float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
+      String agent = columns[2];
+      String bookingText = columns[3];
+      String purpose = columns[4];
+      if (columns[7].equals("x")) {
+        category = categorize(agent, purpose);
+      } else {
+        category = Enum.valueOf(Category.class, columns[7].toUpperCase());
+      }
+      Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
+      transaktions.add(transaktion);
+    }
     reader.close();
     return transaktions;
   }
@@ -110,30 +145,6 @@ public class TransaktionService {
     }
     return null;
 
-  }
-
-  private boolean skipIfMonthYearAlreadyExist(String[] columns) {
-    String year = columns[1].substring(6, 10);
-    String month = columns[1].substring(3, 5);
-    if (this.transaktionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
-      return true;
-    }
-    return false;
-  }
-
-  private Category categorize(String agent, String purpose) {
-    for (Map.Entry<Category, String[]> elementOfMap : IDENTIFIER.entrySet()) {
-      Category entryCategory = elementOfMap.getKey();
-      String[] values = elementOfMap.getValue();
-
-      for (String identifier : values) {
-        if (agent.toLowerCase().contains(identifier.toLowerCase())
-            || purpose.toLowerCase().contains(identifier.toLowerCase())) {
-          return entryCategory;
-        }
-      }
-    }
-    return Category.LEER;
   }
 
 }

@@ -48,6 +48,14 @@ public class TransaktionController {
     transaktionRepository.saveAll(transaktions);
   }
 
+  @PostMapping("/file-upload-init")
+  public void uploadInitFile(@RequestParam("file") MultipartFile csvFile) throws IOException {
+    InputStream stream = csvFile.getInputStream();
+    List<Transaktion> transaktions = new ArrayList<>();
+    transaktions.addAll(this.transaktionService.convertCsvToTransaktionListInit(stream));
+    transaktionRepository.saveAll(transaktions);
+  }
+
   @PatchMapping("/categorize")
   public ResponseEntity<?> categorizeTransaktions(@RequestBody List<MinimizedTransaktion> patchValues) {
 
