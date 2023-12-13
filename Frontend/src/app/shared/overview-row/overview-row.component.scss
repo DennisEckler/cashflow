@@ -1,0 +1,19 @@
+table {
+  display: block;
+  width: 100%;
+  max-width: auto;
+  overflow-x: auto;
+}
+thead {
+  position: sticky;
+  top: 0px;
+  background: #0d1f2d;
+}
+td,
+th {
+  height: 25px;
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 2px solid rgb(110, 175, 213); //blau
+  overflow-x: auto;
+}
