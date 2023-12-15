@@ -9,12 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.sql.Date;
-
 import org.springframework.stereotype.Service;
-
 import dev.eckler.myData.shared.Category;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 @Service
@@ -54,16 +52,17 @@ public class TransaktionService {
 
   List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream) throws IOException {
     boolean monthCheckCalled = false;
-    int counter = 0;
     List<Transaktion> transaktions = new ArrayList<>();
     String line = "";
     Category category = null;
+
     BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
     reader.readLine();
+
     while ((line = reader.readLine()) != null) {
-      System.out.println(++counter);
+
       String[] columns = line.split(";");
-      Date date = formatDateToDatabaseFormat(columns[1]);
+      Date date = parseDate(columns[1]);
       float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
       String agent = columns[2];
       String bookingText = columns[3];
@@ -104,7 +103,7 @@ public class TransaktionService {
     return Category.LEER;
   }
 
-  List<Transaktion> convertCsvToTransaktionListInit(InputStream fileInputStream) throws IOException {
+  public List<Transaktion> convertCsvToTransaktionListInit(InputStream fileInputStream) throws IOException {
     List<Transaktion> transaktions = new ArrayList<>();
     String line = "";
     Category category = null;
@@ -113,7 +112,7 @@ public class TransaktionService {
     reader.readLine();
     while ((line = reader.readLine()) != null) {
       String[] columns = line.split(";");
-      Date date = formatDateToDatabaseFormat(columns[1]);
+      Date date = parseDate(columns[1]);
       float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
       String agent = columns[2];
       String bookingText = columns[3];
@@ -130,21 +129,15 @@ public class TransaktionService {
     return transaktions;
   }
 
-  private Date formatDateToDatabaseFormat(String unformattedDate) {
-    SimpleDateFormat dotsFormatter = new SimpleDateFormat("dd.MM.yyyy");
-    SimpleDateFormat slashFormatter = new SimpleDateFormat("dd/MM/yyyy");
-    try {
-      return new Date(dotsFormatter.parse(unformattedDate).getTime());
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-    try {
-      return new Date(slashFormatter.parse(unformattedDate).getTime());
-    } catch (ParseException e) {
-      e.printStackTrace();
+  private static Date parseDate(String date) {
+    List<String> formats = Arrays.asList("dd.MM.yyyy", "dd/MM/yyyy", "yyyy-MM-dd");
+    for (String format : formats) {
+      try {
+        return new Date(new SimpleDateFormat(format).parse(date).getTime());
+      } catch (ParseException e) {
+      }
     }
     return null;
-
   }
 
 }

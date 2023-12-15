@@ -110,20 +110,14 @@ public class OverviewRow {
       case ("GEZ") -> setGez(amount);
       case ("ABONNEMENT") -> setAbonnement(amount);
       case ("LEBENSMITTEL") -> setLebensmittel(amount);
-      case ("HAUSHALSMITTEL") -> setHaushaltsmittel(amount);
+      case ("HAUSHALTSMITTEL") -> setHaushaltsmittel(amount);
       case ("KLEIDUNG") -> setKleidung(amount);
       case ("MOBILITAET") -> setMobilitaet(amount);
       case ("GESCHENKE") -> setGeschenke(amount);
       case ("AUSGEHEN") -> setAusgehen(amount);
       case ("SONSTIGES") -> setSonstiges(amount);
+      default -> System.out.println("category not available" + category);
     }
-  }
-
-  @Override
-  public String toString() {
-    return year + "  " + month + "  " + dennis + "  " + sveti + "  " + gutschrift + "  " + miete + "  " + strom + "  "
-        + internet + "  " + handy + "  " + versicherung + "  " + gez + "  " + abonnement + "  " + lebensmittel + "  "
-        + haushaltsmittel + "  " + kleidung + "  " + mobilitaet + "  " + geschenke + "  " + ausgehen + "  " + sonstiges;
   }
 
   public String getYear() {

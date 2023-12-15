@@ -1,0 +1,1001 @@
+buchung;valuta;auftraggeber/empfaenger;buchungstext;verwendungszweck;betrag;;
+2022-04-24;2020-01-30;xxx;bookingtext;arvato;647,23;x;x
+2022-02-16;2022-03-11;xxx;gutschrift;landbaeckerei niemeyer;-21,83;x;x
+2022-09-09;2023-09-14;other;bookingtext;LIDL;-552,12;x;x
+2022-06-27;2022-06-14;other;bookingtext;c+a;-133,79;x;x
+2023-10-13;2022-08-06;other;bookingtext;hauptzollamt bielefeld;-405,45;x;x
+2023-04-29;2020-12-19;xxx;gutschrift;telefonica;-224,92;x;x
+2023-10-04;2021-09-08;xxx;bookingtext;mait;774,92;x;x
+2021-05-28;2020-01-25;xxx;gutschrift;ing;-330,65;x;x
+2022-07-21;2021-07-25;other;gutschrift;igm herford;-658,05;x;x
+2020-06-16;2021-10-08;xxx;bookingtext;kammann;944,96;x;x
+2021-05-17;2022-02-25;xxx;gutschrift;wez;-146,43;x;x
+2023-01-29;2023-12-17;other;gutschrift;netflix;-261,8;x;x
+2021-12-01;2023-09-06;xxx;bookingtext;spotify ab;-662,03;x;x
+2023-09-10;2020-11-28;xxx;gutschrift;beitragsservice von ard;-448,67;x;x
+2022-09-02;2023-12-01;other;gutschrift;LIDL;-880,24;x;x
+2022-12-04;2020-12-23;xxx;gutschrift;spotify ab;-383,6;x;x
+2023-02-27;2021-04-25;other;bookingtext;E-CENTER;-377,39;x;x
+2021-01-03;2022-09-23;xxx;gutschrift;E-CENTER;-294,19;x;x
+2023-12-11;2021-12-15;xxx;bookingtext;spotify ab;-412,36;x;x
+2023-06-29;2021-10-18;xxx;gutschrift;TAS Minden;-605,26;x;x
+2023-10-31;2020-04-21;other;bookingtext;lvm landw.versicherungsverein;-963,46;x;x
+2023-08-15;2021-07-07;xxx;bookingtext;yyy;-700,54;x;x
+2020-07-23;2020-03-30;other;gutschrift;Deutsche Tamoil GmbH;-753,53;x;x
+2021-05-22;2020-06-05;other;bookingtext;landbaeckerei niemeyer;-789,75;x;x
+2021-04-02;2023-10-31;xxx;gutschrift;DM DROGERIEMARKT;-375,2;x;x
+2020-09-30;2020-04-11;other;bookingtext;DM DROGERIEMARKT;-381,32;x;x
+2021-03-29;2020-07-31;other;bookingtext;ALDI;-935,81;x;x
+2020-12-15;2023-05-11;xxx;bookingtext;Logemann Vermoegensverwaltung;-140,31;x;x
+2022-10-07;2022-06-20;other;gutschrift;bertelsmann;619,05;x;x
+2022-02-02;2020-10-31;other;bookingtext;Logemann Vermoegensverwaltung;-152,22;x;x
+2020-12-05;2022-12-11;xxx;bookingtext;c+a;-73,16;x;x
+2022-04-25;2023-05-26;xxx;bookingtext;lvm landw.versicherungsverein;-235,87;x;x
+2023-01-21;2022-11-30;other;bookingtext;lvm landw.versicherungsverein;-630,15;x;x
+2023-11-28;2021-09-03;other;bookingtext;elsner catering;-612,27;x;x
+2022-01-11;2023-12-27;xxx;bookingtext;elsner catering;-718,26;x;x
+2021-08-29;2021-02-01;xxx;gutschrift;landbaeckerei niemeyer;-484,4;x;x
+2022-06-13;2020-04-27;other;bookingtext;Logemann Vermoegensverwaltung;-640,17;x;x
+2020-01-05;2022-04-16;xxx;bookingtext;TAS Minden;-245,62;x;x
+2022-04-16;2020-05-05;xxx;gutschrift;Combi Verbrauchermarkt;-40,14;x;x
+2021-09-15;2022-01-27;other;gutschrift;telefonica;-516,61;x;x
+2023-06-01;2023-11-18;xxx;bookingtext;neschen;58,34;x;x
+2023-02-26;2023-02-22;xxx;bookingtext;Stromio GmbH;-930,53;x;x
+2022-02-15;2022-04-18;other;gutschrift;neschen;597,49;x;x
+2022-05-10;2023-03-26;xxx;gutschrift;rossmann;-290,66;x;x
+2020-04-03;2022-04-20;other;gutschrift;Combi Verbrauchermarkt;-26,83;x;x
+2020-02-05;2021-10-21;xxx;gutschrift;yyy;-681,3;x;x
+2022-07-08;2023-04-29;other;bookingtext;rainer klenke;-158,32;x;x
+2020-06-27;2022-01-15;other;bookingtext;mait;306,59;x;x
+2023-08-03;2021-05-05;xxx;bookingtext;Stromio GmbH;-663,42;x;x
+2020-02-24;2022-08-21;other;bookingtext;lvm landw.versicherungsverein;-7,85;x;x
+2022-02-17;2023-04-18;other;bookingtext;ALDI;-399,44;x;x
+2022-10-23;2020-10-29;xxx;gutschrift;Drillisch Online GmbH;-861,71;x;x
+2023-06-19;2020-02-10;other;gutschrift;jet dankt;-639,87;x;x
+2022-01-29;2020-04-26;other;bookingtext;pppp;-784,04;x;x
+2022-01-03;2021-04-10;other;bookingtext;e.on energie;-525,66;x;x
+2023-11-09;2021-01-16;other;gutschrift;xxx;-53,61;x;x
+2023-07-30;2022-11-27;other;gutschrift;rainer klenke;-211,17;x;x
+2022-12-18;2020-08-29;other;bookingtext;abas;514,61;x;x
+2021-10-30;2022-10-20;xxx;gutschrift;FitX Deutschland GmbH;-23,89;x;x
+2021-02-25;2021-11-13;other;bookingtext;BoRa Sports GmbH;-713,71;x;x
+2023-04-29;2021-08-07;other;gutschrift;abas;723,37;x;x
+2023-02-22;2022-06-08;other;bookingtext;aral ag;-506,25;x;x
+2022-05-09;2021-03-14;xxx;bookingtext;TAS Minden;-734,38;x;x
+2021-03-15;2021-11-05;xxx;bookingtext;spotify ab;-211,19;x;x
+2020-06-11;2023-11-27;xxx;bookingtext;ing;-833,17;x;x
+2021-11-21;2022-10-06;other;gutschrift;e.on energie;-924,5;x;x
+2021-06-25;2020-08-23;xxx;gutschrift;abas;623,41;x;x
+2021-11-24;2020-09-18;other;gutschrift;hauptzollamt bielefeld;-205,06;x;x
+2020-11-15;2023-08-02;other;gutschrift;e.on energie;-847,05;x;x
+2020-10-05;2022-08-08;other;gutschrift;TAS Minden;-319,21;x;x
+2021-09-03;2022-09-27;xxx;bookingtext;KAUFLAND;-75,87;x;x
+2020-01-09;2023-02-28;xxx;gutschrift;xxx;-418,37;x;x
+2022-10-09;2020-12-21;other;bookingtext;elsner catering;-706,36;x;x
+2023-11-03;2021-07-29;xxx;bookingtext;neschen;788,05;x;x
+2022-06-04;2023-09-21;other;bookingtext;Stromio GmbH;-691,66;x;x
+2023-03-07;2022-04-19;other;gutschrift;LIDL;-718,7;x;x
+2023-09-15;2022-11-12;xxx;gutschrift;kammann;104,52;x;x
+2022-04-03;2022-09-05;xxx;bookingtext;jet dankt;-542,15;x;x
+2020-01-18;2023-08-26;other;bookingtext;unicredit;-782,28;x;x
+2023-02-27;2022-10-27;other;gutschrift;elsner catering;-60,94;x;x
+2022-11-09;2022-12-29;other;bookingtext;LIDL;-236,56;x;x
+2020-09-21;2022-09-29;other;gutschrift;TAS Minden;-563,36;x;x
+2022-03-23;2021-08-04;xxx;gutschrift;bertelsmann;8,04;x;x
+2022-04-08;2023-04-30;xxx;gutschrift;bertelsmann;456,76;x;x
+2021-11-24;2020-01-24;xxx;bookingtext;yyy;-974,48;x;x
+2020-08-18;2021-06-19;other;bookingtext;aral ag;-366,59;x;x
+2021-11-18;2021-08-30;other;gutschrift;rainer klenke;-356,41;x;x
+2023-05-15;2022-01-10;xxx;bookingtext;abas;740,02;x;x
+2021-01-31;2023-06-25;other;bookingtext;jet dankt;-164,25;x;x
+2023-01-31;2021-09-26;xxx;bookingtext;e.on energie;-415,82;x;x
+2020-07-27;2020-03-18;other;bookingtext;DM DROGERIEMARKT;-184,51;x;x
+2021-06-07;2022-05-10;xxx;gutschrift;ALDI;-618,17;x;x
+2020-10-16;2022-01-17;xxx;gutschrift;neschen;814,97;x;x
+2022-08-22;2023-05-06;xxx;gutschrift;LIDL;-517,58;x;x
+2022-12-12;2022-04-19;xxx;gutschrift;hauptzollamt bielefeld;-619,19;x;x
+2022-02-04;2022-07-07;xxx;bookingtext;neschen;320,66;x;x
+2020-11-28;2020-03-11;other;bookingtext;FitX Deutschland GmbH;-483,87;x;x
+2020-12-10;2021-04-07;xxx;gutschrift;spotify ab;-19,72;x;x
+2022-01-13;2021-02-17;xxx;bookingtext;elsner catering;-675,43;x;x
+2022-02-16;2023-08-06;other;bookingtext;spotify ab;-950,26;x;x
+2022-06-27;2023-03-09;xxx;gutschrift;xxx;-494,22;x;x
+2022-12-30;2020-08-29;other;gutschrift;xxx;-355,7;x;x
+2023-10-08;2023-08-14;other;gutschrift;ALDI;-334,02;x;x
+2023-04-18;2021-06-01;xxx;gutschrift;spotify ab;-491,73;x;x
+2021-05-30;2020-01-24;xxx;bookingtext;c+a;-657,88;x;x
+2022-03-24;2021-11-03;other;gutschrift;Drillisch Online GmbH;-138,48;x;x
+2022-05-02;2021-05-19;other;bookingtext;Logemann Vermoegensverwaltung;-393,17;x;x
+2023-05-23;2020-10-25;xxx;gutschrift;zalando;-2,73;x;x
+2023-12-27;2020-03-07;xxx;bookingtext;yyy;-355,25;x;x
+2022-07-14;2021-01-25;other;bookingtext;BoRa Sports GmbH;-94,84;x;x
+2021-10-18;2022-03-12;xxx;gutschrift;e.on energie;-935,53;x;x
+2020-08-23;2021-07-25;xxx;bookingtext;vodafone;-61,97;x;x
+2020-09-04;2023-07-27;xxx;bookingtext;igm herford;-980,53;x;x
+2021-06-19;2021-07-31;xxx;bookingtext;elsner catering;-304,43;x;x
+2021-01-27;2020-01-30;other;bookingtext;TAS Minden;-660,99;x;x
+2023-04-11;2021-05-22;other;gutschrift;pppp;-210,53;x;x
+2020-10-25;2020-08-23;xxx;bookingtext;bertelsmann;263,26;x;x
+2021-06-24;2022-05-20;xxx;bookingtext;TAS Minden;-608,08;x;x
+2022-06-13;2020-06-06;other;gutschrift;elsner catering;-3,18;x;x
+2021-05-24;2023-02-26;xxx;gutschrift;ing;-353,78;x;x
+2021-03-15;2020-02-09;xxx;bookingtext;ALDI;-846,25;x;x
+2023-01-23;2021-11-06;xxx;gutschrift;unicredit;-9,77;x;x
+2020-11-21;2020-08-09;xxx;gutschrift;ALDI;-123,2;x;x
+2022-08-01;2021-06-23;xxx;gutschrift;lvm landw.versicherungsverein;-613,25;x;x
+2022-05-07;2022-03-21;xxx;gutschrift;c+a;-459,89;x;x
+2021-08-31;2023-07-13;xxx;gutschrift;wez;-871,11;x;x
+2022-04-04;2020-01-19;other;gutschrift;TAS Minden;-368,2;x;x
+2023-03-06;2023-07-15;xxx;gutschrift;wez;-465,63;x;x
+2023-09-25;2022-07-20;other;bookingtext;Deutsche Tamoil GmbH;-929,06;x;x
+2020-06-24;2020-10-07;xxx;bookingtext;unicredit;-334,94;x;x
+2020-08-22;2020-01-06;xxx;bookingtext;xxx;-482,56;x;x
+2022-09-10;2023-08-23;xxx;bookingtext;DM DROGERIEMARKT;-434,25;x;x
+2023-01-15;2022-12-20;other;gutschrift;arvato;186,32;x;x
+2020-05-18;2021-04-07;other;bookingtext;kammann;816,42;x;x
+2023-02-22;2020-09-25;other;bookingtext;c+a;-712,94;x;x
+2023-11-06;2020-02-25;other;bookingtext;beitragsservice von ard;-75,21;x;x
+2022-12-17;2020-12-03;xxx;bookingtext;Combi Verbrauchermarkt;-737,52;x;x
+2020-07-06;2023-01-23;xxx;bookingtext;Deutsche Tamoil GmbH;-731,15;x;x
+2020-10-06;2020-10-31;xxx;gutschrift;Combi Verbrauchermarkt;-382,71;x;x
+2022-04-25;2023-12-11;other;gutschrift;e.on energie;-267,22;x;x
+2023-03-13;2022-04-04;xxx;gutschrift;arvato;152,17;x;x
+2022-02-27;2020-10-09;xxx;bookingtext;c+a;-550,11;x;x
+2020-07-05;2021-04-12;xxx;bookingtext;telefonica;-455,48;x;x
+2023-11-11;2021-06-10;other;gutschrift;DM DROGERIEMARKT;-42,83;x;x
+2021-04-15;2021-03-27;xxx;bookingtext;hauptzollamt bielefeld;-308;x;x
+2023-04-17;2022-08-23;xxx;gutschrift;Stromio GmbH;-886,19;x;x
+2023-05-21;2020-06-30;xxx;gutschrift;rossmann;-557,01;x;x
+2023-06-18;2021-03-23;xxx;bookingtext;neschen;33,14;x;x
+2021-09-06;2021-03-28;other;bookingtext;hauptzollamt bielefeld;-859,48;x;x
+2023-11-23;2021-03-11;other;gutschrift;Deutsche Tamoil GmbH;-894,54;x;x
+2022-07-19;2021-06-22;xxx;bookingtext;Deutsche Tamoil GmbH;-42,6;x;x
+2021-07-18;2022-06-29;xxx;bookingtext;igm herford;-380,27;x;x
+2022-11-17;2023-06-24;xxx;bookingtext;jet dankt;-908,57;x;x
+2022-09-17;2020-08-20;other;bookingtext;beitragsservice von ard;-312,44;x;x
+2022-09-19;2022-11-15;xxx;gutschrift;DM DROGERIEMARKT;-10,35;x;x
+2021-11-05;2021-02-11;xxx;bookingtext;ALDI;-669,12;x;x
+2022-09-15;2020-07-11;other;gutschrift;pppp;-625,74;x;x
+2021-06-29;2023-07-02;other;bookingtext;Drillisch Online GmbH;-862,44;x;x
+2023-05-16;2021-04-23;xxx;gutschrift;vodafone;-71,88;x;x
+2023-12-03;2020-05-15;xxx;gutschrift;lvm landw.versicherungsverein;-143,52;x;x
+2020-06-15;2020-05-26;xxx;gutschrift;Deutsche Tamoil GmbH;-792,09;x;x
+2020-04-04;2021-02-15;other;gutschrift;bertelsmann;70,96;x;x
+2021-07-31;2020-10-25;other;gutschrift;netflix;-721,86;x;x
+2021-09-21;2022-06-07;xxx;bookingtext;kammann;580,86;x;x
+2020-03-10;2022-05-11;xxx;gutschrift;vodafone;-166,63;x;x
+2021-07-08;2020-12-14;xxx;gutschrift;Combi Verbrauchermarkt;-38,09;x;x
+2021-08-03;2023-10-18;other;gutschrift;xxx;-6,42;x;x
+2020-07-05;2022-03-26;other;bookingtext;neschen;171,79;x;x
+2022-02-21;2020-01-21;other;gutschrift;DM DROGERIEMARKT;-55,07;x;x
+2021-11-04;2022-10-05;xxx;gutschrift;KAUFLAND;-519,25;x;x
+2023-10-27;2020-04-24;xxx;gutschrift;c+a;-91,54;x;x
+2021-03-22;2021-01-27;other;gutschrift;c+a;-185,29;x;x
+2023-05-04;2020-11-11;xxx;bookingtext;lvm landw.versicherungsverein;-664,26;x;x
+2021-08-04;2021-09-26;other;bookingtext;aral ag;-148,2;x;x
+2022-02-10;2023-06-30;xxx;gutschrift;bertelsmann;489,52;x;x
+2021-01-07;2020-07-20;xxx;gutschrift;kammann;813,02;x;x
+2021-05-24;2023-02-17;other;gutschrift;Combi Verbrauchermarkt;-838,8;x;x
+2021-04-29;2021-03-24;xxx;gutschrift;TAS Minden;-740,22;x;x
+2022-07-10;2022-11-24;xxx;gutschrift;FitX Deutschland GmbH;-241,66;x;x
+2022-09-23;2020-04-25;other;bookingtext;Combi Verbrauchermarkt;-174,25;x;x
+2021-12-18;2020-04-08;xxx;bookingtext;zalando;-71,61;x;x
+2020-05-26;2020-08-31;xxx;gutschrift;ALDI;-289,35;x;x
+2021-10-24;2023-03-17;other;gutschrift;LIDL;-210,13;x;x
+2020-03-03;2023-05-11;other;bookingtext;xxx;-183,72;x;x
+2020-08-05;2023-05-12;xxx;bookingtext;jet dankt;-563,95;x;x
+2022-10-21;2021-06-30;xxx;gutschrift;aral ag;-450,73;x;x
+2020-04-17;2020-10-09;other;gutschrift;mait;294,8;x;x
+2022-12-25;2021-09-29;xxx;bookingtext;rossmann;-579,69;x;x
+2021-02-01;2021-05-15;other;bookingtext;beitragsservice von ard;-722,41;x;x
+2022-01-27;2021-12-30;xxx;bookingtext;xxx;-239,23;x;x
+2022-10-06;2021-03-26;other;gutschrift;spotify ab;-679,33;x;x
+2020-02-13;2021-05-20;xxx;gutschrift;Stromio GmbH;-996,42;x;x
+2022-12-07;2022-02-06;xxx;bookingtext;rossmann;-313,29;x;x
+2022-07-19;2020-11-12;xxx;bookingtext;wez;-24,49;x;x
+2020-11-20;2021-10-29;other;bookingtext;Drillisch Online GmbH;-785,56;x;x
+2021-04-25;2021-07-28;other;bookingtext;jet dankt;-404,37;x;x
+2020-01-28;2022-05-11;other;bookingtext;xxx;-953,51;x;x
+2023-11-03;2022-10-30;other;gutschrift;hauptzollamt bielefeld;-82,4;x;x
+2023-11-26;2022-01-04;other;bookingtext;kammann;925,15;x;x
+2020-07-23;2023-04-23;xxx;bookingtext;e.on energie;-165,33;x;x
+2020-10-15;2020-09-19;xxx;gutschrift;unicredit;-448,19;x;x
+2023-11-16;2020-01-06;xxx;gutschrift;lvm landw.versicherungsverein;-751,5;x;x
+2020-02-01;2022-09-09;xxx;gutschrift;rossmann;-231,36;x;x
+2020-01-10;2020-12-01;xxx;bookingtext;unicredit;-250,15;x;x
+2023-02-07;2022-08-20;xxx;bookingtext;E-CENTER;-384,36;x;x
+2020-06-19;2021-11-12;other;gutschrift;Combi Verbrauchermarkt;-768,34;x;x
+2023-12-07;2023-03-06;xxx;gutschrift;neschen;139,43;x;x
+2022-04-25;2021-03-23;other;gutschrift;BoRa Sports GmbH;-594,84;x;x
+2022-12-11;2023-04-14;other;gutschrift;E-CENTER;-358,47;x;x
+2023-08-27;2022-09-05;other;bookingtext;telefonica;-296,55;x;x
+2023-03-26;2020-12-14;other;bookingtext;jet dankt;-294,59;x;x
+2021-06-29;2023-11-09;other;bookingtext;Combi Verbrauchermarkt;-721,72;x;x
+2020-04-05;2021-07-14;xxx;gutschrift;arvato;578,22;x;x
+2020-07-31;2023-01-19;xxx;gutschrift;ALDI;-982,94;x;x
+2023-01-14;2020-07-09;other;bookingtext;bertelsmann;354,48;x;x
+2023-02-16;2021-09-20;other;bookingtext;arvato;340,35;x;x
+2022-05-15;2023-09-26;other;bookingtext;bertelsmann;885,4;x;x
+2022-05-03;2020-05-16;xxx;bookingtext;vodafone;-86,02;x;x
+2021-12-20;2023-02-25;xxx;gutschrift;igm herford;-652,54;x;x
+2020-12-23;2021-05-28;xxx;bookingtext;unicredit;-139,09;x;x
+2021-10-21;2020-10-25;other;bookingtext;mait;937,49;x;x
+2022-07-23;2023-11-20;other;gutschrift;rossmann;-513,4;x;x
+2022-08-05;2020-01-30;other;bookingtext;vodafone;-259,17;x;x
+2023-02-08;2021-05-15;other;gutschrift;beitragsservice von ard;-345,59;x;x
+2020-08-11;2020-12-31;xxx;gutschrift;neschen;148,13;x;x
+2021-05-20;2021-05-08;other;bookingtext;mait;519,7;x;x
+2022-01-06;2021-02-07;xxx;bookingtext;wez;-442,11;x;x
+2022-02-19;2020-01-02;other;gutschrift;elsner catering;-760,2;x;x
+2023-01-22;2022-04-23;xxx;bookingtext;yyy;-181,33;x;x
+2023-10-10;2023-12-18;xxx;gutschrift;mait;236,93;x;x
+2022-01-14;2021-09-13;other;bookingtext;aral ag;-565,74;x;x
+2023-12-29;2022-12-26;xxx;gutschrift;Logemann Vermoegensverwaltung;-350,91;x;x
+2023-05-12;2023-12-08;other;gutschrift;igm herford;-95,28;x;x
+2023-12-05;2020-01-17;xxx;bookingtext;lvm landw.versicherungsverein;-529;x;x
+2021-11-06;2021-08-13;other;bookingtext;Logemann Vermoegensverwaltung;-941,2;x;x
+2023-05-09;2020-05-31;xxx;gutschrift;Stromio GmbH;-179,52;x;x
+2020-05-10;2021-08-05;xxx;bookingtext;ing;-875,09;x;x
+2021-05-10;2023-12-04;xxx;bookingtext;unicredit;-246,49;x;x
+2022-09-21;2020-08-23;xxx;gutschrift;FitX Deutschland GmbH;-631,31;x;x
+2021-01-04;2022-04-08;other;gutschrift;ALDI;-347,62;x;x
+2022-05-15;2023-03-14;xxx;bookingtext;kammann;685,32;x;x
+2023-06-27;2022-06-16;other;bookingtext;e.on energie;-11,78;x;x
+2020-03-01;2021-11-24;other;bookingtext;aral ag;-506,14;x;x
+2020-12-02;2021-09-19;xxx;gutschrift;c+a;-567,05;x;x
+2021-05-05;2020-08-05;other;gutschrift;unicredit;-492,33;x;x
+2022-09-22;2021-05-17;other;bookingtext;FitX Deutschland GmbH;-844,13;x;x
+2020-12-30;2023-04-16;other;bookingtext;lvm landw.versicherungsverein;-710,76;x;x
+2020-03-31;2021-08-31;xxx;gutschrift;lvm landw.versicherungsverein;-909,58;x;x
+2022-10-05;2021-05-25;xxx;bookingtext;jet dankt;-486,96;x;x
+2023-03-30;2020-02-02;other;gutschrift;DM DROGERIEMARKT;-650,56;x;x
+2021-09-01;2020-11-14;xxx;bookingtext;hauptzollamt bielefeld;-167,4;x;x
+2023-10-10;2020-03-28;other;gutschrift;xxx;-110,41;x;x
+2021-12-04;2021-09-24;xxx;gutschrift;kammann;119,74;x;x
+2020-03-30;2020-05-28;xxx;gutschrift;TAS Minden;-243,75;x;x
+2020-10-25;2022-03-14;xxx;gutschrift;KAUFLAND;-726,71;x;x
+2021-03-25;2020-04-01;other;gutschrift;vodafone;-982,38;x;x
+2020-04-01;2021-05-10;other;gutschrift;rainer klenke;-288,75;x;x
+2022-10-28;2022-06-15;xxx;gutschrift;rossmann;-754,39;x;x
+2023-03-20;2022-08-23;xxx;bookingtext;jet dankt;-404,41;x;x
+2023-10-04;2020-08-12;xxx;bookingtext;xxx;-927,86;x;x
+2022-04-16;2021-03-21;other;gutschrift;abas;70,44;x;x
+2023-11-29;2023-07-25;other;gutschrift;landbaeckerei niemeyer;-627,05;x;x
+2020-07-09;2021-07-09;xxx;gutschrift;abas;180,12;x;x
+2023-04-20;2021-11-23;xxx;bookingtext;FitX Deutschland GmbH;-889,84;x;x
+2022-01-27;2020-04-06;other;gutschrift;mait;692,33;x;x
+2021-02-14;2020-04-26;other;gutschrift;E-CENTER;-494,79;x;x
+2021-10-13;2023-07-23;other;gutschrift;LIDL;-371,81;x;x
+2021-06-30;2020-05-13;other;bookingtext;abas;453,11;x;x
+2020-04-02;2022-04-16;other;bookingtext;wez;-224,2;x;x
+2022-07-13;2020-12-27;other;bookingtext;spotify ab;-271,77;x;x
+2021-10-31;2022-06-08;xxx;bookingtext;arvato;87,83;x;x
+2023-01-08;2020-08-31;other;bookingtext;jet dankt;-519,04;x;x
+2022-12-25;2021-08-15;xxx;gutschrift;beitragsservice von ard;-787,71;x;x
+2022-11-16;2022-12-12;xxx;gutschrift;Logemann Vermoegensverwaltung;-413,83;x;x
+2021-09-24;2020-05-31;xxx;gutschrift;rossmann;-758,38;x;x
+2020-08-02;2022-01-05;other;bookingtext;e.on energie;-166,38;x;x
+2020-12-01;2021-03-20;xxx;gutschrift;xxx;-87,12;x;x
+2021-02-22;2021-10-29;xxx;bookingtext;wez;-821,75;x;x
+2020-08-28;2021-04-04;other;bookingtext;Combi Verbrauchermarkt;-178,55;x;x
+2021-09-10;2020-01-30;other;gutschrift;hauptzollamt bielefeld;-974,58;x;x
+2020-03-28;2023-12-10;xxx;bookingtext;DM DROGERIEMARKT;-143,66;x;x
+2023-04-30;2023-08-13;other;bookingtext;yyy;-840,35;x;x
+2021-07-08;2020-02-02;xxx;bookingtext;c+a;-737,43;x;x
+2020-05-27;2022-05-12;xxx;bookingtext;FitX Deutschland GmbH;-67,34;x;x
+2022-12-23;2020-08-10;xxx;bookingtext;Drillisch Online GmbH;-816,05;x;x
+2022-02-20;2021-04-09;other;bookingtext;TAS Minden;-898,32;x;x
+2021-10-25;2022-09-08;xxx;bookingtext;Stromio GmbH;-951,98;x;x
+2023-11-04;2023-05-21;other;gutschrift;c+a;-149,21;x;x
+2023-04-21;2022-10-17;xxx;bookingtext;elsner catering;-713,88;x;x
+2022-12-04;2022-07-26;other;gutschrift;ALDI;-725,29;x;x
+2022-08-02;2022-07-24;xxx;gutschrift;rainer klenke;-75,86;x;x
+2022-09-23;2022-06-05;other;bookingtext;beitragsservice von ard;-896,58;x;x
+2022-02-22;2023-01-20;other;gutschrift;yyy;-753,78;x;x
+2021-03-30;2023-09-09;xxx;bookingtext;c+a;-783,25;x;x
+2023-01-22;2021-01-26;other;bookingtext;Deutsche Tamoil GmbH;-879,13;x;x
+2022-10-23;2023-05-05;other;bookingtext;zalando;-81,66;x;x
+2023-06-24;2023-04-26;xxx;gutschrift;arvato;225,91;x;x
+2022-02-11;2021-06-04;other;gutschrift;zalando;-882,73;x;x
+2020-08-04;2020-10-16;xxx;bookingtext;FitX Deutschland GmbH;-234,15;x;x
+2022-11-21;2023-07-14;xxx;bookingtext;KAUFLAND;-812,21;x;x
+2020-11-11;2023-12-30;xxx;bookingtext;rainer klenke;-821,88;x;x
+2022-06-04;2021-02-05;other;gutschrift;abas;163,52;x;x
+2021-08-02;2022-05-10;xxx;gutschrift;Stromio GmbH;-342,73;x;x
+2021-10-26;2021-06-13;other;gutschrift;arvato;420,18;x;x
+2022-08-02;2022-05-29;other;bookingtext;netflix;-593,57;x;x
+2020-11-17;2020-03-11;xxx;bookingtext;elsner catering;-152,93;x;x
+2020-12-23;2022-04-23;xxx;bookingtext;Drillisch Online GmbH;-94,37;x;x
+2021-09-05;2021-09-11;other;bookingtext;telefonica;-398,02;x;x
+2023-03-08;2020-09-13;other;bookingtext;LIDL;-827,04;x;x
+2021-11-10;2023-11-13;xxx;bookingtext;Stromio GmbH;-64,95;x;x
+2023-08-31;2023-04-21;xxx;bookingtext;FitX Deutschland GmbH;-573,57;x;x
+2023-10-25;2021-05-12;other;bookingtext;E-CENTER;-725,55;x;x
+2021-05-22;2022-02-21;other;bookingtext;FitX Deutschland GmbH;-780,87;x;x
+2022-01-17;2022-03-15;other;gutschrift;hauptzollamt bielefeld;-25,89;x;x
+2023-11-12;2021-09-01;xxx;bookingtext;igm herford;-114,69;x;x
+2023-02-20;2021-05-06;xxx;gutschrift;spotify ab;-784,14;x;x
+2023-01-16;2021-05-25;other;gutschrift;arvato;614,42;x;x
+2023-12-28;2021-03-24;other;gutschrift;hauptzollamt bielefeld;-345,83;x;x
+2023-02-28;2020-02-23;xxx;bookingtext;Logemann Vermoegensverwaltung;-329,67;x;x
+2020-05-14;2020-05-01;xxx;gutschrift;neschen;705,71;x;x
+2020-07-29;2020-07-20;other;bookingtext;Deutsche Tamoil GmbH;-669,54;x;x
+2023-07-13;2022-09-16;other;gutschrift;yyy;-411,31;x;x
+2020-07-16;2023-04-13;other;gutschrift;spotify ab;-650,67;x;x
+2023-11-23;2021-11-15;xxx;bookingtext;aral ag;-29,12;x;x
+2020-03-13;2023-11-16;other;bookingtext;LIDL;-704,39;x;x
+2021-12-14;2020-06-22;xxx;bookingtext;rainer klenke;-199,93;x;x
+2021-08-31;2022-08-11;other;bookingtext;aral ag;-784,84;x;x
+2022-10-19;2023-08-16;other;bookingtext;KAUFLAND;-540,82;x;x
+2021-09-22;2022-05-11;xxx;bookingtext;netflix;-660,79;x;x
+2021-02-11;2023-05-09;other;bookingtext;kammann;284,03;x;x
+2023-05-11;2021-07-25;other;bookingtext;landbaeckerei niemeyer;-976,5;x;x
+2021-04-28;2023-05-20;other;gutschrift;spotify ab;-803,19;x;x
+2022-11-22;2021-07-10;other;bookingtext;unicredit;-243,15;x;x
+2023-02-07;2021-11-08;xxx;bookingtext;ALDI;-865,71;x;x
+2021-05-01;2023-03-30;xxx;gutschrift;beitragsservice von ard;-956,89;x;x
+2021-06-07;2022-01-19;xxx;gutschrift;neschen;177,01;x;x
+2021-12-07;2021-10-14;other;gutschrift;aral ag;-713,69;x;x
+2022-12-30;2023-03-13;xxx;bookingtext;spotify ab;-2,61;x;x
+2021-07-28;2022-04-29;other;bookingtext;jet dankt;-456,58;x;x
+2023-12-18;2021-12-05;xxx;bookingtext;wez;-630,63;x;x
+2022-02-26;2020-06-12;other;gutschrift;vodafone;-536,43;x;x
+2023-03-09;2020-02-22;xxx;gutschrift;igm herford;-644,81;x;x
+2022-02-04;2023-04-29;xxx;bookingtext;ALDI;-664,53;x;x
+2020-10-11;2023-04-26;xxx;bookingtext;ing;-110,93;x;x
+2023-07-29;2023-12-31;other;bookingtext;beitragsservice von ard;-489,35;x;x
+2022-10-27;2021-03-20;xxx;bookingtext;zalando;-560,37;x;x
+2021-11-14;2020-06-19;other;gutschrift;kammann;837,2;x;x
+2020-02-20;2021-03-29;other;gutschrift;TAS Minden;-945,81;x;x
+2021-10-31;2020-09-24;xxx;gutschrift;FitX Deutschland GmbH;-589,22;x;x
+2021-05-17;2023-11-11;other;bookingtext;netflix;-970,69;x;x
+2022-02-04;2021-07-09;other;bookingtext;rossmann;-319,65;x;x
+2021-07-29;2020-02-16;other;bookingtext;pppp;-854,39;x;x
+2021-10-12;2022-04-18;xxx;bookingtext;DM DROGERIEMARKT;-1,36;x;x
+2023-05-10;2022-08-30;other;gutschrift;arvato;746,81;x;x
+2023-01-06;2020-02-20;other;gutschrift;xxx;-277,41;x;x
+2020-06-29;2021-12-30;xxx;gutschrift;E-CENTER;-555,64;x;x
+2021-01-24;2022-09-01;other;gutschrift;e.on energie;-643,61;x;x
+2023-09-20;2021-06-18;xxx;gutschrift;vodafone;-475,66;x;x
+2022-08-03;2021-07-25;xxx;gutschrift;BoRa Sports GmbH;-874,02;x;x
+2023-05-13;2022-10-29;other;bookingtext;FitX Deutschland GmbH;-61,87;x;x
+2020-08-24;2023-04-22;xxx;bookingtext;arvato;925,49;x;x
+2023-05-03;2021-01-10;other;bookingtext;Combi Verbrauchermarkt;-491,91;x;x
+2023-08-08;2021-05-18;xxx;gutschrift;Logemann Vermoegensverwaltung;-42,16;x;x
+2020-11-09;2022-02-13;other;bookingtext;elsner catering;-840,19;x;x
+2020-08-10;2023-02-12;xxx;gutschrift;BoRa Sports GmbH;-881,01;x;x
+2021-01-02;2020-12-31;xxx;gutschrift;c+a;-351,97;x;x
+2020-12-28;2021-07-11;other;bookingtext;hauptzollamt bielefeld;-122,27;x;x
+2020-06-23;2022-08-15;other;gutschrift;unicredit;-74,72;x;x
+2020-04-13;2022-05-03;other;gutschrift;kammann;484,62;x;x
+2023-01-09;2022-02-17;other;gutschrift;rossmann;-384,95;x;x
+2020-02-29;2022-10-15;other;bookingtext;Deutsche Tamoil GmbH;-294,46;x;x
+2021-09-15;2023-05-05;xxx;bookingtext;elsner catering;-3,63;x;x
+2023-04-08;2021-12-19;xxx;bookingtext;BoRa Sports GmbH;-393,9;x;x
+2022-03-27;2022-07-14;xxx;gutschrift;rainer klenke;-776,55;x;x
+2023-02-04;2022-10-19;xxx;bookingtext;unicredit;-830,59;x;x
+2022-08-13;2022-08-07;xxx;gutschrift;xxx;-507,09;x;x
+2022-09-19;2022-04-07;other;bookingtext;KAUFLAND;-267,43;x;x
+2021-04-07;2021-11-01;xxx;gutschrift;rainer klenke;-698,56;x;x
+2022-07-25;2020-05-06;xxx;gutschrift;ALDI;-72,61;x;x
+2023-03-20;2021-11-27;other;bookingtext;abas;912,8;x;x
+2020-07-26;2020-03-02;xxx;gutschrift;aral ag;-819,26;x;x
+2021-02-06;2021-04-14;xxx;bookingtext;kammann;393,07;x;x
+2021-03-15;2020-05-02;other;gutschrift;abas;697,67;x;x
+2021-09-14;2023-03-05;xxx;gutschrift;Drillisch Online GmbH;-168,02;x;x
+2022-09-09;2020-07-26;other;gutschrift;mait;14,17;x;x
+2022-06-08;2020-02-08;xxx;bookingtext;E-CENTER;-459,77;x;x
+2021-11-19;2021-07-18;other;bookingtext;hauptzollamt bielefeld;-352,21;x;x
+2021-09-08;2022-11-07;xxx;bookingtext;KAUFLAND;-654,49;x;x
+2022-12-27;2021-01-24;xxx;bookingtext;bertelsmann;942,82;x;x
+2023-08-05;2021-10-08;other;gutschrift;abas;495,93;x;x
+2023-01-06;2023-10-13;other;gutschrift;Stromio GmbH;-612,49;x;x
+2023-10-27;2021-10-15;other;bookingtext;mait;528,16;x;x
+2023-11-01;2023-03-04;xxx;bookingtext;Deutsche Tamoil GmbH;-508,07;x;x
+2021-11-11;2022-12-03;other;gutschrift;bertelsmann;264,11;x;x
+2022-07-02;2022-05-15;other;bookingtext;vodafone;-262,46;x;x
+2021-08-16;2021-06-03;other;bookingtext;landbaeckerei niemeyer;-150,24;x;x
+2022-07-31;2023-04-09;other;bookingtext;LIDL;-674,09;x;x
+2023-04-26;2021-04-20;other;gutschrift;rossmann;-837,52;x;x
+2023-02-06;2023-09-09;other;gutschrift;ALDI;-156,4;x;x
+2020-04-18;2022-05-31;xxx;gutschrift;aral ag;-721,45;x;x
+2023-10-04;2023-08-10;other;gutschrift;mait;962,72;x;x
+2021-09-19;2022-10-12;other;gutschrift;netflix;-793,32;x;x
+2023-03-03;2022-12-14;xxx;bookingtext;neschen;287,83;x;x
+2020-10-08;2021-06-01;other;gutschrift;yyy;-827,92;x;x
+2023-03-03;2022-10-07;other;bookingtext;yyy;-617,08;x;x
+2021-04-13;2022-02-23;other;bookingtext;BoRa Sports GmbH;-62,87;x;x
+2022-10-28;2022-12-24;other;gutschrift;vodafone;-755,6;x;x
+2020-03-11;2022-10-15;xxx;bookingtext;neschen;618,74;x;x
+2021-06-25;2020-11-26;other;gutschrift;lvm landw.versicherungsverein;-650,1;x;x
+2023-05-24;2022-04-27;xxx;gutschrift;FitX Deutschland GmbH;-368,58;x;x
+2021-02-25;2022-10-26;other;bookingtext;xxx;-11,19;x;x
+2023-02-25;2023-01-07;other;bookingtext;ALDI;-317,61;x;x
+2022-03-09;2020-05-13;other;bookingtext;ALDI;-536,52;x;x
+2020-08-29;2023-07-07;xxx;bookingtext;mait;48,91;x;x
+2020-06-08;2021-02-22;xxx;gutschrift;yyy;-579,01;x;x
+2023-12-08;2023-09-04;xxx;gutschrift;e.on energie;-889,26;x;x
+2023-08-29;2020-11-11;xxx;gutschrift;telefonica;-621,04;x;x
+2023-02-01;2021-11-06;xxx;bookingtext;Stromio GmbH;-45,74;x;x
+2022-02-03;2020-02-05;xxx;gutschrift;rainer klenke;-7,93;x;x
+2021-10-04;2020-09-18;xxx;gutschrift;wez;-363,15;x;x
+2023-12-16;2021-09-25;other;bookingtext;pppp;-179,67;x;x
+2021-04-05;2021-09-03;xxx;gutschrift;beitragsservice von ard;-305,42;x;x
+2022-07-14;2020-03-22;xxx;gutschrift;arvato;675,62;x;x
+2020-06-09;2021-08-06;other;bookingtext;spotify ab;-336,89;x;x
+2022-10-10;2023-04-11;xxx;bookingtext;xxx;-608,53;x;x
+2021-06-04;2021-11-26;other;gutschrift;Combi Verbrauchermarkt;-786,87;x;x
+2021-05-17;2022-06-18;xxx;gutschrift;KAUFLAND;-408,56;x;x
+2021-08-13;2022-08-25;xxx;bookingtext;BoRa Sports GmbH;-204,63;x;x
+2022-03-24;2022-08-22;other;bookingtext;yyy;-255,73;x;x
+2023-06-25;2020-05-13;other;bookingtext;E-CENTER;-391,82;x;x
+2022-11-27;2023-11-24;other;gutschrift;e.on energie;-500,04;x;x
+2021-01-12;2021-11-04;other;bookingtext;e.on energie;-238,55;x;x
+2020-03-07;2020-11-02;xxx;gutschrift;ing;-563,73;x;x
+2020-12-24;2022-04-25;xxx;bookingtext;KAUFLAND;-866,13;x;x
+2020-05-19;2020-03-30;xxx;bookingtext;rainer klenke;-14,38;x;x
+2020-10-31;2022-01-18;xxx;gutschrift;KAUFLAND;-273,84;x;x
+2021-05-02;2023-08-11;xxx;bookingtext;spotify ab;-188,07;x;x
+2020-02-19;2022-08-01;xxx;bookingtext;vodafone;-516,88;x;x
+2022-11-11;2020-09-04;xxx;gutschrift;ing;-971,13;x;x
+2023-08-19;2021-04-16;xxx;bookingtext;aral ag;-367,63;x;x
+2022-09-04;2023-01-25;other;bookingtext;ing;-236,44;x;x
+2020-08-03;2023-06-13;xxx;gutschrift;igm herford;-338,15;x;x
+2021-03-15;2021-07-29;xxx;gutschrift;Deutsche Tamoil GmbH;-696,77;x;x
+2021-01-29;2021-01-29;other;gutschrift;jet dankt;-647,29;x;x
+2022-03-19;2022-11-28;other;gutschrift;telefonica;-122,35;x;x
+2021-10-28;2022-11-04;xxx;gutschrift;netflix;-750,09;x;x
+2023-10-12;2020-06-29;xxx;gutschrift;beitragsservice von ard;-167,89;x;x
+2021-11-18;2022-09-23;xxx;bookingtext;spotify ab;-941,4;x;x
+2023-07-05;2021-08-24;other;bookingtext;zalando;-664;x;x
+2022-03-03;2022-04-06;other;gutschrift;lvm landw.versicherungsverein;-261,89;x;x
+2020-12-29;2020-03-12;xxx;bookingtext;yyy;-775,62;x;x
+2022-11-07;2021-09-16;xxx;gutschrift;LIDL;-790,72;x;x
+2022-12-14;2023-12-09;other;gutschrift;zalando;-419,13;x;x
+2022-03-06;2023-12-29;other;bookingtext;Logemann Vermoegensverwaltung;-701,11;x;x
+2022-03-04;2023-10-04;xxx;gutschrift;vodafone;-314,88;x;x
+2021-04-25;2023-08-20;other;gutschrift;pppp;-210,4;x;x
+2022-07-10;2021-06-01;other;gutschrift;c+a;-991,07;x;x
+2022-08-05;2021-09-22;other;bookingtext;ing;-566,45;x;x
+2022-06-18;2021-10-22;other;bookingtext;telefonica;-46,68;x;x
+2022-09-15;2022-10-23;xxx;gutschrift;rossmann;-704,65;x;x
+2022-01-17;2022-03-03;xxx;bookingtext;c+a;-632,22;x;x
+2020-06-28;2022-12-11;other;gutschrift;ALDI;-473,47;x;x
+2020-10-27;2023-10-23;xxx;gutschrift;vodafone;-545,62;x;x
+2023-07-11;2022-07-15;other;gutschrift;pppp;-763,13;x;x
+2023-02-11;2021-12-03;other;bookingtext;c+a;-27,08;x;x
+2022-03-10;2023-01-16;xxx;bookingtext;spotify ab;-249,21;x;x
+2020-09-09;2023-12-23;xxx;gutschrift;FitX Deutschland GmbH;-222,07;x;x
+2022-07-21;2022-12-01;other;gutschrift;Stromio GmbH;-832,49;x;x
+2023-05-24;2023-10-07;xxx;bookingtext;Drillisch Online GmbH;-500,29;x;x
+2021-05-29;2021-01-13;other;gutschrift;elsner catering;-650,54;x;x
+2023-12-26;2022-07-28;other;bookingtext;bertelsmann;338,32;x;x
+2020-05-20;2023-10-15;other;bookingtext;landbaeckerei niemeyer;-718,83;x;x
+2021-05-04;2021-07-27;xxx;bookingtext;Logemann Vermoegensverwaltung;-83,46;x;x
+2021-10-22;2022-08-27;xxx;bookingtext;spotify ab;-353,41;x;x
+2023-03-19;2021-10-14;other;bookingtext;ALDI;-344,63;x;x
+2022-04-06;2020-03-25;other;bookingtext;wez;-491,29;x;x
+2020-05-15;2020-11-14;other;gutschrift;spotify ab;-92,62;x;x
+2020-08-19;2020-06-24;xxx;bookingtext;ing;-219,89;x;x
+2022-02-20;2023-03-24;other;gutschrift;lvm landw.versicherungsverein;-77,3;x;x
+2022-03-29;2020-10-03;other;gutschrift;bertelsmann;337,15;x;x
+2021-10-08;2021-09-25;other;gutschrift;vodafone;-732,51;x;x
+2021-03-14;2023-06-05;xxx;bookingtext;abas;926,21;x;x
+2021-03-16;2022-12-26;xxx;bookingtext;rainer klenke;-88,28;x;x
+2022-03-06;2020-08-04;other;gutschrift;hauptzollamt bielefeld;-319,91;x;x
+2021-10-18;2023-07-09;xxx;bookingtext;xxx;-618,46;x;x
+2021-09-03;2022-07-12;xxx;gutschrift;mait;396,2;x;x
+2021-03-13;2021-06-01;xxx;bookingtext;Deutsche Tamoil GmbH;-523,59;x;x
+2023-08-31;2021-02-14;xxx;gutschrift;TAS Minden;-68,56;x;x
+2021-10-14;2021-10-07;other;gutschrift;BoRa Sports GmbH;-527,71;x;x
+2023-04-19;2020-10-20;other;bookingtext;kammann;607,92;x;x
+2022-05-18;2020-01-18;other;gutschrift;Logemann Vermoegensverwaltung;-136,08;x;x
+2022-08-29;2021-12-15;other;bookingtext;Deutsche Tamoil GmbH;-549,33;x;x
+2022-08-17;2020-01-23;other;bookingtext;LIDL;-60,98;x;x
+2022-11-11;2020-08-04;xxx;bookingtext;landbaeckerei niemeyer;-716,16;x;x
+2022-02-02;2023-11-19;other;gutschrift;arvato;574,41;x;x
+2021-11-05;2023-08-15;other;bookingtext;unicredit;-212,47;x;x
+2020-05-27;2023-11-01;xxx;gutschrift;hauptzollamt bielefeld;-632,67;x;x
+2020-08-12;2022-11-20;other;gutschrift;rossmann;-453,84;x;x
+2021-02-07;2023-12-23;other;gutschrift;landbaeckerei niemeyer;-402,5;x;x
+2023-04-25;2023-11-26;xxx;bookingtext;e.on energie;-955,71;x;x
+2023-08-26;2021-09-18;xxx;bookingtext;ing;-837,28;x;x
+2023-06-29;2020-09-05;other;bookingtext;c+a;-323,39;x;x
+2021-08-19;2023-07-23;other;bookingtext;lvm landw.versicherungsverein;-836,53;x;x
+2021-11-14;2020-05-21;xxx;gutschrift;spotify ab;-312,5;x;x
+2022-02-11;2021-05-21;other;gutschrift;elsner catering;-649,34;x;x
+2023-07-28;2021-02-28;other;bookingtext;bertelsmann;206,78;x;x
+2020-03-20;2020-12-21;xxx;gutschrift;BoRa Sports GmbH;-411,23;x;x
+2021-04-14;2020-09-14;other;bookingtext;yyy;-513,74;x;x
+2023-08-26;2023-10-23;other;bookingtext;hauptzollamt bielefeld;-946,51;x;x
+2022-07-23;2022-04-03;xxx;bookingtext;E-CENTER;-123,79;x;x
+2021-09-13;2023-08-19;xxx;gutschrift;bertelsmann;229,96;x;x
+2021-02-01;2023-11-28;other;gutschrift;vodafone;-300,23;x;x
+2021-03-24;2021-11-07;other;bookingtext;Deutsche Tamoil GmbH;-154,15;x;x
+2022-11-22;2020-12-20;xxx;gutschrift;yyy;-11,93;x;x
+2020-05-01;2020-02-10;xxx;gutschrift;TAS Minden;-823,09;x;x
+2023-04-26;2020-11-04;other;gutschrift;mait;400,12;x;x
+2021-12-16;2020-03-04;other;bookingtext;xxx;-315,77;x;x
+2023-05-23;2023-01-28;other;gutschrift;bertelsmann;441,41;x;x
+2021-04-18;2022-12-28;xxx;bookingtext;rainer klenke;-823,63;x;x
+2020-03-30;2020-10-28;other;bookingtext;bertelsmann;461,98;x;x
+2022-06-24;2023-11-15;other;bookingtext;DM DROGERIEMARKT;-912,53;x;x
+2021-11-24;2023-01-08;xxx;bookingtext;Deutsche Tamoil GmbH;-40,52;x;x
+2023-11-16;2022-11-01;xxx;gutschrift;elsner catering;-913,51;x;x
+2020-04-14;2022-12-23;other;gutschrift;abas;398,88;x;x
+2021-11-24;2020-02-23;xxx;bookingtext;wez;-382,35;x;x
+2023-07-09;2021-03-15;xxx;gutschrift;vodafone;-615,93;x;x
+2023-01-31;2021-02-26;xxx;bookingtext;jet dankt;-215,6;x;x
+2021-11-23;2021-12-13;other;bookingtext;TAS Minden;-21,67;x;x
+2023-11-03;2022-03-16;xxx;gutschrift;bertelsmann;810,29;x;x
+2021-11-04;2021-11-26;other;bookingtext;Deutsche Tamoil GmbH;-427,95;x;x
+2023-05-02;2022-08-18;other;gutschrift;abas;99,11;x;x
+2023-11-11;2023-09-14;other;bookingtext;e.on energie;-34,41;x;x
+2022-03-12;2022-02-11;other;gutschrift;arvato;635,42;x;x
+2023-04-23;2022-08-01;other;gutschrift;rainer klenke;-60,28;x;x
+2023-11-19;2020-11-01;other;bookingtext;FitX Deutschland GmbH;-39,24;x;x
+2022-05-20;2022-02-19;xxx;bookingtext;spotify ab;-228,89;x;x
+2023-10-26;2022-07-19;other;bookingtext;LIDL;-600,93;x;x
+2023-10-06;2020-11-17;other;bookingtext;kammann;351,32;x;x
+2021-06-14;2023-01-13;other;gutschrift;landbaeckerei niemeyer;-248,05;x;x
+2023-03-24;2020-03-11;other;gutschrift;jet dankt;-365,01;x;x
+2023-08-08;2020-08-07;other;bookingtext;abas;686,3;x;x
+2020-02-04;2021-03-01;other;gutschrift;ALDI;-444,71;x;x
+2023-12-18;2023-11-05;other;gutschrift;KAUFLAND;-666,84;x;x
+2022-01-08;2023-04-17;xxx;gutschrift;beitragsservice von ard;-202,43;x;x
+2023-08-14;2022-12-14;other;bookingtext;bertelsmann;16,91;x;x
+2022-05-23;2021-11-14;other;bookingtext;c+a;-663,97;x;x
+2023-09-16;2022-12-09;xxx;bookingtext;neschen;447,04;x;x
+2021-03-28;2023-06-13;xxx;bookingtext;igm herford;-872,96;x;x
+2023-12-10;2021-12-03;other;gutschrift;DM DROGERIEMARKT;-217,9;x;x
+2021-04-16;2022-11-12;xxx;gutschrift;abas;884,49;x;x
+2021-11-11;2021-02-12;other;gutschrift;TAS Minden;-324,96;x;x
+2023-02-25;2021-01-22;xxx;bookingtext;TAS Minden;-186,67;x;x
+2023-09-25;2023-04-04;xxx;gutschrift;wez;-47,93;x;x
+2021-08-16;2021-01-26;other;bookingtext;landbaeckerei niemeyer;-151,89;x;x
+2020-05-15;2020-01-15;xxx;gutschrift;Drillisch Online GmbH;-142,02;x;x
+2020-03-09;2023-08-30;other;bookingtext;KAUFLAND;-792,89;x;x
+2021-07-25;2023-05-06;other;gutschrift;BoRa Sports GmbH;-40,99;x;x
+2023-02-03;2022-12-31;xxx;bookingtext;jet dankt;-795,6;x;x
+2023-02-22;2021-04-30;xxx;bookingtext;pppp;-786,5;x;x
+2023-05-08;2021-07-07;other;bookingtext;neschen;566,48;x;x
+2020-05-02;2021-04-25;xxx;gutschrift;hauptzollamt bielefeld;-813,75;x;x
+2021-03-17;2022-06-01;xxx;gutschrift;Stromio GmbH;-127,39;x;x
+2022-11-23;2022-08-04;xxx;gutschrift;elsner catering;-897,56;x;x
+2021-08-08;2020-07-17;xxx;bookingtext;spotify ab;-116,06;x;x
+2022-07-02;2021-04-13;other;bookingtext;aral ag;-758,05;x;x
+2020-09-12;2023-03-09;xxx;bookingtext;telefonica;-196,95;x;x
+2021-07-09;2022-08-29;other;gutschrift;arvato;881,04;x;x
+2023-12-14;2023-12-01;other;gutschrift;FitX Deutschland GmbH;-494,85;x;x
+2021-02-03;2023-06-19;xxx;bookingtext;abas;827,24;x;x
+2022-08-19;2021-10-08;other;gutschrift;xxx;-300,65;x;x
+2020-10-23;2021-05-20;other;gutschrift;lvm landw.versicherungsverein;-431,12;x;x
+2020-11-08;2020-11-10;other;gutschrift;xxx;-546,57;x;x
+2022-06-04;2022-10-04;other;gutschrift;KAUFLAND;-510,48;x;x
+2022-07-11;2023-08-22;xxx;bookingtext;Combi Verbrauchermarkt;-815,17;x;x
+2022-09-03;2021-06-23;other;gutschrift;Deutsche Tamoil GmbH;-892,17;x;x
+2023-11-23;2022-05-16;xxx;gutschrift;rossmann;-497,43;x;x
+2020-03-30;2023-07-07;other;bookingtext;unicredit;-629,65;x;x
+2021-08-04;2022-08-22;xxx;bookingtext;mait;877,84;x;x
+2023-08-09;2022-05-01;xxx;bookingtext;neschen;830,11;x;x
+2023-11-05;2022-11-04;other;gutschrift;spotify ab;-959,98;x;x
+2022-08-18;2022-05-21;xxx;bookingtext;pppp;-592,02;x;x
+2021-11-15;2022-12-26;other;bookingtext;LIDL;-639,08;x;x
+2020-07-27;2023-01-08;other;bookingtext;kammann;220,87;x;x
+2021-04-04;2021-01-27;xxx;bookingtext;Stromio GmbH;-288,15;x;x
+2020-05-08;2021-11-28;other;gutschrift;Logemann Vermoegensverwaltung;-348,72;x;x
+2020-01-14;2020-04-20;xxx;gutschrift;TAS Minden;-114,09;x;x
+2021-11-13;2023-01-22;xxx;bookingtext;ing;-8,91;x;x
+2022-08-31;2023-09-06;xxx;bookingtext;beitragsservice von ard;-27,35;x;x
+2020-09-14;2020-12-14;other;bookingtext;unicredit;-729,9;x;x
+2020-06-21;2020-11-22;xxx;gutschrift;rossmann;-310,39;x;x
+2020-04-14;2023-05-30;xxx;bookingtext;neschen;308,06;x;x
+2023-05-16;2021-08-17;other;gutschrift;pppp;-832,1;x;x
+2023-05-01;2021-03-25;other;bookingtext;arvato;789,81;x;x
+2022-12-07;2021-02-12;other;gutschrift;vodafone;-428,86;x;x
+2020-02-19;2023-06-23;other;bookingtext;vodafone;-388,13;x;x
+2022-09-03;2023-10-12;xxx;gutschrift;vodafone;-533,3;x;x
+2023-05-31;2021-01-19;other;bookingtext;ALDI;-631,75;x;x
+2021-06-23;2020-05-10;other;gutschrift;Combi Verbrauchermarkt;-272,74;x;x
+2022-08-06;2021-08-25;other;gutschrift;c+a;-980,53;x;x
+2023-08-04;2023-11-17;xxx;gutschrift;LIDL;-631,06;x;x
+2023-04-28;2023-05-25;xxx;gutschrift;LIDL;-153,7;x;x
+2021-12-23;2022-06-10;other;bookingtext;jet dankt;-773,75;x;x
+2021-04-16;2023-12-18;xxx;gutschrift;wez;-379,32;x;x
+2021-11-20;2021-04-16;other;gutschrift;e.on energie;-947,15;x;x
+2020-03-17;2021-04-08;xxx;gutschrift;abas;433,28;x;x
+2022-11-03;2020-07-23;other;gutschrift;Stromio GmbH;-174,73;x;x
+2022-09-01;2023-12-03;other;gutschrift;LIDL;-957,69;x;x
+2022-07-27;2021-06-21;xxx;gutschrift;aral ag;-461,89;x;x
+2021-02-15;2023-04-16;other;bookingtext;kammann;431,12;x;x
+2021-01-16;2020-12-25;xxx;bookingtext;beitragsservice von ard;-788,29;x;x
+2020-11-09;2022-07-06;other;gutschrift;landbaeckerei niemeyer;-168,86;x;x
+2021-04-07;2021-08-09;other;gutschrift;xxx;-674,85;x;x
+2020-09-02;2023-02-15;other;bookingtext;kammann;904,02;x;x
+2020-03-16;2020-02-19;other;bookingtext;Logemann Vermoegensverwaltung;-14,6;x;x
+2021-04-17;2022-03-19;xxx;gutschrift;abas;190,16;x;x
+2020-02-25;2021-02-08;xxx;gutschrift;jet dankt;-536,03;x;x
+2020-04-03;2023-12-14;xxx;gutschrift;beitragsservice von ard;-0,18;x;x
+2022-05-01;2021-10-18;xxx;gutschrift;kammann;696,25;x;x
+2023-04-07;2022-10-14;xxx;bookingtext;ALDI;-967,14;x;x
+2022-12-06;2021-04-12;xxx;bookingtext;arvato;485,24;x;x
+2020-06-20;2021-03-06;other;gutschrift;LIDL;-9,83;x;x
+2023-06-05;2021-12-08;xxx;bookingtext;landbaeckerei niemeyer;-510,83;x;x
+2023-04-01;2023-02-18;xxx;gutschrift;landbaeckerei niemeyer;-952,08;x;x
+2021-10-08;2021-05-17;xxx;bookingtext;c+a;-361,53;x;x
+2023-12-08;2020-11-11;xxx;bookingtext;Deutsche Tamoil GmbH;-229,36;x;x
+2023-04-25;2020-12-31;other;bookingtext;spotify ab;-920,14;x;x
+2023-02-07;2020-09-18;other;gutschrift;igm herford;-247,49;x;x
+2023-12-28;2020-05-02;other;gutschrift;Drillisch Online GmbH;-663,86;x;x
+2023-01-19;2023-06-24;other;gutschrift;neschen;737,45;x;x
+2021-06-17;2023-01-04;xxx;gutschrift;ALDI;-224,22;x;x
+2021-04-11;2021-10-28;other;bookingtext;yyy;-644,42;x;x
+2022-08-28;2020-10-04;xxx;gutschrift;rossmann;-30,34;x;x
+2020-09-21;2022-03-25;other;gutschrift;abas;348,47;x;x
+2021-11-07;2020-10-26;other;gutschrift;beitragsservice von ard;-484,42;x;x
+2021-10-28;2023-12-27;xxx;gutschrift;Stromio GmbH;-33,26;x;x
+2022-07-17;2023-10-23;xxx;gutschrift;lvm landw.versicherungsverein;-777,46;x;x
+2021-02-12;2020-10-12;other;gutschrift;mait;812,21;x;x
+2022-01-15;2021-10-02;xxx;bookingtext;netflix;-494,76;x;x
+2021-02-23;2022-09-05;xxx;bookingtext;pppp;-271,4;x;x
+2020-09-12;2021-11-28;xxx;gutschrift;unicredit;-896,2;x;x
+2023-03-27;2021-08-02;xxx;bookingtext;lvm landw.versicherungsverein;-12,47;x;x
+2023-02-15;2022-03-12;xxx;gutschrift;FitX Deutschland GmbH;-372,82;x;x
+2020-10-03;2022-10-11;other;gutschrift;neschen;119,58;x;x
+2021-08-29;2023-10-25;other;gutschrift;mait;696,66;x;x
+2023-12-02;2020-10-11;other;gutschrift;BoRa Sports GmbH;-548,9;x;x
+2022-03-22;2021-08-14;other;gutschrift;Stromio GmbH;-234,8;x;x
+2022-11-25;2022-06-07;xxx;gutschrift;mait;821,16;x;x
+2023-04-29;2023-01-25;other;bookingtext;arvato;729,14;x;x
+2020-06-20;2021-10-23;other;gutschrift;Combi Verbrauchermarkt;-821,02;x;x
+2021-03-01;2020-12-08;other;gutschrift;beitragsservice von ard;-881,31;x;x
+2023-03-27;2020-11-24;xxx;bookingtext;lvm landw.versicherungsverein;-985,7;x;x
+2022-10-14;2020-11-09;xxx;gutschrift;DM DROGERIEMARKT;-962,86;x;x
+2020-09-19;2022-09-17;xxx;gutschrift;aral ag;-964,41;x;x
+2022-10-14;2023-12-22;xxx;bookingtext;Drillisch Online GmbH;-930,17;x;x
+2020-12-13;2022-09-24;xxx;gutschrift;Stromio GmbH;-246,71;x;x
+2022-05-12;2020-12-25;xxx;bookingtext;xxx;-816,37;x;x
+2022-06-02;2020-02-27;other;bookingtext;igm herford;-672;x;x
+2021-07-09;2023-05-21;xxx;gutschrift;landbaeckerei niemeyer;-738,57;x;x
+2022-03-04;2023-01-27;other;bookingtext;ALDI;-359,63;x;x
+2023-10-25;2021-09-02;other;gutschrift;zalando;-377,39;x;x
+2023-05-22;2020-06-05;xxx;gutschrift;Drillisch Online GmbH;-170,55;x;x
+2021-03-09;2021-12-17;other;gutschrift;ing;-547,33;x;x
+2020-08-05;2023-01-21;xxx;bookingtext;zalando;-564,58;x;x
+2023-05-27;2022-06-01;other;gutschrift;zalando;-872;x;x
+2022-06-04;2022-04-14;other;gutschrift;telefonica;-688,34;x;x
+2021-11-03;2020-03-28;other;bookingtext;landbaeckerei niemeyer;-450,3;x;x
+2023-04-16;2020-09-26;xxx;bookingtext;bertelsmann;224,52;x;x
+2023-01-22;2022-05-24;other;bookingtext;ALDI;-998,66;x;x
+2020-08-04;2021-07-13;other;gutschrift;ing;-679,24;x;x
+2023-11-22;2020-09-02;xxx;gutschrift;bertelsmann;191,53;x;x
+2022-09-04;2023-05-22;xxx;bookingtext;e.on energie;-212,24;x;x
+2022-09-15;2022-10-12;other;bookingtext;spotify ab;-248,95;x;x
+2023-07-02;2021-12-08;xxx;bookingtext;aral ag;-408,16;x;x
+2021-09-26;2020-01-09;other;bookingtext;Deutsche Tamoil GmbH;-185,72;x;x
+2020-04-05;2020-05-10;other;bookingtext;LIDL;-970,54;x;x
+2021-05-25;2023-04-16;xxx;gutschrift;vodafone;-882,1;x;x
+2023-01-29;2023-07-31;other;bookingtext;lvm landw.versicherungsverein;-876,33;x;x
+2023-07-02;2020-11-15;other;gutschrift;elsner catering;-646,02;x;x
+2022-06-17;2023-12-02;other;gutschrift;beitragsservice von ard;-221,89;x;x
+2023-08-12;2020-03-16;other;bookingtext;Deutsche Tamoil GmbH;-221,71;x;x
+2022-12-15;2020-06-25;xxx;bookingtext;abas;34,44;x;x
+2021-05-20;2020-02-19;xxx;bookingtext;DM DROGERIEMARKT;-525,31;x;x
+2020-07-25;2023-07-08;xxx;gutschrift;Stromio GmbH;-532,9;x;x
+2021-09-16;2023-04-03;other;gutschrift;yyy;-68,16;x;x
+2022-04-29;2021-08-31;xxx;bookingtext;DM DROGERIEMARKT;-627,24;x;x
+2020-03-10;2023-01-05;other;gutschrift;netflix;-492,12;x;x
+2023-12-24;2021-01-27;xxx;bookingtext;c+a;-497,57;x;x
+2020-01-01;2020-01-15;xxx;bookingtext;kammann;912,78;x;x
+2021-04-19;2021-04-27;other;bookingtext;Combi Verbrauchermarkt;-673,79;x;x
+2020-09-20;2022-07-29;xxx;bookingtext;rainer klenke;-50,46;x;x
+2021-12-16;2022-12-23;xxx;gutschrift;bertelsmann;245,6;x;x
+2022-08-31;2022-07-14;other;gutschrift;xxx;-780,78;x;x
+2023-07-25;2023-12-08;xxx;bookingtext;Deutsche Tamoil GmbH;-564,56;x;x
+2021-07-06;2021-12-28;xxx;bookingtext;KAUFLAND;-395,69;x;x
+2022-09-12;2023-03-13;xxx;gutschrift;vodafone;-539,6;x;x
+2021-02-03;2020-12-12;xxx;gutschrift;Combi Verbrauchermarkt;-243,41;x;x
+2022-05-14;2023-06-26;other;gutschrift;mait;572,75;x;x
+2020-03-01;2021-05-07;other;gutschrift;wez;-785,32;x;x
+2022-11-08;2021-12-09;other;gutschrift;BoRa Sports GmbH;-93,81;x;x
+2021-05-02;2023-07-26;other;gutschrift;kammann;68,17;x;x
+2020-06-27;2023-10-04;xxx;gutschrift;rainer klenke;-396,09;x;x
+2023-10-30;2023-10-18;xxx;gutschrift;FitX Deutschland GmbH;-795,23;x;x
+2022-11-11;2023-06-28;xxx;bookingtext;xxx;-206,68;x;x
+2021-09-13;2020-12-17;other;gutschrift;ing;-439,62;x;x
+2022-03-25;2021-08-11;xxx;bookingtext;e.on energie;-253,25;x;x
+2020-06-12;2020-03-17;xxx;bookingtext;TAS Minden;-118,9;x;x
+2022-06-15;2022-09-14;xxx;bookingtext;yyy;-122,22;x;x
+2023-07-15;2023-11-05;other;bookingtext;telefonica;-410,86;x;x
+2021-09-12;2021-06-15;xxx;gutschrift;jet dankt;-627,64;x;x
+2021-06-26;2022-06-12;other;bookingtext;DM DROGERIEMARKT;-146,59;x;x
+2020-02-23;2020-10-12;xxx;bookingtext;jet dankt;-516,81;x;x
+2021-05-01;2023-11-18;other;bookingtext;wez;-251,88;x;x
+2021-01-13;2023-07-14;other;gutschrift;elsner catering;-203,42;x;x
+2022-10-17;2022-12-23;other;bookingtext;rossmann;-644,79;x;x
+2020-10-25;2021-07-24;xxx;bookingtext;DM DROGERIEMARKT;-932,81;x;x
+2022-09-06;2023-05-04;xxx;gutschrift;jet dankt;-725,52;x;x
+2022-09-26;2021-01-24;other;gutschrift;jet dankt;-993,02;x;x
+2023-04-08;2020-01-30;xxx;gutschrift;DM DROGERIEMARKT;-628,52;x;x
+2021-08-27;2020-01-02;xxx;bookingtext;pppp;-424,97;x;x
+2021-11-15;2021-08-31;xxx;bookingtext;xxx;-639,82;x;x
+2020-04-12;2020-06-02;xxx;gutschrift;xxx;-526,61;x;x
+2021-02-06;2021-08-30;other;bookingtext;ing;-18,87;x;x
+2020-12-05;2021-02-18;xxx;gutschrift;Logemann Vermoegensverwaltung;-813,51;x;x
+2023-03-21;2021-03-13;xxx;gutschrift;xxx;-776,51;x;x
+2023-09-24;2022-08-05;xxx;bookingtext;spotify ab;-58,88;x;x
+2021-08-08;2021-02-11;xxx;bookingtext;DM DROGERIEMARKT;-147,62;x;x
+2023-01-25;2022-02-12;xxx;gutschrift;aral ag;-966,19;x;x
+2020-08-20;2023-11-30;other;gutschrift;c+a;-9,24;x;x
+2020-05-09;2022-04-13;other;bookingtext;vodafone;-828,59;x;x
+2022-12-23;2020-04-13;other;gutschrift;telefonica;-777,54;x;x
+2021-08-26;2023-03-19;other;bookingtext;arvato;722,11;x;x
+2022-02-21;2021-05-27;xxx;bookingtext;Deutsche Tamoil GmbH;-85;x;x
+2023-04-10;2020-04-24;other;gutschrift;pppp;-255,75;x;x
+2021-03-31;2020-01-03;other;bookingtext;igm herford;-561,24;x;x
+2021-10-27;2023-05-06;xxx;bookingtext;rainer klenke;-986,17;x;x
+2020-12-17;2023-02-23;xxx;bookingtext;Stromio GmbH;-2,05;x;x
+2021-04-26;2022-11-18;xxx;bookingtext;abas;450,01;x;x
+2021-02-28;2023-06-04;other;gutschrift;rossmann;-702,1;x;x
+2020-09-02;2021-07-06;xxx;gutschrift;ing;-275,32;x;x
+2021-04-07;2021-06-01;other;bookingtext;zalando;-287,57;x;x
+2023-10-24;2022-05-16;other;gutschrift;ing;-74,92;x;x
+2023-12-15;2023-07-15;other;bookingtext;Logemann Vermoegensverwaltung;-796,38;x;x
+2022-05-04;2023-10-16;other;bookingtext;igm herford;-916,49;x;x
+2022-04-18;2022-10-19;other;gutschrift;unicredit;-759,34;x;x
+2022-09-08;2022-04-06;xxx;bookingtext;hauptzollamt bielefeld;-466,59;x;x
+2022-08-04;2020-11-19;other;gutschrift;wez;-44,29;x;x
+2021-08-19;2023-09-15;xxx;gutschrift;wez;-498,5;x;x
+2020-09-28;2022-04-08;other;bookingtext;telefonica;-127,42;x;x
+2023-09-27;2020-03-21;other;bookingtext;Logemann Vermoegensverwaltung;-787,13;x;x
+2020-10-11;2023-10-08;other;bookingtext;Deutsche Tamoil GmbH;-626,35;x;x
+2020-07-23;2022-06-15;other;bookingtext;beitragsservice von ard;-434,63;x;x
+2020-07-22;2021-12-15;xxx;gutschrift;bertelsmann;510,32;x;x
+2022-09-29;2021-03-07;xxx;gutschrift;bertelsmann;846,36;x;x
+2023-07-02;2022-05-25;other;gutschrift;igm herford;-481,64;x;x
+2023-06-05;2021-06-29;other;bookingtext;kammann;559,07;x;x
+2021-02-04;2021-07-03;xxx;gutschrift;bertelsmann;48,89;x;x
+2023-04-20;2021-08-07;other;bookingtext;kammann;43,31;x;x
+2023-10-09;2020-01-28;other;gutschrift;landbaeckerei niemeyer;-953,42;x;x
+2022-06-12;2023-11-07;other;bookingtext;Stromio GmbH;-195,37;x;x
+2020-09-30;2023-01-05;xxx;gutschrift;yyy;-222,19;x;x
+2022-01-25;2021-10-15;other;gutschrift;LIDL;-280;x;x
+2023-07-15;2020-08-25;other;gutschrift;e.on energie;-21,8;x;x
+2022-09-01;2020-05-30;xxx;gutschrift;zalando;-193,61;x;x
+2021-10-02;2022-02-03;xxx;bookingtext;c+a;-304;x;x
+2021-11-15;2023-01-28;other;bookingtext;TAS Minden;-565,05;x;x
+2020-03-07;2022-02-21;other;bookingtext;neschen;236,15;x;x
+2022-10-26;2021-10-19;other;gutschrift;netflix;-688,31;x;x
+2021-07-13;2022-05-11;xxx;bookingtext;vodafone;-384,35;x;x
+2022-05-14;2023-01-01;xxx;bookingtext;aral ag;-350,02;x;x
+2023-10-30;2023-11-11;other;bookingtext;arvato;904,42;x;x
+2022-06-13;2021-01-05;xxx;bookingtext;Logemann Vermoegensverwaltung;-273,19;x;x
+2021-01-12;2023-05-04;xxx;bookingtext;e.on energie;-386,35;x;x
+2020-03-17;2023-03-23;other;gutschrift;rossmann;-27,43;x;x
+2022-09-17;2023-05-27;xxx;gutschrift;aral ag;-873,61;x;x
+2022-04-29;2020-11-13;xxx;bookingtext;neschen;601,63;x;x
+2022-05-29;2020-08-31;xxx;bookingtext;igm herford;-388,03;x;x
+2021-06-24;2023-04-02;xxx;bookingtext;mait;281,47;x;x
+2020-03-27;2022-02-12;xxx;gutschrift;pppp;-290,31;x;x
+2023-08-08;2020-12-24;xxx;bookingtext;ing;-642,74;x;x
+2022-08-28;2022-04-11;other;gutschrift;telefonica;-4,66;x;x
+2021-09-24;2020-01-15;xxx;gutschrift;bertelsmann;451,92;x;x
+2021-06-26;2021-06-09;xxx;bookingtext;spotify ab;-848,36;x;x
+2022-06-08;2021-04-13;xxx;gutschrift;yyy;-378,33;x;x
+2020-04-08;2023-10-31;xxx;bookingtext;abas;936,91;x;x
+2023-09-09;2023-02-01;xxx;bookingtext;kammann;566,31;x;x
+2023-12-15;2021-09-21;other;gutschrift;E-CENTER;-4,22;x;x
+2023-06-13;2020-05-30;xxx;gutschrift;pppp;-38,31;x;x
+2020-06-26;2021-10-28;other;gutschrift;hauptzollamt bielefeld;-582,81;x;x
+2020-09-23;2021-08-25;other;bookingtext;ing;-855,88;x;x
+2020-01-05;2021-10-25;xxx;gutschrift;BoRa Sports GmbH;-979,11;x;x
+2021-04-01;2021-11-24;other;gutschrift;ing;-494,89;x;x
+2022-02-24;2021-12-10;other;gutschrift;ing;-600,84;x;x
+2021-03-13;2023-10-25;xxx;gutschrift;E-CENTER;-382,42;x;x
+2022-11-10;2021-04-14;other;bookingtext;aral ag;-39,37;x;x
+2020-08-11;2022-01-04;other;bookingtext;abas;226,13;x;x
+2020-05-11;2020-08-21;other;gutschrift;Logemann Vermoegensverwaltung;-663,51;x;x
+2021-08-02;2022-03-09;other;gutschrift;ALDI;-98,06;x;x
+2021-04-08;2023-09-30;xxx;gutschrift;KAUFLAND;-892,53;x;x
+2020-01-03;2021-03-26;other;bookingtext;hauptzollamt bielefeld;-658,72;x;x
+2022-06-03;2023-06-22;xxx;bookingtext;Logemann Vermoegensverwaltung;-10,48;x;x
+2021-03-01;2023-08-30;xxx;gutschrift;Stromio GmbH;-618,15;x;x
+2023-05-19;2020-01-01;other;bookingtext;xxx;-8,03;x;x
+2023-11-08;2020-01-29;xxx;gutschrift;netflix;-381,77;x;x
+2023-08-19;2020-10-06;xxx;bookingtext;neschen;403,39;x;x
+2021-09-27;2020-10-17;other;bookingtext;neschen;600,68;x;x
+2020-12-30;2020-03-01;xxx;bookingtext;pppp;-781,54;x;x
+2023-08-17;2020-07-24;xxx;bookingtext;abas;956,66;x;x
+2021-03-08;2022-03-25;xxx;gutschrift;FitX Deutschland GmbH;-59,26;x;x
+2022-08-13;2021-11-15;xxx;gutschrift;wez;-377,28;x;x
+2020-02-28;2022-04-09;xxx;gutschrift;FitX Deutschland GmbH;-705,19;x;x
+2022-01-07;2022-12-22;xxx;gutschrift;FitX Deutschland GmbH;-62,32;x;x
+2021-06-17;2021-04-15;xxx;gutschrift;aral ag;-573,52;x;x
+2022-11-25;2020-11-26;other;bookingtext;telefonica;-591,34;x;x
+2022-03-26;2020-07-19;xxx;bookingtext;FitX Deutschland GmbH;-940,9;x;x
+2023-05-02;2022-10-19;other;bookingtext;landbaeckerei niemeyer;-905,44;x;x
+2023-04-28;2021-03-08;other;bookingtext;vodafone;-406,91;x;x
+2021-10-30;2022-04-15;other;gutschrift;arvato;680,91;x;x
+2021-01-15;2022-06-02;other;bookingtext;BoRa Sports GmbH;-634,24;x;x
+2022-04-25;2023-04-16;xxx;gutschrift;kammann;30,6;x;x
+2021-11-21;2021-06-26;xxx;bookingtext;yyy;-928,8;x;x
+2020-03-09;2023-01-20;other;bookingtext;hauptzollamt bielefeld;-131,26;x;x
+2021-08-01;2022-07-21;xxx;bookingtext;Combi Verbrauchermarkt;-29,2;x;x
+2023-09-22;2021-10-03;xxx;gutschrift;e.on energie;-287,94;x;x
+2021-12-18;2023-08-09;xxx;bookingtext;telefonica;-331,83;x;x
+2023-09-08;2021-12-19;xxx;gutschrift;rainer klenke;-325,97;x;x
+2022-11-16;2021-05-05;xxx;bookingtext;vodafone;-538,4;x;x
+2023-12-22;2022-04-30;other;bookingtext;Stromio GmbH;-558,59;x;x
+2022-07-20;2021-10-08;other;bookingtext;zalando;-894,16;x;x
+2023-06-04;2023-08-25;xxx;gutschrift;FitX Deutschland GmbH;-977,54;x;x
+2020-01-18;2021-08-13;other;bookingtext;pppp;-616,08;x;x
+2020-05-08;2021-08-06;xxx;bookingtext;abas;623,92;x;x
+2021-09-05;2023-09-17;xxx;gutschrift;Combi Verbrauchermarkt;-655,58;x;x
+2020-07-18;2020-06-19;other;gutschrift;unicredit;-166,78;x;x
+2023-10-12;2022-01-14;xxx;bookingtext;landbaeckerei niemeyer;-694,77;x;x
+2023-08-11;2021-09-06;other;bookingtext;BoRa Sports GmbH;-105,78;x;x
+2022-11-08;2021-12-31;other;bookingtext;FitX Deutschland GmbH;-644,77;x;x
+2023-07-09;2023-07-18;other;bookingtext;mait;296,63;x;x
+2020-05-31;2022-11-24;other;bookingtext;yyy;-6,06;x;x
+2023-03-14;2020-12-30;xxx;gutschrift;Combi Verbrauchermarkt;-710,75;x;x
+2023-08-20;2020-04-14;other;bookingtext;LIDL;-725,65;x;x
+2021-12-02;2020-06-13;other;gutschrift;hauptzollamt bielefeld;-601,92;x;x
+2022-11-06;2022-08-02;xxx;bookingtext;TAS Minden;-263,97;x;x
+2021-04-18;2022-11-21;xxx;gutschrift;rainer klenke;-606,1;x;x
+2022-01-31;2021-10-31;other;gutschrift;vodafone;-97,69;x;x
+2020-11-23;2021-01-14;xxx;bookingtext;mait;140,22;x;x
+2023-11-21;2023-10-18;xxx;gutschrift;jet dankt;-171,11;x;x
+2020-07-11;2020-08-03;xxx;gutschrift;aral ag;-265,03;x;x
+2022-09-10;2022-05-30;xxx;gutschrift;e.on energie;-18,72;x;x
+2022-11-16;2021-04-22;xxx;gutschrift;vodafone;-665,83;x;x
+2022-01-16;2023-12-09;other;gutschrift;elsner catering;-935,82;x;x
+2021-08-08;2020-10-08;xxx;bookingtext;igm herford;-43,48;x;x
+2022-08-17;2023-12-11;other;gutschrift;pppp;-191,17;x;x
+2020-01-15;2023-07-26;other;bookingtext;xxx;-533,31;x;x
+2023-01-28;2020-10-18;other;bookingtext;DM DROGERIEMARKT;-859,23;x;x
+2021-08-01;2020-02-25;other;bookingtext;lvm landw.versicherungsverein;-615,42;x;x
+2022-10-05;2020-01-06;xxx;gutschrift;lvm landw.versicherungsverein;-431,21;x;x
+2023-09-27;2020-05-20;xxx;bookingtext;c+a;-35,44;x;x
+2020-06-19;2021-04-09;xxx;bookingtext;FitX Deutschland GmbH;-188,04;x;x
+2022-08-13;2023-07-09;xxx;gutschrift;wez;-117,11;x;x
+2022-05-21;2023-02-02;xxx;bookingtext;arvato;189,95;x;x
+2021-05-02;2021-01-29;xxx;gutschrift;igm herford;-534,82;x;x
+2020-12-02;2022-10-24;xxx;bookingtext;bertelsmann;818,46;x;x
+2021-06-06;2021-11-28;xxx;bookingtext;jet dankt;-186,58;x;x
+2023-02-01;2022-04-10;other;gutschrift;ing;-432,32;x;x
+2021-07-23;2022-09-30;other;bookingtext;aral ag;-432;x;x
+2022-01-29;2021-02-06;xxx;gutschrift;landbaeckerei niemeyer;-960,83;x;x
+2022-10-12;2022-01-29;other;bookingtext;spotify ab;-363,55;x;x
+2021-04-09;2023-08-16;xxx;bookingtext;spotify ab;-151,12;x;x
+2021-07-13;2021-08-06;xxx;gutschrift;unicredit;-733,69;x;x
+2023-10-19;2020-12-19;other;gutschrift;rainer klenke;-75,46;x;x
+2020-06-11;2020-04-24;xxx;bookingtext;LIDL;-122,46;x;x
+2021-10-15;2020-07-25;other;gutschrift;KAUFLAND;-435,49;x;x
+2023-09-16;2022-11-11;xxx;bookingtext;xxx;-969,25;x;x
+2023-05-12;2022-01-26;other;gutschrift;Drillisch Online GmbH;-193,55;x;x
+2022-10-09;2022-03-15;xxx;gutschrift;BoRa Sports GmbH;-395,63;x;x
+2023-10-29;2021-03-18;other;bookingtext;vodafone;-295,35;x;x
+2020-08-07;2020-06-10;xxx;bookingtext;BoRa Sports GmbH;-17;x;x
+2022-03-12;2022-02-21;other;gutschrift;BoRa Sports GmbH;-976,17;x;x
+2020-08-02;2022-02-11;xxx;gutschrift;jet dankt;-540,95;x;x
+2023-09-07;2023-03-03;xxx;gutschrift;unicredit;-662,98;x;x
+2023-01-17;2020-04-25;other;bookingtext;vodafone;-895,27;x;x
+2020-08-28;2023-03-11;other;bookingtext;wez;-919,47;x;x
+2020-07-30;2023-10-01;other;gutschrift;xxx;-226,56;x;x
+2023-03-25;2020-02-19;xxx;bookingtext;unicredit;-794,79;x;x
+2021-05-26;2022-09-06;other;bookingtext;arvato;970,27;x;x
+2022-07-14;2021-10-10;xxx;bookingtext;bertelsmann;542,07;x;x
+2021-05-07;2021-10-10;other;gutschrift;ing;-168,69;x;x
+2022-09-04;2021-02-09;other;bookingtext;kammann;426,54;x;x
+2020-04-26;2020-08-11;xxx;gutschrift;wez;-289,54;x;x
+2020-02-05;2020-08-18;other;gutschrift;neschen;53,62;x;x
+2021-05-21;2020-08-27;xxx;bookingtext;yyy;-910,25;x;x
+2021-08-31;2020-07-18;other;bookingtext;rainer klenke;-767,02;x;x
+2020-03-19;2022-01-19;other;bookingtext;aral ag;-500,87;x;x
+2020-02-12;2022-01-01;xxx;bookingtext;vodafone;-848,56;x;x
+2021-09-05;2021-10-30;other;gutschrift;rossmann;-670,48;x;x
+2023-11-21;2021-10-30;other;gutschrift;BoRa Sports GmbH;-770,64;x;x
+2021-07-23;2023-04-01;xxx;bookingtext;e.on energie;-726,42;x;x
+2022-05-07;2021-06-26;xxx;gutschrift;xxx;-520,71;x;x
+2020-07-03;2020-02-13;other;bookingtext;ing;-22,33;x;x
+2021-12-15;2020-04-27;xxx;bookingtext;aral ag;-854,45;x;x
+2023-01-01;2020-06-07;other;gutschrift;landbaeckerei niemeyer;-977,14;x;x
+2020-09-07;2020-09-26;other;bookingtext;Drillisch Online GmbH;-513,7;x;x
+2021-12-16;2022-09-14;other;gutschrift;vodafone;-916,38;x;x
+2020-08-15;2020-06-21;other;bookingtext;E-CENTER;-147,08;x;x
+2021-11-16;2023-12-16;xxx;bookingtext;wez;-767,61;x;x
+2022-06-22;2022-01-03;other;bookingtext;igm herford;-60,17;x;x
+2023-12-04;2021-03-29;other;gutschrift;netflix;-477,72;x;x
+2023-02-19;2020-02-23;other;gutschrift;elsner catering;-651,91;x;x
+2022-10-04;2023-06-25;other;bookingtext;wez;-826,9;x;x
+2021-04-19;2022-04-11;xxx;gutschrift;rainer klenke;-247,22;x;x
+2021-04-03;2020-06-10;xxx;bookingtext;c+a;-772,6;x;x
+2021-06-29;2021-07-14;xxx;gutschrift;bertelsmann;154,11;x;x
+2021-09-28;2022-06-29;other;gutschrift;c+a;-462,73;x;x
+2023-08-21;2023-10-02;xxx;gutschrift;Drillisch Online GmbH;-428,46;x;x
+2020-11-11;2023-05-28;xxx;bookingtext;ing;-739,53;x;x
+2022-10-14;2020-09-03;xxx;gutschrift;vodafone;-462,76;x;x
+2023-10-14;2022-04-12;other;gutschrift;aral ag;-149,09;x;x
+2021-03-03;2023-10-23;other;bookingtext;Deutsche Tamoil GmbH;-639,15;x;x
+2021-07-22;2020-08-23;other;gutschrift;hauptzollamt bielefeld;-112,34;x;x
+2020-05-31;2021-02-19;xxx;gutschrift;unicredit;-825,22;x;x
+2021-11-02;2020-11-21;xxx;gutschrift;TAS Minden;-743,78;x;x
+2022-12-13;2023-11-06;xxx;gutschrift;mait;677,92;x;x
+2022-05-21;2020-09-10;other;bookingtext;KAUFLAND;-775,14;x;x
+2022-06-09;2022-01-11;other;gutschrift;telefonica;-876,81;x;x
+2023-12-29;2020-06-28;other;gutschrift;mait;746,18;x;x
+2020-07-03;2023-03-07;other;bookingtext;unicredit;-873,23;x;x
+2022-02-16;2023-05-17;xxx;gutschrift;jet dankt;-711,43;x;x
+2023-06-06;2023-09-22;other;bookingtext;e.on energie;-886,26;x;x
+2023-10-24;2023-03-10;other;gutschrift;Logemann Vermoegensverwaltung;-507,44;x;x
+2020-05-10;2023-01-05;other;bookingtext;elsner catering;-473,55;x;x
+2021-01-03;2021-12-31;xxx;bookingtext;FitX Deutschland GmbH;-113,13;x;x
+2023-05-25;2021-07-01;xxx;bookingtext;rossmann;-28,09;x;x
+2023-03-08;2023-12-04;xxx;gutschrift;aral ag;-47,33;x;x
+2021-04-22;2022-07-16;other;bookingtext;elsner catering;-156,27;x;x
+2021-07-20;2023-05-07;xxx;bookingtext;rossmann;-709,99;x;x
+2022-10-28;2023-04-06;other;bookingtext;FitX Deutschland GmbH;-489,51;x;x
+2023-09-09;2020-07-01;xxx;gutschrift;FitX Deutschland GmbH;-264,38;x;x
+2020-01-12;2020-02-05;xxx;bookingtext;mait;398,92;x;x
+2021-04-05;2020-11-14;other;bookingtext;LIDL;-742,12;x;x
+2022-07-19;2020-09-24;other;bookingtext;E-CENTER;-846,75;x;x
+2021-12-30;2023-05-17;xxx;gutschrift;Stromio GmbH;-962,85;x;x
+2021-02-06;2020-12-03;xxx;bookingtext;yyy;-933,98;x;x
+2020-03-05;2021-09-30;xxx;gutschrift;ALDI;-690,78;x;x
+2020-08-07;2020-01-05;xxx;bookingtext;arvato;182,45;x;x
+2022-12-23;2020-12-24;xxx;bookingtext;rainer klenke;-150,43;x;x
+2022-01-09;2022-11-05;other;gutschrift;unicredit;-59,89;x;x
+2023-10-02;2020-10-26;xxx;bookingtext;yyy;-823,43;x;x
+2020-11-17;2023-01-28;xxx;gutschrift;FitX Deutschland GmbH;-843,48;x;x
+2020-11-05;2021-11-28;other;bookingtext;BoRa Sports GmbH;-481,11;x;x
+2022-03-22;2022-08-03;other;gutschrift;KAUFLAND;-968,82;x;x
+2022-05-28;2022-05-24;xxx;bookingtext;Stromio GmbH;-4,68;x;x
+2020-07-05;2022-08-01;xxx;gutschrift;e.on energie;-654,39;x;x
+2023-05-07;2023-05-12;other;gutschrift;kammann;40,2;x;x
+2021-07-23;2020-01-20;xxx;gutschrift;LIDL;-25,4;x;x
+2021-03-21;2020-10-20;xxx;bookingtext;neschen;293,33;x;x
+2023-08-02;2020-08-27;xxx;bookingtext;BoRa Sports GmbH;-895,47;x;x
+2021-06-19;2023-09-24;other;gutschrift;arvato;231,07;x;x
+2022-04-28;2022-02-14;other;bookingtext;LIDL;-386,94;x;x
+2021-02-27;2021-07-12;other;gutschrift;kammann;751,93;x;x
+2021-03-19;2021-03-03;xxx;bookingtext;neschen;39,78;x;x
+2021-12-30;2023-12-14;other;gutschrift;ing;-610,82;x;x
+2022-10-28;2020-02-20;other;bookingtext;Deutsche Tamoil GmbH;-267,13;x;x
+2022-08-26;2020-12-04;other;bookingtext;telefonica;-683,43;x;x
+2020-11-07;2023-02-27;xxx;bookingtext;elsner catering;-766,5;x;x
+2020-10-12;2023-03-24;xxx;bookingtext;mait;882,48;x;x
+2021-09-25;2023-01-20;xxx;bookingtext;c+a;-408,01;x;x
+2021-01-26;2023-02-18;other;gutschrift;TAS Minden;-686,64;x;x
+2023-12-30;2020-06-06;xxx;gutschrift;Logemann Vermoegensverwaltung;-192,62;x;x
+2021-08-17;2023-02-03;xxx;bookingtext;xxx;-467,52;x;x
+2022-12-30;2021-12-31;xxx;bookingtext;e.on energie;-135,41;x;x
+2023-07-25;2020-06-29;xxx;bookingtext;KAUFLAND;-59,01;x;x
+2022-12-25;2023-08-12;other;bookingtext;c+a;-728,08;x;x
+2020-10-13;2020-02-12;other;gutschrift;unicredit;-605,59;x;x
+2022-11-14;2020-08-12;xxx;gutschrift;spotify ab;-950,63;x;x
+2020-01-18;2022-07-07;xxx;bookingtext;zalando;-932,2;x;x
+2022-01-14;2023-11-25;xxx;gutschrift;wez;-910,72;x;x
+2020-02-22;2023-05-13;other;bookingtext;neschen;246,05;x;x
+2022-07-29;2020-11-13;xxx;bookingtext;kammann;927,52;x;x
+2020-03-22;2023-11-05;xxx;gutschrift;wez;-919,25;x;x
+2021-09-20;2023-06-26;xxx;gutschrift;aral ag;-370,85;x;x
+2021-07-11;2023-08-13;other;gutschrift;landbaeckerei niemeyer;-68,56;x;x
+2022-04-30;2020-11-06;other;gutschrift;Deutsche Tamoil GmbH;-565,99;x;x
+2023-11-07;2023-01-18;xxx;gutschrift;Stromio GmbH;-746,75;x;x
+2022-07-18;2020-03-28;xxx;bookingtext;FitX Deutschland GmbH;-489,72;x;x
+2020-10-31;2020-08-17;other;bookingtext;jet dankt;-228,16;x;x
+2020-03-07;2021-01-29;xxx;bookingtext;beitragsservice von ard;-259,63;x;x
+2022-09-11;2023-11-13;xxx;bookingtext;Deutsche Tamoil GmbH;-839,82;x;x
+2023-03-11;2022-10-17;xxx;gutschrift;abas;871,88;x;x
+2022-09-15;2020-09-05;xxx;bookingtext;Drillisch Online GmbH;-731,3;x;x
+2023-05-12;2021-07-19;xxx;gutschrift;aral ag;-689,02;x;x
+2022-07-09;2022-09-16;xxx;gutschrift;Drillisch Online GmbH;-644,4;x;x
+2023-08-19;2023-10-28;xxx;bookingtext;yyy;-47,47;x;x
+2020-04-09;2023-06-06;other;bookingtext;elsner catering;-653,78;x;x
+2022-11-25;2022-10-07;other;bookingtext;Deutsche Tamoil GmbH;-837,73;x;x
+2020-03-25;2022-11-16;other;bookingtext;Logemann Vermoegensverwaltung;-821,03;x;x
+2020-11-14;2020-10-28;xxx;gutschrift;wez;-349,09;x;x
+2020-06-12;2023-11-26;other;gutschrift;kammann;155,04;x;x
+2023-08-24;2022-02-15;other;gutschrift;landbaeckerei niemeyer;-670,8;x;x
+2020-08-16;2021-10-01;other;gutschrift;igm herford;-236,86;x;x
+2021-04-07;2023-01-09;xxx;bookingtext;DM DROGERIEMARKT;-717,51;x;x
