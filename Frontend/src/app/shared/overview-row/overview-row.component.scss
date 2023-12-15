@@ -1,6 +1,9 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
 table {
   display: block;
-  width: 100%;
   max-width: auto;
   overflow-x: auto;
 }

@@ -57,7 +57,7 @@ public class TransaktionController {
   }
 
   @PatchMapping("/categorize")
-  public ResponseEntity<?> categorizeTransaktions(@RequestBody List<MinimizedTransaktion> patchValues) {
+  public ResponseEntity<?> categorizeTransaktions(@RequestBody List<TransaktionDTO> patchValues) {
 
     patchValues.forEach(entry -> {
       Optional<Transaktion> transaktionFromDB = this.transaktionRepository.findById(entry.getId());
