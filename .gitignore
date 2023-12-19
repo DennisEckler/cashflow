@@ -89,3 +89,5 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+/Authorization/src/main/resources/myData-realm.json
+/Authorization/src/main/resources/META-INF/keycloak-server.json
