@@ -18,28 +18,30 @@ import java.util.HashMap;
 @Service
 public class TransaktionService {
 
-  private static final Map<Category, String[]> IDENTIFIER = new HashMap<Category, String[]>() {
+  private static final Map<Category, String[]> IDENTIFIER = new HashMap<>() {
     {
-      put(Category.DENNIS, new String[] { "bertelsmann", "abas", "neschen", "mait", "arvato" });
-      put(Category.SVETI, new String[] { "kammann" });
-      put(Category.MIETE, new String[] { "rainer klenke", "Logemann Vermoegensverwaltung" });
-      put(Category.STROM, new String[] { "e.on energie", "Stromio GmbH" });
-      put(Category.INTERNET, new String[] { "vodafone" });
-      put(Category.HANDY, new String[] { "telefonica", "Drillisch Online GmbH" });
-      put(Category.VERSICHERUNG, new String[] { "lvm landw.versicherungsverein" });
-      put(Category.GEZ, new String[] { "beitragsservice von ard" });
+      put(Category.DENNIS, new String[]{"bertelsmann", "abas", "neschen", "mait", "arvato"});
+      put(Category.SVETI, new String[]{"kammann"});
+      put(Category.MIETE, new String[]{"rainer klenke", "Logemann Vermoegensverwaltung"});
+      put(Category.STROM, new String[]{"e.on energie", "Stromio GmbH"});
+      put(Category.INTERNET, new String[]{"vodafone"});
+      put(Category.HANDY, new String[]{"telefonica", "Drillisch Online GmbH"});
+      put(Category.VERSICHERUNG, new String[]{"lvm landw.versicherungsverein"});
+      put(Category.GEZ, new String[]{"beitragsservice von ard"});
       put(Category.ABONNEMENT,
-          new String[] { "spotify ab", "igm herford", "netflix", "BoRa Sports GmbH", "FitX Deutschland GmbH" });
+          new String[]{"spotify ab", "igm herford", "netflix", "BoRa Sports GmbH",
+              "FitX Deutschland GmbH"});
       put(Category.LEBENSMITTEL,
-          new String[] { "wez", "LIDL", "E-CENTER", "KAUFLAND", "ALDI", "Combi Verbrauchermarkt" });
-      put(Category.HAUSHALTSMITTEL, new String[] { "rossmann", "DM DROGERIEMARKT" });
-      put(Category.KLEIDUNG, new String[] { "c+a", "zalando" });
+          new String[]{"wez", "LIDL", "E-CENTER", "KAUFLAND", "ALDI", "Combi Verbrauchermarkt"});
+      put(Category.HAUSHALTSMITTEL, new String[]{"rossmann", "DM DROGERIEMARKT"});
+      put(Category.KLEIDUNG, new String[]{"c+a", "zalando"});
       put(Category.MOBILITAET,
-          new String[] { "hauptzollamt bielefeld", "unicredit", "aral ag", "jet dankt", "Deutsche Tamoil GmbH",
-              "TAS Minden" });
-      put(Category.GESCHENKE, new String[] {});
-      put(Category.AUSGEHEN, new String[] { "landbaeckerei niemeyer" });
-      put(Category.SONSTIGES, new String[] { "elsner catering", "ing" });
+          new String[]{"hauptzollamt bielefeld", "unicredit", "aral ag", "jet dankt",
+              "Deutsche Tamoil GmbH",
+              "TAS Minden"});
+      put(Category.GESCHENKE, new String[]{});
+      put(Category.AUSGEHEN, new String[]{"landbaeckerei niemeyer"});
+      put(Category.SONSTIGES, new String[]{"elsner catering", "ing"});
 
     }
   };
