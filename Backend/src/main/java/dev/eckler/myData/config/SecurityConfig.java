@@ -22,7 +22,7 @@ public class SecurityConfig {
     http.cors(Customizer.withDefaults())
         .authorizeHttpRequests(authorize -> authorize
             .anyRequest().authenticated())
-        .oauth2ResourceServer((oauth2) -> oauth2.jwt(
+        .oauth2ResourceServer(oauth2 -> oauth2.jwt(
             jwt -> jwt.jwtAuthenticationConverter(customJwtConverter())));
     return http.build();
   }

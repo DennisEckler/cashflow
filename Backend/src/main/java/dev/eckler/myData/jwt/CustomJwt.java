@@ -8,12 +8,22 @@ import java.util.Collection;
 
 public class CustomJwt extends JwtAuthenticationToken {
 
+  private String id;
+
   private String firstname;
 
   private String lastname;
 
   public CustomJwt(Jwt jwt, Collection<? extends GrantedAuthority> authorities) {
     super(jwt, authorities);
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   public String getFirstname() {

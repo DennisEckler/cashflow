@@ -18,7 +18,7 @@ import java.util.HashMap;
 @Service
 public class TransaktionService {
 
-  private static final Map<Category, String[]> IDENTIFIER = new HashMap<>() {
+  private static final Map<Category, String[]> IDENTIFIER = new HashMap<Category, String[]>() {
     {
       put(Category.DENNIS, new String[]{"bertelsmann", "abas", "neschen", "mait", "arvato"});
       put(Category.SVETI, new String[]{"kammann"});
@@ -74,7 +74,8 @@ public class TransaktionService {
       } else {
         category = Enum.valueOf(Category.class, columns[7].toUpperCase());
       }
-      Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
+      Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount,
+          category);
       transaktions.add(transaktion);
     }
     reader.close();
@@ -105,7 +106,8 @@ public class TransaktionService {
     return Category.LEER;
   }
 
-  public List<Transaktion> convertCsvToTransaktionListInit(InputStream fileInputStream) throws IOException {
+  public List<Transaktion> convertCsvToTransaktionListInit(InputStream fileInputStream)
+      throws IOException {
     List<Transaktion> transaktions = new ArrayList<>();
     String line = "";
     Category category = null;
@@ -124,7 +126,8 @@ public class TransaktionService {
       } else {
         category = Enum.valueOf(Category.class, columns[7].toUpperCase());
       }
-      Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount, category);
+      Transaktion transaktion = new Transaktion(date, agent, bookingText, purpose, amount,
+          category);
       transaktions.add(transaktion);
     }
     reader.close();
