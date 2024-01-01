@@ -27,7 +27,8 @@ public class TransaktionService {
     this.categoryRepository = categoryRepository;
   }
 
-  List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream, final String USERID) throws IOException {
+  List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream, final String USERID)
+      throws IOException {
     boolean monthCheckCalled = false;
     List<Transaktion> transaktions = new ArrayList<>();
     Iterable<Category> categories = categoryRepository.findAllByUserID(USERID);
@@ -42,11 +43,8 @@ public class TransaktionService {
       float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
       String source = columns[2];
       String purpose = columns[4];
-      if (columns[7].equals("x")) {
-        identifier = categorize(categories, source, purpose);
-      } else {
-        identifier = null;
-      }
+      identifier = categorize(categories, source, purpose);
+
       Transaktion transaktion = new Transaktion(date, amount, USERID, purpose, source, identifier);
       transaktions.add(transaktion);
     }
@@ -54,14 +52,14 @@ public class TransaktionService {
     return transaktions;
   }
 
-//  private boolean skipIfPeriodAlreadyExist(String[] columns) {
-//    String year = columns[1].substring(6, 10);
-//    String month = columns[1].substring(3, 5);
-//    if (this.transaktionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
-//      return true;
-//    }
-//    return false;
-//  }
+  private boolean skipIfPeriodAlreadyExist(String[] columns) {
+    String year = columns[1].substring(6, 10);
+    String month = columns[1].substring(3, 5);
+    if (this.transaktionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
+      return true;
+    }
+    return false;
+  }
 
   private Identifier categorize(Iterable<Category> categories, String source, String purpose) {
     for (Category category : categories) {
@@ -86,7 +84,8 @@ public class TransaktionService {
     return null;
   }
 
-  public List<Transaktion> convertCsvToTransaktionListInit(InputStream fileInputStream, final String USERID)
+  public List<Transaktion> convertCsvToTransaktionListInit(InputStream fileInputStream,
+      final String USERID)
       throws IOException {
     List<Transaktion> transaktions = new ArrayList<>();
     Iterable<Category> categories = categoryRepository.findAllByUserID(USERID);
