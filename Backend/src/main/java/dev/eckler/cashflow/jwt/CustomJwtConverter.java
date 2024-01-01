@@ -1,4 +1,4 @@
-package dev.eckler.myData.jwt;
+package dev.eckler.cashflow.jwt;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;

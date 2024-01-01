@@ -1,4 +1,4 @@
-package dev.eckler.myData.overview;
+package dev.eckler.cashflow.overview;
 
 public class OverviewRow {
   String year = "";

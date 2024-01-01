@@ -1,4 +1,4 @@
-package dev.eckler.myData.jwt;
+package dev.eckler.cashflow.jwt;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
