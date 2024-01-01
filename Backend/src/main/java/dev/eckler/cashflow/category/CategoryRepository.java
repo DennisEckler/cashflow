@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
   Set<Category> findAllByUserID(String userID);
+  Category findByLabel(String label);
 
 }

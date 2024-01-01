@@ -32,12 +32,14 @@ public class Transaktion {
   @JoinColumn(name = "identifier_id")
   private Identifier identifier;
 
-  public Transaktion(Date date, float amount, String userID, String purpose, String source) {
+  public Transaktion(Date date, float amount, String userID, String purpose, String source,
+      Identifier identifier) {
     this.date = date;
     this.amount = amount;
     this.userID = userID;
     this.source = source;
     this.purpose = purpose;
+    this.identifier = identifier;
   }
 
   public Transaktion() {

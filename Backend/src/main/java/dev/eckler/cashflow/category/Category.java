@@ -3,6 +3,7 @@ package dev.eckler.cashflow.category;
 import dev.eckler.cashflow.identifier.Identifier;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,7 +33,7 @@ public class Category {
   @NotNull
   private String userID;
 
-  @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
+  @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
   private Set<Identifier> identifier;
 
   public String getLabel() {
@@ -49,5 +50,13 @@ public class Category {
 
   public void setUserID(String userID) {
     this.userID = userID;
+  }
+
+  public Set<Identifier> getIdentifier() {
+    return identifier;
+  }
+
+  public void setIdentifier(Set<Identifier> identifier) {
+    this.identifier = identifier;
   }
 }

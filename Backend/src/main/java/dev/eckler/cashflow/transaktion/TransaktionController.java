@@ -21,7 +21,6 @@ public class TransaktionController {
 
   private final TransaktionRepository transaktionRepository;
   private final TransaktionService transaktionService;
-//  private static final Category LEER = Category.LEER;
 
   public TransaktionController(TransaktionRepository transaktionRepository, TransaktionService transaktionService) {
     this.transaktionRepository = transaktionRepository;
@@ -33,10 +32,6 @@ public class TransaktionController {
 //    return transaktionRepository.findAllByCategory(LEER);
 //  }
 //
-//  @GetMapping("/show-transaktions")
-//  public Iterable<Transaktion> getTransaktions() {
-//    return transaktionRepository.findAllByCategoryNot(LEER);
-//  }
 
   @PostMapping("/file-upload")
   public void uploadFile(@RequestParam("file") MultipartFile csvFile) throws IOException {
