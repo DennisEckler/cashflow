@@ -1,8 +1,8 @@
-package dev.eckler.cashflow.transaktion;
+package dev.eckler.cashflow.model.transaktion;
 
-import dev.eckler.cashflow.category.Category;
-import dev.eckler.cashflow.category.CategoryRepository;
-import dev.eckler.cashflow.identifier.Identifier;
+import dev.eckler.cashflow.model.category.Category;
+import dev.eckler.cashflow.model.category.CategoryRepository;
+import dev.eckler.cashflow.model.identifier.Identifier;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

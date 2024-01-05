@@ -1,12 +1,9 @@
-package dev.eckler.cashflow.transaktion;
+package dev.eckler.cashflow.model.transaktion;
 
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,7 +69,7 @@ public class TransaktionController {
 //  }
 
   @PatchMapping("/categorize")
-  public ResponseEntity<?> categorizeTransaktions(@RequestBody List<Transaktion> patchValues) {
+  public ResponseEntity<String> categorizeTransaktions(@RequestBody List<Transaktion> patchValues) {
 
     patchValues.forEach(entry -> {
       Optional<Transaktion> transaktionFromDB = this.transaktionRepository.findById(entry.getId());

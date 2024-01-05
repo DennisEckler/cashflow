@@ -1,7 +1,7 @@
-package dev.eckler.cashflow.identifier;
+package dev.eckler.cashflow.model.identifier;
 
-import dev.eckler.cashflow.category.Category;
-import dev.eckler.cashflow.transaktion.Transaktion;
+import dev.eckler.cashflow.model.category.Category;
+import dev.eckler.cashflow.model.transaktion.Transaktion;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,7 +37,7 @@ public class Identifier {
   private Set<Transaktion> transaktions;
 
   @ManyToOne
-  @JoinColumn(name = "category_id", nullable = false)
+  @JoinColumn(name = "categoryID", nullable = false)
   private Category category;
 
   public String getLabel() {

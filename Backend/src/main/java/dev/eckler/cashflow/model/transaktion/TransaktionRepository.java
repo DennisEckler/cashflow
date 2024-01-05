@@ -1,7 +1,6 @@
-package dev.eckler.cashflow.transaktion;
+package dev.eckler.cashflow.model.transaktion;
 
-import dev.eckler.cashflow.category.Category;
-import dev.eckler.cashflow.identifier.Identifier;
+import dev.eckler.cashflow.model.identifier.Identifier;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

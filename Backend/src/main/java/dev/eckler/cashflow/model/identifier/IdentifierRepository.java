@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.identifier;
+package dev.eckler.cashflow.model.identifier;
 
 import org.springframework.data.repository.CrudRepository;
 

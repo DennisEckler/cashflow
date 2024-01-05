@@ -1,6 +1,6 @@
-package dev.eckler.cashflow.transaktion;
+package dev.eckler.cashflow.model.transaktion;
 
-import dev.eckler.cashflow.identifier.Identifier;
+import dev.eckler.cashflow.model.identifier.Identifier;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -29,7 +29,7 @@ public class Transaktion {
   @NotNull
   private String source;
   @ManyToOne
-  @JoinColumn(name = "identifier_id")
+  @JoinColumn(name = "identifierID")
   private Identifier identifier;
 
   public Transaktion(Date date, float amount, String userID, String purpose, String source,
