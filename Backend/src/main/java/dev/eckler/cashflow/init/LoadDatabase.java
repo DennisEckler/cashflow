@@ -86,7 +86,7 @@ class LoadDatabase {
             USERID),
         new Category("ausgehen",
             USERID),
-        new Category("sonstigess",
+        new Category("sonstiges",
             USERID)
     );
   }
