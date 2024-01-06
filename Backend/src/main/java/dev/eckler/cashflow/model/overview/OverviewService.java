@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.model.transaktion.overview;
+package dev.eckler.cashflow.model.overview;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
