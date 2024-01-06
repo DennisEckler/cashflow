@@ -1,4 +1,4 @@
-package dev.eckler.myData.overview;
+package dev.eckler.cashflow.model.overview;
 
 public interface OverviewEntry {
   String getYear();

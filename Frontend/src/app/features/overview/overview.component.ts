@@ -19,7 +19,7 @@ export class OverviewComponent implements OnInit {
   constructor(
     private overviewService: OverviewService,
     private httpClient: HttpClient,
-    private oauthService: OAuthService,
+    private oauthService: OAuthService
   ) {}
   ngOnInit() {
     // this.overviewService.getOverview().subscribe({
@@ -28,9 +28,6 @@ export class OverviewComponent implements OnInit {
     //   },
     //   error: (error: HttpErrorResponse) => console.log(error.message),
     // });
-    //
-    //
-    //
   }
 
   logout() {

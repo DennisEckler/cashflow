@@ -1,12 +1,18 @@
-package dev.eckler.myData.jwt;
+package dev.eckler.cashflow.jwt;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
 import java.util.Collection;
+import org.springframework.stereotype.Component;
 
 public class CustomJwt extends JwtAuthenticationToken {
+
+  private String userID;
 
   private String firstname;
 
@@ -14,6 +20,20 @@ public class CustomJwt extends JwtAuthenticationToken {
 
   public CustomJwt(Jwt jwt, Collection<? extends GrantedAuthority> authorities) {
     super(jwt, authorities);
+  }
+
+  public static String getUserId(String bearerToken, String issuer) {
+    String jwtToken = bearerToken.substring(7);
+    Jwt jwt = JwtDecoders.fromIssuerLocation(issuer).decode(jwtToken);
+    return jwt.getClaimAsString("sub");
+  }
+
+  public String getId() {
+    return userID;
+  }
+
+  public void setId(String id) {
+    this.userID = id;
   }
 
   public String getFirstname() {

@@ -63,7 +63,7 @@ services:
     environment:
       JAVA_OPTS_APPEND: -Dkeycloak.profile.feature.upload_scripts=enabled
       KC_DB_PASSWORD: postgres
-      KC_DB_URL: jdbc:postgresql://postgres/keycloak
+      KC_DB_URL: jdbc:postgresql://db/keycloak
       KC_DB_USERNAME: postgres
       KC_HEALTH_ENABLED: "true"
       KC_HTTP_ENABLED: "true"

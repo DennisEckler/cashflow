@@ -1,2 +1,8 @@
-INSERT INTO transaktion (valuta, client_or_recipient, booking_text, purpose, value)
-VALUES ( '2023-08-15', 'Vodafone', 'this is a booking text', 'some purpose', -25.08)
+INSERT INTO category (label, userID)
+VALUES ( 'test', 'test');
+
+INSERT INTO identifier (label, categoryID)
+VALUES ( 'test', 1);
+
+INSERT INTO transaktion (date, amount, userID, purpose, source, identifierID)
+VALUES ( '2023-08-15', 10, 'test', 'test', 'test', 1);
