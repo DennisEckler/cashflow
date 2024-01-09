@@ -2,6 +2,8 @@ package dev.eckler.cashflow.model.transaktion;
 
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
+import dev.eckler.cashflow.model.identifier.Identifier;
+import dev.eckler.cashflow.model.identifier.IdentifierRepository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,19 +34,25 @@ public class TransaktionController {
   private String issuer;
   private final TransaktionRepository transaktionRepository;
   private final TransaktionService transaktionService;
+  private final IdentifierRepository identifierRepository;
   private final Logger logger = LoggerFactory.getLogger(TransaktionController.class);
 
 
   public TransaktionController(TransaktionRepository transaktionRepository,
-      TransaktionService transaktionService) {
+      TransaktionService transaktionService,
+      IdentifierRepository identifierRepository) {
     this.transaktionRepository = transaktionRepository;
     this.transaktionService = transaktionService;
+    this.identifierRepository = identifierRepository;
   }
 
-//  @GetMapping("/get-empty-category-entries")
-//  @PreAuthorize("hasAuthority('ROLE_user')")
+  @GetMapping("/get-empty-category-entries")
+  @PreAuthorize("hasAuthority('ROLE_user')")
+  public List<Identifier> getTransaktion() {
+    return identifierRepository.findAll();
+  }
 //  public Iterable<Transaktion> getTransaktion() {
-//    return transaktionRepository.findAllByCategory(LEER);
+//    return transaktionRepository.findAll();
 //  }
 
 

@@ -2,10 +2,11 @@ package dev.eckler.cashflow.model.transaktion;
 
 import dev.eckler.cashflow.model.identifier.Identifier;
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface TransaktionRepository extends CrudRepository<Transaktion, Long> {
+public interface TransaktionRepository extends JpaRepository<Transaktion, Long> {
 
   List<Transaktion> findAllByIdentifier(Identifier identifier);
 

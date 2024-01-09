@@ -1,15 +1,22 @@
 package dev.eckler.cashflow.model.category;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.eckler.cashflow.model.identifier.Identifier;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,7 +33,7 @@ public class Category {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Long categoryid;
 
   @NotNull
   private String label;
@@ -34,7 +41,17 @@ public class Category {
   private String userID;
 
   @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-  private Set<Identifier> identifier;
+//  @JsonManagedReference
+//  @JoinColumn(name = "identifierid")
+  private List<Identifier> identifier;
+
+  public Long getId() {
+    return categoryid;
+  }
+
+  public void setId(Long id) {
+    this.categoryid = id;
+  }
 
   public String getLabel() {
     return label;
@@ -52,11 +69,11 @@ public class Category {
     this.userID = userID;
   }
 
-  public Set<Identifier> getIdentifier() {
+  public List<Identifier> getIdentifier() {
     return identifier;
   }
 
-  public void setIdentifier(Set<Identifier> identifier) {
+  public void setIdentifier(List<Identifier> identifier) {
     this.identifier = identifier;
   }
 }

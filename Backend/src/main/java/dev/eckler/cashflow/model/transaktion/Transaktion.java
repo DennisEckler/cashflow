@@ -1,5 +1,7 @@
 package dev.eckler.cashflow.model.transaktion;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.eckler.cashflow.model.identifier.Identifier;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -17,7 +19,7 @@ public class Transaktion {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Long transaktionid;
   @NotNull
   private Date date;
   @NotNull
@@ -29,7 +31,9 @@ public class Transaktion {
   @NotNull
   private String source;
   @ManyToOne
-  @JoinColumn(name = "identifierID")
+//  @JsonBackReference
+  @JoinColumn(name = "identifierid")
+  @JsonIgnore
   private Identifier identifier;
 
   public Transaktion(Date date, float amount, String userID, String purpose, String source,
@@ -45,12 +49,28 @@ public class Transaktion {
   public Transaktion() {
   }
 
+  public Long getTransaktionid() {
+    return transaktionid;
+  }
+
+  public void setTransaktionid(Long transaktionid) {
+    this.transaktionid = transaktionid;
+  }
+
+  public Identifier getIdentifier() {
+    return identifier;
+  }
+
+  public void setIdentifier(Identifier identifier) {
+    this.identifier = identifier;
+  }
+
   public Long getId() {
-    return id;
+    return transaktionid;
   }
 
   public void setId(Long id) {
-    this.id = id;
+    this.transaktionid = id;
   }
 
   public Date getDate() {
