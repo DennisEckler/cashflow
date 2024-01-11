@@ -27,5 +27,13 @@ public class CategoryController {
     return new ResponseEntity<>(categories, status);
   }
 
+  @GetMapping("/custom")
+  @PreAuthorize("hasAuthority('ROLE_user')")
+  public ResponseEntity<List<Category>> getWithCustomQuery() {
+    List<Category> categories = categoryService.customJoin();
+    HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
+    return new ResponseEntity<>(categories, status);
+  }
+
 
 }

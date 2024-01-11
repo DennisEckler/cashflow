@@ -41,8 +41,7 @@ public class Category {
   private String userID;
 
   @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-//  @JsonManagedReference
-//  @JoinColumn(name = "identifierid")
+  @JsonManagedReference
   private List<Identifier> identifier;
 
   public Long getId() {

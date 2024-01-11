@@ -15,7 +15,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
   Category findByLabel(String label);
 
   @Query("SELECT c FROM Category c JOIN FETCH c.identifier")
-  List<Category> findAllCategories();
+  List<Category> joinCategories();
 
 
 }

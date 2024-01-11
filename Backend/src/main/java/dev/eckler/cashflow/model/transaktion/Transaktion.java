@@ -31,7 +31,6 @@ public class Transaktion {
   @NotNull
   private String source;
   @ManyToOne
-//  @JsonBackReference
   @JoinColumn(name = "identifierid")
   @JsonIgnore
   private Identifier identifier;

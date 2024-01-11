@@ -14,8 +14,11 @@ public class CategoryService {
   }
 
   public List<Category> getAllCategories(String userID){
-//    return categoryRepository.findAllByUserID(userID);
-    return categoryRepository.findAllCategories();
+    return categoryRepository.findAllByUserID(userID);
+  }
+
+  public List<Category> customJoin(){
+    return categoryRepository.joinCategories();
   }
 
 
