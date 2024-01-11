@@ -1,13 +1,9 @@
 package dev.eckler.cashflow.model.identifier;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.eckler.cashflow.model.category.Category;
-import dev.eckler.cashflow.model.category.CategoryController;
 import dev.eckler.cashflow.model.transaktion.Transaktion;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,13 +35,12 @@ public class Identifier {
   private String label;
 
   @OneToMany(mappedBy = "identifier")
-//  @JsonManagedReference
   @JsonIgnore
   private Set<Transaktion> transaktions;
 
   @ManyToOne
-  @JsonBackReference
   @JoinColumn(name = "categoryid")
+  @JsonIgnore
   private Category category;
 
   public Long getIdentifierID() {

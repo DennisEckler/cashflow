@@ -2,8 +2,6 @@ package dev.eckler.cashflow.model.transaktion;
 
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
-import dev.eckler.cashflow.model.identifier.Identifier;
-import dev.eckler.cashflow.model.identifier.IdentifierRepository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,7 +16,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,26 +31,20 @@ public class TransaktionController {
   private String issuer;
   private final TransaktionRepository transaktionRepository;
   private final TransaktionService transaktionService;
-  private final IdentifierRepository identifierRepository;
   private final Logger logger = LoggerFactory.getLogger(TransaktionController.class);
 
 
   public TransaktionController(TransaktionRepository transaktionRepository,
-      TransaktionService transaktionService,
-      IdentifierRepository identifierRepository) {
+      TransaktionService transaktionService) {
     this.transaktionRepository = transaktionRepository;
     this.transaktionService = transaktionService;
-    this.identifierRepository = identifierRepository;
   }
 
   @GetMapping("/get-empty-category-entries")
   @PreAuthorize("hasAuthority('ROLE_user')")
-  public List<Identifier> getTransaktion() {
-    return identifierRepository.findAll();
+  public List<Transaktion> getTransaktion() {
+    return transaktionRepository.findAll();
   }
-//  public Iterable<Transaktion> getTransaktion() {
-//    return transaktionRepository.findAll();
-//  }
 
 
   @PostMapping("/file-upload")
@@ -68,7 +59,6 @@ public class TransaktionController {
     logger.info("FileUpload done");
   }
 
-
 //  @PostMapping("/file-upload-init")
 //  public void uploadInitFile(@RequestParam("file") MultipartFile csvFile) throws IOException {
 //    InputStream stream = csvFile.getInputStream();
@@ -81,7 +71,7 @@ public class TransaktionController {
   public ResponseEntity<String> categorizeTransaktions(@RequestBody List<Transaktion> patchValues) {
 
     patchValues.forEach(entry -> {
-      Optional<Transaktion> transaktionFromDB = this.transaktionRepository.findById(entry.getId());
+      Optional<Transaktion> transaktionFromDB = this.transaktionRepository.findById(entry.getTransaktionid());
       if (transaktionFromDB.isPresent()) {
 //        transaktionFromDB.get().setCategory(entry.getCategory());
         transaktionRepository.save(transaktionFromDB.get());

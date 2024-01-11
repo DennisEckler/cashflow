@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,18 +21,9 @@ public class CategoryController {
   @GetMapping("/categories/{userID}")
   @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<List<Category>> getCategories(@PathVariable @NotNull String userID) {
-    List<Category> categories = categoryService.getAllCategories(userID);
+    List<Category> categories = categoryService.getAllCategoriesByUserID(userID);
     HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
     return new ResponseEntity<>(categories, status);
   }
-
-  @GetMapping("/custom")
-  @PreAuthorize("hasAuthority('ROLE_user')")
-  public ResponseEntity<List<Category>> getWithCustomQuery() {
-    List<Category> categories = categoryService.customJoin();
-    HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
-    return new ResponseEntity<>(categories, status);
-  }
-
 
 }
