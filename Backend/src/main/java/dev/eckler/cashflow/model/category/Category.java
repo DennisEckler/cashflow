@@ -1,6 +1,7 @@
 package dev.eckler.cashflow.model.category;
 
 import dev.eckler.cashflow.model.identifier.Identifier;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -12,43 +13,44 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@Table(name = "Category")
+@Table(name = "category")
 public class Category {
 
   public Category() {
   }
 
-  public Category(String label, String userID) {
-    this.label = label;
+  public Category(String categoryLabel, String userID) {
+    this.categoryLabel = categoryLabel;
     this.userID = userID;
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long categoryid;
+  private Long categoryID;
 
   @NotNull
-  private String label;
+  @Column(name = "CATEGORYLABEL")
+  private String categoryLabel;
   @NotNull
   private String userID;
 
   @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
   private Set<Identifier> identifier;
 
-  public Long getId() {
-    return categoryid;
+  public Long getCategoryID() {
+    return categoryID;
   }
 
-  public void setId(Long id) {
-    this.categoryid = id;
+  public void setCategoryID(Long id) {
+    this.categoryID = id;
   }
 
-  public String getLabel() {
-    return label;
+  public String getCategoryLabel() {
+    return categoryLabel;
   }
 
-  public void setLabel(String label) {
-    this.label = label;
+  public void setCategoryLabel(String category) {
+    this.categoryLabel = category;
   }
 
   public String getUserID() {

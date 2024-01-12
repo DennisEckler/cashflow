@@ -10,7 +10,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
   @Query("FROM Category c JOIN FETCH c.identifier WHERE c.userID = :userID")
   List<Category> findAllByUserID(@Param("userID") String userID);
 
-  Category findByLabel(String label);
+  Category findByCategoryLabel(String label);
 
 
 

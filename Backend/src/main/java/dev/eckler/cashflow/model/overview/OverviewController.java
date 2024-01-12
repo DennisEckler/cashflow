@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dev.eckler.cashflow.model.transaktion.TransaktionRepository;
+import dev.eckler.cashflow.model.transaction.TransactionRepository;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", methods = {RequestMethod.GET})
 public class OverviewController {
 
-  TransaktionRepository transaktionRepository;
+  TransactionRepository transactionRepository;
   OverviewService overviewService;
   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
   private String issuer;
 
-  OverviewController(TransaktionRepository transaktionRepository, OverviewService overviewService) {
-    this.transaktionRepository = transaktionRepository;
+  OverviewController(TransactionRepository transactionRepository, OverviewService overviewService) {
+    this.transactionRepository = transactionRepository;
     this.overviewService = overviewService;
 
   }
@@ -35,7 +35,7 @@ public class OverviewController {
     Jwt jwt = JwtDecoders.fromIssuerLocation(issuer).decode(jwtToken);
     String userID = jwt.getClaimAsString("sub");
     System.out.println("Token Claims: " + userID);
-//    List<OverviewEntry> entries = transaktionRepository.getOverview();
+//    List<OverviewEntry> entries = transactionRepository.getOverview();
 //    List<OverviewRow> summary = overviewService.createOverviewRows(entries);
     List<OverviewRow> summary = null;
     return summary;

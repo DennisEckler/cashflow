@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.model.transaktion;
+package dev.eckler.cashflow.model.transaction;
 
 import dev.eckler.cashflow.model.identifier.Identifier;
 import jakarta.persistence.JoinColumn;
@@ -12,12 +12,12 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Transaktion")
-public class Transaktion {
+@Table(name = "Transaction")
+public class Transaction {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long transaktionid;
+  private Long transactionID;
   @NotNull
   private Date date;
   @NotNull
@@ -30,11 +30,10 @@ public class Transaktion {
   private String source;
 
   @ManyToOne
-  @JoinColumn(name = "identifierid")
-//  @JsonIgnore
+  @JoinColumn(name = "identifierID")
   private Identifier identifier;
 
-  public Transaktion(Date date, float amount, String userID, String purpose, String source,
+  public Transaction(Date date, float amount, String userID, String purpose, String source,
       Identifier identifier) {
     this.date = date;
     this.amount = amount;
@@ -44,15 +43,15 @@ public class Transaktion {
     this.identifier = identifier;
   }
 
-  public Transaktion() {
+  public Transaction() {
   }
 
-  public Long getTransaktionid() {
-    return transaktionid;
+  public Long getTransactionID() {
+    return transactionID;
   }
 
-  public void setTransaktionid(Long transaktionid) {
-    this.transaktionid = transaktionid;
+  public void setTransactionID(Long transactionID) {
+    this.transactionID = transactionID;
   }
 
   public Identifier getIdentifier() {

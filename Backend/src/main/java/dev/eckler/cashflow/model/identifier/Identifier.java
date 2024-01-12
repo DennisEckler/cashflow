@@ -2,7 +2,8 @@ package dev.eckler.cashflow.model.identifier;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.eckler.cashflow.model.category.Category;
-import dev.eckler.cashflow.model.transaktion.Transaktion;
+import dev.eckler.cashflow.model.transaction.Transaction;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,50 +23,51 @@ public class Identifier {
   public Identifier() {
   }
 
-  public Identifier(String label, Category category) {
-    this.label = label;
+  public Identifier(String identifierLabel, Category category) {
+    this.identifierLabel = identifierLabel;
     this.category = category;
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long identifierid;
+  private Long identifierID;
 
   @NotNull
-  private String label;
+  @Column(name = "IDENTIFIERLABEL")
+  private String identifierLabel;
 
   @OneToMany(mappedBy = "identifier")
   @JsonIgnore
-  private Set<Transaktion> transaktions;
+  private Set<Transaction> transactions;
 
   @ManyToOne
-  @JoinColumn(name = "categoryid")
+  @JoinColumn(name = "categoryID")
   @JsonIgnore
   private Category category;
 
   public Long getIdentifierID() {
-    return identifierid;
+    return identifierID;
   }
 
   public void setIdentifierID(Long identifierID) {
-    this.identifierid = identifierID;
+    this.identifierID = identifierID;
   }
 
-  public Set<Transaktion> getTransaktions() {
-    return transaktions;
+  public Set<Transaction> getTransaktions() {
+    return transactions;
   }
 
   public void setTransaktions(
-      Set<Transaktion> transaktions) {
-    this.transaktions = transaktions;
+      Set<Transaction> transactions) {
+    this.transactions = transactions;
   }
 
-  public String getLabel() {
-    return label;
+  public String getIdentifierLabel() {
+    return identifierLabel;
   }
 
-  public void setLabel(String label) {
-    this.label = label;
+  public void setIdentifierLabel(String identifierLabel) {
+    this.identifierLabel = identifierLabel;
   }
 
   public Category getCategory() {
