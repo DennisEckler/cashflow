@@ -22,16 +22,16 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors(Customizer.withDefaults())
-//        allows connection to h2 for all
-        .authorizeHttpRequests(customizer -> customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/h2/**")).permitAll())
-        .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2/**")))
-        .headers(headers -> headers.frameOptions(FrameOptionsConfig::disable));
-
 //    activate to authorize with token
-//        .authorizeHttpRequests(authorize -> authorize
-//            .anyRequest().authenticated())
-//        .oauth2ResourceServer(oauth2 -> oauth2.jwt(
-//            jwt -> jwt.jwtAuthenticationConverter(customJwtConverter())));
+        .authorizeHttpRequests(authorize -> authorize
+            .requestMatchers(AntPathRequestMatcher.antMatcher("/h2/**")).permitAll()
+            .anyRequest().authenticated())
+        .csrf(csrf -> csrf
+            .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2/**")))
+        .headers(headers -> headers
+            .frameOptions(FrameOptionsConfig::disable))
+        .oauth2ResourceServer(oauth2 -> oauth2.jwt(
+            jwt -> jwt.jwtAuthenticationConverter(customJwtConverter())));
     return http.build();
   }
 

@@ -6,6 +6,7 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { OverviewComponent } from './features/overview/overview.component';
+import { SettingsComponent } from './features/settings/settings.component';
 
 export const routes: Routes = [
   { path: 'file-upload', title: 'FileUpload', component: FileUploadComponent },
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'overview', component: OverviewComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

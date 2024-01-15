@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.model.transaktion;
+package dev.eckler.cashflow.model.transaction;
 
 import dev.eckler.cashflow.model.category.Category;
 import dev.eckler.cashflow.model.category.CategoryRepository;
@@ -11,28 +11,32 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.sql.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 @Service
-public class TransaktionService {
+public class TransactionService {
 
-  private TransaktionRepository transaktionRepository;
-  private CategoryRepository categoryRepository;
+  private final TransactionRepository transactionRepository;
+  private final CategoryRepository categoryRepository;
+  private final Logger logger = LoggerFactory.getLogger(TransactionService.class);
 
-  private TransaktionService(TransaktionRepository transaktionRepository,
+
+  private TransactionService(TransactionRepository transactionRepository,
       CategoryRepository categoryRepository) {
-    this.transaktionRepository = transaktionRepository;
+    this.transactionRepository = transactionRepository;
     this.categoryRepository = categoryRepository;
   }
 
-  List<Transaktion> convertCsvToTransaktionList(InputStream fileInputStream, final String USERID)
+  List<Transaction> convertCsvToTransaktionList(InputStream fileInputStream, final String USERID)
       throws IOException {
     boolean monthCheckCalled = false;
-    List<Transaktion> transaktions = new ArrayList<>();
+    List<Transaction> transactions = new ArrayList<>();
     Iterable<Category> categories = categoryRepository.findAllByUserID(USERID);
-    String line = "";
+    String line;
     Identifier identifier = null;
     BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
 
@@ -40,22 +44,22 @@ public class TransaktionService {
     while ((line = reader.readLine()) != null) {
       String[] columns = line.split(";");
       Date date = parseDate(columns[1]);
-      float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
+      float amount = Float.parseFloat(columns[5].replace("\\.", "").replace(',', '.'));
       String source = columns[2];
       String purpose = columns[4];
       identifier = categorize(categories, source, purpose);
 
-      Transaktion transaktion = new Transaktion(date, amount, USERID, purpose, source, identifier);
-      transaktions.add(transaktion);
+      Transaction transaction = new Transaction(date, amount, USERID, purpose, source, identifier);
+      transactions.add(transaction);
     }
     reader.close();
-    return transaktions;
+    return transactions;
   }
 
   private boolean skipIfPeriodAlreadyExist(String[] columns) {
     String year = columns[1].substring(6, 10);
     String month = columns[1].substring(3, 5);
-    if (this.transaktionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
+    if (this.transactionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
       return true;
     }
     return false;
@@ -64,8 +68,9 @@ public class TransaktionService {
   private Identifier categorize(Iterable<Category> categories, String source, String purpose) {
     for (Category category : categories) {
       for (Identifier identifier : category.getIdentifier()) {
-        if (source.trim().toLowerCase().contains(identifier.getLabel().toLowerCase())
-            || purpose.trim().toLowerCase().contains(identifier.getLabel().toLowerCase())) {
+        if (source.trim().toLowerCase().contains(identifier.getIdentifierLabel().toLowerCase())
+            || purpose.trim().toLowerCase()
+            .contains(identifier.getIdentifierLabel().toLowerCase())) {
           return identifier;
         }
       }
@@ -73,21 +78,22 @@ public class TransaktionService {
     return null;
   }
 
-  private static Date parseDate(String date) {
+  private Date parseDate(String date) {
     List<String> formats = Arrays.asList("dd.MM.yyyy", "dd/MM/yyyy", "yyyy-MM-dd");
     for (String format : formats) {
       try {
         return new Date(new SimpleDateFormat(format).parse(date).getTime());
       } catch (ParseException e) {
+        logger.error("Format {} not Supported for this date: {}", format, date);
       }
     }
     return null;
   }
 
-  public List<Transaktion> convertCsvToTransaktionListInit(InputStream fileInputStream,
+  public List<Transaction> convertCsvToTransaktionListInit(InputStream fileInputStream,
       final String USERID)
       throws IOException {
-    List<Transaktion> transaktions = new ArrayList<>();
+    List<Transaction> transactions = new ArrayList<>();
     Iterable<Category> categories = categoryRepository.findAllByUserID(USERID);
     String line = "";
     Identifier identifier = null;
@@ -97,7 +103,7 @@ public class TransaktionService {
     while ((line = reader.readLine()) != null) {
       String[] columns = line.split(";");
       Date date = parseDate(columns[1]);
-      float amount = Float.parseFloat(columns[5].replaceAll("\\.", "").replace(',', '.'));
+      float amount = Float.parseFloat(columns[5].replace("\\.", "").replace(',', '.'));
       String source = columns[2];
       String purpose = columns[4];
       if (columns[7].equals("x")) {
@@ -105,11 +111,11 @@ public class TransaktionService {
       } else {
         identifier = null;
       }
-      Transaktion transaktion = new Transaktion(date, amount, USERID, purpose, source, identifier);
-      transaktions.add(transaktion);
+      Transaction transaction = new Transaction(date, amount, USERID, purpose, source, identifier);
+      transactions.add(transaction);
     }
     reader.close();
-    return transaktions;
+    return transactions;
   }
 
 }

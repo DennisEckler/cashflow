@@ -5,7 +5,7 @@ import dev.eckler.cashflow.model.category.CategoryRepository;
 import dev.eckler.cashflow.model.identifier.Identifier;
 import dev.eckler.cashflow.model.identifier.IdentifierRepository;
 
-import dev.eckler.cashflow.model.transaktion.Transaktion;
+import dev.eckler.cashflow.model.transaction.Transaction;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-import dev.eckler.cashflow.model.transaktion.TransaktionRepository;
-import dev.eckler.cashflow.model.transaktion.TransaktionService;
+import dev.eckler.cashflow.model.transaction.TransactionRepository;
+import dev.eckler.cashflow.model.transaction.TransactionService;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
@@ -30,8 +30,8 @@ class LoadDatabase {
 
   @Bean
   @Transactional
-  CommandLineRunner initDatabase(TransaktionRepository transaktionRepository,
-      TransaktionService transaktionService,
+  CommandLineRunner initDatabase(TransactionRepository transactionRepository,
+      TransactionService transaktionService,
       IdentifierRepository identifierRepository,
       CategoryRepository categoryRepository,
       ResourceLoader resourceloader) {
@@ -42,9 +42,9 @@ class LoadDatabase {
       try {
         Resource resource = resourceloader.getResource("classpath:fakeData.csv");
         InputStream stream = resource.getInputStream();
-        List<Transaktion> transaktions = new ArrayList<>();
-        transaktions.addAll(transaktionService.convertCsvToTransaktionListInit(stream, USERID));
-        transaktionRepository.saveAll(transaktions);
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.addAll(transaktionService.convertCsvToTransaktionListInit(stream, USERID));
+        transactionRepository.saveAll(transactions);
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -94,45 +94,45 @@ class LoadDatabase {
   private void initIdentifier(IdentifierRepository identifierRepository,
       CategoryRepository categoryRepository) {
     identifierRepository.saveAll(Arrays.asList(
-        new Identifier("bertelsmann", categoryRepository.findByLabel("dennis")),
-        new Identifier("abas", categoryRepository.findByLabel("dennis")),
-        new Identifier("neschen", categoryRepository.findByLabel("dennis")),
-        new Identifier("mait", categoryRepository.findByLabel("dennis")),
-        new Identifier("arvato", categoryRepository.findByLabel("dennis")),
-        new Identifier("kammann", categoryRepository.findByLabel("sveti")),
-        new Identifier("rainer klenke", categoryRepository.findByLabel("miete")),
-        new Identifier("logemann vermoegensverwaltung", categoryRepository.findByLabel("miete")),
-        new Identifier("e.on energie", categoryRepository.findByLabel("strom")),
-        new Identifier("stromio gmbh", categoryRepository.findByLabel("strom")),
-        new Identifier("vodafone", categoryRepository.findByLabel("internet")),
-        new Identifier("telefonica", categoryRepository.findByLabel("handy")),
-        new Identifier("drillisch online gmbh", categoryRepository.findByLabel("handy")),
-        new Identifier("lvm landw.versicherungsverein", categoryRepository.findByLabel("versicherung")),
-        new Identifier("beitragsservice von ard", categoryRepository.findByLabel("gez")),
-        new Identifier("spotify", categoryRepository.findByLabel("abonnement")),
-        new Identifier("igm herford", categoryRepository.findByLabel("abonnement")),
-        new Identifier("netflix", categoryRepository.findByLabel("abonnement")),
-        new Identifier("BoRa Sports GmbH", categoryRepository.findByLabel("abonnement")),
-        new Identifier("FitX Deutschland GmbH", categoryRepository.findByLabel("abonnement")),
-        new Identifier("wez", categoryRepository.findByLabel("lebensmittel")),
-        new Identifier("LIDL", categoryRepository.findByLabel("lebensmittel")),
-        new Identifier("E-CENTER", categoryRepository.findByLabel("lebensmittel")),
-        new Identifier("KAUFLAND", categoryRepository.findByLabel("lebensmittel")),
-        new Identifier("ALDI", categoryRepository.findByLabel("lebensmittel")),
-        new Identifier("Combi Verbrauchermarkt", categoryRepository.findByLabel("lebensmittel")),
-        new Identifier("rossmann", categoryRepository.findByLabel("haushaltsmittel")),
-        new Identifier("DM DROGERIEMARKT", categoryRepository.findByLabel("haushaltsmittel")),
-        new Identifier("c+a", categoryRepository.findByLabel("kleidung")),
-        new Identifier("zalando", categoryRepository.findByLabel("kleidung")),
-        new Identifier("hauptzollamt bielefeld", categoryRepository.findByLabel("mobilitaet")),
-        new Identifier("unicredit", categoryRepository.findByLabel("mobilitaet")),
-        new Identifier("aral ag", categoryRepository.findByLabel("mobilitaet")),
-        new Identifier("jet dankt", categoryRepository.findByLabel("mobilitaet")),
-        new Identifier("Deutsche Tamoil GmbH", categoryRepository.findByLabel("mobilitaet")),
-        new Identifier("TAS Minden", categoryRepository.findByLabel("mobilitaet")),
-        new Identifier("landbaeckerei niemeyer", categoryRepository.findByLabel("ausgehen")),
-        new Identifier("ing", categoryRepository.findByLabel("sonstiges")),
-        new Identifier("elsner catering", categoryRepository.findByLabel("sonstiges"))
+        new Identifier("bertelsmann", categoryRepository.findByCategoryLabel("dennis")),
+        new Identifier("abas", categoryRepository.findByCategoryLabel("dennis")),
+        new Identifier("neschen", categoryRepository.findByCategoryLabel("dennis")),
+        new Identifier("mait", categoryRepository.findByCategoryLabel("dennis")),
+        new Identifier("arvato", categoryRepository.findByCategoryLabel("dennis")),
+        new Identifier("kammann", categoryRepository.findByCategoryLabel("sveti")),
+        new Identifier("rainer klenke", categoryRepository.findByCategoryLabel("miete")),
+        new Identifier("logemann vermoegensverwaltung", categoryRepository.findByCategoryLabel("miete")),
+        new Identifier("e.on energie", categoryRepository.findByCategoryLabel("strom")),
+        new Identifier("stromio gmbh", categoryRepository.findByCategoryLabel("strom")),
+        new Identifier("vodafone", categoryRepository.findByCategoryLabel("internet")),
+        new Identifier("telefonica", categoryRepository.findByCategoryLabel("handy")),
+        new Identifier("drillisch online gmbh", categoryRepository.findByCategoryLabel("handy")),
+        new Identifier("lvm landw.versicherungsverein", categoryRepository.findByCategoryLabel("versicherung")),
+        new Identifier("beitragsservice von ard", categoryRepository.findByCategoryLabel("gez")),
+        new Identifier("spotify", categoryRepository.findByCategoryLabel("abonnement")),
+        new Identifier("igm herford", categoryRepository.findByCategoryLabel("abonnement")),
+        new Identifier("netflix", categoryRepository.findByCategoryLabel("abonnement")),
+        new Identifier("BoRa Sports GmbH", categoryRepository.findByCategoryLabel("abonnement")),
+        new Identifier("FitX Deutschland GmbH", categoryRepository.findByCategoryLabel("abonnement")),
+        new Identifier("wez", categoryRepository.findByCategoryLabel("lebensmittel")),
+        new Identifier("LIDL", categoryRepository.findByCategoryLabel("lebensmittel")),
+        new Identifier("E-CENTER", categoryRepository.findByCategoryLabel("lebensmittel")),
+        new Identifier("KAUFLAND", categoryRepository.findByCategoryLabel("lebensmittel")),
+        new Identifier("ALDI", categoryRepository.findByCategoryLabel("lebensmittel")),
+        new Identifier("Combi Verbrauchermarkt", categoryRepository.findByCategoryLabel("lebensmittel")),
+        new Identifier("rossmann", categoryRepository.findByCategoryLabel("haushaltsmittel")),
+        new Identifier("DM DROGERIEMARKT", categoryRepository.findByCategoryLabel("haushaltsmittel")),
+        new Identifier("c+a", categoryRepository.findByCategoryLabel("kleidung")),
+        new Identifier("zalando", categoryRepository.findByCategoryLabel("kleidung")),
+        new Identifier("hauptzollamt bielefeld", categoryRepository.findByCategoryLabel("mobilitaet")),
+        new Identifier("unicredit", categoryRepository.findByCategoryLabel("mobilitaet")),
+        new Identifier("aral ag", categoryRepository.findByCategoryLabel("mobilitaet")),
+        new Identifier("jet dankt", categoryRepository.findByCategoryLabel("mobilitaet")),
+        new Identifier("Deutsche Tamoil GmbH", categoryRepository.findByCategoryLabel("mobilitaet")),
+        new Identifier("TAS Minden", categoryRepository.findByCategoryLabel("mobilitaet")),
+        new Identifier("landbaeckerei niemeyer", categoryRepository.findByCategoryLabel("ausgehen")),
+        new Identifier("ing", categoryRepository.findByCategoryLabel("sonstiges")),
+        new Identifier("elsner catering", categoryRepository.findByCategoryLabel("sonstiges"))
     ));
   }
 

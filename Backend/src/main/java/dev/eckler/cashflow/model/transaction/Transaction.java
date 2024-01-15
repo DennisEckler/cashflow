@@ -1,9 +1,7 @@
-package dev.eckler.cashflow.model.transaktion;
+package dev.eckler.cashflow.model.transaction;
 
 import dev.eckler.cashflow.model.identifier.Identifier;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,12 +10,11 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Transaktion")
-public class Transaktion {
+public class Transaction {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Long transactionID;
   @NotNull
   private Date date;
   @NotNull
@@ -28,11 +25,11 @@ public class Transaktion {
   private String purpose;
   @NotNull
   private String source;
+
   @ManyToOne
-  @JoinColumn(name = "identifierID")
   private Identifier identifier;
 
-  public Transaktion(Date date, float amount, String userID, String purpose, String source,
+  public Transaction(Date date, float amount, String userID, String purpose, String source,
       Identifier identifier) {
     this.date = date;
     this.amount = amount;
@@ -42,15 +39,23 @@ public class Transaktion {
     this.identifier = identifier;
   }
 
-  public Transaktion() {
+  public Transaction() {
   }
 
-  public Long getId() {
-    return id;
+  public Long getTransactionID() {
+    return transactionID;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setTransactionID(Long transactionID) {
+    this.transactionID = transactionID;
+  }
+
+  public Identifier getIdentifier() {
+    return identifier;
+  }
+
+  public void setIdentifier(Identifier identifier) {
+    this.identifier = identifier;
   }
 
   public Date getDate() {

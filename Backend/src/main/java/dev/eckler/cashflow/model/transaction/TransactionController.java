@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.model.transaktion;
+package dev.eckler.cashflow.model.transaction;
 
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,26 +25,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-public class TransaktionController {
+public class TransactionController {
 
   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
   private String issuer;
-  private final TransaktionRepository transaktionRepository;
-  private final TransaktionService transaktionService;
-  private final Logger logger = LoggerFactory.getLogger(TransaktionController.class);
+  private final TransactionRepository transactionRepository;
+  private final TransactionService transaktionService;
+  private final Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
 
-  public TransaktionController(TransaktionRepository transaktionRepository,
-      TransaktionService transaktionService) {
-    this.transaktionRepository = transaktionRepository;
+  public TransactionController(TransactionRepository transactionRepository,
+      TransactionService transaktionService) {
+    this.transactionRepository = transactionRepository;
     this.transaktionService = transaktionService;
   }
 
-//  @GetMapping("/get-empty-category-entries")
-//  @PreAuthorize("hasAuthority('ROLE_user')")
-//  public Iterable<Transaktion> getTransaktion() {
-//    return transaktionRepository.findAllByCategory(LEER);
-//  }
+  @GetMapping("/uncategorized-transactions")
+  @PreAuthorize("hasAuthority('ROLE_user')")
+  public List<Transaction> getTransaktion() {
+    return transactionRepository.findAllByIdentifierIsNull();
+  }
 
 
   @PostMapping("/file-upload")
@@ -53,29 +53,20 @@ public class TransaktionController {
       @RequestParam("file") MultipartFile csvFile) throws IOException {
     String userID = getUserId(bearerRequest, issuer);
     InputStream stream = csvFile.getInputStream();
-    List<Transaktion> transaktions = new ArrayList<>();
-    transaktions.addAll(transaktionService.convertCsvToTransaktionList(stream, userID));
-    transaktionRepository.saveAll(transaktions);
+    List<Transaction> transactions = new ArrayList<>();
+    transactions.addAll(transaktionService.convertCsvToTransaktionList(stream, userID));
+    transactionRepository.saveAll(transactions);
     logger.info("FileUpload done");
   }
 
-
-//  @PostMapping("/file-upload-init")
-//  public void uploadInitFile(@RequestParam("file") MultipartFile csvFile) throws IOException {
-//    InputStream stream = csvFile.getInputStream();
-//    List<Transaktion> transaktions = new ArrayList<>();
-////    transaktions.addAll(this.transaktionService.convertCsvToTransaktionListInit(stream));
-//    transaktionRepository.saveAll(transaktions);
-//  }
-
   @PatchMapping("/categorize")
-  public ResponseEntity<String> categorizeTransaktions(@RequestBody List<Transaktion> patchValues) {
+  public ResponseEntity<String> categorizeTransaktions(@RequestBody List<Transaction> patchValues) {
 
     patchValues.forEach(entry -> {
-      Optional<Transaktion> transaktionFromDB = this.transaktionRepository.findById(entry.getId());
+      Optional<Transaction> transaktionFromDB = this.transactionRepository.findById(entry.getTransactionID());
       if (transaktionFromDB.isPresent()) {
 //        transaktionFromDB.get().setCategory(entry.getCategory());
-        transaktionRepository.save(transaktionFromDB.get());
+        transactionRepository.save(transaktionFromDB.get());
       }
 
     });

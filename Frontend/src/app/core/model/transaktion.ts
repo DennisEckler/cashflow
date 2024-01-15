@@ -16,7 +16,7 @@ export class Transaktion {
     bookingText: string,
     purpose: string,
     amount: number,
-    category: Category,
+    category: Category
   ) {
     this.id = id;
     this.date = date;
