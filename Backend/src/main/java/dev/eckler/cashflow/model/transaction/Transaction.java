@@ -1,9 +1,7 @@
 package dev.eckler.cashflow.model.transaction;
 
 import dev.eckler.cashflow.model.identifier.Identifier;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Transaction")
 public class Transaction {
 
   @Id
@@ -30,7 +27,6 @@ public class Transaction {
   private String source;
 
   @ManyToOne
-  @JoinColumn(name = "identifierID")
   private Identifier identifier;
 
   public Transaction(Date date, float amount, String userID, String purpose, String source,

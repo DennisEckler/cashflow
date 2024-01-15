@@ -85,7 +85,6 @@ public class TransactionService {
         return new Date(new SimpleDateFormat(format).parse(date).getTime());
       } catch (ParseException e) {
         logger.error("Format {} not Supported for this date: {}", format, date);
-        throw new RuntimeException(e);
       }
     }
     return null;

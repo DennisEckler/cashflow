@@ -40,10 +40,10 @@ public class TransactionController {
     this.transaktionService = transaktionService;
   }
 
-  @GetMapping("/get-empty-category-entries")
+  @GetMapping("/uncategorized-transactions")
   @PreAuthorize("hasAuthority('ROLE_user')")
   public List<Transaction> getTransaktion() {
-    return transactionRepository.findAll();
+    return transactionRepository.findAllByIdentifierIsNull();
   }
 
 

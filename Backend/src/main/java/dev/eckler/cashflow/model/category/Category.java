@@ -1,19 +1,17 @@
 package dev.eckler.cashflow.model.category;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.eckler.cashflow.model.identifier.Identifier;
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@Table(name = "category")
 public class Category {
 
   public Category() {
@@ -29,12 +27,11 @@ public class Category {
   private Long categoryID;
 
   @NotNull
-  @Column(name = "CATEGORYLABEL")
   private String categoryLabel;
   @NotNull
   private String userID;
 
-  @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
   private Set<Identifier> identifier;
 
   public Long getCategoryID() {
@@ -61,6 +58,7 @@ public class Category {
     this.userID = userID;
   }
 
+  @JsonManagedReference
   public Set<Identifier> getIdentifier() {
     return identifier;
   }

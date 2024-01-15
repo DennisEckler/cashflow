@@ -1,14 +1,14 @@
 package dev.eckler.cashflow.model.identifier;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.eckler.cashflow.model.category.Category;
 import dev.eckler.cashflow.model.transaction.Transaction;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -17,6 +17,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Identifier")
+@JsonIgnoreProperties({ "category" })
 public class Identifier {
 
 
@@ -33,16 +34,12 @@ public class Identifier {
   private Long identifierID;
 
   @NotNull
-  @Column(name = "IDENTIFIERLABEL")
   private String identifierLabel;
 
   @OneToMany(mappedBy = "identifier")
-  @JsonIgnore
   private Set<Transaction> transactions;
 
   @ManyToOne
-  @JoinColumn(name = "categoryID")
-  @JsonIgnore
   private Category category;
 
   public Long getIdentifierID() {
@@ -53,6 +50,7 @@ public class Identifier {
     this.identifierID = identifierID;
   }
 
+  @JsonIgnore
   public Set<Transaction> getTransaktions() {
     return transactions;
   }
@@ -70,6 +68,7 @@ public class Identifier {
     this.identifierLabel = identifierLabel;
   }
 
+  @JsonBackReference
   public Category getCategory() {
     return category;
   }
