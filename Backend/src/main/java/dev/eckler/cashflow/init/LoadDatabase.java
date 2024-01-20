@@ -8,7 +8,6 @@ import dev.eckler.cashflow.model.identifier.IdentifierRepository;
 import dev.eckler.cashflow.model.transaction.Transaction;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.boot.CommandLineRunner;
@@ -42,8 +41,7 @@ class LoadDatabase {
       try {
         Resource resource = resourceloader.getResource("classpath:fakeData.csv");
         InputStream stream = resource.getInputStream();
-        List<Transaction> transactions = new ArrayList<>();
-        transactions.addAll(transaktionService.convertCsvToTransaktionListInit(stream, USERID));
+        List<Transaction> transactions = transaktionService.convertCsvToTransaktionListInit(stream, USERID);
         transactionRepository.saveAll(transactions);
       } catch (IOException e) {
         e.printStackTrace();

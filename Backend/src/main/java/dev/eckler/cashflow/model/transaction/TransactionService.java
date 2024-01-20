@@ -7,12 +7,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.sql.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,29 +34,48 @@ public class TransactionService {
     this.categoryRepository = categoryRepository;
   }
 
-  List<Transaction> convertCsvToTransaktionList(InputStream fileInputStream, final String USERID)
-      throws IOException {
-    boolean monthCheckCalled = false;
+  List<Transaction> convertCsvToTransaktionList(InputStream fileInputStream, final String USERID,
+      JSONObject json) throws JSONException {
+
     List<Transaction> transactions = new ArrayList<>();
-    Iterable<Category> categories = categoryRepository.findAllByUserID(USERID);
-    String line;
-    Identifier identifier = null;
-    BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
+    List<Category> categories = categoryRepository.findAllByUserID(USERID);
 
-    reader.readLine();
-    while ((line = reader.readLine()) != null) {
-      String[] columns = line.split(";");
-      Date date = parseDate(columns[1]);
-      float amount = Float.parseFloat(columns[5].replace("\\.", "").replace(',', '.'));
-      String source = columns[2];
-      String purpose = columns[4];
-      identifier = categorize(categories, source, purpose);
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream))) {
 
-      Transaction transaction = new Transaction(date, amount, USERID, purpose, source, identifier);
-      transactions.add(transaction);
+      final long BLANK_ROWS = json.getLong("blankRows");
+      final int DATE_INDEX = json.getInt("date");
+      final int AMOUNT_INDEX = json.getInt("amount");
+      final int PURPOSE_INDEX = json.getInt("purpose");
+      final int SOURCE_INDEX = json.getInt("source");
+
+      reader.lines().skip(BLANK_ROWS).forEach(row -> {
+
+            String[] column = row.split(";");
+            Date date = parseDate(column[DATE_INDEX]);
+            float amount = parseAmount(column[AMOUNT_INDEX]);
+            String source = column[SOURCE_INDEX];
+            String purpose = column[PURPOSE_INDEX];
+            Identifier identifier = categorize(categories, source, purpose);
+            Transaction transaction = new Transaction(date, amount, USERID, purpose, source,
+                identifier);
+            transactions.add(transaction);
+          }
+      );
+      return transactions;
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-    reader.close();
     return transactions;
+  }
+
+  private float parseAmount(String amount) {
+    DecimalFormat format = new DecimalFormat("#,00");
+    try {
+      return format.parse(amount).floatValue();
+    } catch (ParseException e) {
+      logger.error("Format {} not Supported for this value: {}", format, amount);
+      throw new RuntimeException(e);
+    }
   }
 
   private boolean skipIfPeriodAlreadyExist(String[] columns) {
@@ -62,12 +84,13 @@ public class TransactionService {
     return this.transactionRepository.getNumberOfYearMonthMatches(year, month) > 0;
   }
 
-  private Identifier categorize(Iterable<Category> categories, String source, String purpose) {
+  private Identifier categorize(List<Category> categories, String source, String purpose) {
     for (Category category : categories) {
       for (Identifier identifier : category.getIdentifier()) {
-        if (source.trim().toLowerCase().contains(identifier.getIdentifierLabel().toLowerCase())
+        if (source.trim().toLowerCase()
+            .contains(identifier.getIdentifierLabel().trim().toLowerCase())
             || purpose.trim().toLowerCase()
-            .contains(identifier.getIdentifierLabel().toLowerCase())) {
+            .contains(identifier.getIdentifierLabel().trim().toLowerCase())) {
           return identifier;
         }
       }
@@ -85,6 +108,34 @@ public class TransactionService {
       }
     }
     return null;
+  }
+
+  public List<Transaction> convertCsvToTransaktionListInit(InputStream fileInputStream,
+      final String USERID)
+      throws IOException {
+    List<Transaction> transactions = new ArrayList<>();
+    List<Category> categories = categoryRepository.findAllByUserID(USERID);
+    String line = "";
+    Identifier identifier = null;
+    BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
+
+    reader.readLine();
+    while ((line = reader.readLine()) != null) {
+      String[] columns = line.split(";");
+      Date date = parseDate(columns[1]);
+      float amount = Float.parseFloat(columns[5].replace("\\.", "").replace(',', '.'));
+      String source = columns[2];
+      String purpose = columns[4];
+      if (columns[7].equals("x")) {
+        identifier = categorize(categories, source, purpose);
+      } else {
+        identifier = null;
+      }
+      Transaction transaction = new Transaction(date, amount, USERID, purpose, source, identifier);
+      transactions.add(transaction);
+    }
+    reader.close();
+    return transactions;
   }
 
 }

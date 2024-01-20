@@ -8,15 +8,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(path = "/category")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
 
   private final CategoryService categoryService;
@@ -27,7 +31,7 @@ public class CategoryController {
     this.categoryService = categoryService;
   }
 
-  @GetMapping("/categories/{userID}")
+  @GetMapping("/get/{userID}")
   @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<List<Category>> getCategories(@PathVariable @NotNull String userID) {
     List<Category> categories = categoryService.getCategoriesByUser(userID);
@@ -35,7 +39,7 @@ public class CategoryController {
     return new ResponseEntity<>(categories, status);
   }
 
-  @PostMapping("/save-categories")
+  @PostMapping("/save")
   @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<?> saveCategories(
       @RequestHeader("Authorization") String bearerRequest,
@@ -47,7 +51,7 @@ public class CategoryController {
     return new ResponseEntity<>("Categories are saved", HttpStatus.OK);
   }
 
-  @DeleteMapping("/category/delete/{categoryID}")
+  @DeleteMapping("/delete/{categoryID}")
   @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<?> deleteCategory(@PathVariable(name = "categoryID") Long categoryID) {
     if (categoryService.deleteCategory(categoryID)) {
