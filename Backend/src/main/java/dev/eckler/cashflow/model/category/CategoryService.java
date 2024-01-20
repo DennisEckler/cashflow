@@ -25,17 +25,25 @@ public class CategoryService {
     return categoryRepository.findAllByUserID(userID);
   }
 
+
   public void saveCategories(List<Category> categories) {
-    categoryRepository.saveAll(categories);
-    categories.forEach(category -> {
-      Set<Identifier> identifiers = category.getIdentifier();
-      Optional<Identifier> identifier = identifiers.stream()
-          .filter(identifierFilter -> identifierFilter.getIdentifierLabel().equals(DEFAULT_IDENTIFIER))
-          .findFirst();
-      if (identifier.isEmpty()){
-        identifierService.saveIdentifier(category, DEFAULT_IDENTIFIER);
+    for (Category category : categories) {
+      if (category.getCategoryID() == null || hasNoneDefaultIdentifier(category.getCategoryID())) {
+        setDefaultIdentifier(category);
       }
-    });
+      categoryRepository.save(category);
+    }
+  }
+
+  private void setDefaultIdentifier(Category category) {
+    Set<Identifier> identifiers = category.getIdentifier();
+    identifiers.add(new Identifier(DEFAULT_IDENTIFIER, category));
+    category.setIdentifier(identifiers);
+  }
+
+  private boolean hasNoneDefaultIdentifier(Long categoryID) {
+    return categoryRepository.getReferenceById(categoryID).getIdentifier().stream()
+        .noneMatch(identifier -> identifier.getIdentifierLabel().equals(DEFAULT_IDENTIFIER));
   }
 
   public boolean deleteCategory(Long categoryID) {
