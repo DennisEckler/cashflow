@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,7 +50,7 @@ public class TransactionController {
 
   @PostMapping("/file-upload")
   @PreAuthorize("hasAuthority('ROLE_user')")
-  public void uploadFile(@RequestHeader("Authorization") String bearerRequest,
+  public ResponseEntity<?> uploadFile(@RequestHeader("Authorization") String bearerRequest,
       @RequestParam("file") MultipartFile csvFile) throws IOException {
     String userID = getUserId(bearerRequest, issuer);
     InputStream stream = csvFile.getInputStream();
@@ -57,6 +58,7 @@ public class TransactionController {
     transactions.addAll(transaktionService.convertCsvToTransaktionList(stream, userID));
     transactionRepository.saveAll(transactions);
     logger.info("FileUpload done");
+    return new ResponseEntity<>("File upload successfully", HttpStatus.OK);
   }
 
   @PatchMapping("/categorize")
@@ -65,7 +67,7 @@ public class TransactionController {
     patchValues.forEach(entry -> {
       Optional<Transaction> transaktionFromDB = this.transactionRepository.findById(entry.getTransactionID());
       if (transaktionFromDB.isPresent()) {
-//        transaktionFromDB.get().setCategory(entry.getCategory());
+        transaktionFromDB.get().setIdentifier(entry.getCategory());
         transactionRepository.save(transaktionFromDB.get());
       }
 

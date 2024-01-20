@@ -59,10 +59,7 @@ public class TransactionService {
   private boolean skipIfPeriodAlreadyExist(String[] columns) {
     String year = columns[1].substring(6, 10);
     String month = columns[1].substring(3, 5);
-    if (this.transactionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
-      return true;
-    }
-    return false;
+    return this.transactionRepository.getNumberOfYearMonthMatches(year, month) > 0;
   }
 
   private Identifier categorize(Iterable<Category> categories, String source, String purpose) {
@@ -88,34 +85,6 @@ public class TransactionService {
       }
     }
     return null;
-  }
-
-  public List<Transaction> convertCsvToTransaktionListInit(InputStream fileInputStream,
-      final String USERID)
-      throws IOException {
-    List<Transaction> transactions = new ArrayList<>();
-    Iterable<Category> categories = categoryRepository.findAllByUserID(USERID);
-    String line = "";
-    Identifier identifier = null;
-    BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
-
-    reader.readLine();
-    while ((line = reader.readLine()) != null) {
-      String[] columns = line.split(";");
-      Date date = parseDate(columns[1]);
-      float amount = Float.parseFloat(columns[5].replace("\\.", "").replace(',', '.'));
-      String source = columns[2];
-      String purpose = columns[4];
-      if (columns[7].equals("x")) {
-        identifier = categorize(categories, source, purpose);
-      } else {
-        identifier = null;
-      }
-      Transaction transaction = new Transaction(date, amount, USERID, purpose, source, identifier);
-      transactions.add(transaction);
-    }
-    reader.close();
-    return transactions;
   }
 
 }
