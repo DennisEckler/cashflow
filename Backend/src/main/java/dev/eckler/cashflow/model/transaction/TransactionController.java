@@ -50,7 +50,7 @@ public class TransactionController {
     return transactionRepository.findAllByIdentifierIsNull();
   }
 
-  @PostMapping("/file-upload")
+  @PostMapping("/upload")
   @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<?> uploadFile(
       @RequestHeader("Authorization") String bearerRequest,
@@ -74,7 +74,10 @@ public class TransactionController {
   }
 
   @PatchMapping("/categorize")
-  public ResponseEntity<String> categorizeTransaktions(@RequestBody List<Transaction> patchValues) {
+  @PreAuthorize("hasAuthority('ROLE_user')")
+  public ResponseEntity<String> categorizeTransaktions(
+      @RequestHeader("Authorization") String bearerRequest,
+      @RequestBody List<Transaction> patchValues) {
 
     patchValues.forEach(entry -> {
       Optional<Transaction> transaktionFromDB = this.transactionRepository.findById(
