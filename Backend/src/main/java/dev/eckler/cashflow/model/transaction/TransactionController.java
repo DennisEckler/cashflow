@@ -62,8 +62,7 @@ public class TransactionController {
       String userID = getUserId(bearerRequest, issuer);
       InputStream stream = csvFile.getInputStream();
 
-      List<Transaction> transactions =
-          transaktionService.convertCsvToTransaktionList(stream, userID, json);
+      List<Transaction> transactions = transaktionService.parseCsv(stream, userID, json);
       transactionRepository.saveAll(transactions);
       logger.info("FileUpload done");
       return new ResponseEntity<>("File upload successfully", HttpStatus.OK);
