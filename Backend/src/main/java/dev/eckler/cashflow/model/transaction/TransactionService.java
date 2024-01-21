@@ -35,8 +35,8 @@ public class TransactionService {
     this.categoryRepository = categoryRepository;
   }
 
-  List<Transaction> convertCsvToTransaktionList(InputStream fileInputStream, final String USERID,
-      JSONObject json) throws JSONException {
+  List<Transaction> parseCsv(InputStream fileInputStream, final String USERID, JSONObject json)
+      throws JSONException {
 
     List<Transaction> transactions = new ArrayList<>();
     List<Category> categories = categoryRepository.findAllByUserID(USERID);
@@ -84,7 +84,7 @@ public class TransactionService {
   }
 
   private void skipIfPeriodAlreadyExist(String year, String month) throws PeriodExistsException {
-    if (transactionRepository.getNumberOfYearMonthMatches(year, month) > 0){
+    if (transactionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
       throw new PeriodExistsException("This Period exists");
     }
   }
