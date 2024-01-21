@@ -1,5 +1,6 @@
 package dev.eckler.cashflow.model.transaction;
 
+import dev.eckler.cashflow.exception.PeriodExistsException;
 import dev.eckler.cashflow.model.category.Category;
 import dev.eckler.cashflow.model.category.CategoryRepository;
 import dev.eckler.cashflow.model.identifier.Identifier;
@@ -47,10 +48,15 @@ public class TransactionService {
       final int AMOUNT_INDEX = json.getInt("amount");
       final int PURPOSE_INDEX = json.getInt("purpose");
       final int SOURCE_INDEX = json.getInt("source");
+      final String YEAR = json.getString("year");
+      final String MONTH = json.getString("month");
+
+      skipIfPeriodAlreadyExist(YEAR, MONTH);
 
       reader.lines().skip(BLANK_ROWS).forEach(row -> {
 
             String[] column = row.split(";");
+
             Date date = parseDate(column[DATE_INDEX]);
             float amount = parseAmount(column[AMOUNT_INDEX]);
             String source = column[SOURCE_INDEX];
@@ -62,10 +68,9 @@ public class TransactionService {
           }
       );
       return transactions;
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException | PeriodExistsException e) {
+      throw new RuntimeException(e);
     }
-    return transactions;
   }
 
   private float parseAmount(String amount) {
@@ -78,10 +83,10 @@ public class TransactionService {
     }
   }
 
-  private boolean skipIfPeriodAlreadyExist(String[] columns) {
-    String year = columns[1].substring(6, 10);
-    String month = columns[1].substring(3, 5);
-    return this.transactionRepository.getNumberOfYearMonthMatches(year, month) > 0;
+  private void skipIfPeriodAlreadyExist(String year, String month) throws PeriodExistsException {
+    if (transactionRepository.getNumberOfYearMonthMatches(year, month) > 0){
+      throw new PeriodExistsException("This Period exists");
+    }
   }
 
   private Identifier categorize(List<Category> categories, String source, String purpose) {
