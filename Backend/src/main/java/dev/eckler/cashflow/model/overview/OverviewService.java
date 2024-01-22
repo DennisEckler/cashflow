@@ -29,33 +29,6 @@ public class OverviewService {
 
         });
 
-    // overviewEntries.forEach(entry -> {
-    //
-    // if (index == 0) {
-    // this.year = entry.getYear();
-    // this.month = entry.getMonth();
-    // this.overviewRow.setYear(entry.getYear());
-    // this.overviewRow.setMonth(entry.getMonth());
-    // index++;
-    // }
-    //
-    // if (entry.getYear().equals(year) && entry.getMonth().equals(month)) {
-    // overviewRow.mapCategoryAmount(entry.getCategory(), entry.getAmount());
-    // } else {
-    //
-    // overviewSummary.add(overviewRow);
-    // this.year = entry.getYear();
-    // this.month = entry.getMonth();
-    // this.overviewRow = new OverviewRow();
-    // this.overviewRow.setYear(entry.getYear());
-    // this.overviewRow.setMonth(entry.getMonth());
-    //
-    // }
-    // });
-    //
-    // this.year = "";
-    // this.month = "";
-    // this.index = 0;
     return overviewSummary;
   }
 }
