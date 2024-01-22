@@ -1,6 +1,5 @@
 package dev.eckler.cashflow.model.identifier;
 
-import dev.eckler.cashflow.model.category.Category;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -28,8 +27,9 @@ public class IdentifierService {
     return false;
   }
 
-  public void saveIdentifier(Category category, String identiferLabel){
-    identifierRepository.save(new Identifier(identiferLabel, category));
+
+  public Identifier findIdentifierByID(Long identifierID){
+    return identifierRepository.findById(identifierID).orElse(null);
   }
 
 

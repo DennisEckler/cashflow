@@ -2,10 +2,10 @@ package dev.eckler.cashflow.model.transaction;
 
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
+import dev.eckler.cashflow.model.identifier.IdentifierService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,19 +34,22 @@ public class TransactionController {
   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
   private String issuer;
   private final TransactionRepository transactionRepository;
-  private final TransactionService transaktionService;
+  private final TransactionService transactionService;
+  private final IdentifierService identifierService;
   private final Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
 
   public TransactionController(TransactionRepository transactionRepository,
-      TransactionService transaktionService) {
+      TransactionService transactionService,
+      IdentifierService identifierService) {
     this.transactionRepository = transactionRepository;
-    this.transaktionService = transaktionService;
+    this.transactionService = transactionService;
+    this.identifierService = identifierService;
   }
 
   @GetMapping("/uncategorized")
   @PreAuthorize("hasAuthority('ROLE_user')")
-  public List<Transaction> getTransaktion() {
+  public List<Transaction> getTransaction() {
     return transactionRepository.findAllByIdentifierIsNull();
   }
 
@@ -62,31 +65,28 @@ public class TransactionController {
       String userID = getUserId(bearerRequest, issuer);
       InputStream stream = csvFile.getInputStream();
 
-      List<Transaction> transactions = transaktionService.parseCsv(stream, userID, json);
+      List<Transaction> transactions = transactionService.parseCsv(stream, userID, json);
       transactionRepository.saveAll(transactions);
       logger.info("FileUpload done");
       return new ResponseEntity<>("File upload successfully", HttpStatus.OK);
 
     } catch (JSONException | IOException e) {
-      throw new RuntimeException(e);
+      logger.error("Cant handle this case");
+      return new ResponseEntity<>("Check your File or JSON", HttpStatus.BAD_REQUEST);
     }
   }
 
   @PatchMapping("/categorize")
   @PreAuthorize("hasAuthority('ROLE_user')")
-  public ResponseEntity<String> categorizeTransaktions(
-      @RequestHeader("Authorization") String bearerRequest,
+  public ResponseEntity<String> categorizeTransactions(
       @RequestBody List<Transaction> patchValues) {
 
-    patchValues.forEach(entry -> {
-      Optional<Transaction> transaktionFromDB = this.transactionRepository.findById(
-          entry.getTransactionID());
-      if (transaktionFromDB.isPresent()) {
-//        transaktionFromDB.get().setIdentifier(entry.getCategory());
-//        transactionRepository.save(transaktionFromDB.get());
-      }
+    patchValues.forEach(entry -> transactionRepository.findById(entry.getTransactionID())
+        .ifPresentOrElse(transaction -> transaction.setIdentifier(
+                identifierService.findIdentifierByID(entry.getIdentifier().getIdentifierID())),
+            () -> logger.info("Cant find Transaction with ID: {}", entry)));
+    transactionRepository.saveAll(patchValues);
 
-    });
     return ResponseEntity.ok("updated values successfully");
   }
 
