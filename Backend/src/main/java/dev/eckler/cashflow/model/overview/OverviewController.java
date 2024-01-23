@@ -31,13 +31,8 @@ public class OverviewController {
   @GetMapping("/overview")
   @PreAuthorize("hasAuthority('ROLE_developer')")
   public List<OverviewRow> getOverview(@RequestHeader("Authorization") String request) {
-    String jwtToken = request.substring(7);
-    Jwt jwt = JwtDecoders.fromIssuerLocation(issuer).decode(jwtToken);
-    String userID = jwt.getClaimAsString("sub");
-    System.out.println("Token Claims: " + userID);
-//    List<OverviewEntry> entries = transactionRepository.getOverview();
-//    List<OverviewRow> summary = overviewService.createOverviewRows(entries);
-    List<OverviewRow> summary = null;
+    List<OverviewEntry> entries = transactionRepository.getOverview();
+    List<OverviewRow> summary = overviewService.createOverviewRows(entries);
     return summary;
   }
 
