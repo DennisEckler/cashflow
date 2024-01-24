@@ -7,7 +7,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
   providedIn: 'root',
 })
 export class FileUploadService {
-  url = 'http://localhost:8080/';
+  url = 'http://localhost:8080/transaction/';
 
   constructor(private http: HttpClient, private oauth: OAuthService) {}
 
@@ -19,7 +19,7 @@ export class FileUploadService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.oauth.getAccessToken()}`,
     });
-    return this.http.post(this.url + 'file-upload', formData, { headers });
+    return this.http.post(this.url + 'upload', formData, { headers });
   }
 
   uploadInit(file: File): Observable<any> {

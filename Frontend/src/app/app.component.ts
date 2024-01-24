@@ -10,5 +10,5 @@ import { HeaderComponent } from './core/layout/header/header.component';
   imports: [HeaderComponent, RouterOutlet, RouterLink],
 })
 export class AppComponent {
-  title = 'Haushaltskostenbuch';
+  title = 'Cashflow';
 }

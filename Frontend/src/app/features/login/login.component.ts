@@ -1,12 +1,32 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TestComponent } from './test.component';
+import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
+import { OAuthService } from 'angular-oauth2-oidc';
+import {
+  authCodeFlowConfig,
+  initializeOAuth,
+} from 'src/app/core/auth/auth.conf';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, TestComponent],
+  imports: [CommonModule, NavigationButtonComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {}
+export class LoginComponent {
+  constructor(private oauthService: OAuthService) {}
+
+  onLogin() {
+    initializeOAuth(this.oauthService);
+  }
+
+  onLogout() {
+    this.oauthService.logOut();
+  }
+
+  public login($event: any) {
+    $event.preventDefault();
+    this.oauthService.initLoginFlow();
+  }
+}
