@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CategorizeService } from '../../core/services/categorize.service';
 import { Transaktion } from 'src/app/core/model/transaktion';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from '../../core/enum/category';
 import { FormsModule } from '@angular/forms';
 import { TransaktionDTO } from 'src/app/core/model/transaktion-dto';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
+import { TransactionService } from 'src/app/core/services/transaction.service';
 
 @Component({
   selector: 'app-categorize',
@@ -15,7 +15,7 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
   imports: [FormsModule, NavigationButtonComponent],
 })
 export class CategorizeComponent implements OnInit {
-  private categorizeService = inject(CategorizeService);
+  private transactionService = inject(TransactionService);
   transaktions?: Transaktion[] = undefined;
   categories: Category[] = Object.values(Category);
   transaktionDTO: TransaktionDTO[] = [];
@@ -23,12 +23,12 @@ export class CategorizeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.categorizeService.getList().subscribe({
+    this.transactionService.getList().subscribe({
       next: (v) => {
         this.transaktions = v;
         console.log(
           'get request was succesfull and transaktions are filled with length of: ' +
-            this.transaktions?.length,
+            this.transaktions?.length
         );
         console.log(this.transaktions);
       },
@@ -52,7 +52,7 @@ export class CategorizeComponent implements OnInit {
 
       if (this.transaktionDTO.length > 0) {
         console.log('sending');
-        this.categorizeService.saveList(this.transaktionDTO).subscribe({
+        this.transactionService.saveList(this.transaktionDTO).subscribe({
           next: (v) => console.log(v),
           error: (error: HttpErrorResponse) =>
             console.log(`Error message: ${error.message}`),

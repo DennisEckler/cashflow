@@ -22,19 +22,6 @@ export class OverviewComponent implements OnInit {
     private oauthService: OAuthService
   ) {}
   ngOnInit() {
-    // this.overviewService.getOverview().subscribe({
-    //   next: (v) => {
-    //     this.overviewSummary = v;
-    //   },
-    //   error: (error: HttpErrorResponse) => console.log(error.message),
-    // });
-  }
-
-  logout() {
-    this.oauthService.logOut();
-  }
-
-  getOverview() {
     this.httpClient
       .get<OverviewRow[]>('http://localhost:8080/overview', {
         headers: {

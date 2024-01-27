@@ -4,10 +4,10 @@ export const authCodeFlowConfig: AuthConfig = {
   issuer: 'http://localhost:8180/realms/myData',
   tokenEndpoint:
     'http://localhost:8180/realms/myData/protocol/openid-connect/token',
-  redirectUri: window.location.origin,
+  redirectUri: window.location.origin + '/login',
   clientId: 'myDataClient',
   responseType: 'code',
-  scope: 'openid profile',
+  scope: 'profile',
   showDebugInformation: true,
 };
 

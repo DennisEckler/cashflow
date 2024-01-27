@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FileUploadService } from '../../core/services/file-upload.service';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
+import { TransactionService } from 'src/app/core/services/transaction.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -10,9 +10,11 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
   imports: [NavigationButtonComponent],
 })
 export class FileUploadComponent implements OnInit {
-  private fileUploadService = inject(FileUploadService);
+  private transactionService = inject(TransactionService);
   csvFile: File | null = null;
   message: string = '';
+  text: string = '';
+
   loading: boolean = false;
 
   constructor() {}
@@ -29,21 +31,11 @@ export class FileUploadComponent implements OnInit {
   onUpload() {
     this.loading = !this.loading;
     if (this.csvFile) {
+      this.text =
+        "{date: 1, amount: 5,purpose: 4, source: 2, blankRows: 13, year: '2023', month: '08'}";
       console.log('uploading this file: ' + this.csvFile.name);
-      this.fileUploadService.upload(this.csvFile).subscribe((event: any) => {
-        if (typeof event === 'object') {
-          this.loading = false;
-        }
-      });
-    }
-  }
-
-  onInitUpload() {
-    this.loading = !this.loading;
-    if (this.csvFile) {
-      console.log('uploading this file: ' + this.csvFile.name);
-      this.fileUploadService
-        .uploadInit(this.csvFile)
+      this.transactionService
+        .upload(this.csvFile, this.text)
         .subscribe((event: any) => {
           if (typeof event === 'object') {
             this.loading = false;

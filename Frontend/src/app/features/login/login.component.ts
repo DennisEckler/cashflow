@@ -19,14 +19,12 @@ export class LoginComponent {
 
   onLogin() {
     initializeOAuth(this.oauthService);
+    // this.oauthService.initCodeFlow();
+    this.oauthService.configure(authCodeFlowConfig);
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
   onLogout() {
     this.oauthService.logOut();
-  }
-
-  public login($event: any) {
-    $event.preventDefault();
-    this.oauthService.initLoginFlow();
   }
 }
