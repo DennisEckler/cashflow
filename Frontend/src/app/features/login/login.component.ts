@@ -4,7 +4,7 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
 import { OAuthService } from 'angular-oauth2-oidc';
 import {
   authCodeFlowConfig,
-  initializeOAuth,
+  // initializeOAuth,
 } from 'src/app/core/auth/auth.conf';
 
 @Component({
@@ -18,10 +18,10 @@ export class LoginComponent {
   constructor(private oauthService: OAuthService) {}
 
   onLogin() {
-    initializeOAuth(this.oauthService);
-    // this.oauthService.initCodeFlow();
+    // initializeOAuth(this.oauthService);
     this.oauthService.configure(authCodeFlowConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    // this.oauthService.initCodeFlow();
+    this.oauthService.loadDiscoveryDocumentAndLogin();
   }
 
   onLogout() {
