@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TransaktionDTO } from 'src/app/core/model/transaktion-dto';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import { TransactionService } from 'src/app/core/services/transaction.service';
+import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
   selector: 'app-categorize',
@@ -16,6 +17,7 @@ import { TransactionService } from 'src/app/core/services/transaction.service';
 })
 export class CategorizeComponent implements OnInit {
   private transactionService = inject(TransactionService);
+  private categorySerivce = inject(CategoryService);
   transaktions?: Transaktion[] = undefined;
   categories: Category[] = Object.values(Category);
   transaktionDTO: TransaktionDTO[] = [];
@@ -28,7 +30,7 @@ export class CategorizeComponent implements OnInit {
         this.transaktions = v;
         console.log(
           'get request was succesfull and transaktions are filled with length of: ' +
-            this.transaktions?.length
+            this.transaktions?.length,
         );
         console.log(this.transaktions);
       },
@@ -41,15 +43,6 @@ export class CategorizeComponent implements OnInit {
 
   onClick() {
     if (this.transaktions) {
-      this.transaktions.forEach((transaktion) => {
-        if (transaktion.category.toString() !== 'LEER') {
-          this.transaktionDTO.push({
-            id: transaktion.id,
-            category: transaktion.category.toUpperCase(),
-          });
-        }
-      });
-
       if (this.transaktionDTO.length > 0) {
         console.log('sending');
         this.transactionService.saveList(this.transaktionDTO).subscribe({
