@@ -1,0 +1,32 @@
+@import "../../../styles.scss";
+
+:host {
+  display: grid;
+
+  .category {
+    margin-top: 1rem;
+    border: 4px $myBlue solid;
+    border-radius: 10px;
+    width: 50%;
+    justify-self: center;
+
+    &-header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      &-label {
+        color: $myPurple;
+        margin-top: 0.1rem;
+        margin-left: 0.5rem;
+      }
+    }
+
+    &-content {
+      display: flex;
+      margin-left: 2rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+  }
+}

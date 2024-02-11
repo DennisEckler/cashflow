@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Transaktion } from '../model/transaktion';
 import { TransaktionDTO } from '../model/transaktion-dto';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { HttpHeaders } from '@angular/common/http';
+import { Category } from '../model/category';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +17,11 @@ export class CategoryService {
     private oauth: OAuthService,
   ) {}
 
-  getList(): Observable<any> {
+  get(): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.oauth.getAccessToken()}`,
     });
-    return this.http.get<Transaktion>(this.url + 'get-empty-category-entries');
+    return this.http.get<Category>(this.url + '/get', { headers });
   }
 
   saveList(transaktions: TransaktionDTO[]): Observable<any> {

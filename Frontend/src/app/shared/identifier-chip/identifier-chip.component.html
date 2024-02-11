@@ -1,1 +1,6 @@
-<p>identifier-chip works!</p>
+@if (identifier) {
+  <div class="identifier-container">
+    <p class="identifier-chip">{{ identifier.identifierLabel }}</p>
+    <button class="identifier-button">x</button>
+  </div>
+}

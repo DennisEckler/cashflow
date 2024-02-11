@@ -1,1 +1,12 @@
-<p>category-card works!</p>
+<div class="category">
+  @if (category) {
+    <div class="category-header">
+      <h1 class="category-header-label">{{ category.categoryLabel }}</h1>
+    </div>
+    <div class="category-content">
+      @for (identifier of category.identifier; track identifier.identifierID) {
+        <app-identifier-chip [identifier]="identifier"></app-identifier-chip>
+      }
+    </div>
+  }
+</div>

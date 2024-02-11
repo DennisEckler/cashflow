@@ -1,6 +1,6 @@
 import { Identifier } from './identifier';
 
-export interface Transaktion {
+export interface Transaction {
   transactionID: number;
   date: Date;
   amount: number;

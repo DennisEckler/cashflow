@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Transaktion } from 'src/app/core/model/transaktion';
+import { Transaction } from 'src/app/core/model/transaction';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from '../../core/enum/category';
 import { FormsModule } from '@angular/forms';
@@ -18,8 +18,8 @@ import { CategoryService } from 'src/app/core/services/category.service';
 export class CategorizeComponent implements OnInit {
   private transactionService = inject(TransactionService);
   private categorySerivce = inject(CategoryService);
-  transaktions?: Transaktion[] = undefined;
-  categories: Category[] = Object.values(Category);
+  transactions?: Transaction[];
+  categories?: Category[];
   transaktionDTO: TransaktionDTO[] = [];
 
   constructor() {}
@@ -27,22 +27,31 @@ export class CategorizeComponent implements OnInit {
   ngOnInit(): void {
     this.transactionService.getList().subscribe({
       next: (v) => {
-        this.transaktions = v;
+        this.transactions = v;
         console.log(
-          'get request was succesfull and transaktions are filled with length of: ' +
-            this.transaktions?.length,
+          'get request was succesfull and transactions are filled with length of: ' +
+            this.transactions?.length,
         );
-        console.log(this.transaktions);
+        console.log(this.transactions);
       },
       error: (error: HttpErrorResponse) => {
         console.log(`error: ${error.message}`);
       },
       complete: () => console.log('complete'),
     });
+    this.categorySerivce.get().subscribe({
+      next: (v) => {
+        this.categories = v;
+        console.log(this.categories);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(`error ${error.message}`);
+      },
+    });
   }
 
   onClick() {
-    if (this.transaktions) {
+    if (this.transactions) {
       if (this.transaktionDTO.length > 0) {
         console.log('sending');
         this.transactionService.saveList(this.transaktionDTO).subscribe({

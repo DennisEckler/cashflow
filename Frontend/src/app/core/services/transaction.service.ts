@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Transaktion } from '../model/transaktion';
+import { Transaction } from '../model/transaction';
 import { TransaktionDTO } from '../model/transaktion-dto';
 import { OAuthService } from 'angular-oauth2-oidc';
 
@@ -20,7 +20,7 @@ export class TransactionService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.oauth.getAccessToken()}`,
     });
-    return this.http.get<Transaktion>(this.url + 'uncategorized', { headers });
+    return this.http.get<Transaction>(this.url + 'uncategorized', { headers });
   }
 
   saveList(transaktions: TransaktionDTO[]): Observable<any> {
