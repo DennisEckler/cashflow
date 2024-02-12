@@ -31,9 +31,10 @@ public class CategoryController {
     this.categoryService = categoryService;
   }
 
-  @GetMapping("/get/{userID}")
+  @GetMapping("/get")
   @PreAuthorize("hasAuthority('ROLE_user')")
-  public ResponseEntity<List<Category>> getCategories(@PathVariable @NotNull String userID) {
+  public ResponseEntity<List<Category>> getCategories(@RequestHeader("Authorization") String bearerRequest) {
+    String userID = getUserId(bearerRequest, issuer);
     List<Category> categories = categoryService.getCategoriesByUser(userID);
     HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
     return new ResponseEntity<>(categories, status);

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Identifier } from 'src/app/core/model/identifier';
 
@@ -11,4 +11,9 @@ import { Identifier } from 'src/app/core/model/identifier';
 })
 export class IdentifierChipComponent {
   @Input() identifier?: Identifier;
+  @Output() identifierDeleted = new EventEmitter<Identifier>();
+
+  deleteIdentifier() {
+    this.identifierDeleted.emit(this.identifier);
+  }
 }
