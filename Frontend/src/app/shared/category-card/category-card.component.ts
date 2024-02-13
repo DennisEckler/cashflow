@@ -15,7 +15,7 @@ import { Identifier } from 'src/app/core/model/identifier';
 export class CategoryCardComponent {
   @Input() category?: Category;
 
-  onIdentifierDelete(deleteIdentifer: Identifier) {
+  deleteIdentifier(deleteIdentifer: Identifier) {
     if (this.category) {
       this.category.identifier = this.category.identifier.filter(
         (identifer) => identifer.identifierID !== deleteIdentifer.identifierID

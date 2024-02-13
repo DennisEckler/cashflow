@@ -5,7 +5,7 @@
     </div>
     <div class="category-content">
       @for (identifier of category.identifier; track identifier.identifierID) {
-        <app-identifier-chip (identifierDeleted)="onIdentifierDelete($event)" [identifier]="identifier"></app-identifier-chip>
+        <app-identifier-chip (identifierDeleted)="deleteIdentifier($event)" [identifier]="identifier"></app-identifier-chip>
       }
     </div>
   }

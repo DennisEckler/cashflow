@@ -10,6 +10,8 @@
     label="Save"
   ></navigation-button>
 </div>
-@for (category of categories; track category.categoryID) {
-  <app-category-card [category]="category"></app-category-card>
+@if (categories){ @for (category of categories; track category.categoryID) {
+<app-category-card [category]="category"></app-category-card>
+} }@else {
+<h2>Can`t find Categories</h2>
 }
