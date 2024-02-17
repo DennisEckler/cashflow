@@ -8,23 +8,23 @@
     </tr>
     <tr>
       <th>ID</th>
-      <th>Agent</th>
+      <th>Source</th>
       <th>Purpose</th>
       <th>Category</th>
     </tr>
   </thead>
   <tbody>
-    @for (transaktion of transaktions; track transaktion.id) {
+    @for (transaction of transactions; track transaction.transactionID) {
       <tr>
-        <td>{{ transaktion.id }}</td>
-        <td>{{ transaktion.agent }}</td>
-        <td>{{ transaktion.purpose }}</td>
+        <td>{{ transaction.transactionID }}</td>
+        <td>{{ transaction.source }}</td>
+        <td>{{ transaction.purpose }}</td>
         <td>
-          <select [(ngModel)]="transaktion.category" name="category">
-            @for (category of categories; track category) {
-              <option [value]="category">{{ category }}</option>
-            }
-          </select>
+          <!-- <select [(ngModel)]="transaction.category" name="category"> -->
+          <!--   @for (category of categories; track category) { -->
+          <!--     <option [value]="category">{{ category }}</option> -->
+          <!--   } -->
+          <!-- </select> -->
         </td>
       </tr>
     }
