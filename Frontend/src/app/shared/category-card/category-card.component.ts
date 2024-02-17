@@ -26,7 +26,19 @@ export class CategoryCardComponent {
   }
 
   addIdentifier() {
-    if (this.identifierInput !== '') {
+    if (this.identifierInput !== '' && this.category) {
+      const labelExist = this.category.identifier.some(
+        (identifer) => identifer.identifierLabel === this.identifierInput
+      );
+      if (labelExist) {
+        window.alert('Can`t add duplicates or empty identifier');
+      } else {
+        this.category.identifier.push({
+          identifierID: null,
+          identifierLabel: this.identifierInput,
+        });
+        this.identifierInput = '';
+      }
     }
   }
 

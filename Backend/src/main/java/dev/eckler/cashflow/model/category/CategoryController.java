@@ -2,12 +2,10 @@ package dev.eckler.cashflow.model.category;
 
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
-import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +30,6 @@ public class CategoryController {
   }
 
   @GetMapping("/get")
-  @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<List<Category>> getCategories(@RequestHeader("Authorization") String bearerRequest) {
     String userID = getUserId(bearerRequest, issuer);
     List<Category> categories = categoryService.getCategoriesByUser(userID);
@@ -41,7 +38,6 @@ public class CategoryController {
   }
 
   @PostMapping("/save")
-  @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<?> saveCategories(
       @RequestHeader("Authorization") String bearerRequest,
       @RequestBody List<Category> categories) {
@@ -53,7 +49,6 @@ public class CategoryController {
   }
 
   @DeleteMapping("/delete/{categoryID}")
-  @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<?> deleteCategory(@PathVariable(name = "categoryID") Long categoryID) {
     if (categoryService.deleteCategory(categoryID)) {
       return new ResponseEntity<>("Category deleted", HttpStatus.OK);

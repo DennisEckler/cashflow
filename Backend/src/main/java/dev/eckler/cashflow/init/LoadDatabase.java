@@ -22,7 +22,7 @@ import dev.eckler.cashflow.model.transaction.TransactionService;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
-@Profile("Demo")
+@Profile("dev")
 class LoadDatabase {
 
   static final String USERID = "5276b7e0-4c55-49d7-bf52-46e34ab673cb";
