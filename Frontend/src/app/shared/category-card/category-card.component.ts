@@ -20,7 +20,8 @@ export class CategoryCardComponent {
   deleteIdentifier(deleteIdentifer: Identifier) {
     if (this.category) {
       this.category.identifier = this.category.identifier.filter(
-        (identifer) => identifer.identifierID !== deleteIdentifer.identifierID
+        (identifer) =>
+          identifer.identifierLabel !== deleteIdentifer.identifierLabel
       );
     }
   }

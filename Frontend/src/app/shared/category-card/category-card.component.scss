@@ -5,6 +5,7 @@
 
   .category {
     margin-top: 1rem;
+    padding: 5px;
     border: 4px $myBlue solid;
     border-radius: 10px;
     width: 50%;
@@ -18,7 +19,7 @@
 
       &-label {
         color: $myPurple;
-        margin-top: 0.1rem;
+        margin-top: 0;
         margin-left: 0.5rem;
       }
     }
