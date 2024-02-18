@@ -1,6 +1,6 @@
 import { Category } from './category';
 
 export interface Identifier {
-  identifierID: number;
+  identifierID: number | null;
   identifierLabel: string;
 }
