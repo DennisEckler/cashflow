@@ -19,7 +19,8 @@
     border: none;
     padding: 0;
     height: 20px;
-    &-icon{
+    &-icon:hover circle, &-icon:hover line{
+      stroke: #0d1f2d;
     }
   }
 }
