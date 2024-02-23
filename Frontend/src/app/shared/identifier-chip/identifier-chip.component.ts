@@ -12,14 +12,9 @@ import { Identifier } from 'src/app/core/model/identifier';
 export class IdentifierChipComponent {
   @Input() identifier?: Identifier;
   @Output() identifierDeleted = new EventEmitter<Identifier>();
-  @Output() identifierAppend = new EventEmitter<Identifier>();
   newIdentifier?: Identifier;
 
   deleteIdentifier() {
     this.identifierDeleted.emit(this.identifier);
-  }
-
-  addIdentifier() {
-    this.identifierAppend.emit(this.newIdentifier);
   }
 }

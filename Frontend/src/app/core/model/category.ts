@@ -1,8 +1,8 @@
 import { Identifier } from './identifier';
 
 export interface Category {
-  categoryID: number;
-  categoryLabel: string;
-  userID: string;
+  categoryID: number | null;
+  categoryLabel?: string;
+  userID: string | null;
   identifier: Identifier[];
 }

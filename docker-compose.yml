@@ -77,7 +77,7 @@ services:
       - "8787:8787" # debug port
     networks:
       - local
-    # volumes:
+# volumes:
     #   - ./my-test-realm-realm.json:/opt/keycloak/data/import/my-test-realm-realm.json
 
 networks:

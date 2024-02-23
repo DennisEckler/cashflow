@@ -2,6 +2,7 @@
   @if (category) {
     <div class="category-header">
       <h1 class="category-header-label">{{ category.categoryLabel }}</h1>
+      <button class="category-header-button" (click)="deleteCategory()">deleteCategory</button>
     </div>
     <div class="addIdentifier">
       <h4>Add Identifier:</h4>

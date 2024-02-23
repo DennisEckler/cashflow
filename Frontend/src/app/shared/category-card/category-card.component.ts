@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Category } from 'src/app/core/model/category';
 import { Input } from '@angular/core';
@@ -15,7 +15,13 @@ import { FormsModule } from '@angular/forms';
 })
 export class CategoryCardComponent {
   @Input() category?: Category;
+  @Output() categoryDelete = new EventEmitter<Category>();
+
   identifierInput: string = '';
+
+  deleteCategory() {
+    this.categoryDelete.emit(this.category);
+  }
 
   deleteIdentifier(deleteIdentifer: Identifier) {
     if (this.category) {
@@ -31,7 +37,7 @@ export class CategoryCardComponent {
       const labelExist = this.category.identifier.some(
         (identifer) => identifer.identifierLabel === this.identifierInput
       );
-      if (labelExist) {
+      if (labelExist || this.identifierInput.trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');
       } else {
         this.category.identifier.push({
