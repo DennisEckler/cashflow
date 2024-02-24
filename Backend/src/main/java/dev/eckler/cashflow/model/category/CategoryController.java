@@ -51,7 +51,7 @@ public class CategoryController {
   @DeleteMapping("/delete/{categoryID}")
   public ResponseEntity<String> deleteCategory(@PathVariable(name = "categoryID") Long categoryID) {
     if (categoryService.deleteCategory(categoryID)) {
-      return new ResponseEntity<>("Category deleted", HttpStatus.OK);
+      return new ResponseEntity<>("Category deleted: " + categoryID, HttpStatus.OK);
     }
     return new ResponseEntity<>("Cant find Category", HttpStatus.NOT_FOUND);
   }

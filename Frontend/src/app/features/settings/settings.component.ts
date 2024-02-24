@@ -5,9 +5,7 @@ import { IdentifierChipComponent } from 'src/app/shared/identifier-chip/identifi
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import { Category } from 'src/app/core/model/category';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { Identifier } from 'src/app/core/model/identifier';
 
 @Component({
   selector: 'app-settings',
@@ -30,12 +28,16 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.get().subscribe({
-      next: (v) => (this.categories = v),
+      next: (v) => {
+        if (v !== null) {
+          this.categories = v;
+        }
+      },
     });
   }
 
   addCategory() {
-    if (this.categoryInput !== '' && this.categories) {
+    if (this.categoryInput !== '') {
       const labelExist = this.categories.some(
         (category) => category.categoryLabel === this.categoryInput
       );
@@ -59,7 +61,7 @@ export class SettingsComponent implements OnInit {
     );
     if (category.categoryID !== null) {
       this.categoryService.delete(category).subscribe({
-        next: (v) => console.log(`deleted ${v}`),
+        next: (v) => console.log(v),
       });
     }
   }

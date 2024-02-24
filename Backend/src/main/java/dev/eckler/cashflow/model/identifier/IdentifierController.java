@@ -23,14 +23,12 @@ public class IdentifierController {
   }
 
   @GetMapping("/get")
-  @PreAuthorize("hasAuthority('ROLE_user')")
   public List<Identifier> getAllIdentifier(){
     return this.identifierService.getAllIdentifier();
   }
 
   @DeleteMapping("/delete/{identifierID}")
-  @PreAuthorize("hasAuthority('ROLE_user')")
-  public ResponseEntity<?> deleteIdentifier(@PathVariable(name = "identifierID") Long identifierID){
+  public ResponseEntity<String> deleteIdentifier(@PathVariable(name = "identifierID") Long identifierID){
     if (identifierService.deleteIdentifier(identifierID)){
       return new ResponseEntity<>("Deleted Identifier", HttpStatus.OK);
     }

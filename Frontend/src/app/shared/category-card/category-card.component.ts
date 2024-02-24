@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Category } from 'src/app/core/model/category';
 import { Input } from '@angular/core';
 import { IdentifierChipComponent } from '../identifier-chip/identifier-chip.component';
 import { Identifier } from 'src/app/core/model/identifier';
 import { FormsModule } from '@angular/forms';
+import { IdentifierService } from 'src/app/core/services/identifier.service';
 
 @Component({
   selector: 'app-category-card',
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './category-card.component.scss',
 })
 export class CategoryCardComponent {
+  private identifierSerice = inject(IdentifierService);
   @Input() category?: Category;
   @Output() categoryDelete = new EventEmitter<Category>();
 
@@ -29,6 +31,11 @@ export class CategoryCardComponent {
         (identifer) =>
           identifer.identifierLabel !== deleteIdentifer.identifierLabel
       );
+      if (deleteIdentifer.identifierID !== null) {
+        this.identifierSerice.delete(deleteIdentifer).subscribe({
+          next: (v) => console.log(v),
+        });
+      }
     }
   }
 
@@ -47,9 +54,5 @@ export class CategoryCardComponent {
         this.identifierInput = '';
       }
     }
-  }
-
-  onChange(event: any) {
-    this.identifierInput = event.target.value;
   }
 }
