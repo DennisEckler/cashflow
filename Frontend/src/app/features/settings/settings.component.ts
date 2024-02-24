@@ -25,7 +25,7 @@ import { Identifier } from 'src/app/core/model/identifier';
 export class SettingsComponent implements OnInit {
   private categoryService = inject(CategoryService);
 
-  categories?: Category[];
+  categories: Category[] = [];
   categoryInput: string = '';
 
   ngOnInit() {
@@ -57,7 +57,16 @@ export class SettingsComponent implements OnInit {
     this.categories = this.categories?.filter(
       (ele) => ele.categoryLabel !== category.categoryLabel
     );
+    if (category.categoryID !== null) {
+      this.categoryService.delete(category).subscribe({
+        next: (v) => console.log(`deleted ${v}`),
+      });
+    }
   }
 
-  save() {}
+  save() {
+    this.categoryService.save(this.categories).subscribe({
+      next: (v) => console.log(`saved succsesfully` + v),
+    });
+  }
 }

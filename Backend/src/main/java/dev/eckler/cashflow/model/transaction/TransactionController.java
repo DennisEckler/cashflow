@@ -48,13 +48,11 @@ public class TransactionController {
   }
 
   @GetMapping("/uncategorized")
-  @PreAuthorize("hasAuthority('ROLE_user')")
   public List<Transaction> getTransaction() {
     return transactionRepository.findAllByIdentifierIsNull();
   }
 
   @PostMapping("/upload")
-  @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<?> uploadFile(
       @RequestHeader("Authorization") String bearerRequest,
       @RequestParam("file") MultipartFile csvFile,
@@ -77,10 +75,8 @@ public class TransactionController {
   }
 
   @PatchMapping("/categorize")
-  @PreAuthorize("hasAuthority('ROLE_user')")
   public ResponseEntity<String> categorizeTransactions(
       @RequestBody List<Transaction> patchValues) {
-
     patchValues.forEach(entry -> transactionRepository.findById(entry.getTransactionID())
         .ifPresentOrElse(transaction -> transaction.setIdentifier(
                 identifierService.findIdentifierByID(entry.getIdentifier().getIdentifierID())),

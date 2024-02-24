@@ -7,11 +7,11 @@
   <input type="text" [(ngModel)]="categoryInput"/>
   <navigation-button
     class="header-button"
-    (click)="(save)"
+    (click)="save()"
     label="Save"
   ></navigation-button>
 </div>
-@if (categories){ @for (category of categories; track category.categoryID) {
+@if (categories && categories.length !== 0){ @for (category of categories; track category.categoryID) {
 <app-category-card (categoryDelete)="deleteCategory($event)" [category]="category"></app-category-card>
 } }@else {
 <h2>Can`t find Categories</h2>
