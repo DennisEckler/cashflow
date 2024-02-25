@@ -47,11 +47,13 @@ export class CategorizeComponent implements OnInit {
     if (this.transactions) {
       for (let transaction of this.transactions) {
         if (transaction.identifier) {
+          transaction.identifier = JSON.parse(transaction.identifier as string);
           this.update.push(transaction);
         }
       }
       if (this.update.length > 0) {
         console.log('sending');
+        console.log(this.update);
         this.transactionService.saveList(this.update).subscribe({
           next: (v) => console.log(v),
           error: (error: HttpErrorResponse) =>
@@ -63,9 +65,9 @@ export class CategorizeComponent implements OnInit {
     this.ngOnInit();
   }
 
-  getUndefined(category: Category): Identifier | undefined {
-    return category.identifier.find(
-      (ele) => ele.identifierLabel === 'undefined'
+  getUndefined(category: Category): string {
+    return JSON.stringify(
+      category.identifier.find((ele) => ele.identifierLabel === 'undefined')
     );
   }
 }

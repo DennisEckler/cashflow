@@ -7,5 +7,5 @@ export interface Transaction {
   userID: string;
   purpose: string;
   source: string;
-  identifier: Identifier;
+  identifier: Identifier | string;
 }
