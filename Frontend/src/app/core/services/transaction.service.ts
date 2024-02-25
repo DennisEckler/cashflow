@@ -43,16 +43,4 @@ export class TransactionService {
     });
     return this.http.post(this.url + 'upload', formData, { headers });
   }
-
-  uploadInit(file: File): Observable<any> {
-    const formData = new FormData();
-    if (file) {
-      formData.append('file', file, file.name);
-    }
-    return this.http.post(this.url + 'file-upload-init', formData, {
-      headers: {
-        Authorization: `Bearer ${this.oauth.getAccessToken()}`,
-      },
-    });
-  }
 }

@@ -38,14 +38,14 @@ class LoadDatabase {
     return args -> {
       categoryRepository.saveAll(getCategories());
       initIdentifier(identifierRepository, categoryRepository);
-      try {
-        Resource resource = resourceloader.getResource("classpath:fakeData.csv");
-        InputStream stream = resource.getInputStream();
-        List<Transaction> transactions = transaktionService.convertCsvToTransaktionListInit(stream, USERID);
-        transactionRepository.saveAll(transactions);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+//      try {
+//        Resource resource = resourceloader.getResource("classpath:fakeData.csv");
+//        InputStream stream = resource.getInputStream();
+//        List<Transaction> transactions = transaktionService.convertCsvToTransaktionListInit(stream, USERID);
+//        transactionRepository.saveAll(transactions);
+//      } catch (IOException e) {
+//        e.printStackTrace();
+//      }
     };
   }
 
