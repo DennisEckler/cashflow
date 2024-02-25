@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Transaction } from 'src/app/core/model/transaction';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Category } from '../../core/enum/category';
 import { FormsModule } from '@angular/forms';
-import { TransaktionDTO } from 'src/app/core/model/transaktion-dto';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import { TransactionService } from 'src/app/core/services/transaction.service';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { Category } from 'src/app/core/model/category';
+import { Identifier } from 'src/app/core/model/identifier';
 
 @Component({
   selector: 'app-categorize',
@@ -20,7 +20,7 @@ export class CategorizeComponent implements OnInit {
   private categorySerivce = inject(CategoryService);
   transactions?: Transaction[];
   categories?: Category[];
-  transaktionDTO: TransaktionDTO[] = [];
+  update: Transaction[] = [];
 
   constructor() {}
 
@@ -28,21 +28,14 @@ export class CategorizeComponent implements OnInit {
     this.transactionService.getList().subscribe({
       next: (v) => {
         this.transactions = v;
-        console.log(
-          'get request was succesfull and transactions are filled with length of: ' +
-            this.transactions?.length,
-        );
-        console.log(this.transactions);
       },
       error: (error: HttpErrorResponse) => {
         console.log(`error: ${error.message}`);
       },
-      complete: () => console.log('complete'),
     });
     this.categorySerivce.get().subscribe({
       next: (v) => {
         this.categories = v;
-        console.log(this.categories);
       },
       error: (error: HttpErrorResponse) => {
         console.log(`error ${error.message}`);
@@ -50,18 +43,29 @@ export class CategorizeComponent implements OnInit {
     });
   }
 
-  onClick() {
+  onSave() {
     if (this.transactions) {
-      if (this.transaktionDTO.length > 0) {
+      for (let transaction of this.transactions) {
+        if (transaction.identifier) {
+          this.update.push(transaction);
+        }
+      }
+      if (this.update.length > 0) {
         console.log('sending');
-        this.transactionService.saveList(this.transaktionDTO).subscribe({
+        this.transactionService.saveList(this.update).subscribe({
           next: (v) => console.log(v),
           error: (error: HttpErrorResponse) =>
             console.log(`Error message: ${error.message}`),
         });
-        this.transaktionDTO.length = 0;
+        this.update.length = 0;
       }
     }
     this.ngOnInit();
+  }
+
+  getUndefined(category: Category): Identifier | undefined {
+    return category.identifier.find(
+      (ele) => ele.identifierLabel === 'undefined'
+    );
   }
 }

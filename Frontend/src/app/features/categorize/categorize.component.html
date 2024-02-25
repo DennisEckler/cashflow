@@ -1,32 +1,37 @@
 <table>
   <thead class="sticky">
     <tr>
-      <th colspan="4">
+      <th colspan="5">
         <h2>List of Transaktions</h2>
-        <navigation-button (click)="onClick()" label="Save" />
+        <navigation-button (click)="onSave()" label="Save" />
       </th>
     </tr>
     <tr>
-      <th>ID</th>
+      <th>Date</th>
       <th>Source</th>
       <th>Purpose</th>
+      <th>Amount</th>
       <th>Category</th>
     </tr>
   </thead>
   <tbody>
     @for (transaction of transactions; track transaction.transactionID) {
-      <tr>
-        <td>{{ transaction.transactionID }}</td>
-        <td>{{ transaction.source }}</td>
-        <td>{{ transaction.purpose }}</td>
-        <td>
-          <!-- <select [(ngModel)]="transaction.category" name="category"> -->
-          <!--   @for (category of categories; track category) { -->
-          <!--     <option [value]="category">{{ category }}</option> -->
-          <!--   } -->
-          <!-- </select> -->
-        </td>
-      </tr>
+    <tr>
+      <td>{{ transaction.date }}</td>
+      <td>{{ transaction.source }}</td>
+      <td>{{ transaction.purpose }}</td>
+      <td>{{ transaction.amount }}</td>
+      <td>
+        <select [(ngModel)]="transaction.identifier">
+          <option value="---">---</option>
+          @for (category of categories; track category) {
+          <option [value]="getUndefined(category)">
+            {{ category.categoryLabel }}
+          </option>
+          }
+        </select>
+      </td>
+    </tr>
     }
   </tbody>
 </table>

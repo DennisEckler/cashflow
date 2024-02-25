@@ -11,10 +11,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 export class TransactionService {
   url: string = 'http://localhost:8080/transaction/';
 
-  constructor(
-    private http: HttpClient,
-    private oauth: OAuthService,
-  ) {}
+  constructor(private http: HttpClient, private oauth: OAuthService) {}
 
   getList(): Observable<any> {
     const headers = new HttpHeaders({
@@ -23,7 +20,7 @@ export class TransactionService {
     return this.http.get<Transaction>(this.url + 'uncategorized', { headers });
   }
 
-  saveList(transaktions: TransaktionDTO[]): Observable<any> {
+  saveList(transaktions: Transaction[]): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.oauth.getAccessToken()}`,
     });
