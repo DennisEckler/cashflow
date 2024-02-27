@@ -3,6 +3,9 @@
 Thumbs.db
 .env
 command.txt
+*.fakeData.csv
+misc/
+helper/
 ############## JAVA ##############
 # Compiled class files
 *.class
