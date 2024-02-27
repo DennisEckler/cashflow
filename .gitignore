@@ -6,6 +6,7 @@ command.txt
 *.fakeData.csv
 misc/
 helper/
+*/LoadDatabase.java
 ############## JAVA ##############
 # Compiled class files
 *.class
