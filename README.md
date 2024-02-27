@@ -9,8 +9,7 @@ Also this is used for testing out many technologies and built it all together.
 
 - Spring
 - Java
-- Gradle
-- OpenApi
+- Maven
 - Docker
 - Keycloak
 - TypeScript
@@ -25,7 +24,3 @@ Also this is used for testing out many technologies and built it all together.
 
 - NgRx
 - RxJs
-
-```
-./mvnw flyway:migrate -Dflyway.url=jdbc:postgresql://postgres:5432/ -Dflyway.user=test -Dflyway.password=test
-```
