@@ -8,7 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>dev.eckler</groupId>
@@ -61,12 +61,6 @@
             <artifactId>postgresql</artifactId>
             <version>42.6.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-maven-plugin</artifactId>-->
-<!--            <version>10.4.1</version>-->
-<!--        </dependency>-->
-
 
         <!--Security-->
         <dependency>
@@ -83,36 +77,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-
         <!--Utility-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
         </dependency>
-
-        <!--    openApi-->
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-ui</artifactId>-->
-<!--            <version>${spring.doc.openapi.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-webmvc-core</artifactId>-->
-<!--            <version>${spring.doc.openapi.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.swagger</groupId>-->
-<!--            <artifactId>swagger-annotations</artifactId>-->
-<!--            <version>1.6.11</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.openapitools</groupId>-->
-<!--            <artifactId>jackson-databind-nullable</artifactId>-->
-<!--            <version>0.2.1</version>-->
-<!--        </dependency>-->
-
 
     </dependencies>
 
@@ -128,51 +98,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.flywaydb</groupId>-->
-<!--                <artifactId>flyway-maven-plugin</artifactId>-->
-<!--                <version>10.4.1</version>-->
-<!--                <configuration>-->
-<!--                    <user>sa</user>-->
-<!--                    <password>test</password>-->
-<!--                    <url>jdbc:h2:mem:customdb</url>-->
-<!--                    <schemas>-->
-<!--                        <schema>PUBLIC</schema>-->
-<!--                    </schemas>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.openapitools</groupId>-->
-<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
-<!--                <version>7.1.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>openAPI</id>-->
-<!--                        <goals>-->
-<!--                            <goal>generate</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <inputSpec>${project.basedir}/src/main/resources/cashflow_openapi.yaml-->
-<!--                            </inputSpec>-->
-<!--                            <generatorName>spring</generatorName>-->
-<!--                            <apiPackage>dev.eckler.cashflow.openapi.api</apiPackage>-->
-<!--                            <modelPackage>dev.eckler.cashflow.openapi.model</modelPackage>-->
-<!--                            <templateDirectory/>-->
-<!--                            <configOptions>-->
-<!--                                &lt;!&ndash;                <serializableModel>true</serializableModel>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                <snapshotVersion>true</snapshotVersion>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                <delegatePattern>true</delegatePattern>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                <useBeanValidation>false</useBeanValidation>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                <performBeanValidation>false</performBeanValidation>&ndash;&gt;-->
-<!--                                <useSpringBoot3>true</useSpringBoot3>-->
-<!--                            </configOptions>-->
-<!--                            <supportingFilesToGenerate>-->
-<!--                                ApiUtil.java-->
-<!--                            </supportingFilesToGenerate>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 

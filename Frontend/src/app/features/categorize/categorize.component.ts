@@ -6,7 +6,6 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
 import { TransactionService } from 'src/app/core/services/transaction.service';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { Category } from 'src/app/core/model/category';
-import { Identifier } from 'src/app/core/model/identifier';
 
 @Component({
   selector: 'app-categorize',
