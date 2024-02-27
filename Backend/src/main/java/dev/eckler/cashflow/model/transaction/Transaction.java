@@ -1,13 +1,13 @@
 package dev.eckler.cashflow.model.transaction;
 
 import dev.eckler.cashflow.model.identifier.Identifier;
-import jakarta.persistence.ManyToOne;
-import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
+import java.sql.Date;
 
 @Entity
 public class Transaction {

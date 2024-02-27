@@ -1,14 +1,10 @@
 package dev.eckler.cashflow.jwt;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-
-import java.util.Collection;
-import org.springframework.stereotype.Component;
 
 public class CustomJwt extends JwtAuthenticationToken {
 

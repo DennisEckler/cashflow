@@ -1,9 +1,9 @@
 package dev.eckler.cashflow.model.overview;
 
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
+import org.springframework.stereotype.Service;
 
 @Service
 public class OverviewService {
