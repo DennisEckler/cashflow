@@ -6,7 +6,7 @@ command.txt
 *.fakeData.csv
 misc/
 helper/
-*/LoadDatabase.java
+/Backend/src/main/java/dev/eckler/cashflow/init/LoadDatabase.java
 ############## JAVA ##############
 # Compiled class files
 *.class
