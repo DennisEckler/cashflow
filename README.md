@@ -9,7 +9,7 @@ Also this is used for testing out many technologies and built it all together.
 
 - Spring
 - Java
-- Maven
+- Gradle
 - Docker
 - Keycloak
 - TypeScript
