@@ -2,13 +2,13 @@ package dev.eckler.cashflow.model.transaction;
 
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
+import dev.eckler.cashflow.config.Oauth2Properties;
 import dev.eckler.cashflow.model.identifier.IdentifierService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -29,20 +29,20 @@ import org.springframework.web.multipart.MultipartFile;
 @CrossOrigin(origins = "http://localhost:4200")
 public class TransactionController {
 
-  @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-  private String issuer;
   private final TransactionRepository transactionRepository;
   private final TransactionService transactionService;
   private final IdentifierService identifierService;
+  private final Oauth2Properties oauthProperties;
   private final Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
 
   public TransactionController(TransactionRepository transactionRepository,
       TransactionService transactionService,
-      IdentifierService identifierService) {
+      IdentifierService identifierService, Oauth2Properties oauthProperties) {
     this.transactionRepository = transactionRepository;
     this.transactionService = transactionService;
     this.identifierService = identifierService;
+    this.oauthProperties = oauthProperties;
   }
 
   @GetMapping("/uncategorized")
@@ -58,7 +58,7 @@ public class TransactionController {
     try {
 
       JSONObject json = new JSONObject(columnIndex);
-      String userID = getUserId(bearerRequest, issuer);
+      String userID = getUserId(bearerRequest, oauthProperties);
       InputStream stream = csvFile.getInputStream();
 
       List<Transaction> transactions = transactionService.parseCsv(stream, userID, json);

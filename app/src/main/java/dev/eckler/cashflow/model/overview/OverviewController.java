@@ -16,8 +16,6 @@ public class OverviewController {
 
   TransactionRepository transactionRepository;
   OverviewService overviewService;
-  @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-  private String issuer;
 
   OverviewController(TransactionRepository transactionRepository, OverviewService overviewService) {
     this.transactionRepository = transactionRepository;

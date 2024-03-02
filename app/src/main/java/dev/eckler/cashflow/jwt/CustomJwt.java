@@ -1,5 +1,6 @@
 package dev.eckler.cashflow.jwt;
 
+import dev.eckler.cashflow.config.Oauth2Properties;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -18,7 +19,8 @@ public class CustomJwt extends JwtAuthenticationToken {
     super(jwt, authorities);
   }
 
-  public static String getUserId(String bearerToken, String issuer) {
+  public static String getUserId(String bearerToken, Oauth2Properties oauthProperties) {
+    String issuer = oauthProperties.issuerUri();
     String jwtToken = bearerToken.substring(7);
     Jwt jwt = JwtDecoders.fromIssuerLocation(issuer).decode(jwtToken);
     return jwt.getClaimAsString("sub");

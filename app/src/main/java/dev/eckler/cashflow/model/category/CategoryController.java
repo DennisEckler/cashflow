@@ -2,8 +2,8 @@ package dev.eckler.cashflow.model.category;
 
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
+import dev.eckler.cashflow.config.Oauth2Properties;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,17 +21,18 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
 
-  private final CategoryService categoryService;
-  @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-  private String issuer;
+  private final Oauth2Properties oauthProperties;
 
-  public CategoryController(CategoryService categoryService) {
+  private final CategoryService categoryService;
+
+  public CategoryController(Oauth2Properties oauthProperties, CategoryService categoryService) {
+    this.oauthProperties = oauthProperties;
     this.categoryService = categoryService;
   }
 
   @GetMapping("/get")
   public ResponseEntity<List<Category>> getCategories(@RequestHeader("Authorization") String bearerRequest) {
-    String userID = getUserId(bearerRequest, issuer);
+    String userID = getUserId(bearerRequest, oauthProperties);
     List<Category> categories = categoryService.getCategoriesByUser(userID);
     HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
     return new ResponseEntity<>(categories, status);
@@ -41,7 +42,7 @@ public class CategoryController {
   public ResponseEntity<?> saveCategories(
       @RequestHeader("Authorization") String bearerRequest,
       @RequestBody List<Category> categories) {
-    String userID = getUserId(bearerRequest, issuer);
+    String userID = getUserId(bearerRequest, oauthProperties);
     categories.stream().filter(category -> category.getUserID() == null)
         .forEach(category -> category.setUserID(userID));
     categoryService.saveCategories(categories);

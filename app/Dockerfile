@@ -1,12 +1,12 @@
-FROM amazoncorretto:21-alpine
+FROM gradle:8.5-jdk21 AS build
+WORKDIR /home/gradle/src
+COPY .gradle/ .gradle
+COPY build.gradle.kts ./
+COPY src ./src
+RUN gradle build --no-daemon
 
-WORKDIR /app
-
-#COPY .mvn/ .mvn
-#COPY mvnw pom.xml ./
-#
-#RUN ./mvnw dependency:resolve
-#
-#COPY src ./src
-#
-#CMD ["./mvnw", "spring-boot:run"]
+# Runtime stage
+FROM eclipse-temurin:21-jdk-alpine
+RUN mkdir /app
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/app.jar
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
