@@ -1,6 +1,5 @@
 FROM gradle:8.5-jdk21 AS build
 WORKDIR /home/gradle/src
-COPY app/.gradle .gradle
 COPY app/build.gradle.kts ./
 COPY app/src ./src
 RUN gradle build --no-daemon
