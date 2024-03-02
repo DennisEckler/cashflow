@@ -6,21 +6,8 @@ Also this is used for testing out many technologies and built it all together.
 ---
 
 ## TechStack
-
 - Spring
 - Java
 - Gradle
 - Docker
-- Keycloak
-- TypeScript
-- Angular
-- npm
-- Nginx
 - Postgres
-
----
-
-## Further improvements
-
-- NgRx
-- RxJs
