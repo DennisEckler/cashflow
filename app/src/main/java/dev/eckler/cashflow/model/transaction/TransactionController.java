@@ -58,7 +58,7 @@ public class TransactionController {
     try {
 
       JSONObject json = new JSONObject(columnIndex);
-      String userID = getUserId(bearerRequest, oauthProperties);
+      String userID = getUserId(bearerRequest, oauthProperties.issuerUri());
       InputStream stream = csvFile.getInputStream();
 
       List<Transaction> transactions = transactionService.parseCsv(stream, userID, json);
@@ -80,7 +80,6 @@ public class TransactionController {
                 identifierService.findIdentifierByID(entry.getIdentifier().getIdentifierID())),
             () -> logger.info("Cant find Transaction with ID: {}", entry)));
     transactionRepository.saveAll(patchValues);
-
     return ResponseEntity.ok("updated values successfully");
   }
 

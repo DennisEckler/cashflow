@@ -19,8 +19,7 @@ public class CustomJwt extends JwtAuthenticationToken {
     super(jwt, authorities);
   }
 
-  public static String getUserId(String bearerToken, Oauth2Properties oauthProperties) {
-    String issuer = oauthProperties.issuerUri();
+  public static String getUserId(String bearerToken, String issuer) {
     String jwtToken = bearerToken.substring(7);
     Jwt jwt = JwtDecoders.fromIssuerLocation(issuer).decode(jwtToken);
     return jwt.getClaimAsString("sub");

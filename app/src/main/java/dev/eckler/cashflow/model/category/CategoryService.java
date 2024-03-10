@@ -1,10 +1,13 @@
 package dev.eckler.cashflow.model.category;
 
+import static dev.eckler.cashflow.shared.CashflowConst.UNDEFINED;
+
 import dev.eckler.cashflow.model.identifier.Identifier;
 import dev.eckler.cashflow.model.identifier.IdentifierService;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +15,6 @@ public class CategoryService {
 
   private final CategoryRepository categoryRepository;
   private final IdentifierService identifierService;
-  private static final String DEFAULT_IDENTIFIER = "undefined";
 
 
   public CategoryService(CategoryRepository categoryRepository,
@@ -26,35 +28,25 @@ public class CategoryService {
   }
 
 
-  public void saveCategories(List<Category> categories) {
-    for (Category category : categories) {
-      if (category.getCategoryID() == null || hasNoneDefaultIdentifier(category.getCategoryID())) {
-        setDefaultIdentifier(category);
-      }
-      categoryRepository.save(category);
-    }
+  public ResponseEntity<Category> createCategory(Category category) {
+    Set<Identifier> identifier = category.getIdentifier();
+    identifier.add(new Identifier(UNDEFINED, category));
+    category.setIdentifier(identifier);
+    Category response = categoryRepository.save(category);
+    return response.getCategoryID() != null ? ResponseEntity.ok(response) : ResponseEntity.badRequest().build();
   }
 
-  private void setDefaultIdentifier(Category category) {
-    Set<Identifier> identifiers = category.getIdentifier();
-    identifiers.add(new Identifier(DEFAULT_IDENTIFIER, category));
-    category.setIdentifier(identifiers);
-  }
-
-  private boolean hasNoneDefaultIdentifier(Long categoryID) {
-    return categoryRepository.getReferenceById(categoryID).getIdentifier().stream()
-        .noneMatch(identifier -> identifier.getIdentifierLabel().equals(DEFAULT_IDENTIFIER));
-  }
-
-  public boolean deleteCategory(Long categoryID) {
-    Optional<Category> category = categoryRepository.findById(categoryID);
-    if (category.isPresent()) {
+  public ResponseEntity<String> deleteCategory(Long id, String userID) {
+    Optional<Category> category = categoryRepository.findById(id);
+    boolean allowDeleteUndefined = true;
+    if (category.isPresent() && userID.equals(category.get().getUserID())) {
       category.get().getIdentifier()
-          .forEach(identifier -> identifierService.deleteIdentifier(identifier.getIdentifierID()));
+          .forEach(identifier -> identifierService.deleteIdentifier(identifier.getIdentifierID(), allowDeleteUndefined));
       categoryRepository.delete(category.get());
-      return true;
+      return ResponseEntity.ok(String.join(" ", "Category with id:", id.toString(), "deleted"));
     }
-    return false;
+//    return ResponseEntity.unprocessableEntity().body("Cant find Category with id: " + id);
+    throw new CategoryNotFoundException("Category with id now found");
   }
 
 }

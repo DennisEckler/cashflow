@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/category")
+@RequestMapping(path = "/api/category")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
 
@@ -30,31 +30,30 @@ public class CategoryController {
     this.categoryService = categoryService;
   }
 
-  @GetMapping("/get")
-  public ResponseEntity<List<Category>> getCategories(@RequestHeader("Authorization") String bearerRequest) {
-    String userID = getUserId(bearerRequest, oauthProperties);
+  @GetMapping("/")
+  public ResponseEntity<List<Category>> getCategories(
+      @RequestHeader("Authorization") String bearerRequest) {
+    String userID = getUserId(bearerRequest, oauthProperties.issuerUri());
     List<Category> categories = categoryService.getCategoriesByUser(userID);
     HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
     return new ResponseEntity<>(categories, status);
   }
 
-  @PostMapping("/save")
-  public ResponseEntity<?> saveCategories(
+  @PostMapping("/")
+  public ResponseEntity<Category> createCategory(
       @RequestHeader("Authorization") String bearerRequest,
-      @RequestBody List<Category> categories) {
-    String userID = getUserId(bearerRequest, oauthProperties);
-    categories.stream().filter(category -> category.getUserID() == null)
-        .forEach(category -> category.setUserID(userID));
-    categoryService.saveCategories(categories);
-    return new ResponseEntity<>("Categories are saved", HttpStatus.OK);
+      @RequestBody Category category) {
+    String userID = getUserId(bearerRequest, oauthProperties.issuerUri());
+    category.setUserID(userID);
+    return categoryService.createCategory(category);
   }
 
-  @DeleteMapping("/delete/{categoryID}")
-  public ResponseEntity<String> deleteCategory(@PathVariable(name = "categoryID") Long categoryID) {
-    if (categoryService.deleteCategory(categoryID)) {
-      return new ResponseEntity<>("Category deleted: " + categoryID, HttpStatus.OK);
-    }
-    return new ResponseEntity<>("Cant find Category", HttpStatus.NOT_FOUND);
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteCategory(
+      @PathVariable(name = "id") Long id,
+      @RequestHeader("Authorization") String bearerRequest) {
+    String userID = getUserId(bearerRequest, oauthProperties.issuerUri());
+    return categoryService.deleteCategory(id, userID);
   }
 
 
