@@ -1,0 +1,10 @@
+:host {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  grid-template-columns: 1fr;
+}
+
+.header-button {
+  margin: 1rem;
+}

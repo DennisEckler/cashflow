@@ -1,0 +1,14 @@
+<input
+  type="file"
+  id="fileUpload_hidden"
+  class="fileUpload_hidden"
+  name="fileUpload_hidden"
+  (change)="onChange($event)"
+/>
+<label class="btn" for="fileUpload_hidden">Select File</label>
+@if (message) {
+  <navigation-button label="Send" (click)="onUpload()" />
+}
+@if (loading) {
+  <h3>Loading...</h3>
+}
