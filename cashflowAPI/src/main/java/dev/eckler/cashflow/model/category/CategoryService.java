@@ -45,8 +45,7 @@ public class CategoryService {
       categoryRepository.delete(category.get());
       return ResponseEntity.ok(String.join(" ", "Category with id:", id.toString(), "deleted"));
     }
-//    return ResponseEntity.unprocessableEntity().body("Cant find Category with id: " + id);
-    throw new CategoryNotFoundException("Category with id now found");
+    throw new CategoryNotFoundException("Category with id not found");
   }
 
 }

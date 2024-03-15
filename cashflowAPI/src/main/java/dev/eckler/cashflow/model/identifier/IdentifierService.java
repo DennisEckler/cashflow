@@ -4,7 +4,6 @@ import static dev.eckler.cashflow.shared.CashflowConst.UNDEFINED;
 
 import dev.eckler.cashflow.model.category.Category;
 import dev.eckler.cashflow.model.category.CategoryRepository;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,10 +18,6 @@ public class IdentifierService {
       CategoryRepository categoryRepository) {
     this.identifierRepository = identifierRepository;
     this.categoryRepository = categoryRepository;
-  }
-
-  public List<Identifier> getAllIdentifier() {
-    return identifierRepository.findAll();
   }
 
   public ResponseEntity<String> deleteIdentifier(Long identiferID, String userID) {

@@ -1,0 +1,90 @@
+version: "3.8"
+services:
+  # postgres:
+  #   image: postgres:16
+  #   container_name: postgres
+  #   environment:
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres:/var/lib/postgresql/data
+  #
+  # backend:
+  #   image: backend
+  #   container_name: backend
+  #   working_dir: /app
+  #   ports:
+  #     - "8080:8080"
+  #     # Volume is only for developing locally and auto reload
+  #   volumes:
+  #   - ./Backend:/app
+  postgres:
+    container_name: db
+    image: "postgres:16"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    volumes:
+      # change this to your local path
+      - "postgres:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: keycloak
+      POSTGRES_HOST: postgres
+    networks:
+      - local
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "5050:80"
+
+  keycloak:
+    container_name: keycloak
+    build:
+      context: ./Keycloak/
+      args:
+        KEYCLOAK_VERSION: 22.0.0
+    # command: ["start", "--optimized", "--import-realm"]
+    command: ["start", "--optimized"]
+    depends_on:
+      - "postgres"
+    environment:
+      JAVA_OPTS_APPEND: -Dkeycloak.profile.feature.upload_scripts=enabled
+      KC_DB_PASSWORD: postgres
+      KC_DB_URL: jdbc:postgresql://db/keycloak
+      KC_DB_USERNAME: postgres
+      KC_HEALTH_ENABLED: "true"
+      KC_HTTP_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+      KC_HOSTNAME_URL: http://localhost:8180
+      KC_PROXY: reencrypt
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: password
+    ports:
+      - "8180:8080"
+      - "8787:8787" # debug port
+    networks:
+      - local
+# volumes:
+    #   - ./my-test-realm-realm.json:/opt/keycloak/data/import/my-test-realm-realm.json
+
+networks:
+  local:
+    name: local
+    driver: bridge
+
+volumes:
+  postgres:
+    name: "postgres_data"
