@@ -8,13 +8,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -57,8 +64,8 @@ public class TransactionService {
 
             String[] column = row.split(";");
 
-            Date date = parseDate(column[DATE_INDEX]);
-            float amount = parseAmount(column[AMOUNT_INDEX]);
+            LocalDate date = parseDate(column[DATE_INDEX]);
+            BigDecimal amount = parseAmount(column[AMOUNT_INDEX]);
             String source = column[SOURCE_INDEX];
             String purpose = column[PURPOSE_INDEX];
             Identifier identifier = categorize(categories, source, purpose);
@@ -73,19 +80,20 @@ public class TransactionService {
     }
   }
 
-  private float parseAmount(String amount) {
-    DecimalFormat format = new DecimalFormat("#,00");
+  public static BigDecimal parseAmount(String amount) {
+    DecimalFormat df = new DecimalFormat("#,###.00");
     try {
-      return format.parse(amount).floatValue();
+      return new BigDecimal(String.valueOf(df.parse(amount)));
     } catch (ParseException e) {
-      logger.error("Format {} not Supported for this value: {}", format, amount);
       throw new RuntimeException(e);
     }
   }
 
+
   private void skipIfPeriodAlreadyExist(String year, String month) throws PeriodExistsException {
     if (transactionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
-      throw new PeriodExistsException("This Period exists");
+      throw new PeriodExistsException(
+          "This Period exists with year: " + year + " and month: " + month);
     }
   }
 
@@ -103,12 +111,12 @@ public class TransactionService {
     return null;
   }
 
-  private Date parseDate(String date) {
+  private LocalDate parseDate(String date) {
     List<String> formats = Arrays.asList("dd.MM.yyyy", "dd/MM/yyyy", "yyyy-MM-dd");
     for (String format : formats) {
       try {
-        return new Date(new SimpleDateFormat(format).parse(date).getTime());
-      } catch (ParseException e) {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
+      } catch (DateTimeParseException e) {
         logger.error("Format {} not Supported for this date: {}", format, date);
       }
     }

@@ -1,5 +1,3 @@
-import org.gradle.internal.classpath.Instrumented.systemProperty
-
 plugins {
     java
     id("org.springframework.boot") version "3.2.3"
@@ -35,6 +33,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 }
+
 
 tasks.withType<Test> {
     useJUnitPlatform()

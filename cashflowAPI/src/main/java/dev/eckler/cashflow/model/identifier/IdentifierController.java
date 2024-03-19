@@ -37,7 +37,6 @@ public class IdentifierController {
     return identifierService.createIdentifier(identifierDTO, userID);
   }
 
-
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteIdentifier(
       @RequestHeader("Authorization") String bearerRequest,

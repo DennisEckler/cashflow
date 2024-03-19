@@ -6,6 +6,7 @@ import dev.eckler.cashflow.model.identifier.Identifier;
 import dev.eckler.cashflow.model.identifier.IdentifierRepository;
 import dev.eckler.cashflow.model.transaction.TransactionRepository;
 import dev.eckler.cashflow.model.transaction.TransactionService;
+import dev.eckler.cashflow.shared.TransactionType;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.boot.CommandLineRunner;
@@ -39,39 +40,39 @@ class LoadDatabase {
 
     return Arrays.asList(
         new Category("dennis",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("sveti",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("gutschrift",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("miete",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("strom",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("internet",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("handy",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("versicherung",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("gez",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("abonnement",
-            USERID),
+            USERID, TransactionType.FIXED),
         new Category("lebensmittel",
-            USERID),
+            USERID, TransactionType.VARIABLE),
         new Category("haushaltsmittel",
-            USERID),
+            USERID, TransactionType.VARIABLE),
         new Category("kleidung",
-            USERID),
+            USERID, TransactionType.VARIABLE),
         new Category("mobilitaet",
-            USERID),
+            USERID, TransactionType.VARIABLE),
         new Category("geschenke",
-            USERID),
+            USERID, TransactionType.VARIABLE),
         new Category("ausgehen",
-            USERID),
+            USERID, TransactionType.VARIABLE),
         new Category("sonstiges",
-            USERID)
+            USERID, TransactionType.VARIABLE)
     );
   }
 

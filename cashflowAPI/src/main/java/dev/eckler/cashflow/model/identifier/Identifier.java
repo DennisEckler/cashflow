@@ -32,13 +32,10 @@ public class Identifier {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long identifierID;
-
   @NotNull
   private String identifierLabel;
-
   @OneToMany(mappedBy = "identifier")
   private Set<Transaction> transactions;
-
   @ManyToOne
   private Category category;
 
@@ -51,11 +48,11 @@ public class Identifier {
   }
 
   @JsonIgnore
-  public Set<Transaction> getTransaktions() {
+  public Set<Transaction> getTransactions() {
     return transactions;
   }
 
-  public void setTransaktions(
+  public void setTransactions(
       Set<Transaction> transactions) {
     this.transactions = transactions;
   }

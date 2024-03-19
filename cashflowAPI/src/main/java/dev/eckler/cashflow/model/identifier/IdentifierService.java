@@ -25,7 +25,7 @@ public class IdentifierService {
     if (identifier.isPresent() && identifier.get().getCategory().getUserID().equals(userID)) {
       return deleteIdentifier(identiferID, false);
     }
-    return ResponseEntity.notFound().build();
+    throw new IdentifierNotFoundException();
   }
 
   public ResponseEntity<String> deleteIdentifier(Long identifierID,
@@ -33,9 +33,9 @@ public class IdentifierService {
     Optional<Identifier> identifier = identifierRepository.findById(identifierID);
     if (identifier.isPresent() && (isAllowedToDeleteUndefined || !identifier.get()
         .getIdentifierLabel().equals(UNDEFINED))) {
-      identifier.get().getTransaktions().forEach(ele -> ele.setIdentifier(null));
+      identifier.get().getTransactions().forEach(ele -> ele.setIdentifier(null));
       identifierRepository.deleteById(identifierID);
-      return isAllowedToDeleteUndefined ? null : ResponseEntity.ok().build();
+      return ResponseEntity.ok().build();
     }
     throw new UndefinedIdentifierIsNotAllowedToDelete();
   }

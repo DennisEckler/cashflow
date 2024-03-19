@@ -6,8 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Transaction {
@@ -16,9 +19,10 @@ public class Transaction {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long transactionID;
   @NotNull
-  private Date date;
+  private LocalDate date;
   @NotNull
-  private float amount;
+  @Digits(integer = 6, fraction = 2)
+  private BigDecimal amount;
   @NotNull
   private String userID;
   @NotNull
@@ -29,7 +33,7 @@ public class Transaction {
   @ManyToOne
   private Identifier identifier;
 
-  public Transaction(Date date, float amount, String userID, String purpose, String source,
+  public Transaction(LocalDate date, BigDecimal amount, String userID, String purpose, String source,
       Identifier identifier) {
     this.date = date;
     this.amount = amount;
@@ -58,19 +62,19 @@ public class Transaction {
     this.identifier = identifier;
   }
 
-  public Date getDate() {
+  public LocalDate getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(LocalDate date) {
     this.date = date;
   }
 
-  public float getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(float amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 
