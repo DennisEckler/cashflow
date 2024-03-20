@@ -11,26 +11,26 @@ import { Category } from '../model/category';
 export class CategoryService {
   constructor(private http: HttpClient, private oauth: OAuthService) {}
 
-  url: string = 'http://localhost:8080/category';
+  url: string = 'http://localhost:8080/api/category';
 
   headers = new HttpHeaders({
     Authorization: `Bearer ${this.oauth.getAccessToken()}`,
   });
 
   get(): Observable<any> {
-    return this.http.get<Category>(this.url + '/get', {
+    return this.http.get<Category>(this.url + '/', {
       headers: this.headers,
     });
   }
 
   save(categories: Category[]): Observable<any> {
-    return this.http.post<Category>(this.url + '/save', categories, {
+    return this.http.post<Category>(this.url + '/', categories, {
       headers: this.headers,
     });
   }
 
   delete(category: Category): Observable<any> {
-    return this.http.delete(this.url + '/delete/' + category.categoryID, {
+    return this.http.delete(this.url + '/' + category.categoryID, {
       responseType: 'text',
       headers: this.headers,
     });

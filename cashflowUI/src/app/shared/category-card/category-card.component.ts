@@ -6,6 +6,7 @@ import { IdentifierChipComponent } from '../identifier-chip/identifier-chip.comp
 import { Identifier } from 'src/app/core/model/identifier';
 import { FormsModule } from '@angular/forms';
 import { IdentifierService } from 'src/app/core/services/identifier.service';
+import { IdentifierDTO } from 'src/app/core/model/identifierDto';
 
 @Component({
   selector: 'app-category-card',
@@ -47,9 +48,12 @@ export class CategoryCardComponent {
       if (labelExist || this.identifierInput.trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');
       } else {
-        this.category.identifier.push({
-          identifierID: null,
+        const identifierDto: IdentifierDTO = {
           identifierLabel: this.identifierInput,
+          categoryID: this.category.categoryID,
+        };
+        this.identifierSerice.save(identifierDto).subscribe({
+          next: (response) => this.category?.identifier.push(response),
         });
         this.identifierInput = '';
       }
