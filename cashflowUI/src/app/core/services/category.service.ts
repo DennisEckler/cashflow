@@ -9,24 +9,31 @@ import { Category } from '../model/category';
   providedIn: 'root',
 })
 export class CategoryService {
-  constructor(private http: HttpClient, private oauth: OAuthService) {}
+  constructor(
+    private http: HttpClient,
+    private oauth: OAuthService,
+  ) {}
 
-  url: string = 'http://localhost:8080/api/category';
+  url: string = 'http://localhost:8080/api/category/';
 
   headers = new HttpHeaders({
     Authorization: `Bearer ${this.oauth.getAccessToken()}`,
   });
 
   get(): Observable<any> {
-    return this.http.get<Category>(this.url + '/', {
+    return this.http.get<Category>(this.url, {
       headers: this.headers,
     });
   }
 
-  save(categories: Category[]): Observable<any> {
-    return this.http.post<Category>(this.url + '/', categories, {
+  add(category: Category): Observable<any> {
+    return this.http.post<Category>(this.url, category, {
       headers: this.headers,
     });
+  }
+
+  change(category: Category): Observable<any> {
+    return this.http.patch(this.url, category, { headers: this.headers });
   }
 
   delete(category: Category): Observable<any> {

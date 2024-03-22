@@ -6,6 +6,7 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
 import { Category } from 'src/app/core/model/category';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { FormsModule } from '@angular/forms';
+import { TransactionType } from 'src/app/core/model/transactionType';
 
 @Component({
   selector: 'app-settings',
@@ -39,16 +40,21 @@ export class SettingsComponent implements OnInit {
   addCategory() {
     if (this.categoryInput !== '') {
       const labelExist = this.categories.some(
-        (category) => category.categoryLabel === this.categoryInput
+        (category) => category.categoryLabel === this.categoryInput,
       );
       if (labelExist || this.categoryInput.trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');
       } else {
-        this.categories.push({
+        let category: Category = {
           categoryID: null,
           categoryLabel: this.categoryInput,
           userID: null,
+          type: TransactionType.FIXED,
           identifier: [],
+        };
+        this.categoryService.add(category).subscribe({
+          next: (response) => this.categories.push(response),
+          error: (err) => console.log(err),
         });
         this.categoryInput = '';
       }
@@ -57,18 +63,12 @@ export class SettingsComponent implements OnInit {
 
   deleteCategory(category: Category) {
     this.categories = this.categories?.filter(
-      (ele) => ele.categoryLabel !== category.categoryLabel
+      (ele) => ele.categoryLabel !== category.categoryLabel,
     );
     if (category.categoryID !== null) {
       this.categoryService.delete(category).subscribe({
         next: (v) => console.log(v),
       });
     }
-  }
-
-  save() {
-    this.categoryService.save(this.categories).subscribe({
-      next: (v) => console.log(`saved succsesfully` + v),
-    });
   }
 }

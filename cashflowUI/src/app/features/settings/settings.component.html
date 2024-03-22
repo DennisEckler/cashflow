@@ -5,18 +5,14 @@
     label="Add Category"
   ></navigation-button>
   <input type="text" [(ngModel)]="categoryInput" />
-  <navigation-button
-    class="header-button"
-    (click)="save()"
-    label="Save"
-  ></navigation-button>
 </div>
-@if (categories && categories.length !== 0){ @for (category of categories; track
-category.categoryID) {
-<app-category-card
-  (categoryDelete)="deleteCategory($event)"
-  [category]="category"
-></app-category-card>
-} }@else {
-<h2>Can`t find Categories</h2>
+@if (categories && categories.length !== 0) {
+  @for (category of categories; track category.categoryID) {
+    <app-category-card
+      (categoryDelete)="deleteCategory($event)"
+      [category]="category"
+    ></app-category-card>
+  }
+} @else {
+  <h2>Can`t find Categories</h2>
 }
