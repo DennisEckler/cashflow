@@ -37,7 +37,7 @@ export class CategoryService {
   }
 
   delete(category: Category): Observable<any> {
-    return this.http.delete(this.url + '/' + category.categoryID, {
+    return this.http.delete(this.url + category.categoryID, {
       responseType: 'text',
       headers: this.headers,
     });

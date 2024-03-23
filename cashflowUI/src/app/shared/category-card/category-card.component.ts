@@ -33,9 +33,8 @@ export class CategoryCardComponent {
   enumValues: string[];
 
   changeType() {
-    this.category.type = TransactionType.FIXED;
     this.categoryService.change(this.category).subscribe({
-      next: (value) => (this.category = value),
+      next: (response) => (this.category = response),
       error: (err) => console.log('value not accepted'),
     });
   }

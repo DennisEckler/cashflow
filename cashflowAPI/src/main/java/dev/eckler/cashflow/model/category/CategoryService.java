@@ -33,7 +33,15 @@ public class CategoryService {
     identifier.add(new Identifier(UNDEFINED, category));
     category.setIdentifier(identifier);
     Category response = categoryRepository.save(category);
-    return response.getCategoryID() != null ? ResponseEntity.ok(response) : ResponseEntity.badRequest().build();
+    return response.getCategoryID() != null ? ResponseEntity.ok(response)
+        : ResponseEntity.badRequest().build();
+  }
+
+  public ResponseEntity<Category> changeType(Category category) {
+    Category dbCategory = categoryRepository.findById(category.getCategoryID())
+        .orElseThrow(() -> new CategoryNotFoundException(""));
+    dbCategory.setType(category.getType());
+    return ResponseEntity.ok(categoryRepository.save(dbCategory));
   }
 
   public ResponseEntity<String> deleteCategory(Long id, String userID) {
@@ -41,7 +49,8 @@ public class CategoryService {
     boolean allowDeleteUndefined = true;
     if (category.isPresent() && userID.equals(category.get().getUserID())) {
       category.get().getIdentifier()
-          .forEach(identifier -> identifierService.deleteIdentifier(identifier.getIdentifierID(), allowDeleteUndefined));
+          .forEach(identifier -> identifierService.deleteIdentifier(identifier.getIdentifierID(),
+              allowDeleteUndefined));
       categoryRepository.delete(category.get());
       return ResponseEntity.ok(String.join(" ", "Category with id:", id.toString(), "deleted"));
     }

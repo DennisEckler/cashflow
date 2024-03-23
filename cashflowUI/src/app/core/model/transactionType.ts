@@ -1,5 +1,5 @@
 export enum TransactionType {
-  FIXED = 'Fixed',
-  VARIABLE = 'Variable',
-  UNIQUE = 'Unique',
+  FIXED = 'FIXED',
+  VARIABLE = 'VARIABLE',
+  UNIQUE = 'UNIQUE',
 }

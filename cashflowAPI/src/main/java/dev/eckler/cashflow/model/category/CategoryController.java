@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +49,13 @@ public class CategoryController {
     String userID = getUserId(bearerRequest, oauthProperties.issuerUri());
     category.setUserID(userID);
     return categoryService.createCategory(category);
+  }
+
+  @PatchMapping("/")
+  public ResponseEntity<Category> changeType(
+      @RequestHeader("Authorization") String bearerRequest,
+      @RequestBody Category category) {
+    return categoryService.changeType(category);
   }
 
   @DeleteMapping("/{id}")
