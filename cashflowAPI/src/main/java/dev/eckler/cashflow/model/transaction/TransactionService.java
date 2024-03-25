@@ -112,13 +112,11 @@ public class TransactionService {
   }
 
   private LocalDate parseDate(String date) {
-    List<String> formats = Arrays.asList("dd.MM.yyyy", "dd/MM/yyyy", "yyyy-MM-dd");
-    for (String format : formats) {
-      try {
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
-      } catch (DateTimeParseException e) {
-        logger.error("Format {} not Supported for this date: {}", format, date);
-      }
+    String format = "dd.MM.yyyy";
+    try {
+      return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
+    } catch (DateTimeParseException e) {
+      logger.error("Format {} not Supported for this date: {}", format, date);
     }
     return null;
   }

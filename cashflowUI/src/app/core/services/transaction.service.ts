@@ -10,7 +10,10 @@ import { OAuthService } from 'angular-oauth2-oidc';
 export class TransactionService {
   url: string = 'http://localhost:8080/transaction/';
 
-  constructor(private http: HttpClient, private oauth: OAuthService) {}
+  constructor(
+    private http: HttpClient,
+    private oauth: OAuthService,
+  ) {}
 
   getList(): Observable<any> {
     const headers = new HttpHeaders({
@@ -40,6 +43,9 @@ export class TransactionService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.oauth.getAccessToken()}`,
     });
-    return this.http.post(this.url + 'upload', formData, { headers });
+    return this.http.post(this.url + 'upload', formData, {
+      responseType: 'text',
+      headers,
+    });
   }
 }

@@ -4,7 +4,8 @@ package dev.eckler.cashflow.shared;
 public enum TransactionType {
   FIXED("Fixed"),
   VARIABLE("Variable"),
-  UNIQUE("Unique");
+  UNIQUE("Unique"),
+  INCOME("Income");
 
   private String name;
 

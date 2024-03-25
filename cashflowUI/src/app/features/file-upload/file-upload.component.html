@@ -1,14 +1,14 @@
-<input
-  type="file"
-  id="fileUpload_hidden"
-  class="fileUpload_hidden"
-  name="fileUpload_hidden"
-  (change)="onChange($event)"
-/>
-<label class="btn" for="fileUpload_hidden">Select File</label>
-@if (message) {
+<input type="file" class="fileUpload_hidden" (change)="onChange($event)" #fileUpload />
+
+<div class="file-upload">
+
+  {{ csvFile?.name || "No file uploaded yet." }}
+  <button (click)="fileUpload.click()">upload</button>
+
+</div>
+
+@if (fileName) {
+  <input [(ngModel)]="text" type="text" />
   <navigation-button label="Send" (click)="onUpload()" />
-}
-@if (loading) {
-  <h3>Loading...</h3>
+  {{message}}
 }

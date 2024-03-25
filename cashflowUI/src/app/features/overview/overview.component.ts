@@ -19,18 +19,10 @@ export class OverviewComponent implements OnInit {
   constructor(
     private overviewService: OverviewService,
     private httpClient: HttpClient,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
   ) {}
+
   ngOnInit() {
-    this.httpClient
-      .get<OverviewRow[]>('http://localhost:8080/overview', {
-        headers: {
-          Authorization: `Bearer ${this.oauthService.getAccessToken()}`,
-        },
-      })
-      .subscribe({
-        next: (v) => (this.overviewSummary = v),
-        error: (error) => console.log(error),
-      });
+    this.overviewService.getOverview().subscribe({});
   }
 }

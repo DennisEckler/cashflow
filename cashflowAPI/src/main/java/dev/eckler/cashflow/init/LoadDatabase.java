@@ -40,11 +40,11 @@ class LoadDatabase {
 
     return Arrays.asList(
         new Category("dennis",
-            USERID, TransactionType.FIXED),
+            USERID, TransactionType.INCOME),
         new Category("sveti",
-            USERID, TransactionType.FIXED),
+            USERID, TransactionType.INCOME),
         new Category("gutschrift",
-            USERID, TransactionType.FIXED),
+            USERID, TransactionType.INCOME),
         new Category("miete",
             USERID, TransactionType.FIXED),
         new Category("strom",
