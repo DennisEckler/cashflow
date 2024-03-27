@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OverviewService } from './overview.service';
-import { OverviewRow } from 'src/app/core/model/overviewRow';
-import { OverviewRowComponent } from 'src/app/shared/overview-row/overview-row.component';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { HttpClient } from '@angular/common/http';
+import { OverviewService } from 'src/app/core/services/overview.service';
+import {
+  OverviewContainer,
+  OverviewRow,
+  Overview,
+} from 'src/app/core/model/overview';
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule, OverviewRowComponent],
+  imports: [CommonModule],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss',
 })
 export class OverviewComponent implements OnInit {
-  overviewSummary: OverviewRow[] = [];
+  overviews: OverviewRow[] = [];
 
-  constructor(
-    private overviewService: OverviewService,
-    private httpClient: HttpClient,
-    private oauthService: OAuthService,
-  ) {}
+  constructor(private overviewService: OverviewService) {}
 
   ngOnInit() {
-    this.overviewService.getOverview().subscribe({});
+    this.overviewService.getOverview().subscribe({
+      next: (v) => (this.overviews = v),
+    });
   }
 }

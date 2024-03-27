@@ -1,1 +1,26 @@
-<app-overview-row [overviewRows]="overviewSummary"></app-overview-row>
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Fixed</th>
+      <th>Variable</th>
+      <th>Income</th>
+      <th>Unique</th>
+      <th>Diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      @for (row of overviews; track $index) {
+        <td>{{row.year}}</td>
+        <td>{{row.month}}</td>
+        <td>{{row.fixed}}</td>
+        <td>{{row.variable}}</td>
+        <td>{{row.income}}</td>
+        <td>{{row.unique}}</td>
+        <td>{{row.diff}}</td>
+      }
+    </tr>
+  </tbody>
+</table>
