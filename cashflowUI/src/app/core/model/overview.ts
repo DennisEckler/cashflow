@@ -12,7 +12,7 @@ export interface Overview {
   amount: Number;
 }
 
-export interface OverviewRow {
+export interface OverviewSummary {
   year: string;
   month: string;
   fixed: number;

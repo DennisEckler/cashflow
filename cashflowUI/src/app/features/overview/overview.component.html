@@ -11,16 +11,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      @for (row of overviews; track $index) {
-        <td>{{row.year}}</td>
-        <td>{{row.month}}</td>
-        <td>{{row.fixed}}</td>
-        <td>{{row.variable}}</td>
-        <td>{{row.income}}</td>
-        <td>{{row.unique}}</td>
-        <td>{{row.diff}}</td>
-      }
-    </tr>
+    @for (row of overviews; track $index) {
+      <tr>
+        <td>{{ row.year }}</td>
+        <td>{{ row.month }}</td>
+        <td>{{ row.fixed }}</td>
+        <td>{{ row.variable }}</td>
+        <td>{{ row.income }}</td>
+        <td>{{ row.unique }}</td>
+        <td>{{ row.diff }}</td>
+      </tr>
+    }
   </tbody>
 </table>

@@ -2,6 +2,7 @@ package dev.eckler.cashflow.model.overview;
 
 import dev.eckler.cashflow.model.transaction.TransactionRepository;
 import dev.eckler.cashflow.shared.TransactionType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -20,11 +21,23 @@ public class OverviewService {
   }
 
 
-  public Map<String, List<Overview>> getOverview(String userID) {
-    return tr.getOverview(userID).stream()
+  public List<OverviewSummary> getOverview(String userID) {
+    Map<String, List<Overview>> list = tr.getOverview(userID).stream()
         .map(this::createOverview)
-        .filter(this::byFixedAndVariable)
         .collect(groupYearMonthNaturalOrder());
+    return createOverviewRows(list);
+  }
+
+  private List<OverviewSummary> createOverviewRows(Map<String, List<Overview>> mapOfOverview) {
+    List<OverviewSummary> rows = new ArrayList<>();
+    mapOfOverview.forEach((period, list) -> {
+      OverviewSummary row = new OverviewSummary();
+      row.setMonth(list.getFirst().month());
+      row.setYear(list.getFirst().year());
+      list.forEach(row::accumulateAmount);
+      rows.add(row);
+    });
+    return rows;
   }
 
 
@@ -33,9 +46,6 @@ public class OverviewService {
         TransactionType.valueOf(oe.getType()), oe.getAmount());
   }
 
-  private boolean byFixedAndVariable(Overview o) {
-    return o.type() == TransactionType.FIXED || o.type() == TransactionType.VARIABLE;
-  }
 
   private static Collector<Overview, ?, Map<String, List<Overview>>> groupYearMonthNaturalOrder() {
     return Collectors.groupingBy(o -> o.year() + o.month(), TreeMap::new, Collectors.toList());

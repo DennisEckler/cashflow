@@ -3,9 +3,7 @@ package dev.eckler.cashflow.model.overview;
 import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
 
 import dev.eckler.cashflow.config.Oauth2Properties;
-import dev.eckler.cashflow.model.transaction.TransactionRepository;
 import java.util.List;
-import java.util.Map;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +27,7 @@ public class OverviewController {
 
   @GetMapping("/")
   @PreAuthorize("hasAuthority('ROLE_developer')")
-  public Map<String, List<Overview>> getOverview(@RequestHeader("Authorization") String request) {
+  public List<OverviewSummary> getOverview(@RequestHeader("Authorization") String request) {
     String userID = getUserId(request, oauthProperties.issuerUri());
     return overviewService.getOverview(userID);
   }

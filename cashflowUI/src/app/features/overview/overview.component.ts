@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OverviewService } from 'src/app/core/services/overview.service';
-import {
-  OverviewContainer,
-  OverviewRow,
-  Overview,
-} from 'src/app/core/model/overview';
+import { OverviewSummary } from 'src/app/core/model/overview';
 
 @Component({
   selector: 'app-overview',
@@ -15,7 +11,7 @@ import {
   styleUrl: './overview.component.scss',
 })
 export class OverviewComponent implements OnInit {
-  overviews: OverviewRow[] = [];
+  overviews: OverviewSummary[] = [];
 
   constructor(private overviewService: OverviewService) {}
 
