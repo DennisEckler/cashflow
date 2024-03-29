@@ -1,11 +1,11 @@
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
 export const authCodeFlowConfig: AuthConfig = {
-  issuer: 'http://localhost:8180/realms/myData',
+  issuer: 'http://localhost:8180/realms/cashflow',
   tokenEndpoint:
-    'http://localhost:8180/realms/myData/protocol/openid-connect/token',
+    'http://localhost:8180/realms/cashflow/protocol/openid-connect/token',
   redirectUri: window.location.origin + '/login',
-  clientId: 'myDataClient',
+  clientId: 'cashflowClient',
   responseType: 'code',
   scope: 'profile',
   showDebugInformation: true,

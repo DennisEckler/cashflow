@@ -76,6 +76,15 @@ services:
     networks:
       - local
 
+  cashflowUI:
+    image: denniseckler/cashflowui
+    build: ./cashflowUI/
+    container_name: cashflow-ui
+    ports:
+      - "4200:80"
+    networks:
+      - local
+
 networks:
   local:
     name: local

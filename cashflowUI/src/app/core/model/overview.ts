@@ -1,17 +1,3 @@
-import { TransactionType } from './transactionType';
-
-export interface OverviewContainer {
-  period: string;
-  overviews: Overview[];
-}
-
-export interface Overview {
-  year: string;
-  month: string;
-  type: TransactionType;
-  amount: Number;
-}
-
 export interface OverviewSummary {
   year: string;
   month: string;
