@@ -3,7 +3,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8180/realms/myData
+          issuer-uri: http://localhost:8180/realms/cashflow
   datasource:
     url: ${POSTGRES_URL}
     username: ${POSTGRES_USER}

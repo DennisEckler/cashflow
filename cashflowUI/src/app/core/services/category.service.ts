@@ -9,10 +9,7 @@ import { Category } from '../model/category';
   providedIn: 'root',
 })
 export class CategoryService {
-  constructor(
-    private http: HttpClient,
-    private oauth: OAuthService,
-  ) {}
+  constructor(private http: HttpClient, private oauth: OAuthService) {}
 
   url: string = 'http://localhost:8080/api/category/';
 
