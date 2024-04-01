@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
 import { Identifier } from '../model/identifier';
 import { IdentifierDTO } from '../model/identifierDto';
@@ -9,7 +8,7 @@ import { IdentifierDTO } from '../model/identifierDto';
   providedIn: 'root',
 })
 export class IdentifierService {
-  constructor(private http: HttpClient, private oauth: OAuthService) {}
+  constructor(private http: HttpClient) {}
 
   url: string = '/api/identifier/';
 

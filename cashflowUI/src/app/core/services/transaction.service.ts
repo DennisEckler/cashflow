@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transaction } from '../model/transaction';
-import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root',
@@ -10,22 +9,15 @@ import { OAuthService } from 'angular-oauth2-oidc';
 export class TransactionService {
   url: string = '/api/transaction/';
 
-  constructor(private http: HttpClient, private oauth: OAuthService) {}
+  constructor(private http: HttpClient) {}
 
   getList(): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.oauth.getAccessToken()}`,
-    });
-    return this.http.get<Transaction>(this.url + 'uncategorized', { headers });
+    return this.http.get<Transaction>(this.url + 'uncategorized');
   }
 
   saveList(transaktions: Transaction[]): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.oauth.getAccessToken()}`,
-    });
     return this.http.patch(this.url + 'categorize', transaktions, {
       responseType: 'text',
-      headers,
     });
   }
 
@@ -37,12 +29,8 @@ export class TransactionService {
     if (text) {
       formData.append('columnIndex', text);
     }
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.oauth.getAccessToken()}`,
-    });
     return this.http.post(this.url + 'upload', formData, {
       responseType: 'text',
-      headers,
     });
   }
 }

@@ -49,7 +49,6 @@ public class TransactionController {
 
   @PostMapping("/upload")
   public ResponseEntity<?> uploadFile(
-      @RequestHeader("Authorization") String bearerRequest,
       @RequestParam("file") MultipartFile csvFile,
       @RequestParam("columnIndex") String columnIndex) {
     try {
