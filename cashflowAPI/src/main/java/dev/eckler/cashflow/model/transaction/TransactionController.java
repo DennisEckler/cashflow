@@ -1,8 +1,7 @@
 package dev.eckler.cashflow.model.transaction;
 
-import static dev.eckler.cashflow.jwt.CustomJwt.getUserId;
+import static dev.eckler.cashflow.shared.CashflowConst.USER_ID;
 
-import dev.eckler.cashflow.config.Oauth2Properties;
 import dev.eckler.cashflow.model.identifier.IdentifierService;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,24 +24,22 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping(path = "/transaction")
-@CrossOrigin(origins = "http://localhost:80")
+@RequestMapping(path = "/api/transaction")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TransactionController {
 
   private final TransactionRepository transactionRepository;
   private final TransactionService transactionService;
   private final IdentifierService identifierService;
-  private final Oauth2Properties oauthProperties;
   private final Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
 
   public TransactionController(TransactionRepository transactionRepository,
       TransactionService transactionService,
-      IdentifierService identifierService, Oauth2Properties oauthProperties) {
+      IdentifierService identifierService) {
     this.transactionRepository = transactionRepository;
     this.transactionService = transactionService;
     this.identifierService = identifierService;
-    this.oauthProperties = oauthProperties;
   }
 
   @GetMapping("/uncategorized")
@@ -58,10 +55,9 @@ public class TransactionController {
     try {
 
       JSONObject json = new JSONObject(columnIndex);
-      String userID = getUserId(bearerRequest, oauthProperties.issuerUri());
       InputStream stream = csvFile.getInputStream();
 
-      List<Transaction> transactions = transactionService.parseCsv(stream, userID, json);
+      List<Transaction> transactions = transactionService.parseCsv(stream, USER_ID, json);
       transactionRepository.saveAll(transactions);
       logger.info("FileUpload done");
       return new ResponseEntity<>("File upload successfully", HttpStatus.OK);

@@ -1,13 +1,15 @@
 # Stage 1: Compile and Build angular codebase
 FROM node:20-alpine as build
 
+RUN npm install -g @angular/cli@17
+
 WORKDIR /usr/local/app
 
 COPY ./ /usr/local/app/
 
 RUN npm install
 
-RUN npm run build
+RUN ng build --configuration production
 
 
 # Stage 2: Serve app with nginx server

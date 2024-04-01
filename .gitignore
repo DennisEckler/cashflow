@@ -1,11 +1,10 @@
 ### Misc
 .DS_Store
 Thumbs.db
-command.txt
-*.fakeData.csv
-misc/
 helper/
 /Backend/src/main/java/dev/eckler/cashflow/init/LoadDatabase.java
+backup.txt
+dump_test.sql
 ############## JAVA ##############
 *.class
 *.log

@@ -11,32 +11,23 @@ import { Category } from '../model/category';
 export class CategoryService {
   constructor(private http: HttpClient, private oauth: OAuthService) {}
 
-  url: string = 'http://localhost:8080/api/category/';
-
-  headers = new HttpHeaders({
-    Authorization: `Bearer ${this.oauth.getAccessToken()}`,
-  });
+  url: string = '/api/category/';
 
   get(): Observable<any> {
-    return this.http.get<Category>(this.url, {
-      headers: this.headers,
-    });
+    return this.http.get<Category>(this.url);
   }
 
   add(category: Category): Observable<any> {
-    return this.http.post<Category>(this.url, category, {
-      headers: this.headers,
-    });
+    return this.http.post<Category>(this.url, category);
   }
 
   change(category: Category): Observable<any> {
-    return this.http.patch(this.url, category, { headers: this.headers });
+    return this.http.patch(this.url, category);
   }
 
   delete(category: Category): Observable<any> {
     return this.http.delete(this.url + category.categoryID, {
       responseType: 'text',
-      headers: this.headers,
     });
   }
 }

@@ -9,15 +9,14 @@ services:
       interval: 10s
       retries: 10
     volumes:
-      # change this to your local path
-      - "postgres:/var/lib/postgresql/data"
+      - "cashflow_data:/var/lib/postgresql/data"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_HOST: ${POSTGRES_HOST}
     networks:
-      - local
+      - cashflow_local
     ports:
       - "5432:5432"
 
@@ -30,39 +29,8 @@ services:
     ports:
       - "5050:80"
 
-  keycloak:
-    container_name: cashflow-keycloak
-    build:
-      context: ./cashflowAuth/
-      args:
-        KEYCLOAK_VERSION: 22.0.0
-    # command: ["start", "--optimized", "--import-realm"]
-    command: ["start", "--optimized"]
-    depends_on:
-      - "postgres"
-    environment:
-      JAVA_OPTS_APPEND: -Dkeycloak.profile.feature.upload_scripts=enabled
-      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
-      KC_DB_URL: ${POSTGRES_URL}
-      KC_DB_USERNAME: ${POSTGRES_USER}
-      KC_HEALTH_ENABLED: "true"
-      KC_HTTP_ENABLED: "true"
-      KC_METRICS_ENABLED: "true"
-      KC_HOSTNAME_URL: ${KC_URL}
-      KC_PROXY: reencrypt
-      KEYCLOAK_ADMIN: ${KC_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KC_PASSWORD}
-    ports:
-      - "8180:8080"
-      - "8787:8787" # debug port
-    networks:
-      - local
-  # volumes:
-  #   - ./my-test-realm-realm.json:/opt/keycloak/data/import/my-test-realm-realm.json
-  #
-
-  cashflowAPI:
-    image: denniseckler/cashflowapi
+  cashflow-api:
+    image: denniseckler/cashflow-api
     build: ./cashflowAPI/
     container_name: cashflow-api
     depends_on:
@@ -74,22 +42,24 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - local
+      - cashflow_local
 
-  cashflowUI:
-    image: denniseckler/cashflowui
+  cashflow-ui:
+    image: denniseckler/cashflow-ui
     build: ./cashflowUI/
     container_name: cashflow-ui
+    depends_on:
+      - "cashflow-api"
     ports:
       - "4200:80"
     networks:
-      - local
+      - cashflow_local
 
 networks:
-  local:
-    name: local
+  cashflow_local:
+    name: cashflow_local
     driver: bridge
 
 volumes:
-  postgres:
+  cashflow_data:
     name: "cashflow_data"

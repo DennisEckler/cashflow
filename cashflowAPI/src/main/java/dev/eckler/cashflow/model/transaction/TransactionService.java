@@ -81,7 +81,10 @@ public class TransactionService {
   }
 
   public static BigDecimal parseAmount(String amount) {
-    DecimalFormat df = new DecimalFormat("#,###.00");
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+    symbols.setGroupingSeparator('.');
+    symbols.setDecimalSeparator(',');
+    DecimalFormat df = new DecimalFormat("#,###.00", symbols);
     try {
       return new BigDecimal(String.valueOf(df.parse(amount)));
     } catch (ParseException e) {

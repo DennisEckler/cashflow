@@ -11,22 +11,15 @@ import { IdentifierDTO } from '../model/identifierDto';
 export class IdentifierService {
   constructor(private http: HttpClient, private oauth: OAuthService) {}
 
-  url: string = 'http://localhost:8080/api/identifier';
-
-  header = new HttpHeaders({
-    Authorization: `Bearer ${this.oauth.getAccessToken()}`,
-  });
+  url: string = '/api/identifier/';
 
   delete(identifier: Identifier): Observable<any> {
-    return this.http.delete(this.url + '/' + identifier.identifierID, {
+    return this.http.delete(this.url + identifier.identifierID, {
       responseType: 'text',
-      headers: this.header,
     });
   }
 
   save(identifierDTO: IdentifierDTO): Observable<any> {
-    return this.http.post(this.url + '/', identifierDTO, {
-      headers: this.header,
-    });
+    return this.http.post(this.url, identifierDTO);
   }
 }

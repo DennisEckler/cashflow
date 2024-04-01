@@ -7,18 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class OverviewService {
-  constructor(
-    private http: HttpClient,
-    private oauth: OAuthService,
-  ) {}
-
-  header = new HttpHeaders({
-    Authorization: `Bearer ${this.oauth.getAccessToken()}`,
-  });
+  constructor(private http: HttpClient, private oauth: OAuthService) {}
 
   getOverview(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/overview/', {
-      headers: this.header,
-    });
+    return this.http.get('/api/overview/');
   }
 }

@@ -21,7 +21,7 @@ public class Transaction {
   @NotNull
   private LocalDate date;
   @NotNull
-  @Digits(integer = 6, fraction = 2)
+  @Digits(integer = 9, fraction = 2)
   private BigDecimal amount;
   @NotNull
   private String userID;

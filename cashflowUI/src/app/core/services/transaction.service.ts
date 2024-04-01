@@ -8,12 +8,9 @@ import { OAuthService } from 'angular-oauth2-oidc';
   providedIn: 'root',
 })
 export class TransactionService {
-  url: string = 'http://localhost:8080/transaction/';
+  url: string = '/api/transaction/';
 
-  constructor(
-    private http: HttpClient,
-    private oauth: OAuthService,
-  ) {}
+  constructor(private http: HttpClient, private oauth: OAuthService) {}
 
   getList(): Observable<any> {
     const headers = new HttpHeaders({
