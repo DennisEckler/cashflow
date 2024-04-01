@@ -11,7 +11,7 @@ import { Category } from '../model/category';
 export class CategoryService {
   constructor(private http: HttpClient, private oauth: OAuthService) {}
 
-  url: string = 'http://localhost:8080/api/category/';
+  url: string = '/api/category/';
 
   headers = new HttpHeaders({
     Authorization: `Bearer ${this.oauth.getAccessToken()}`,

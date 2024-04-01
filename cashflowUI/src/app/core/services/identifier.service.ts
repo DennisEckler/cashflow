@@ -11,7 +11,7 @@ import { IdentifierDTO } from '../model/identifierDto';
 export class IdentifierService {
   constructor(private http: HttpClient, private oauth: OAuthService) {}
 
-  url: string = 'http://localhost:8080/api/identifier';
+  url: string = 'http://localhost:8999/api/identifier';
 
   header = new HttpHeaders({
     Authorization: `Bearer ${this.oauth.getAccessToken()}`,

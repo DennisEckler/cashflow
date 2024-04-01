@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import { OAuthService } from 'angular-oauth2-oidc';
-import {
-  authCodeFlowConfig,
-  // initializeOAuth,
-} from 'src/app/core/auth/auth.conf';
+import { authCodeFlowConfig } from 'src/app/core/auth/auth.conf';
 
 @Component({
   selector: 'app-login',

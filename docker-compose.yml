@@ -17,18 +17,18 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_HOST: ${POSTGRES_HOST}
     networks:
-      - local
+      - cashflow-local
     ports:
       - "5432:5432"
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: cashflow-pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-    ports:
-      - "5050:80"
+  # pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   container_name: cashflow-pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+  #   ports:
+  #     - "5050:80"
 
   keycloak:
     container_name: cashflow-keycloak
@@ -36,7 +36,6 @@ services:
       context: ./cashflowAuth/
       args:
         KEYCLOAK_VERSION: 22.0.0
-    # command: ["start", "--optimized", "--import-realm"]
     command: ["start", "--optimized"]
     depends_on:
       - "postgres"
@@ -49,14 +48,14 @@ services:
       KC_HTTP_ENABLED: "true"
       KC_METRICS_ENABLED: "true"
       KC_HOSTNAME_URL: ${KC_URL}
-      KC_PROXY: reencrypt
+      KC_PROXY: edge
       KEYCLOAK_ADMIN: ${KC_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KC_PASSWORD}
     ports:
-      - "8180:8080"
+      - "8080:8080"
       - "8787:8787" # debug port
     networks:
-      - local
+      - cashflow-local
   # volumes:
   #   - ./my-test-realm-realm.json:/opt/keycloak/data/import/my-test-realm-realm.json
   #
@@ -72,22 +71,25 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "8080:8080"
+      - "8999:8999"
     networks:
-      - local
+      - cashflow-local
 
   cashflowUI:
     image: denniseckler/cashflowui
     build: ./cashflowUI/
     container_name: cashflow-ui
+    depends_on:
+      - "cashflowAPI"
+      - "keycloak"
     ports:
       - "4200:80"
     networks:
-      - local
+      - cashflow-local
 
 networks:
-  local:
-    name: local
+  cashflow-local:
+    name: cashflow-local
     driver: bridge
 
 volumes:
