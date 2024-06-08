@@ -29,13 +29,17 @@ public class Category {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long categoryID;
+
   @NotNull
   private String categoryLabel;
+
   @NotNull
   private String userID;
+
   @NotNull
   @Enumerated(value = EnumType.STRING)
   private TransactionType type;
+
   @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
   private Set<Identifier> identifier;
 

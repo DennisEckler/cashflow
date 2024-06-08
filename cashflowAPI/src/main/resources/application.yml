@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cashflow
+    username: test
+    password: test
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:init/schema.sql
+  jpa:
+    show-sql: true
+    #    hibernate:
+    #      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
