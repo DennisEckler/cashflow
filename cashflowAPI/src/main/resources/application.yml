@@ -1,17 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/cashflow
-    username: test
-    password: test
-    driverClassName: org.postgresql.Driver
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
   sql:
     init:
       mode: always
       schema-locations: classpath:init/schema.sql
-  jpa:
-    show-sql: true
-    #    hibernate:
-    #      ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect

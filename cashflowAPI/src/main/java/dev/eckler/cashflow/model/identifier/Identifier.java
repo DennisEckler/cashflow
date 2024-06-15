@@ -11,67 +11,67 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@Table(name = "Identifier")
-@JsonIgnoreProperties({ "category" })
+@JsonIgnoreProperties({"category"})
 public class Identifier {
-
-
-  public Identifier() {
-  }
-
-  public Identifier(String identifierLabel, Category category) {
-    this.identifierLabel = identifierLabel;
-    this.category = category;
-  }
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long identifierID;
-  @NotNull
-  private String identifierLabel;
-  @OneToMany(mappedBy = "identifier")
-  private Set<Transaction> transactions;
-  @ManyToOne
-  private Category category;
-
-  public Long getIdentifierID() {
-    return identifierID;
-  }
-
-  public void setIdentifierID(Long identifierID) {
-    this.identifierID = identifierID;
-  }
-
-  @JsonIgnore
-  public Set<Transaction> getTransactions() {
-    return transactions;
-  }
-
-  public void setTransactions(
-      Set<Transaction> transactions) {
-    this.transactions = transactions;
-  }
-
-  public String getIdentifierLabel() {
-    return identifierLabel;
-  }
-
-  public void setIdentifierLabel(String identifierLabel) {
-    this.identifierLabel = identifierLabel;
-  }
-
-  @JsonBackReference
-  public Category getCategory() {
-    return category;
-  }
-
-  public void setCategory(Category category) {
-    this.category = category;
-  }
-
+    
+    public Identifier() {
+    }
+    
+    public Identifier(String label, Category category) {
+        this.label = label;
+        this.category = category;
+    }
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @NotNull
+    private String label;
+    
+    @OneToMany(mappedBy = "identifier")
+    private Set<Transaction> transactions;
+    
+    @ManyToOne
+    private Category category;
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    @JsonIgnore
+    public Set<Transaction> getTransactions() {
+        return transactions;
+    }
+    
+    public void setTransactions(
+        Set<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+    
+    public String getLabel() {
+        return label;
+    }
+    
+    public void setLabel(String label) {
+        this.label = label;
+    }
+    
+    @JsonBackReference
+    public Category getCategory() {
+        return category;
+    }
+    
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+    
 }

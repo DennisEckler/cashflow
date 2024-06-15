@@ -20,7 +20,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
           + "FROM Transaction t "
           + "JOIN t.identifier i "
           + "JOIN i.category c "
-          + "WHERE t.identifier.identifierID = i.identifierID AND i.category.categoryID = c.categoryID AND c.userID = :userID "
+          + "WHERE t.identifier.id = i.id AND i.category.id = c.id AND c.userID = :userID "
           + "GROUP By year, month, c.type "
           + "ORDER By year, month")
   List<OverviewEntry> getOverview(String userID);

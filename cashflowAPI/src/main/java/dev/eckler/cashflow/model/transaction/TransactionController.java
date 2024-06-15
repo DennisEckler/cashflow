@@ -69,9 +69,9 @@ public class TransactionController {
   @PatchMapping("/categorize")
   public ResponseEntity<String> categorizeTransactions(
       @RequestBody List<Transaction> patchValues) {
-    patchValues.forEach(entry -> transactionRepository.findById(entry.getTransactionID())
+    patchValues.forEach(entry -> transactionRepository.findById(entry.getId())
         .ifPresentOrElse(transaction -> transaction.setIdentifier(
-                identifierService.findIdentifierByID(entry.getIdentifier().getIdentifierID())),
+                identifierService.findIdentifierByID(entry.getIdentifier().getId())),
             () -> logger.info("Cant find Transaction with ID: {}", entry)));
     transactionRepository.saveAll(patchValues);
     return ResponseEntity.ok("updated values successfully");

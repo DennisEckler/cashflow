@@ -32,7 +32,7 @@ public class IdentifierService {
       boolean isAllowedToDeleteUndefined) {
     Optional<Identifier> identifier = identifierRepository.findById(identifierID);
     if (identifier.isPresent() && (isAllowedToDeleteUndefined || !identifier.get()
-        .getIdentifierLabel().equals(UNDEFINED))) {
+        .getLabel().equals(UNDEFINED))) {
       identifier.get().getTransactions().forEach(ele -> ele.setIdentifier(null));
       identifierRepository.deleteById(identifierID);
       return ResponseEntity.ok().build();
@@ -51,7 +51,7 @@ public class IdentifierService {
     Optional<Category> category = categoryRepository.findById(
         Long.parseLong(identifierDTO.categoryID()));
     if (category.isPresent() && category.get().getUserID().equals(userID)) {
-      Identifier identifier = new Identifier(identifierDTO.identifierLabel(), category.get());
+      Identifier identifier = new Identifier(identifierDTO.label(), category.get());
       response = identifierRepository.save(identifier);
     }
     return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();

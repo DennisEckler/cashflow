@@ -9,7 +9,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
@@ -17,7 +16,7 @@ public class Transaction {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long transactionID;
+  private Long id;
   @NotNull
   private LocalDate date;
   @NotNull
@@ -46,12 +45,12 @@ public class Transaction {
   public Transaction() {
   }
 
-  public Long getTransactionID() {
-    return transactionID;
+  public Long getId() {
+    return id;
   }
 
-  public void setTransactionID(Long transactionID) {
-    this.transactionID = transactionID;
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public Identifier getIdentifier() {

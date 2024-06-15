@@ -98,9 +98,9 @@ public class TransactionService {
     for (Category category : categories) {
       for (Identifier identifier : category.getIdentifier()) {
         if (source.trim().toLowerCase()
-            .contains(identifier.getIdentifierLabel().trim().toLowerCase())
+            .contains(identifier.getLabel().trim().toLowerCase())
             || purpose.trim().toLowerCase()
-            .contains(identifier.getIdentifierLabel().trim().toLowerCase())) {
+            .contains(identifier.getLabel().trim().toLowerCase())) {
           return identifier;
         }
       }
