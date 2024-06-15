@@ -1,4 +1,4 @@
 export interface IdentifierDTO {
-  identifierLabel: string;
+  label: string;
   categoryID: string | null | number;
 }

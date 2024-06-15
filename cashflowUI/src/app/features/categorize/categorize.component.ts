@@ -21,7 +21,7 @@ export class CategorizeComponent implements OnInit {
   categories?: Category[];
   update: Transaction[] = [];
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.transactionService.getList().subscribe({
@@ -66,7 +66,7 @@ export class CategorizeComponent implements OnInit {
 
   getUndefined(category: Category): string {
     return JSON.stringify(
-      category.identifier.find((ele) => ele.identifierLabel === 'undefined')
+      category.identifier.find((ele) => ele.label === 'undefined')
     );
   }
 }

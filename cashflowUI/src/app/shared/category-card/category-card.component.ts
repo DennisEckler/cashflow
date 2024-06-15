@@ -47,9 +47,9 @@ export class CategoryCardComponent {
     if (this.category) {
       this.category.identifier = this.category.identifier.filter(
         (identifer) =>
-          identifer.identifierLabel !== deleteIdentifer.identifierLabel,
+          identifer.label !== deleteIdentifer.label,
       );
-      if (deleteIdentifer.identifierID !== null) {
+      if (deleteIdentifer.id !== null) {
         this.identifierSerice.delete(deleteIdentifer).subscribe({
           next: (v) => console.log(v),
         });
@@ -60,14 +60,14 @@ export class CategoryCardComponent {
   addIdentifier() {
     if (this.identifierInput !== '' && this.category) {
       const labelExist = this.category.identifier.some(
-        (identifer) => identifer.identifierLabel === this.identifierInput,
+        (identifer) => identifer.label === this.identifierInput,
       );
       if (labelExist || this.identifierInput.trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');
       } else {
         const identifierDto: IdentifierDTO = {
-          identifierLabel: this.identifierInput,
-          categoryID: this.category.categoryID,
+          label: this.identifierInput,
+          categoryID: this.category.id,
         };
         this.identifierSerice.save(identifierDto).subscribe({
           next: (response) => this.category?.identifier.push(response),

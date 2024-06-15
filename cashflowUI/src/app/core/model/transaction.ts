@@ -1,7 +1,7 @@
 import { Identifier } from './identifier';
 
 export interface Transaction {
-  transactionID: number;
+  id: number;
   date: Date;
   amount: number;
   userID: string;

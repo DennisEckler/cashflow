@@ -40,14 +40,14 @@ export class SettingsComponent implements OnInit {
   addCategory() {
     if (this.categoryInput !== '') {
       const labelExist = this.categories.some(
-        (category) => category.categoryLabel === this.categoryInput,
+        (category) => category.label === this.categoryInput,
       );
       if (labelExist || this.categoryInput.trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');
       } else {
         let category: Category = {
-          categoryID: null,
-          categoryLabel: this.categoryInput,
+          id: null,
+          label: this.categoryInput,
           userID: null,
           type: TransactionType.FIXED,
           identifier: [],
@@ -63,9 +63,9 @@ export class SettingsComponent implements OnInit {
 
   deleteCategory(category: Category) {
     this.categories = this.categories?.filter(
-      (ele) => ele.categoryLabel !== category.categoryLabel,
+      (ele) => ele.label !== category.label,
     );
-    if (category.categoryID !== null) {
+    if (category.id !== null) {
       this.categoryService.delete(category).subscribe({
         next: (v) => console.log(v),
       });

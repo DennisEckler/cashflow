@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (transaction of transactions; track transaction.transactionID) {
+    @for (transaction of transactions; track transaction.id) {
     <tr>
       <td>{{ transaction.date }}</td>
       <td>{{ transaction.source }}</td>
@@ -26,7 +26,7 @@
           <option value="---">---</option>
           @for (category of categories; track category) {
           <option [value]="getUndefined(category)">
-            {{ category.categoryLabel }}
+            {{ category.label}}
           </option>
           }
         </select>

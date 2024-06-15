@@ -9,7 +9,8 @@ import { Category } from '../model/category';
 export class CategoryService {
   constructor(private http: HttpClient) {}
 
-  url: string = '/api/category/';
+  // url: string = '/api/category/';
+  url: string = 'http://localhost:8080/api/category/';
 
   get(): Observable<any> {
     return this.http.get<Category>(this.url);
@@ -24,7 +25,7 @@ export class CategoryService {
   }
 
   delete(category: Category): Observable<any> {
-    return this.http.delete(this.url + category.categoryID, {
+    return this.http.delete(this.url + category.id, {
       responseType: 'text',
     });
   }

@@ -1,4 +1,4 @@
 export interface Identifier {
-  identifierID: number | null;
-  identifierLabel: string;
+  id: number | null;
+  label: string;
 }

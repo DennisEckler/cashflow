@@ -7,7 +7,7 @@
   <input type="text" [(ngModel)]="categoryInput" />
 </div>
 @if (categories && categories.length !== 0) {
-  @for (category of categories; track category.categoryID) {
+  @for (category of categories; track category.id) {
     <app-category-card
       (categoryDelete)="deleteCategory($event)"
       [category]="category"
