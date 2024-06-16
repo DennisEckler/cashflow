@@ -4,6 +4,7 @@ import dev.eckler.cashflow.exception.PeriodExistsException;
 import dev.eckler.cashflow.model.category.Category;
 import dev.eckler.cashflow.model.category.CategoryRepository;
 import dev.eckler.cashflow.model.identifier.Identifier;
+import dev.eckler.cashflow.shared.FileStructure;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,103 +20,113 @@ import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionService {
-
-  private final TransactionRepository transactionRepository;
-  private final CategoryRepository categoryRepository;
-  private final Logger logger = LoggerFactory.getLogger(TransactionService.class);
-
-
-  private TransactionService(TransactionRepository transactionRepository,
-      CategoryRepository categoryRepository) {
-    this.transactionRepository = transactionRepository;
-    this.categoryRepository = categoryRepository;
-  }
-
-  List<Transaction> parseCsv(InputStream fileInputStream, final String USERID, JSONObject json)
-      throws JSONException {
-
-    List<Transaction> transactions = new ArrayList<>();
-    List<Category> categories = categoryRepository.findAllByUserID(USERID);
-
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream))) {
-
-      final long BLANK_ROWS = json.getLong("blankRows");
-      final int DATE_INDEX = json.getInt("date");
-      final int AMOUNT_INDEX = json.getInt("amount");
-      final int PURPOSE_INDEX = json.getInt("purpose");
-      final int SOURCE_INDEX = json.getInt("source");
-      final String YEAR = json.getString("year");
-      final String MONTH = json.getString("month");
-
-      skipIfPeriodAlreadyExist(YEAR, MONTH);
-
-      reader.lines().skip(BLANK_ROWS).forEach(row -> {
-
-            String[] column = row.split(";");
-
-            LocalDate date = parseDate(column[DATE_INDEX]);
-            BigDecimal amount = parseAmount(column[AMOUNT_INDEX]);
-            String source = column[SOURCE_INDEX];
-            String purpose = column[PURPOSE_INDEX];
-            Identifier identifier = categorize(categories, source, purpose);
-            Transaction transaction = new Transaction(date, amount, USERID, purpose, source,
-                identifier);
-            transactions.add(transaction);
-          }
-      );
-      return transactions;
-    } catch (IOException | PeriodExistsException e) {
-      throw new RuntimeException(e);
+    
+    private final TransactionRepository transactionRepository;
+    private final CategoryRepository categoryRepository;
+    private final Logger logger = LoggerFactory.getLogger(TransactionService.class);
+    
+    
+    private TransactionService(TransactionRepository transactionRepository,
+        CategoryRepository categoryRepository) {
+        this.transactionRepository = transactionRepository;
+        this.categoryRepository = categoryRepository;
     }
-  }
-
-  public static BigDecimal parseAmount(String amount) {
-    DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-    symbols.setGroupingSeparator('.');
-    symbols.setDecimalSeparator(',');
-    DecimalFormat df = new DecimalFormat("#,###.00", symbols);
-    try {
-      return new BigDecimal(String.valueOf(df.parse(amount)));
-    } catch (ParseException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  private void skipIfPeriodAlreadyExist(String year, String month) throws PeriodExistsException {
-    if (transactionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
-      throw new PeriodExistsException(
-          "This Period exists with year: " + year + " and month: " + month);
-    }
-  }
-
-  private Identifier categorize(List<Category> categories, String source, String purpose) {
-    for (Category category : categories) {
-      for (Identifier identifier : category.getIdentifier()) {
-        if (source.trim().toLowerCase()
-            .contains(identifier.getLabel().trim().toLowerCase())
-            || purpose.trim().toLowerCase()
-            .contains(identifier.getLabel().trim().toLowerCase())) {
-          return identifier;
+    
+    List<Transaction> parseCsv(InputStream is, final String USERID, FileStructure fs) {
+        List<Transaction> transactions = new ArrayList<>();
+        List<Category> categories = categoryRepository.findAllByUserID(USERID);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+            
+            throwIfPeriodAlreadyExist(fs.yearIdx(), fs.monthIdx());
+            List<String> lines = reader.lines().toList();
+            int skipRowsCount = identifyParsableRow(lines, fs.dateIdx(), fs.amountIdx());
+            
+            lines.stream().skip(skipRowsCount).forEach(row -> {
+                    Transaction transaction = createTransaction(USERID, row, fs, categories);
+                    transactions.add(transaction);
+                }
+            );
+            
+            return transactions;
+        } catch (IOException | PeriodExistsException e) {
+            throw new RuntimeException(e);
         }
-      }
     }
-    return null;
-  }
-
-  private LocalDate parseDate(String date) {
-    String format = "dd.MM.yyyy";
-    try {
-      return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
-    } catch (DateTimeParseException e) {
-      logger.error("Format {} not Supported for this date: {}", format, date);
+    
+    
+    private void throwIfPeriodAlreadyExist(String year, String month) throws PeriodExistsException {
+        if (transactionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
+            throw new PeriodExistsException(
+                "This Period exists with year: " + year + " and month: " + month);
+        }
     }
-    return null;
-  }
-
+    
+    private int identifyParsableRow(List<String> lines, int dateIdx, int amountIdx) {
+        int skipLines = 0;
+        int maxIdx = Math.max(dateIdx, amountIdx);
+        for (String line : lines) {
+            String[] col = line.split(";");
+            try {
+                if (col.length > maxIdx) {
+                    parseDate(col[dateIdx]);
+                    parseAmount(col[amountIdx]);
+                    logger.info("skipped {} lines", skipLines);
+                    return skipLines;
+                }
+                skipLines++;
+            } catch (DateTimeParseException | ParseException e) {
+                skipLines++;
+            }
+        }
+        return skipLines;
+    }
+    
+    private LocalDate parseDate(String date) throws DateTimeParseException {
+        String format = "dd.MM.yyyy";
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
+    }
+    
+    public static BigDecimal parseAmount(String amount) throws ParseException {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        symbols.setDecimalSeparator(',');
+        DecimalFormat df = new DecimalFormat("#,###.00", symbols);
+        return new BigDecimal(String.valueOf(df.parse(amount)));
+    }
+    
+    private Transaction createTransaction(String USERID, String row, FileStructure fs,
+        List<Category> categories) {
+        try {
+            String[] col = row.split(";");
+            LocalDate date = parseDate(col[fs.dateIdx()]);
+            BigDecimal amount = parseAmount(col[fs.amountIdx()]);
+            String source = col[fs.sourceIdx()];
+            String purpose = col[fs.purposeIdx()];
+            Identifier identifier = categorize(categories, source, purpose);
+            return new Transaction(date, amount, USERID, purpose, source,
+                identifier);
+        } catch (ParseException e) {
+            logger.info("Error in creating Transaction");
+            throw new RuntimeException();
+        }
+    }
+    
+    private Identifier categorize(List<Category> categories, String source, String purpose) {
+        for (Category category : categories) {
+            for (Identifier identifier : category.getIdentifier()) {
+                if (source.trim().toLowerCase()
+                    .contains(identifier.getLabel().trim().toLowerCase())
+                    || purpose.trim().toLowerCase()
+                    .contains(identifier.getLabel().trim().toLowerCase())) {
+                    return identifier;
+                }
+            }
+        }
+        return null;
+    }
+    
 }

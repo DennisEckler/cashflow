@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transaction } from '../model/transaction';
+import { fileStructure } from '../model/fileStructure';
 
 @Injectable({
   providedIn: 'root',
@@ -22,13 +23,13 @@ export class TransactionService {
     });
   }
 
-  upload(file: File, text: string): Observable<any> {
+  upload(file: File, fileStructure: fileStructure): Observable<any> {
     const formData = new FormData();
     if (file) {
       formData.append('file', file, file.name);
     }
-    if (text) {
-      formData.append('columnIndex', text);
+    if (fileStructure) {
+      formData.append('fileStructure', JSON.stringify(fileStructure));
     }
     return this.http.post(this.url + 'upload', formData, {
       responseType: 'text',

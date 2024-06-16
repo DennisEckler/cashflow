@@ -8,7 +8,7 @@
 </div>
 
 @if (fileName) {
-  <input [(ngModel)]="text" type="text" />
+  <input [(ngModel)]="fileStructure" type="text" />
   <navigation-button label="Send" (click)="onUpload()" />
   {{message}}
 }

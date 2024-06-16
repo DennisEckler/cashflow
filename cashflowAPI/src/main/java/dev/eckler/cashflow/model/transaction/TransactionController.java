@@ -2,7 +2,9 @@ package dev.eckler.cashflow.model.transaction;
 
 import static dev.eckler.cashflow.shared.CashflowConst.USER_ID;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.eckler.cashflow.model.identifier.IdentifierService;
+import dev.eckler.cashflow.shared.FileStructure;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -49,18 +51,18 @@ public class TransactionController {
   @PostMapping("/upload")
   public ResponseEntity<?> uploadFile(
       @RequestParam("file") MultipartFile csvFile,
-      @RequestParam("columnIndex") String columnIndex) {
+      @RequestParam("fileStructure") String fileStructureJson) {
     try {
 
-      JSONObject json = new JSONObject(columnIndex);
       InputStream stream = csvFile.getInputStream();
+      FileStructure fileStructure = new ObjectMapper().readValue(fileStructureJson, FileStructure.class);
 
-      List<Transaction> transactions = transactionService.parseCsv(stream, USER_ID, json);
+      List<Transaction> transactions = transactionService.parseCsv(stream, USER_ID, fileStructure);
       transactionRepository.saveAll(transactions);
       logger.info("FileUpload done");
       return new ResponseEntity<>("File upload successfully", HttpStatus.OK);
 
-    } catch (JSONException | IOException e) {
+    } catch (IOException e) {
       logger.error("Cant handle this case");
       return new ResponseEntity<>("Check your File or JSON", HttpStatus.BAD_REQUEST);
     }
