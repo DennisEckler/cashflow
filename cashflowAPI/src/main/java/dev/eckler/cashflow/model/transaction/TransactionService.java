@@ -129,4 +129,15 @@ public class TransactionService {
         return null;
     }
     
+    void recategorize(String USERID){
+        List<Transaction> transactions = transactionRepository.findAllByUserID(USERID);
+        List<Category> categories = categoryRepository.findAllByUserID(USERID);
+        transactions.forEach(t -> {
+            if (t.getIdentifier() == null){
+                t.setIdentifier(categorize(categories, t.getSource(), t.getPurpose()));
+            }
+        });
+        transactionRepository.saveAll(transactions);
+    }
+    
 }

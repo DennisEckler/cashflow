@@ -24,6 +24,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
           + "GROUP By year, month, c.type "
           + "ORDER By year, month")
   List<OverviewEntry> getOverview(String userID);
-
-
+  
+  
+  List<Transaction> findAllByUserID(String userID);
 }

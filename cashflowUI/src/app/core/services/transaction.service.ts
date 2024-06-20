@@ -35,4 +35,10 @@ export class TransactionService {
       responseType: 'text',
     });
   }
+
+  recategorize(): Observable<any> {
+    return this.http.get(this.url + 'recategorize', {
+      responseType: 'text',
+    });
+  }
 }

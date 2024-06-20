@@ -78,5 +78,11 @@ public class TransactionController {
     transactionRepository.saveAll(patchValues);
     return ResponseEntity.ok("updated values successfully");
   }
+  
+  @GetMapping("/recategorize")
+  public ResponseEntity<String> recategorize(){
+    transactionService.recategorize(USER_ID);
+    return ResponseEntity.accepted().body("recategorize done");
+  }
 
 }

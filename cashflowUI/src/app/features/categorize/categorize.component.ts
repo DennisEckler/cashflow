@@ -21,7 +21,7 @@ export class CategorizeComponent implements OnInit {
   categories?: Category[];
   update: Transaction[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.transactionService.getList().subscribe({
@@ -54,14 +54,26 @@ export class CategorizeComponent implements OnInit {
         console.log('sending');
         console.log(this.update);
         this.transactionService.saveList(this.update).subscribe({
-          next: (v) => console.log(v),
-          error: (error: HttpErrorResponse) =>
-            console.log(`Error message: ${error.message}`),
+          next: (v) => {
+            console.log(v);
+            this.ngOnInit();
+          },
+          error: (error: HttpErrorResponse) => {
+            console.log(`Error message: ${error.message}`);
+          },
+          complete: () => (this.update.length = 0),
         });
-        this.update.length = 0;
       }
     }
-    this.ngOnInit();
+  }
+
+  recategorize() {
+    this.transactionService.recategorize().subscribe({
+      next: (v) => {
+        console.log(v);
+        this.ngOnInit();
+      },
+    });
   }
 
   getUndefined(category: Category): string {
