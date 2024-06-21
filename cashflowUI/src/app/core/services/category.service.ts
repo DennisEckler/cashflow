@@ -7,10 +7,10 @@ import { Category } from '../model/category';
   providedIn: 'root',
 })
 export class CategoryService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  // url: string = '/api/category/';
-  url: string = 'http://localhost:8080/api/category/';
+  url: string = '/api/category/';
+  // url: string = 'http://localhost:8080/api/category/';
 
   get(): Observable<any> {
     return this.http.get<Category>(this.url);

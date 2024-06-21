@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class OverviewService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getOverview(): Observable<any> {
-    // return this.http.get('/api/overview/');
-    return this.http.get('http://localhost:8080/api/overview/');
+    return this.http.get('/api/overview/');
+    // return this.http.get('http://localhost:8080/api/overview/');
   }
 }

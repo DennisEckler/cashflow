@@ -4,7 +4,7 @@ services:
     container_name: cashflow-db
     image: "postgres:16"
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      test: ["CMD", "pg_isready", "-q", "-d", "cashflow", "-U", "test"]
       timeout: 45s
       interval: 10s
       retries: 10
@@ -22,7 +22,7 @@ services:
 
   cashflow-api:
     image: denniseckler/cashflow-api
-    build: ./cashflowAPI/
+    # build: ./cashflowAPI/
     container_name: cashflow-api
     depends_on:
       - "postgres"
@@ -37,7 +37,7 @@ services:
 
   cashflow-ui:
     image: denniseckler/cashflow-ui
-    build: ./cashflowUI/
+    # build: ./cashflowUI/
     container_name: cashflow-ui
     depends_on:
       - "cashflow-api"

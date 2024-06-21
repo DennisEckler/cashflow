@@ -8,10 +8,10 @@ import { IdentifierDTO } from '../model/identifierDto';
   providedIn: 'root',
 })
 export class IdentifierService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  // url: string = '/api/identifier/';
-  url: string = 'http://localhost:8080/api/identifier/';
+  url: string = '/api/identifier/';
+  // url: string = 'http://localhost:8080/api/identifier/';
 
   delete(identifier: Identifier): Observable<any> {
     return this.http.delete(this.url + identifier.id, {

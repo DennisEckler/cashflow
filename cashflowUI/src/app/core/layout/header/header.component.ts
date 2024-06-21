@@ -11,5 +11,5 @@ import { NavigationButtonComponent } from '../../../shared/navigation-button/nav
   imports: [NgOptimizedImage, RouterLink, NavigationButtonComponent],
 })
 export class HeaderComponent {
-  logo = '../../../assets/Cashes.png';
+  logo = '../../../assets/cashes2.png';
 }

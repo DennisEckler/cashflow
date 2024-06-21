@@ -26,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(path = "/api/transaction")
-@CrossOrigin(origins = "http://localhost:4200")
 public class TransactionController {
 
   private final TransactionRepository transactionRepository;

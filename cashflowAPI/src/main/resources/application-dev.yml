@@ -7,8 +7,3 @@ spring:
       mode: always
       schema-locations: classpath:init/schema.sql
 #      data-locations: classpath:init/data.sql
-  management:
-    endpoints:
-      web:
-        cors:
-          allowed-origins: "/*"

@@ -8,10 +8,10 @@ import { fileStructure } from '../model/fileStructure';
   providedIn: 'root',
 })
 export class TransactionService {
-  // url: string = '/api/transaction/';
-  url: string = 'http://localhost:8080/api/transaction/';
+  url: string = '/api/transaction/';
+  // url: string = 'http://localhost:8080/api/transaction/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getList(): Observable<any> {
     return this.http.get<Transaction>(this.url + 'uncategorized');
