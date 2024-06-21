@@ -26,7 +26,8 @@ jobs:
           distribution: 'temurin'
           java-version: 21
           cache: 'gradle'
-      - run: ./cashflowAPI/gradle build --no-demon
+      - run: gradle build --no-demon
+        working-directory: cashflowAPI
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
