@@ -28,6 +28,10 @@ jobs:
           cache: 'gradle'
       - run: gradle build
         working-directory: cashflowAPI
+        env:
+          POSTGRES_URL: ${{secrets.POSTGRES_URL}}
+          POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
