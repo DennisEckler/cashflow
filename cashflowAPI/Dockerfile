@@ -1,8 +1,8 @@
-FROM gradle:8.5-jdk21 AS build
-WORKDIR /home/gradle/src
-COPY build.gradle.kts ./
-COPY src ./src
-RUN gradle build -x test --no-daemon
+#FROM gradle:8.5-jdk21 AS build
+#WORKDIR /home/gradle/src
+#COPY build.gradle.kts ./
+#COPY src ./src
+#RUN gradle build -x test --no-daemon
 
 # Runtime stage
 FROM eclipse-temurin:21-jdk-alpine
