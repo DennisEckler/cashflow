@@ -1,8 +1,9 @@
-name: Create and publish a Docker image
+name: build jar file and create docker image
 
 on:
-  # push:
-  # branches: ['main']
+  push:
+    paths:
+      - 'cashflowAPI/**'
   workflow_dispatch:
 
 env:

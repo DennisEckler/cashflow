@@ -21,8 +21,7 @@ services:
       - "5432:5432"
 
   cashflow-api:
-    image: denniseckler/cashflow-api
-    # build: ./cashflowAPI/
+    image: ghcr.io/denniseckler/cashflow-api:main
     container_name: cashflow-api
     depends_on:
       - "postgres"
@@ -36,8 +35,7 @@ services:
       - cashflow_local
 
   cashflow-ui:
-    image: denniseckler/cashflow-ui
-    # build: ./cashflowUI/
+    image: ghcr.io/denniseckler/cashflow-ui:main
     container_name: cashflow-ui
     depends_on:
       - "cashflow-api"
