@@ -35,7 +35,7 @@ services:
       - cashflow_local
 
   cashflow-ui:
-    image: denniseckler/cashflow-ui
+    image: ghcr.io/denniseckler/cashflow-ui:main
     container_name: cashflow-ui
     depends_on:
       - "cashflow-api"
