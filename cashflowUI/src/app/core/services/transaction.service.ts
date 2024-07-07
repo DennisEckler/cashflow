@@ -2,14 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transaction } from '../model/transaction';
-import { fileStructure } from '../model/fileStructure';
+import { environment } from '../../../environments/environment'
+import { FileStructure } from '../model/FileStructure';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransactionService {
-  url: string = '/api/transaction/';
-  // url: string = 'http://localhost:8080/api/transaction/';
+  url: string = environment.cashflowUrl + 'transaction/';
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +23,7 @@ export class TransactionService {
     });
   }
 
-  upload(file: File, fileStructure: fileStructure): Observable<any> {
+  upload(file: File, fileStructure: FileStructure): Observable<any> {
     const formData = new FormData();
     if (file) {
       formData.append('file', file, file.name);

@@ -20,10 +20,12 @@
 
     <div class="category-content">
       @for (identifier of category.identifier; track identifier.id) {
+        @if (identifier.label !== 'undefined') {
         <app-identifier-chip
           (identifierDeleted)="deleteIdentifier($event)"
           [identifier]="identifier"
         ></app-identifier-chip>
+        }
       }
     </div>
   }

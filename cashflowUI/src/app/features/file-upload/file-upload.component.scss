@@ -6,8 +6,25 @@
   gap: 10px;
 }
 
-.fileUpload {
-  &_hidden {
+.file-upload {
+  &-hidden {
     display: none;
   }
+}
+
+.file-structure {
+  display: grid;
+  gap: 3px;
+  max-width: fit-content;
+  grid-template-columns: 80% 20%;
+  label {
+    grid-column: 1;
+  }
+  input {
+    grid-column: 2;
+  }
+}
+
+.send-button {
+  width: max-content;
 }

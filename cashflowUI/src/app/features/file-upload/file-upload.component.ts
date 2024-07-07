@@ -2,8 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import { TransactionService } from 'src/app/core/services/transaction.service';
 import { FormsModule } from '@angular/forms';
-import { HttpResponse } from '@angular/common/http';
-import { fileStructure } from 'src/app/core/model/fileStructure';
+import { FileStructure } from 'src/app/core/model/FileStructure';
 
 @Component({
   selector: 'app-file-upload',
@@ -17,20 +16,19 @@ export class FileUploadComponent implements OnInit {
   csvFile: File | null = null;
   fileName: string = '';
   message: any;
-  fileStructure: fileStructure = {
+  fileStructure: FileStructure = {
     dateIdx: 1,
     amountIdx: 5,
     purposeIdx: 4,
     sourceIdx: 2,
-    yearIdx: '2023',
-    monthIdx: '08',
+    year: '2023',
+    month: '08',
   };
 
   constructor() {}
   ngOnInit(): void {}
 
   onChange(event: any) {
-    console.log('test');
     const fileUpload: File = event.target.files[0];
     if (fileUpload) {
       this.fileName = fileUpload.name;

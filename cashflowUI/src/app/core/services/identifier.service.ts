@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Identifier } from '../model/identifier';
 import { IdentifierDTO } from '../model/identifierDto';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,7 @@ import { IdentifierDTO } from '../model/identifierDto';
 export class IdentifierService {
   constructor(private http: HttpClient) { }
 
-  url: string = '/api/identifier/';
-  // url: string = 'http://localhost:8080/api/identifier/';
+  url: string = environment.cashflowUrl + 'identifier/';
 
   delete(identifier: Identifier): Observable<any> {
     return this.http.delete(this.url + identifier.id, {

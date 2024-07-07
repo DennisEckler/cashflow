@@ -1,8 +1,8 @@
-export type fileStructure = {
+export type FileStructure = {
   dateIdx: number;
   amountIdx: number;
   purposeIdx: number;
   sourceIdx: number;
-  yearIdx: string;
-  monthIdx: string;
+  year: string;
+  month: string;
 };

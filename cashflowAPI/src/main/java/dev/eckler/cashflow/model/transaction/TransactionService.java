@@ -41,7 +41,7 @@ public class TransactionService {
         List<Category> categories = categoryRepository.findAllByUserID(USERID);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
             
-            throwIfPeriodAlreadyExist(fs.yearIdx(), fs.monthIdx());
+            throwIfPeriodAlreadyExist(fs.year(), fs.month());
             List<String> lines = reader.lines().toList();
             int skipRowsCount = identifyParsableRow(lines, fs.dateIdx(), fs.amountIdx());
             

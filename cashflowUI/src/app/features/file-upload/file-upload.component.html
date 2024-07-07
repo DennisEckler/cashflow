@@ -1,14 +1,30 @@
-<input type="file" class="fileUpload_hidden" (change)="onChange($event)" #fileUpload />
+<input
+  type="file"
+  class="file-upload-hidden"
+  (change)="onChange($event)"
+  #fileUpload
+/>
 
 <div class="file-upload">
-
   {{ csvFile?.name || "No file uploaded yet." }}
   <button (click)="fileUpload.click()">upload</button>
-
 </div>
 
 @if (fileName) {
-  <input [(ngModel)]="fileStructure" type="text" />
-  <navigation-button label="Send" (click)="onUpload()" />
-  {{message}}
+<div class="file-structure">
+  <label for="dateIdx">DateIdx: </label>
+  <input id="dateIdx" [(ngModel)]="fileStructure.dateIdx" type="text" />
+  <label for="amountIdx">AmountIdx: </label>
+  <input id="amountIdx" [(ngModel)]="fileStructure.amountIdx" type="text" />
+  <label for="purposeIdx">PurposeIdx: </label>
+  <input id="purposeIdx" [(ngModel)]="fileStructure.purposeIdx" type="text" />
+  <label for="sourceIdx">Source: </label>
+  <input id="sourceIdx" [(ngModel)]="fileStructure.sourceIdx" type="text" />
+  <label for="year">Year: </label>
+  <input id="year" [(ngModel)]="fileStructure.year" type="text" />
+  <label for="month">Month: </label>
+  <input id="month" [(ngModel)]="fileStructure.month" type="text" />
+</div>
+<navigation-button class="send-button" label="Send" (click)="onUpload()" />
+{{ message }}
 }
