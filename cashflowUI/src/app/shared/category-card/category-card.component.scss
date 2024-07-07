@@ -11,20 +11,39 @@
     width: 50%;
     justify-self: center;
 
-    &-header {
+    &-header-container {
       display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      height: 40px;
+      justify-content: space-between;
 
-      &-label {
-        color: $myPurple;
-        margin-top: 0;
-        margin-left: 0.5rem;
+      &-c1 {
+        display: flex;
+        &-label {
+          color: $myPurple;
+          margin: 0;
+          margin-left: 0.5rem;
+        }
+
+        &-selection {
+          height: fit-content;
+          align-self: center;
+        }
+      }
+
+      &-c2 {
+        &-button {
+          background: none;
+          border: none;
+          padding: 0;
+          height: 20px;
+          &-icon:hover circle,
+          &-icon:hover line {
+            stroke: $myBlue;
+          }
+        }
       }
     }
 
-    .addIdentifier {
+    &-identifier {
       h4 {
         display: inline-block;
         height: 30px;
