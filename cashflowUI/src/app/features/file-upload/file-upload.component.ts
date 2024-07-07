@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import { TransactionService } from 'src/app/core/services/transaction.service';
 import { FormsModule } from '@angular/forms';
-import { FileStructure } from 'src/app/core/model/FileStructure';
+import { FileStructure } from 'src/app/core/model/fileStructure';
 
 @Component({
   selector: 'app-file-upload',

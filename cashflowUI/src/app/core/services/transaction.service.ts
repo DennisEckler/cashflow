@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transaction } from '../model/transaction';
-import { environment } from '../../../environments/environment'
-import { FileStructure } from '../model/FileStructure';
+import { environment } from '../../../environments/environment';
+import { FileStructure } from '../model/fileStructure';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ import { FileStructure } from '../model/FileStructure';
 export class TransactionService {
   url: string = environment.cashflowUrl + 'transaction/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getList(): Observable<any> {
     return this.http.get<Transaction>(this.url + 'uncategorized');
