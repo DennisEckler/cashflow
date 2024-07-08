@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Category } from 'src/app/core/model/category';
 import { Input } from '@angular/core';
@@ -24,6 +30,7 @@ export class CategoryCardComponent {
 
   private identifierSerice = inject(IdentifierService);
   private categoryService = inject(CategoryService);
+  dialog!: HTMLDialogElement;
 
   @Input() category!: Category;
   @Output() categoryDelete = new EventEmitter<Category>();
@@ -43,11 +50,20 @@ export class CategoryCardComponent {
     this.categoryDelete.emit(this.category);
   }
 
+  clickedEvent() {
+    this.dialog = document.getElementById('dialog') as HTMLDialogElement;
+    this.dialog.showModal();
+  }
+  closeDialog() {
+    if (this.dialog) {
+      this.dialog.close();
+    }
+  }
+
   deleteIdentifier(deleteIdentifer: Identifier) {
     if (this.category) {
       this.category.identifier = this.category.identifier.filter(
-        (identifer) =>
-          identifer.label !== deleteIdentifer.label,
+        (identifer) => identifer.label !== deleteIdentifer.label
       );
       if (deleteIdentifer.id !== null) {
         this.identifierSerice.delete(deleteIdentifer).subscribe({
@@ -60,7 +76,7 @@ export class CategoryCardComponent {
   addIdentifier() {
     if (this.identifierInput !== '' && this.category) {
       const labelExist = this.category.identifier.some(
-        (identifer) => identifer.label === this.identifierInput,
+        (identifer) => identifer.label === this.identifierInput
       );
       if (labelExist || this.identifierInput.trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');

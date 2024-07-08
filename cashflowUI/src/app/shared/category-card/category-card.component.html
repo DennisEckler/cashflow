@@ -16,13 +16,18 @@
       </select>
     </div>
     <div class="category-header-container-c2">
-      <button class="category-header-container-c2-button" (click)="deleteCategory()">
+      <button class="category-header-container-c2-button" (click)="clickedEvent()">
        <svg class="category-header-container-c2-button-icon" width="20" height="20" viewBox="0 0 20 20">
         <circle cx="10" cy="10" r="9" fill="none" stroke="white" stroke-width="2"/>
         <line x1="6" y1="6" x2="14" y2="14" stroke="white" stroke-width="2"/>
         <line x1="6" y1="14" x2="14" y2="6" stroke="white" stroke-width="2"/>
       </svg>
       </button>
+        <dialog id="dialog">
+          <p>Do You really want to delete the Category?</p>
+          <button (click)="closeDialog()">no</button>
+          <button (click)="deleteCategory()">yes</button>
+        </dialog>
     </div>
   </div>
 
