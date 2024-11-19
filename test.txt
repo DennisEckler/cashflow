@@ -1,0 +1,14 @@
+total 80
+-rw-r--r--@  1 devops  staff   6,0K  6 Apr 21:37 .DS_Store.old
+-rw-r--r--@  1 devops  staff   146B 20 Jun 20:16 .env.old
+drwxr-xr-x@ 15 devops  staff   480B  9 Jul 18:28 .git.old
+drwxr-xr-x   3 devops  staff    96B 23 Jun 13:50 .github.old
+-rw-r--r--   1 devops  staff   292B  1 Mppppär 18:26 REAtDMEoDMEoDMEDME.md.old  S
+-rw-r--r--@  1 dtvos  staff   848B  1 Api <BS> ;<BS>Gr 13:21 backup.txt.old
+drwxr-xr-x@ 19 devops  staff   608B 21 Jun 22:31 cashflowAPI.old
+https://www.lazyvim.org/configuration
+drwxr-xr-x@ 16 devops  staff   512B  7 Jul 17:11 cashflowUI.old
+-rw-r--r--   1 devops  staff   1,2K 23 Jun 13:56 docker-compose.yml.old
+-rw-r--r--   1 devops  staff    11K  1 Apr 13:42 dump_test.sql.old
+drwxr-xr-x@  5 devops  staff   160B 15 Jun 19:16 helper.old
+-rw-r--r--   1 devops  staff     0B 19 J <BS>ul 22:01 test.txt.old
