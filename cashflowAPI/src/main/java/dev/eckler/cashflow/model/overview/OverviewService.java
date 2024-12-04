@@ -20,7 +20,6 @@ public class OverviewService {
     this.tr = tr;
   }
 
-
   public List<OverviewSummary> getOverview(String userID) {
     Map<String, List<Overview>> list = tr.getOverview(userID).stream()
         .map(this::createOverview)
@@ -40,16 +39,13 @@ public class OverviewService {
     return rows;
   }
 
-
   private Overview createOverview(OverviewEntry oe) {
     return new Overview(oe.getYear(), StringUtils.leftPad(oe.getMonth(), 2, '0'),
         TransactionType.valueOf(oe.getType()), oe.getAmount());
   }
-
 
   private static Collector<Overview, ?, Map<String, List<Overview>>> groupYearMonthNaturalOrder() {
     return Collectors.groupingBy(o -> o.year() + o.month(), TreeMap::new, Collectors.toList());
   }
 
 }
-

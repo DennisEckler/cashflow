@@ -1,10 +1,12 @@
 package dev.eckler.cashflow.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@Service
 public class WebConfig implements WebMvcConfigurer {
 
   @Override
