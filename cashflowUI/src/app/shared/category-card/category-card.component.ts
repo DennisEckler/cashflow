@@ -63,7 +63,7 @@ export class CategoryCardComponent {
   deleteIdentifier(deleteIdentifer: Identifier) {
     if (this.category) {
       this.category.identifier = this.category.identifier.filter(
-        (identifer) => identifer.label !== deleteIdentifer.label
+        (identifer) => identifer.label !== deleteIdentifer.label,
       );
       if (deleteIdentifer.id !== null) {
         this.identifierSerice.delete(deleteIdentifer).subscribe({
@@ -76,7 +76,7 @@ export class CategoryCardComponent {
   addIdentifier() {
     if (this.identifierInput !== '' && this.category) {
       const labelExist = this.category.identifier.some(
-        (identifer) => identifer.label === this.identifierInput
+        (identifer) => identifer.label === this.identifierInput,
       );
       if (labelExist || this.identifierInput.trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');
