@@ -3,6 +3,7 @@ package dev.eckler.cashflow.domain.category;
 import static dev.eckler.cashflow.shared.CashflowConst.USER_ID;
 
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

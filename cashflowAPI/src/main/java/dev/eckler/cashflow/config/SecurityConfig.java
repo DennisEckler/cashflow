@@ -24,10 +24,5 @@ public class SecurityConfig {
   public WebSecurityCustomizer webSecurityCustomizer() {
     return (web) -> web.ignoring().requestMatchers("/h2/**");
   }
-  //
-  // @Bean
-  // public JwtDecoder jwtDecoder() {
-  // return
-  // JwtDecoders.fromIssuerLocation("http://localhost:8099/realms/cashflow_realm");
-  // }
+
 }
