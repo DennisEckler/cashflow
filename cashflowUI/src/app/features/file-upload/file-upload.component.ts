@@ -5,11 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { FileStructure } from 'src/app/core/model/fileStructure';
 
 @Component({
-  selector: 'app-file-upload',
-  templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.scss'],
-  standalone: true,
-  imports: [NavigationButtonComponent, FormsModule],
+    selector: 'app-file-upload',
+    templateUrl: './file-upload.component.html',
+    styleUrls: ['./file-upload.component.scss'],
+    imports: [NavigationButtonComponent, FormsModule]
 })
 export class FileUploadComponent implements OnInit {
   private transactionService = inject(TransactionService);

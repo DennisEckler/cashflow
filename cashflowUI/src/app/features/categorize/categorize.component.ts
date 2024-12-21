@@ -8,11 +8,10 @@ import { CategoryService } from 'src/app/core/services/category.service';
 import { Category } from 'src/app/core/model/category';
 
 @Component({
-  selector: 'app-categorize',
-  templateUrl: './categorize.component.html',
-  styleUrls: ['./categorize.component.scss'],
-  standalone: true,
-  imports: [FormsModule, NavigationButtonComponent],
+    selector: 'app-categorize',
+    templateUrl: './categorize.component.html',
+    styleUrls: ['./categorize.component.scss'],
+    imports: [FormsModule, NavigationButtonComponent]
 })
 export class CategorizeComponent implements OnInit {
   private transactionService = inject(TransactionService);
