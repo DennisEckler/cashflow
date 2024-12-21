@@ -6,12 +6,13 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
 import { TransactionService } from 'src/app/core/services/transaction.service';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { Category } from 'src/app/core/model/category';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @Component({
-    selector: 'app-categorize',
-    templateUrl: './categorize.component.html',
-    styleUrls: ['./categorize.component.scss'],
-    imports: [FormsModule, NavigationButtonComponent]
+  selector: 'app-categorize',
+  templateUrl: './categorize.component.html',
+  styleUrls: ['./categorize.component.scss'],
+  imports: [FormsModule, NavigationButtonComponent],
 })
 export class CategorizeComponent implements OnInit {
   private transactionService = inject(TransactionService);
@@ -77,7 +78,7 @@ export class CategorizeComponent implements OnInit {
 
   getUndefined(category: Category): string {
     return JSON.stringify(
-      category.identifier.find((ele) => ele.label === 'undefined')
+      category.identifier.find((ele) => ele.label === 'undefined'),
     );
   }
 }
