@@ -1,7 +1,5 @@
 package dev.eckler.cashflow.domain.transaction;
 
-import static dev.eckler.cashflow.shared.CashflowConst.USER_ID;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -10,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,20 +42,22 @@ public class TransactionController {
   }
 
   @GetMapping("/uncategorized")
-  public List<Transaction> getTransaction() {
-    return transactionRepository.findAllByIdentifierIsNull();
+  public List<Transaction> getTransaction(@AuthenticationPrincipal Jwt jwt) {
+    String userID = jwt.getSubject();
+    return transactionRepository.findAllByIdentifierIsNullAndUserID(userID);
   }
 
   @PostMapping("/upload")
   public ResponseEntity<?> uploadFile(
       @RequestParam("file") MultipartFile csvFile,
-      @RequestParam("fileStructure") String fileStructureJson) {
+      @RequestParam("fileStructure") String fileStructureJson, @AuthenticationPrincipal Jwt jwt) {
     try {
+      String userID = jwt.getSubject();
 
       InputStream stream = csvFile.getInputStream();
       FileStructure fileStructure = new ObjectMapper().readValue(fileStructureJson, FileStructure.class);
 
-      List<Transaction> transactions = transactionService.parseCsv(stream, USER_ID, fileStructure);
+      List<Transaction> transactions = transactionService.parseCsv(stream, userID, fileStructure);
       transactionRepository.saveAll(transactions);
       logger.info("FileUpload done");
       return new ResponseEntity<>("File upload successfully", HttpStatus.OK);
@@ -78,8 +80,9 @@ public class TransactionController {
   }
 
   @GetMapping("/recategorize")
-  public ResponseEntity<String> recategorize() {
-    transactionService.recategorize(USER_ID);
+  public ResponseEntity<String> recategorize(@AuthenticationPrincipal Jwt jwt) {
+    String userID = jwt.getSubject();
+    transactionService.recategorize(userID);
     return ResponseEntity.accepted().body("recategorize done");
   }
 

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-  List<Transaction> findAllByIdentifierIsNull();
+  List<Transaction> findAllByIdentifierIsNullAndUserID(String userID);
 
   List<Transaction> findAllByIdentifier(Identifier identifier);
 

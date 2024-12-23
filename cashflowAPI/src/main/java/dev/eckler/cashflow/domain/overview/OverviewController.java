@@ -1,12 +1,11 @@
 package dev.eckler.cashflow.domain.overview;
 
-import static dev.eckler.cashflow.shared.CashflowConst.USER_ID;
-
 import java.util.List;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,8 +19,9 @@ public class OverviewController {
   }
 
   @GetMapping("/")
-  public List<OverviewSummary> getOverview() {
-    return overviewService.getOverview(USER_ID);
+  public List<OverviewSummary> getOverview(@AuthenticationPrincipal Jwt jwt) {
+    String userID = jwt.getSubject();
+    return overviewService.getOverview(userID);
   }
 
 }

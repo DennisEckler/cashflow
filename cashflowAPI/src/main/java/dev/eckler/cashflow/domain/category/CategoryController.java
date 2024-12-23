@@ -1,11 +1,12 @@
 package dev.eckler.cashflow.domain.category;
 
-import static dev.eckler.cashflow.shared.CashflowConst.USER_ID;
-
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.exc.StreamReadException;
 
 @RestController
 @RequestMapping(path = "/api/category")
@@ -27,15 +30,17 @@ public class CategoryController {
   }
 
   @GetMapping("/")
-  public ResponseEntity<List<Category>> getCategories() {
-    List<Category> categories = categoryService.getCategoriesByUser(USER_ID);
+  public ResponseEntity<List<Category>> getCategories(@AuthenticationPrincipal Jwt jwt) throws StreamReadException,  IOException {
+    String userID = jwt.getSubject();
+    List<Category> categories = categoryService.getCategoriesByUser(userID);
     HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
     return new ResponseEntity<>(categories, status);
   }
 
   @PostMapping("/")
-  public ResponseEntity<Category> createCategory(@RequestBody Category category) {
-    category.setUserID(USER_ID);
+  public ResponseEntity<Category> createCategory(@RequestBody Category category, @AuthenticationPrincipal Jwt jwt) {
+    String userID = jwt.getSubject();
+    category.setUserID(userID);
     return categoryService.createCategory(category);
   }
 
@@ -46,8 +51,9 @@ public class CategoryController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<String> deleteCategory(@PathVariable(name = "id") Long id) {
-    return categoryService.deleteCategory(id, USER_ID);
+  public ResponseEntity<String> deleteCategory(@PathVariable(name = "id") Long id, @AuthenticationPrincipal Jwt jwt) {
+    String userID = jwt.getSubject();
+    return categoryService.deleteCategory(id, userID);
   }
 
 

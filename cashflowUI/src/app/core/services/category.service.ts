@@ -14,7 +14,7 @@ export class CategoryService {
     private oauth: OAuthService,
   ) {}
 
-  url: string = environment.cashflowUrl + 'category/';
+  url: string = environment.cashflowUrl + '/category/';
   token: string = this.oauth.getAccessToken();
 
   httpHeader = new HttpHeaders({

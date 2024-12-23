@@ -4,21 +4,33 @@ import { Observable } from 'rxjs';
 import { Transaction } from '../model/transaction';
 import { environment } from '../../../environments/environment';
 import { FileStructure } from '../model/fileStructure';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransactionService {
-  url: string = environment.cashflowUrl + 'transaction/';
+  constructor(
+    private http: HttpClient,
+    private oauth: OAuthService,
+  ) {}
 
-  constructor(private http: HttpClient) {}
+  url: string = environment.cashflowUrl + '/transaction';
+  token: string = this.oauth.getAccessToken();
+
+  httpHeader = new HttpHeaders({
+    Authorization: `Bearer ${this.token}`,
+  });
 
   getList(): Observable<any> {
-    return this.http.get<Transaction>(this.url + 'uncategorized');
+    return this.http.get<Transaction>(this.url + '/uncategorized', {
+      headers: this.httpHeader,
+    });
   }
 
   saveList(transaktions: Transaction[]): Observable<any> {
-    return this.http.patch(this.url + 'categorize', transaktions, {
+    return this.http.patch(this.url + '/categorize', transaktions, {
+      headers: this.httpHeader,
       responseType: 'text',
     });
   }
@@ -31,13 +43,15 @@ export class TransactionService {
     if (fileStructure) {
       formData.append('fileStructure', JSON.stringify(fileStructure));
     }
-    return this.http.post(this.url + 'upload', formData, {
+    return this.http.post(this.url + '/upload', formData, {
+      headers: this.httpHeader,
       responseType: 'text',
     });
   }
 
   recategorize(): Observable<any> {
-    return this.http.get(this.url + 'recategorize', {
+    return this.http.get(this.url + '/recategorize', {
+      headers: this.httpHeader,
       responseType: 'text',
     });
   }
