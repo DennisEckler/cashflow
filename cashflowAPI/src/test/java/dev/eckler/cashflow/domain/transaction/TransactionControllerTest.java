@@ -33,13 +33,13 @@ public class TransactionControllerTest {
 
   @Test
   void testUnauthorized() throws Exception {
-    Mockito.when(repository.findAllByIdentifierIsNull()).thenReturn(List.of(new Transaction()));
+    Mockito.when(repository.findAllByIdentifierIsNullAndUserID("test")).thenReturn(List.of(new Transaction()));
     mockMvc.perform(get("/api/transaction/uncategorized")).andDo(print()).andExpect(status().isUnauthorized());
   }
 
   @Test
   void testAuthorized() throws Exception {
-    Mockito.when(repository.findAllByIdentifierIsNull()).thenReturn(List.of(new Transaction()));
+    Mockito.when(repository.findAllByIdentifierIsNullAndUserID("test")).thenReturn(List.of(new Transaction()));
     mockMvc.perform(get("/api/transaction/uncategorized").with(SecurityMockMvcRequestPostProcessors.jwt()))
         .andDo(print()).andExpect(status().isOk());
   }
