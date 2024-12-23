@@ -9,17 +9,16 @@ import { FormsModule } from '@angular/forms';
 import { TransactionType } from 'src/app/core/model/transactionType';
 
 @Component({
-  selector: 'app-settings',
-  standalone: true,
-  imports: [
-    CommonModule,
-    CategoryCardComponent,
-    IdentifierChipComponent,
-    NavigationButtonComponent,
-    FormsModule,
-  ],
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.scss',
+    selector: 'app-settings',
+    imports: [
+        CommonModule,
+        CategoryCardComponent,
+        IdentifierChipComponent,
+        NavigationButtonComponent,
+        FormsModule,
+    ],
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.scss'
 })
 export class SettingsComponent implements OnInit {
   private categoryService = inject(CategoryService);

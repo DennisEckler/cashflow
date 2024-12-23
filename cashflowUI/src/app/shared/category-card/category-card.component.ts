@@ -17,11 +17,10 @@ import { TransactionType } from 'src/app/core/model/transactionType';
 import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
-  selector: 'app-category-card',
-  standalone: true,
-  imports: [CommonModule, IdentifierChipComponent, FormsModule],
-  templateUrl: './category-card.component.html',
-  styleUrl: './category-card.component.scss',
+    selector: 'app-category-card',
+    imports: [CommonModule, IdentifierChipComponent, FormsModule],
+    templateUrl: './category-card.component.html',
+    styleUrl: './category-card.component.scss'
 })
 export class CategoryCardComponent {
   constructor() {

@@ -52,6 +52,7 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+kls_database.db
 
 ############## ANGULAR ##############
 # Compiled output
