@@ -31,8 +31,8 @@ public class OverviewService {
     List<OverviewSummary> rows = new ArrayList<>();
     mapOfOverview.forEach((period, list) -> {
       OverviewSummary row = new OverviewSummary();
-      row.setMonth(list.get(1).month());
-      row.setYear(list.get(1).year());
+      row.setMonth(list.get(0).month());
+      row.setYear(list.get(0).year());
       list.forEach(row::accumulateAmount);
       rows.add(row);
     });
