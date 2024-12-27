@@ -6,8 +6,17 @@ Also this is used for testing out many technologies and built it all together.
 ---
 
 ## TechStack
+
 - Spring
 - Java
 - Gradle
 - Docker
 - Postgres
+
+---
+
+### Known problem
+
+- update /etc/hosts file
+  `127.0.0.1 cashflow-auth`
+

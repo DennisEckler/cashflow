@@ -14,6 +14,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8099/realms/cashflow_realm
+# debug: true
 ---
 # dev
 spring:

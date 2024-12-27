@@ -1,7 +1,8 @@
 import { AuthConfig } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 export const authCodeFlowConfig: AuthConfig = {
-  issuer: 'http://localhost:8099/realms/cashflow_realm',
+  issuer: environment.issuer,
   redirectUri: window.location.origin + '/login',
   clientId: 'cashflow',
   responseType: 'code',
