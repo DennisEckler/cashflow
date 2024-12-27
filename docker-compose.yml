@@ -22,6 +22,7 @@ services:
 
   cashflow-api:
     image: ghcr.io/denniseckler/cashflow-api:main
+    # image: cashflow-api:dev
     container_name: cashflow-api
     depends_on:
       - "postgres"
@@ -29,6 +30,7 @@ services:
       POSTGRES_URL: ${POSTGRES_URL}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      ISSUER_URI: ${ISSUER_URI}
     ports:
       - "8089:8080"
     networks:
@@ -36,6 +38,7 @@ services:
 
   cashflow-ui:
     image: ghcr.io/denniseckler/cashflow-ui:main
+    # image: cashflow-ui:dev
     container_name: cashflow-ui
     depends_on:
       - "cashflow-api"
@@ -44,7 +47,7 @@ services:
     networks:
       - cashflow_local
 
-  cashflow_auth:
+  cashflow-auth:
     image: quay.io/keycloak/keycloak:26.0.7
     container_name: cashflow-auth
     depends_on:
@@ -52,7 +55,7 @@ services:
     networks:
       - cashflow_local
     ports:
-      - "8099:8080"
+      - "8080:8080"
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin

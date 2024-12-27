@@ -1,8 +1,10 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
     java
-    id("org.springframework.boot") version "3.3.0"
-    id("io.spring.dependency-management") version "1.1.5"
+    id("org.springframework.boot") version "3.4.1"
 }
+apply(plugin = "io.spring.dependency-management")
 
 group = "dev.eckler"
 version = "0.0.1"
@@ -35,6 +37,10 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testCompileOnly("org.projectlombok:lombok:1.18.36")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
+}
+
+tasks.named<BootBuildImage>("bootBuildImage") {
+    imageName.set("cashflow-api:dev")
 }
 
 tasks.withType<Test> {

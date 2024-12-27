@@ -13,7 +13,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8099/realms/cashflow_realm
+          # issuer-uri: http://localhost:8099/realms/cashflow_realm
+          issuer-uri: ${ISSUER_URI}
+# debug: true
 ---
 # dev
 spring:
