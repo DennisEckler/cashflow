@@ -21,14 +21,7 @@ Also this is used for testing out many technologies and built it all together.
 2. Create new Client cashflow
 3. verify standard flow is active
 4. configure access settings:
-   > Root URL: <http://eckler.local:4200>
-   > Home URL: <http://eckler.local:4200/>
-   > Valid redirect URIs: <http://eckler.local:4200/>\*
+   > Root URL: <http://hostname:port>
+   > Home URL: <http://hostname:port/>
+   > Valid redirect URIs: <http://hostname:port/>\*
    > Web origins: +
-
----
-
-### Known problem
-
-- update /etc/hosts file
-  `127.0.0.1 cashflow-auth`
