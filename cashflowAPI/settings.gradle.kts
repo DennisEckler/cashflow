@@ -1,1 +1,1 @@
-rootProject.name = "cashflowAPI"
+rootProject.name = "cashflow"

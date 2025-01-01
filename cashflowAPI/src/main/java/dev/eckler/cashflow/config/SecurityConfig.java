@@ -19,10 +19,9 @@ public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(auth -> 
-      auth.anyRequest().authenticated())
-      .oauth2ResourceServer(oauth2 -> 
-        oauth2.jwt(Customizer.withDefaults()));return http.build();
+    http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+        .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+    return http.build();
   }
 
   @Bean
@@ -32,11 +31,10 @@ public class SecurityConfig {
 
   @Bean
   @Profile("prod")
-  public JwtDecoder jwtDecoder(){
-    NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders.fromIssuerLocation("http://cashflow-auth:9000/realms/cashflow_realm");
-    jwtDecoder.setJwtValidator(jwt ->{
-      return OAuth2TokenValidatorResult.success();
-    });
+  public JwtDecoder jwtDecoder() {
+    NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
+        .fromIssuerLocation("http://cashflow-auth:9000/realms/cashflow_realm");
+    jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
     return jwtDecoder;
   }
 
