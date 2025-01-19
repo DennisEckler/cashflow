@@ -1,7 +1,13 @@
 package dev.eckler.cashflow.domain.category;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import dev.eckler.cashflow.domain.identifier.Identifier;
+import dev.eckler.cashflow.shared.CashflowConst;
 import dev.eckler.cashflow.shared.TransactionType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -13,7 +19,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -26,6 +31,7 @@ public class Category {
     this.label = label;
     this.userID = userID;
     this.type = type;
+    this.identifier = new HashSet<>(Arrays.asList(new Identifier(CashflowConst.UNDEFINED, this)));
   }
 
   @Id

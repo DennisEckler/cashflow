@@ -22,32 +22,33 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 @RequestMapping(path = "/api/category")
 public class CategoryController {
 
-
   private final CategoryService categoryService;
 
   public CategoryController(CategoryService categoryService) {
     this.categoryService = categoryService;
   }
 
-  @GetMapping("/")
-  public ResponseEntity<List<Category>> getCategories(@AuthenticationPrincipal Jwt jwt) throws StreamReadException,  IOException {
+  @GetMapping
+  public ResponseEntity<List<Category>> getCategories(@AuthenticationPrincipal Jwt jwt)
+      throws StreamReadException, IOException {
     String userID = jwt.getSubject();
     List<Category> categories = categoryService.getCategoriesByUser(userID);
     HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
     return new ResponseEntity<>(categories, status);
   }
 
-  @PostMapping("/")
+  @PostMapping
   public ResponseEntity<Category> createCategory(@RequestBody Category category, @AuthenticationPrincipal Jwt jwt) {
     String userID = jwt.getSubject();
     category.setUserID(userID);
     return categoryService.createCategory(category);
   }
 
-  @PatchMapping("/")
+  @PatchMapping
   public ResponseEntity<Category> changeType(
-      @RequestBody Category category) {
-    return categoryService.changeType(category);
+      @RequestBody Category category, @AuthenticationPrincipal Jwt jwt) {
+    String userID = jwt.getSubject();
+    return categoryService.changeType(category, userID);
   }
 
   @DeleteMapping("/{id}")
@@ -55,6 +56,5 @@ public class CategoryController {
     String userID = jwt.getSubject();
     return categoryService.deleteCategory(id, userID);
   }
-
 
 }

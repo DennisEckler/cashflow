@@ -20,7 +20,7 @@ public class IdentifierController {
     this.identifierService = identifierService;
   }
 
-  @PostMapping("/")
+  @PostMapping
   public ResponseEntity<Identifier> createIdentifier(
       @RequestBody IdentifierDTO identifierDTO, @AuthenticationPrincipal Jwt jwt) {
     String userID = jwt.getSubject();
