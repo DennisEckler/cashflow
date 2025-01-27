@@ -1,13 +1,12 @@
 ############## JAVA ##############
 *.class
 .gradle
-build/*
-!build/generate-resources/
 .classpath
 .factorypath
 .project
 .settings
 bin/
+build/
 kls_database.db
 ############## Package Files ##############
 *.jar

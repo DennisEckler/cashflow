@@ -219,18 +219,6 @@ paths:
       responses:
         "204":
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: integer
-                    format: int32
-                    example: 204
-                  message:
-                    type: string
-                    example: File was processed successfully
         "400":
           description: File Structure is wrong or not defined
   /transaction/categorize:

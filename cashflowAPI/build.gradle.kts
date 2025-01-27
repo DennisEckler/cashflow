@@ -75,13 +75,13 @@ openApiGenerate {
     generatorName.set("spring")
     inputSpec.set("src/main/resources/cashflow-api.yml")
     ignoreFileOverride.set("src/main/resources/.openapi-generator-ignore")
-    invokerPackage.set("dev.eckler.cashflow.openapi.invoker")
     modelPackage.set("dev.eckler.cashflow.openapi.model")
     apiPackage.set("dev.eckler.cashflow.openapi.api")
     configOptions.set(
         mapOf(
             "useSpringBoot3" to "true",
             "openApiNullable" to "false",
+            "interfaceOnly" to "true",
         ),
     )
 }
