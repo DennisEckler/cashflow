@@ -29,9 +29,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/CategoryResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "404":
+        "204":
           $ref: "#/components/responses/NotFound"
     post:
       tags:
@@ -64,8 +62,6 @@ paths:
                     label: "undefined"
         "400":
           $ref: "#/components/responses/BadRequest"
-        "404":
-          $ref: "#/components/responses/NotFound"
   /category/{id}:
     put:
       tags:
@@ -121,8 +117,6 @@ paths:
       responses:
         "204":
           description: deleted
-        "400":
-          $ref: "#/components/responses/BadRequest"
         "404":
           $ref: "#/components/responses/NotFound"
 
@@ -290,7 +284,7 @@ components:
           schema:
             $ref: "#/components/schemas/CashflowErrorResponse"
           example:
-            statusCode: 404
+            statusCode: 204
             message: "Resource not found"
   #-------------------------------
   # Schemas

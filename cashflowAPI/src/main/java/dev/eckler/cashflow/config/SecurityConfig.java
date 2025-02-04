@@ -19,7 +19,9 @@ public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(auth -> auth
+    http
+      .cors(Customizer.withDefaults())
+      .authorizeHttpRequests(auth -> auth
         .requestMatchers("v3/**", "swagger-ui/**").permitAll()
         .anyRequest().authenticated())
         .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
@@ -28,7 +30,7 @@ public class SecurityConfig {
 
   @Bean
   public WebSecurityCustomizer webSecurityCustomizer() {
-    return (web) -> web.ignoring().requestMatchers("/h2/**");
+    return (web) -> web.ignoring().requestMatchers("/h2/**", "/v3/**", "/swagger-ui.html");
   }
 
   @Bean

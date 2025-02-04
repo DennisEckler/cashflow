@@ -7,8 +7,8 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import dev.eckler.cashflow.domain.identifier.Identifier;
+import dev.eckler.cashflow.openapi.model.TransactionType;
 import dev.eckler.cashflow.shared.CashflowConst;
-import dev.eckler.cashflow.shared.TransactionType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -91,5 +91,6 @@ public class Category {
   public void setIdentifier(Set<Identifier> identifier) {
     this.identifier = identifier;
   }
+
 
 }
