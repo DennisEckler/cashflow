@@ -1,7 +1,6 @@
 package dev.eckler.cashflow.config;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -20,13 +19,14 @@ public class SecurityConfigTest{
   
  @Test
   void testUnauthorized() throws Exception {
-    mockMvc.perform(get("/api/transaction/uncategorized")).andDo(print()).andExpect(status().isUnauthorized());
+    mockMvc.perform(get("/api/transaction/uncategorized"))
+      .andExpect(status().isUnauthorized());
   }
 
   @Test
   void testAuthorized() throws Exception {
     mockMvc.perform(get("/api/transaction/uncategorized").with(SecurityMockMvcRequestPostProcessors.jwt()))
-        .andDo(print()).andExpect(status().isOk());
+        .andExpect(status().isOk());
   }
 
 }

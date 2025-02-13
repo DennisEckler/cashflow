@@ -1,7 +1,6 @@
 package dev.eckler.cashflow.domain.transaction;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
@@ -34,13 +33,15 @@ public class TransactionControllerTest {
   @Test
   void testUnauthorized() throws Exception {
     Mockito.when(repository.findAllByIdentifierIsNullAndUserID("test")).thenReturn(List.of(new Transaction()));
-    mockMvc.perform(get("/api/transaction/uncategorized")).andDo(print()).andExpect(status().isUnauthorized());
+    mockMvc.perform(get("/api/transaction/uncategorized"))
+      .andExpect(status().isUnauthorized());
   }
 
   @Test
   void testAuthorized() throws Exception {
     Mockito.when(repository.findAllByIdentifierIsNullAndUserID("test")).thenReturn(List.of(new Transaction()));
-    mockMvc.perform(get("/api/transaction/uncategorized").with(SecurityMockMvcRequestPostProcessors.jwt()))
-        .andDo(print()).andExpect(status().isOk());
+    mockMvc.perform(get("/api/transaction/uncategorized")
+        .with(SecurityMockMvcRequestPostProcessors.jwt()))
+      .andExpect(status().isOk());
   }
 }

@@ -59,6 +59,7 @@ public class CategoryController implements CategoryApi {
   @Override
   public ResponseEntity<Void> deleteCatgory(Long id) {
     String userID = jwtUtil.readSubjectFromSecurityContext();
+    log.debug("Delete Category with ID: {} and userID: {}", id, userID);
     categoryService.deleteCategory(id, userID);
     return ResponseEntity.noContent().build();
   }
@@ -66,6 +67,7 @@ public class CategoryController implements CategoryApi {
   @Override
   public ResponseEntity<CategoryResponse> updateCategory(Long id, @Valid CategoryUpdateRequest categoryUpdateRequest) {
     String userID = jwtUtil.readSubjectFromSecurityContext();
+    log.debug("Update Category with ID: {} and userID: {}", id, userID);
     CategoryResponse response = categoryService.changeType(categoryUpdateRequest, userID);
     return ResponseEntity.ok(response);
   }

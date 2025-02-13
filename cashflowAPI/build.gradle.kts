@@ -98,7 +98,8 @@ tasks.withType<Test> {
         showExceptions = true
         showCauses = true
         showStackTraces = true
-        showStandardStreams = true
+        // TODO: keep this uncommented to clean up the logs in ci/cd
+        // showStandardStreams = true
     }
     // testLogging {
     //     lifecycle {

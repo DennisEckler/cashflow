@@ -1,6 +1,7 @@
 package dev.eckler.cashflow.domain.category;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -8,7 +9,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,6 +35,7 @@ import dev.eckler.cashflow.openapi.model.CashflowValidationErrorResponse;
 import dev.eckler.cashflow.openapi.model.CashflowValidationErrorResponseSubErrorInner;
 import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
 import dev.eckler.cashflow.openapi.model.CategoryResponse;
+import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
 import dev.eckler.cashflow.openapi.model.IdentifierResponse;
 import dev.eckler.cashflow.openapi.model.TransactionType;
 import dev.eckler.cashflow.shared.CashflowConst;
@@ -61,7 +63,6 @@ public class CategoryControllerTest {
   @Test
   void testUnauthorized() throws Exception {
     mockMvc.perform(get(PATH))
-        .andDo(print())
         .andExpect(status().isUnauthorized());
   }
 
@@ -72,7 +73,6 @@ public class CategoryControllerTest {
         .thenThrow(new CategoryNotFoundException(USER_ID));
     mockMvc.perform(get(PATH)
         .with(SecurityMockMvcRequestPostProcessors.jwt()))
-        .andDo(print())
         .andExpect(status().isNotFound())
         .andExpect(result -> 
             assertEquals("The user: " + USER_ID + " dont have this category", result.getResolvedException().getMessage()));
@@ -89,7 +89,6 @@ public class CategoryControllerTest {
 
     mockMvc.perform(get(PATH)
         .with(SecurityMockMvcRequestPostProcessors.jwt()))
-      .andDo(print())
       .andExpect(jsonPath("$.size()", is(1)));
   }
 
@@ -138,18 +137,32 @@ public class CategoryControllerTest {
     Mockito.doNothing().when(cs).deleteCategory(anyLong(), any());
     mockMvc.perform(delete(PATH + "/{id}", 1L)
         .with(SecurityMockMvcRequestPostProcessors.jwt()))
-      .andExpect(status().is(HttpStatus.NO_CONTENT.value()))
-      .andDo(print());
+      .andExpect(status().is(HttpStatus.NO_CONTENT.value()));
   }
 
   @Test
-  void updateCategory_whenInvalidRequest_shouldThrowBadRequestWithDetail(){
+  void updateCategory_whenInvalidRequest_shouldThrowBadRequestWithDetail() throws Exception{
+    CategoryUpdateRequest cur = new CategoryUpdateRequest();
+    String curJson = objectMapper.writeValueAsString(cur);
+    mockMvc.perform(put(PATH + "/{id}", 1L)
+        .with(SecurityMockMvcRequestPostProcessors.jwt())
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(curJson))
+      .andExpect(jsonPath("$..field", containsInAnyOrder("label", "type", "id", "userID")));
 
   }
 
   @Test
-  void updateCategory_whenValidRequest_shouldUpdateAndReturnCategory(){
-
+  void updateCategory_whenValidRequest_shouldUpdateAndReturnCategory() throws Exception{
+    CategoryUpdateRequest cur = validUpdateRequest();
+    String curJson = objectMapper.writeValueAsString(cur);
+    Mockito.when(cs.changeType(cur, null))
+      .thenReturn(mockedCreateResponse());
+    mockMvc.perform(put(PATH + "/{id}", 1L)
+        .with(SecurityMockMvcRequestPostProcessors.jwt())
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(curJson))
+      .andExpect(status().isOk());
   }
 
   private CashflowValidationErrorResponse getExpectedError(){
@@ -185,6 +198,25 @@ public class CategoryControllerTest {
     response.setIdentifier(identifierList);
     return response;
 
+  }
+
+  private CategoryUpdateRequest validUpdateRequest(){
+    CategoryUpdateRequest updateRequest = new CategoryUpdateRequest();
+    updateRequest.setId(123L);
+    updateRequest.setUserID("gojo");
+    updateRequest.setLabel("Mobility");
+    updateRequest.setType(TransactionType.FIXED);
+
+    IdentifierResponse identifierResponse = new IdentifierResponse();
+    identifierResponse.setId(1L);
+    identifierResponse.setLabel(CashflowConst.UNDEFINED);
+    List<IdentifierResponse> identifierList = new ArrayList<>();
+    
+    identifierList.add(identifierResponse);
+
+    updateRequest.setIdentifier(identifierList);
+
+    return updateRequest;
   }
 
 }
