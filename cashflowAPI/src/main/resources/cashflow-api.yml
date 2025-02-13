@@ -29,7 +29,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/CategoryResponse"
-        "204":
+        "404":
           $ref: "#/components/responses/NotFound"
     post:
       tags:
@@ -189,7 +189,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/TransactionResponse"
         "404":
-          description: Ressource not found
+          $ref: "#/components/responses/NotFound"
   /transaction/upload:
     post:
       tags:
@@ -254,9 +254,7 @@ paths:
       operationId: recategorizeTransactions
       responses:
         "204":
-          description: Recategorized
-        "401":
-          description: Unauthorized
+          description: Successfully recategorized
         "404":
           $ref: "#/components/responses/NotFound"
 components:
@@ -273,19 +271,14 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CashflowErrorResponse"
-          example:
-            statusCode: 400
-            message: "Validation failed"
+            $ref: "#/components/schemas/CashflowValidationErrorResponse"
     NotFound:
       description: Ressource not found
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CashflowErrorResponse"
-          example:
-            statusCode: 204
-            message: "Resource not found"
+
   #-------------------------------
   # Schemas
   #-------------------------------
@@ -425,9 +418,32 @@ components:
           format: int32
         message:
           type: string
-      required:
-        - statusCode
-        - message
+
+    CashflowValidationErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 400
+        message:
+          type: string
+          example: Object is invalid see sub-errors
+        datetime:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        subError:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                example: label
+              fieldError:
+                type: string
+                example: label cant be null or empty
   #-------------------------------
   # Security-Schemas
   #-------------------------------

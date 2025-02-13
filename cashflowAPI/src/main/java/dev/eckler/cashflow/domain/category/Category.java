@@ -27,10 +27,10 @@ public class Category {
   public Category() {
   }
 
-  public Category(String label, String userID, TransactionType type) {
+  public Category(String label, String userID ) {
     this.label = label;
     this.userID = userID;
-    this.type = type;
+    this.type = TransactionType.FIXED;
     this.identifier = new HashSet<>(Arrays.asList(new Identifier(CashflowConst.UNDEFINED, this)));
   }
 

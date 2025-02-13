@@ -19,11 +19,9 @@ public class CategoryMapper{
   }
 
   public static Category categoryCreateRequestToCategory(CategoryCreateRequest request){
-    Category category = new Category();
     if (request != null){
-      category.setUserID(request.getUserID());
-      category.setLabel(request.getLabel());
+      return new Category(request.getLabel(), request.getUserID());
     }
-    return category;
+    throw new IllegalArgumentException("CategoryCreateRequest can not be null");
   }
 }

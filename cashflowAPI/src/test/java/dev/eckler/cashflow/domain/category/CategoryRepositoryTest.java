@@ -51,7 +51,7 @@ public class CategoryRepositoryTest {
   }
 
   private Category getCategory() {
-    return new Category("category", "userGojo", TransactionType.FIXED);
+    return new Category("category", "userGojo");
   }
 
   private Category createIdentifierForCategory(Category category) {

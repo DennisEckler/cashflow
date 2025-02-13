@@ -2,19 +2,15 @@ package dev.eckler.cashflow.domain.category;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.eckler.cashflow.domain.util.JwtUtil;
 import dev.eckler.cashflow.openapi.api.CategoryApi;
+import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
 import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
 import dev.eckler.cashflow.openapi.model.CategoryResponse;
 import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
@@ -34,20 +30,19 @@ public class CategoryController implements CategoryApi {
     this.jwtUtil = jwtUtil;
   }
 
-  //@ExceptionHandler({CategoryNotFoundException.class})
-  //public CashflowErrorResponse error(CategoryNotFoundException ex){
-  //  CashflowErrorResponse error = new CashflowErrorResponse();
-  //  error.setStatusCode(ex.hashCode());
-  //  error.setMessage(ex.getMessage());
-  //  return error;
-  //
-  //}
+  @ExceptionHandler({CategoryNotFoundException.class})
+  public ResponseEntity<CashflowErrorResponse> error(CategoryNotFoundException ex){
+    CashflowErrorResponse error = new CashflowErrorResponse();
+    error.setStatusCode(HttpStatus.NOT_FOUND.value());
+    error.setMessage(ex.getMessage());
+    return ResponseEntity.status(error.getStatusCode()).body(error);
+  }
   
 
   @Override
   public ResponseEntity<List<CategoryResponse>> getCategories(){
-    log.debug("Get Categories");
     String userID = jwtUtil.readSubjectFromSecurityContext();
+    log.debug("Get Categories as user: {}", userID);
     List<CategoryResponse> categories = categoryService.getCategoriesByUser(userID);
     return ResponseEntity.ok(categories);
   }
@@ -57,34 +52,22 @@ public class CategoryController implements CategoryApi {
     String userID = jwtUtil.readSubjectFromSecurityContext();
     log.debug("Creating Category: {} for userID: {}", categoryCreateRequest.getLabel(), userID);
     categoryCreateRequest.setUserID(userID);
-    return categoryService.createCategory(categoryCreateRequest);
+    CategoryResponse response = categoryService.createCategory(categoryCreateRequest);
+    return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
-  //
-  //@Override
-  //public ResponseEntity<Void> deleteCatgory(Long id) {
-  //  // TODO Auto-generated method stub
-  //  return CategoryApi.super.deleteCatgory(id);
-  //}
-  //
-  //
-  //@Override
-  //public ResponseEntity<CategoryResponse> updateCategory(Long id, @Valid CategoryUpdateRequest categoryUpdateRequest) {
-  //  // TODO Auto-generated method stub
-  //  return CategoryApi.super.updateCategory(id, categoryUpdateRequest);
-  //}
-
-  @PatchMapping
-  public ResponseEntity<Category> changeType(
-      @RequestBody Category category, @AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    return categoryService.changeType(category, userID);
+  @Override
+  public ResponseEntity<Void> deleteCatgory(Long id) {
+    String userID = jwtUtil.readSubjectFromSecurityContext();
+    categoryService.deleteCategory(id, userID);
+    return ResponseEntity.noContent().build();
   }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<String> deleteCategory(@PathVariable(name = "id") Long id, @AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    return categoryService.deleteCategory(id, userID);
+  @Override
+  public ResponseEntity<CategoryResponse> updateCategory(Long id, @Valid CategoryUpdateRequest categoryUpdateRequest) {
+    String userID = jwtUtil.readSubjectFromSecurityContext();
+    CategoryResponse response = categoryService.changeType(categoryUpdateRequest, userID);
+    return ResponseEntity.ok(response);
   }
 
 }
