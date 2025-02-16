@@ -1,5 +1,6 @@
 package dev.eckler.cashflow.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -16,6 +17,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+  @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+  String issuer;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -35,11 +39,10 @@ public class SecurityConfig {
 
   @Bean
   @Profile("prod")
-  public JwtDecoder jwtDecoder() {
+  public JwtDecoder jwtDecoderProd() {
     NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
         .fromIssuerLocation("http://cashflow-auth:9000/realms/cashflow_realm");
     jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
     return jwtDecoder;
   }
-
 }

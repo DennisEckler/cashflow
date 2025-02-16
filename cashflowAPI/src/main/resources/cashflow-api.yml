@@ -120,12 +120,19 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
-  /identifier:
+  /category/{categoryID}/identifier:
     post:
       tags:
         - identifier
       summary: create an identifier related to an category
       operationId: addIdentifier
+      parameters:
+        - name: categoryID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         description: Create an identifier with an label and related to an categoryID
         content:
@@ -148,14 +155,20 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
-  /identifier/{id}:
+  /category/{categoryID}/identifier/{identifierID}:
     delete:
       tags:
         - identifier
       summary: Delete an identifier
       operationId: deleteIdentifier
       parameters:
-        - name: id
+        - name: categoryID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: identifierID
           in: path
           required: true
           schema:

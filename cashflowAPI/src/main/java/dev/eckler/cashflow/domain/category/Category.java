@@ -10,6 +10,7 @@ import dev.eckler.cashflow.domain.identifier.Identifier;
 import dev.eckler.cashflow.openapi.model.TransactionType;
 import dev.eckler.cashflow.shared.CashflowConst;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,7 +19,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "category")
@@ -36,16 +36,17 @@ public class Category {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Long id;
 
-  @NotNull
+  @Column(name = "label", unique = true, nullable = false)
   private String label;
 
-  @NotNull
+  @Column(name = "user_id", nullable = false)
   private String userID;
 
-  @NotNull
   @Enumerated(value = EnumType.STRING)
+  @Column(name = "type", nullable = false)
   private TransactionType type;
 
   @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)

@@ -13,7 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import dev.eckler.cashflow.domain.identifier.Identifier;
 import dev.eckler.cashflow.domain.identifier.IdentifierRepository;
-import dev.eckler.cashflow.openapi.model.TransactionType;
 
 @ActiveProfiles("dev")
 @DataJpaTest(showSql = false)

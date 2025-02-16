@@ -37,9 +37,14 @@ dependencies {
 
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql:11.3.2")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
+    testImplementation("com.github.dasniko:testcontainers-keycloak:3.6.0")
+    testImplementation("io.rest-assured:rest-assured")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testCompileOnly("org.projectlombok:lombok:1.18.36")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
@@ -100,7 +105,7 @@ tasks.withType<Test> {
         showCauses = true
         showStackTraces = true
         // TODO: keep this uncommented to clean up the logs in ci/cd
-        // showStandardStreams = true
+        showStandardStreams = true
     }
     // testLogging {
     //     lifecycle {
