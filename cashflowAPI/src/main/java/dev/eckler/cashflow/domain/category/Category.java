@@ -24,16 +24,6 @@ import jakarta.persistence.Table;
 @Table(name = "category")
 public class Category {
 
-  public Category() {
-  }
-
-  public Category(String label, String userID ) {
-    this.label = label;
-    this.userID = userID;
-    this.type = TransactionType.FIXED;
-    this.identifier = new HashSet<>(Arrays.asList(new Identifier(CashflowConst.UNDEFINED, this)));
-  }
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
@@ -51,6 +41,16 @@ public class Category {
 
   @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
   private Set<Identifier> identifier;
+
+  public Category() {
+  }
+
+  public Category(String label, String userID ) {
+    this.label = label;
+    this.userID = userID;
+    this.type = TransactionType.FIXED;
+    this.identifier = new HashSet<>(Arrays.asList(new Identifier(CashflowConst.UNDEFINED, this)));
+  }
 
   public Long getId() {
     return id;
@@ -84,7 +84,6 @@ public class Category {
     this.type = type;
   }
 
-  @JsonManagedReference
   public Set<Identifier> getIdentifier() {
     return identifier;
   }

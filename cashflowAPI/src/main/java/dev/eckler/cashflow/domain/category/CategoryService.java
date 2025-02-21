@@ -1,11 +1,9 @@
 package dev.eckler.cashflow.domain.category;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import dev.eckler.cashflow.domain.identifier.IdentifierService;
 import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
 import dev.eckler.cashflow.openapi.model.CategoryResponse;
 import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
@@ -14,11 +12,9 @@ import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
 public class CategoryService {
 
   private final CategoryRepository cr;
-  private final IdentifierService is;
 
-  public CategoryService(CategoryRepository cr, IdentifierService is) {
+  public CategoryService(CategoryRepository cr) {
     this.cr = cr;
-    this.is = is;
   }
 
   public List<CategoryResponse> getCategoriesByUser(String userID) {
@@ -46,17 +42,11 @@ public class CategoryService {
   }
 
   public void deleteCategory(Long id, String userID) {
-    System.out.println("xdxdxd");
-    Optional<Category> category = cr.findByIdAndUserID(id, userID);
-    boolean allowDeleteUndefined = true;
-    if (category.isPresent()) {
-      category.get().getIdentifier()
-        // TODO: use cascade wtf?
-          .forEach(identifier -> is.deleteIdentifier(identifier.getId(),
-              allowDeleteUndefined));
-      cr.delete(category.get());
-    }
-    throw new CategoryNotFoundException("Category with id not found");
+    cr.findByIdAndUserID(id, userID)
+      .ifPresentOrElse(
+          c -> cr.delete(c),
+          () -> {throw new CategoryNotFoundException("Category with id not found");}
+          );
   }
 
 }

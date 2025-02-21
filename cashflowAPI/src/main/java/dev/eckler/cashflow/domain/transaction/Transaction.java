@@ -1,32 +1,39 @@
 package dev.eckler.cashflow.domain.transaction;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import dev.eckler.cashflow.domain.identifier.Identifier;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 public class Transaction {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Long id;
-  @NotNull
+
+  @Column(name = "date", nullable = false)
   private LocalDate date;
-  @NotNull
+
   @Digits(integer = 9, fraction = 2)
+  @Column(name = "amount", nullable = false)
   private BigDecimal amount;
-  @NotNull
+
+  @Column(name = "user_id", nullable = false)
   private String userID;
-  @NotNull
+
+  @Column(name = "purpose", nullable = false)
   private String purpose;
-  @NotNull
+
+  @Column(name = "source", nullable = false)
   private String source;
 
   @ManyToOne

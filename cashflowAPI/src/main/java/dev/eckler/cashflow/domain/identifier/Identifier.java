@@ -1,10 +1,13 @@
 package dev.eckler.cashflow.domain.identifier;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import dev.eckler.cashflow.domain.category.Category;
 import dev.eckler.cashflow.domain.transaction.Transaction;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,25 +15,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
-@JsonIgnoreProperties({"category"})
 public class Identifier {
-    
-    public Identifier() {
-    }
-    
-    public Identifier(String label, Category category) {
-        this.label = label;
-        this.category = category;
-    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     
     @NotNull
+    @Column(name = "label", unique = true, nullable = false)
     private String label;
     
     @OneToMany(mappedBy = "identifier")
@@ -38,6 +33,15 @@ public class Identifier {
     
     @ManyToOne
     private Category category;
+
+    public Identifier() {
+    }
+    
+    public Identifier(String label, Category category) {
+        this.label = label;
+        this.category = category;
+    }
+
     
     public Long getId() {
         return id;
