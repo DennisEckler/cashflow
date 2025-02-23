@@ -1,8 +1,6 @@
 package dev.eckler.cashflow.integration;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,23 +10,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.transaction.annotation.Transactional;
 
 import dev.eckler.cashflow.container.CashflowContainer;
+import dev.eckler.cashflow.domain.category.Category;
 import dev.eckler.cashflow.domain.category.CategoryRepository;
 import dev.eckler.cashflow.domain.identifier.IdentifierRepository;
-import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
-import dev.eckler.cashflow.shared.CashflowConst;
-import dev.eckler.cashflow.shared.TransactionType;
 import dev.eckler.cashflow.model.TestJwtToken;
+import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
 import dev.eckler.cashflow.util.TestTokenUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-//- deleting identifier remains as null value in the Transactions
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CashflowContainer.class, TestTokenUtil.class})
-public class CategoryIntegrationTest {
+public class IdentifierIntegrationTest{
 
   @Autowired
   @Lazy
@@ -36,11 +33,11 @@ public class CategoryIntegrationTest {
 
   @LocalServerPort
   private int port;
+
   @Autowired
   CategoryRepository cr;
   @Autowired
   IdentifierRepository ir;
-
 
   @BeforeEach
   void setUp() {
@@ -53,29 +50,9 @@ public class CategoryIntegrationTest {
     ir.deleteAll();
   }
 
-
   @Test
-  void createCategory_shouldBeCreatedWithInitialValuesAndDefaultIdentifier() {
-    CategoryCreateRequest ccr = new CategoryCreateRequest("lebensmittel");
-    given()
-      .header("Authorization", "Bearer " + testJwtToken.getToken())
-      .contentType(ContentType.JSON)
-      .body(ccr)
-      .when()
-      .post("/category")
-      .then()
-      .statusCode(201)
-      .body("id", notNullValue())
-      .body("label", is("lebensmittel"))
-      .body("userID", notNullValue())
-      .body("type", is(TransactionType.FIXED.toString().toLowerCase()))
-      .body("identifier[0].label", is(CashflowConst.UNDEFINED))
-      ;
-  }
-
-
-  @Test
-  void createCategory_whenAlreadyExist_shouldThrowConflict() {
+  @Transactional
+  void deleteIdentifier_whenIdentifierIsDefault_shouldThrowNotAcceptable(){
     CategoryCreateRequest ccr = new CategoryCreateRequest("lebensmittel");
     given()
       .header("Authorization", "Bearer " + testJwtToken.getToken())
@@ -85,16 +62,21 @@ public class CategoryIntegrationTest {
       .post("/category")
       .then()
       .statusCode(201);
-    String s = given()
+
+    Category c = cr.findAll().get(0);
+
+    given()
       .header("Authorization", "Bearer " + testJwtToken.getToken())
       .contentType(ContentType.JSON)
-      .body(ccr)
       .when()
-      .post("/category")
+      .delete("/category/{categoryID}/identifier/{identifierID}", c.getId(), c.getIdentifier().stream().findFirst().get().getId())
       .then()
-      .statusCode(409)
-      .extract()
-      .asPrettyString();
-    System.out.println("gojo: " + s);
+      .statusCode(406);
   }
+
+  @Test
+  void deleteIdentifier_whenValidRequest_shouldDelete(){
+
+  }
+
 }

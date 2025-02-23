@@ -89,6 +89,7 @@ openApiGenerate {
             "useSpringBoot3" to "true",
             "openApiNullable" to "false",
             "interfaceOnly" to "true",
+            "useTags" to "true",
         ),
     )
 }

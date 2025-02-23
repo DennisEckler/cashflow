@@ -2,58 +2,52 @@ package dev.eckler.cashflow.domain.identifier;
 
 import static dev.eckler.cashflow.shared.CashflowConst.UNDEFINED;
 
-import dev.eckler.cashflow.domain.category.Category;
-import dev.eckler.cashflow.domain.category.CategoryRepository;
-import java.util.Optional;
-import org.springframework.http.ResponseEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import dev.eckler.cashflow.domain.category.CategoryRepository;
 
 @Service
 public class IdentifierService {
 
-  private final IdentifierRepository identifierRepository;
+  private final IdentifierRepository ir;
   private final CategoryRepository categoryRepository;
 
-  public IdentifierService(IdentifierRepository identifierRepository,
+  public IdentifierService(IdentifierRepository ir,
       CategoryRepository categoryRepository) {
-    this.identifierRepository = identifierRepository;
+    this.ir = ir;
     this.categoryRepository = categoryRepository;
   }
 
-  public ResponseEntity<String> deleteIdentifier(Long identiferID, String userID) {
-    Optional<Identifier> identifier = identifierRepository.findById(identiferID);
-    if (identifier.isPresent() && identifier.get().getCategory().getUserID().equals(userID)) {
-      return deleteIdentifier(identiferID, false);
+  public void deleteIdentifier(Long identiferID, Long categoryID, String userID) {
+    Identifier i = ir.findById(identiferID).orElseThrow(
+        () -> new IdentifierNotFoundException());
+    if (isValidDeleteRequest(i, categoryID, userID)){
+      ir.delete(i);
+    } else {
+      throw new UndefinedIdentifierIsNotAllowedToDelete();
     }
-    throw new IdentifierNotFoundException();
   }
 
-  public ResponseEntity<String> deleteIdentifier(Long identifierID,
-      boolean isAllowedToDeleteUndefined) {
-    Optional<Identifier> identifier = identifierRepository.findById(identifierID);
-    if (identifier.isPresent() && (isAllowedToDeleteUndefined || !identifier.get()
-        .getLabel().equals(UNDEFINED))) {
-      identifier.get().getTransactions().forEach(ele -> ele.setIdentifier(null));
-      identifierRepository.deleteById(identifierID);
-      return ResponseEntity.ok().build();
-    }
-    throw new UndefinedIdentifierIsNotAllowedToDelete();
+  public boolean isValidDeleteRequest(Identifier i, Long categoryID, String userID){
+    return StringUtils.equalsIgnoreCase(i.getCategory().getUserID(), userID)
+      &&  i.getCategory().getId().equals(categoryID)
+      && !StringUtils.equalsIgnoreCase(i.getLabel(), UNDEFINED);
   }
-
 
   public Identifier findIdentifierByID(Long identifierID) {
-    return identifierRepository.findById(identifierID).orElse(null);
+    return ir.findById(identifierID).orElse(null);
   }
 
-
-  public ResponseEntity<Identifier> createIdentifier(IdentifierDTO identifierDTO, String userID) {
-    Identifier response = null;
-    Optional<Category> category = categoryRepository.findById(
-        Long.parseLong(identifierDTO.categoryID()));
-    if (category.isPresent() && category.get().getUserID().equals(userID)) {
-      Identifier identifier = new Identifier(identifierDTO.label(), category.get());
-      response = identifierRepository.save(identifier);
-    }
-    return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
-  }
+  //
+  //public ResponseEntity<Identifier> createIdentifier(IdentifierCreateRequest , String userID) {
+  //  Identifier response = null;
+  //  Optional<Category> category = categoryRepository.findById(
+  //      Long.parseLong(identifierDTO.categoryID()));
+  //  if (category.isPresent() && category.get().getUserID().equals(userID)) {
+  //    Identifier identifier = new Identifier(identifierDTO.label(), category.get());
+  //    response = ir.save(identifier);
+  //  }
+  //  return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
+  //}
 }

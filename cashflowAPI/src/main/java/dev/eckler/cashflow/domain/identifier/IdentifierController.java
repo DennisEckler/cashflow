@@ -10,28 +10,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.eckler.cashflow.domain.util.JwtUtil;
+import dev.eckler.cashflow.openapi.api.IdentifierApi;
+import dev.eckler.cashflow.openapi.model.IdentifierCreateRequest;
+import dev.eckler.cashflow.openapi.model.IdentifierResponse;
+import jakarta.validation.Valid;
+import lombok.extern.log4j.Log4j2;
+
 @RestController
-@RequestMapping(path = "/api/identifier")
-public class IdentifierController {
+@RequestMapping(path = "/v1/api")
+@Log4j2
+public class IdentifierController implements IdentifierApi {
+
 
   IdentifierService identifierService;
+  private final JwtUtil jwtUtil;
+  
 
-  public IdentifierController(IdentifierService identifierService) {
+  public IdentifierController(IdentifierService identifierService, JwtUtil jwtUtil) {
     this.identifierService = identifierService;
+    this.jwtUtil = jwtUtil;
   }
 
-  @PostMapping
-  public ResponseEntity<Identifier> createIdentifier(
-      @RequestBody IdentifierDTO identifierDTO, @AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    return identifierService.createIdentifier(identifierDTO, userID);
-  }
+  //@Override
+  //public ResponseEntity<IdentifierResponse> addIdentifier(Long categoryID,
+  //    @Valid IdentifierCreateRequest identifierCreateRequest) {
+  //  String userID = jwtUtil.readSubjectFromSecurityContext();
+  //  log.debug("Create Identifier as user: {}", userID);
+  //  return identifierService.createIdentifier(identifierCreateRequest, userID);
+  //}
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<String> deleteIdentifier(
-      @PathVariable(name = "id") Long id, @AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    return identifierService.deleteIdentifier(id, userID);
+  @Override
+  public ResponseEntity<Void> deleteIdentifier(Long categoryID, Long identifierID) {
+    String userID = jwtUtil.readSubjectFromSecurityContext();
+    log.debug("Delete identifier: {} for category: {} as user: {}", identifierID, categoryID, userID);
+    identifierService.deleteIdentifier(identifierID, categoryID, userID);
+    return ResponseEntity.noContent().build();
   }
-
+  
 }
