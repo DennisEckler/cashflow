@@ -22,11 +22,16 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.eckler.cashflow.domain.identifier.IdentifierService;
+import dev.eckler.cashflow.openapi.api.TransactionApi;
+import dev.eckler.cashflow.openapi.model.FileDescription;
+import dev.eckler.cashflow.openapi.model.TransactionRequest;
+import dev.eckler.cashflow.openapi.model.TransactionResponse;
 import dev.eckler.cashflow.shared.FileStructure;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/api/transaction")
-public class TransactionController {
+public class TransactionController implements TransactionApi {
 
   private final TransactionRepository transactionRepository;
   private final TransactionService transactionService;
@@ -41,49 +46,76 @@ public class TransactionController {
     this.identifierService = identifierService;
   }
 
-  @GetMapping("/uncategorized")
-  public List<Transaction> getTransaction(@AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    return transactionRepository.findAllByIdentifierIsNullAndUserID(userID);
+  @Override
+  public ResponseEntity<Void> categorizeTransactions(@Valid List<TransactionRequest> transactionRequest) {
+    // @PatchMapping("/categorize")
+    // public ResponseEntity<String> categorizeTransactions(
+    // @RequestBody List<Transaction> patchValues) {
+    // patchValues.forEach(entry -> transactionRepository.findById(entry.getId())
+    // .ifPresentOrElse(transaction -> transaction.setIdentifier(
+    // identifierService.findIdentifierByID(entry.getIdentifier().getId())),
+    // () -> logger.info("Cant find Transaction with ID: {}", entry)));
+    // transactionRepository.saveAll(patchValues);
+    // return ResponseEntity.ok("updated values successfully");
+    // }
+    // TODO Auto-generated method stub
+    return TransactionApi.super.categorizeTransactions(transactionRequest);
   }
 
-  @PostMapping("/upload")
-  public ResponseEntity<?> uploadFile(
-      @RequestParam("file") MultipartFile csvFile,
-      @RequestParam("fileStructure") String fileStructureJson, @AuthenticationPrincipal Jwt jwt) {
-    try {
-      String userID = jwt.getSubject();
-
-      InputStream stream = csvFile.getInputStream();
-      FileStructure fileStructure = new ObjectMapper().readValue(fileStructureJson, FileStructure.class);
-
-      List<Transaction> transactions = transactionService.parseCsv(stream, userID, fileStructure);
-      transactionRepository.saveAll(transactions);
-      logger.info("FileUpload done");
-      return new ResponseEntity<>("File upload successfully", HttpStatus.OK);
-
-    } catch (IOException e) {
-      logger.error("Cant handle this case");
-      return new ResponseEntity<>("Check your File or JSON", HttpStatus.BAD_REQUEST);
-    }
+  @Override
+  public ResponseEntity<Void> createTransactions(MultipartFile file, @Valid FileDescription fileDescription) {
+    // @PostMapping("/upload")
+    // public ResponseEntity<?> uploadFile(
+    // @RequestParam("file") MultipartFile csvFile,
+    // @RequestParam("fileStructure") String fileStructureJson,
+    // @AuthenticationPrincipal Jwt jwt) {
+    // try {
+    // String userID = jwt.getSubject();
+    //
+    // InputStream stream = csvFile.getInputStream();
+    // FileStructure fileStructure = new ObjectMapper().readValue(fileStructureJson,
+    // FileStructure.class);
+    //
+    // List<Transaction> transactions = transactionService.parseCsv(stream, userID,
+    // fileStructure);
+    // transactionRepository.saveAll(transactions);
+    // logger.info("FileUpload done");
+    // return new ResponseEntity<>("File upload successfully", HttpStatus.OK);
+    //
+    // } catch (IOException e) {
+    // logger.error("Cant handle this case");
+    // return new ResponseEntity<>("Check your File or JSON",
+    // HttpStatus.BAD_REQUEST);
+    // }
+    // }
+    // TODO Auto-generated method stub
+    return TransactionApi.super.createTransactions(file, fileDescription);
   }
 
-  @PatchMapping("/categorize")
-  public ResponseEntity<String> categorizeTransactions(
-      @RequestBody List<Transaction> patchValues) {
-    patchValues.forEach(entry -> transactionRepository.findById(entry.getId())
-        .ifPresentOrElse(transaction -> transaction.setIdentifier(
-            identifierService.findIdentifierByID(entry.getIdentifier().getId())),
-            () -> logger.info("Cant find Transaction with ID: {}", entry)));
-    transactionRepository.saveAll(patchValues);
-    return ResponseEntity.ok("updated values successfully");
+  @Override
+  public ResponseEntity<List<TransactionResponse>> getUncategorizedTransactions() {
+    // @GetMapping("/uncategorized")
+    // public List<Transaction> getTransaction(@AuthenticationPrincipal Jwt jwt) {
+    // String userID = jwt.getSubject();
+    // return transactionRepository.findAllByIdentifierIsNullAndUserID(userID);
+    // }
+
+    // TODO Auto-generated method stub
+    return TransactionApi.super.getUncategorizedTransactions();
   }
 
-  @GetMapping("/recategorize")
-  public ResponseEntity<String> recategorize(@AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    transactionService.recategorize(userID);
-    return ResponseEntity.accepted().body("recategorize done");
+  @Override
+  public ResponseEntity<Void> recategorizeTransactions() {
+    // @GetMapping("/recategorize")
+    // public ResponseEntity<String> recategorize(@AuthenticationPrincipal Jwt jwt)
+    // {
+    // String userID = jwt.getSubject();
+    // transactionService.recategorize(userID);
+    // return ResponseEntity.accepted().body("recategorize done");
+    // }
+
+    // TODO Auto-generated method stub
+    return TransactionApi.super.recategorizeTransactions();
   }
 
 }
