@@ -2,6 +2,8 @@ package dev.eckler.cashflow.domain.category;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,38 +17,36 @@ import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
 import dev.eckler.cashflow.openapi.model.CategoryResponse;
 import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
 import jakarta.validation.Valid;
-import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping(path = "/v1/api")
-@Log4j2
 public class CategoryController implements CategoryApi {
 
   private final CategoryService categoryService;
   private final JwtUtil jwtUtil;
+  private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
 
   public CategoryController(CategoryService categoryService, JwtUtil jwtUtil) {
     this.categoryService = categoryService;
     this.jwtUtil = jwtUtil;
   }
 
-  @ExceptionHandler({CategoryNotFoundException.class})
-  public ResponseEntity<CashflowErrorResponse> error(CategoryNotFoundException ex){
+  @ExceptionHandler({ CategoryNotFoundException.class })
+  public ResponseEntity<CashflowErrorResponse> error(CategoryNotFoundException ex) {
     CashflowErrorResponse error = new CashflowErrorResponse();
     error.setStatusCode(HttpStatus.NOT_FOUND.value());
     error.setMessage(ex.getMessage());
     return ResponseEntity.status(error.getStatusCode()).body(error);
   }
-  
 
   @Override
-  public ResponseEntity<List<CategoryResponse>> getCategories(){
+  public ResponseEntity<List<CategoryResponse>> getCategories() {
     String userID = jwtUtil.readSubjectFromSecurityContext();
     log.debug("Get Categories as user: {}", userID);
     List<CategoryResponse> categories = categoryService.getCategoriesByUser(userID);
     return ResponseEntity.ok(categories);
   }
-  
+
   @Override
   public ResponseEntity<CategoryResponse> addCategory(@Valid CategoryCreateRequest categoryCreateRequest) {
     String userID = jwtUtil.readSubjectFromSecurityContext();

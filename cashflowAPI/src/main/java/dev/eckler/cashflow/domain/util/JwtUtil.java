@@ -5,15 +5,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.log4j.Log4j2;
-
 @Component
-@Log4j2
-public class JwtUtil{
+public class JwtUtil {
 
   public String readSubjectFromSecurityContext() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    if (auth != null && auth.getPrincipal() instanceof Jwt){
+    if (auth != null && auth.getPrincipal() instanceof Jwt) {
       Jwt jwt = (Jwt) auth.getPrincipal();
       return jwt.getSubject();
     } else {

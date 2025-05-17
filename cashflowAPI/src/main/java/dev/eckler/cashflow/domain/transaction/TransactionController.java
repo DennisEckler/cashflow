@@ -22,28 +22,29 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.eckler.cashflow.domain.identifier.IdentifierService;
+import dev.eckler.cashflow.domain.util.JwtUtil;
 import dev.eckler.cashflow.openapi.api.TransactionApi;
 import dev.eckler.cashflow.openapi.model.FileDescription;
 import dev.eckler.cashflow.openapi.model.TransactionRequest;
 import dev.eckler.cashflow.openapi.model.TransactionResponse;
 import dev.eckler.cashflow.shared.FileStructure;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/api/transaction")
 public class TransactionController implements TransactionApi {
 
-  private final TransactionRepository transactionRepository;
-  private final TransactionService transactionService;
+  private final TransactionService ts;
   private final IdentifierService identifierService;
-  private final Logger logger = LoggerFactory.getLogger(TransactionController.class);
+  private final JwtUtil jwtUtil;
+  private static final Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
-  public TransactionController(TransactionRepository transactionRepository,
-      TransactionService transactionService,
-      IdentifierService identifierService) {
-    this.transactionRepository = transactionRepository;
-    this.transactionService = transactionService;
+  public TransactionController(TransactionRepository transactionRepository, TransactionService ts,
+      IdentifierService identifierService, JwtUtil jwtUtil) {
+    this.ts = ts;
     this.identifierService = identifierService;
+    this.jwtUtil = jwtUtil;
   }
 
   @Override
@@ -76,7 +77,7 @@ public class TransactionController implements TransactionApi {
     // FileStructure fileStructure = new ObjectMapper().readValue(fileStructureJson,
     // FileStructure.class);
     //
-    // List<Transaction> transactions = transactionService.parseCsv(stream, userID,
+    // List<Transaction> transactions = ts.parseCsv(stream, userID,
     // fileStructure);
     // transactionRepository.saveAll(transactions);
     // logger.info("FileUpload done");
@@ -92,17 +93,12 @@ public class TransactionController implements TransactionApi {
     return TransactionApi.super.createTransactions(file, fileDescription);
   }
 
-  @Override
-  public ResponseEntity<List<TransactionResponse>> getUncategorizedTransactions() {
-    // @GetMapping("/uncategorized")
-    // public List<Transaction> getTransaction(@AuthenticationPrincipal Jwt jwt) {
-    // String userID = jwt.getSubject();
-    // return transactionRepository.findAllByIdentifierIsNullAndUserID(userID);
-    // }
-
-    // TODO Auto-generated method stub
-    return TransactionApi.super.getUncategorizedTransactions();
-  }
+  // @Override
+  // public ResponseEntity<List<TransactionResponse>> getUncategorizedTransactions() {
+  //   String userID = jwtUtil.readSubjectFromSecurityContext();
+  //   logger.info(String.join("User: ", userID, " is calling /transaction/uncategorized"));
+  //   return ts.findAllByIdentifierIsNullAndUserID(userID);
+  // }
 
   @Override
   public ResponseEntity<Void> recategorizeTransactions() {
@@ -110,7 +106,7 @@ public class TransactionController implements TransactionApi {
     // public ResponseEntity<String> recategorize(@AuthenticationPrincipal Jwt jwt)
     // {
     // String userID = jwt.getSubject();
-    // transactionService.recategorize(userID);
+    // ts.recategorize(userID);
     // return ResponseEntity.accepted().body("recategorize done");
     // }
 

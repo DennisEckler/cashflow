@@ -1,5 +1,7 @@
 package dev.eckler.cashflow.domain.identifier;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,15 +14,14 @@ import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
 import dev.eckler.cashflow.openapi.model.IdentifierCreateRequest;
 import dev.eckler.cashflow.openapi.model.IdentifierResponse;
 import jakarta.validation.Valid;
-import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping(path = "/v1/api")
-@Log4j2
 public class IdentifierController implements IdentifierApi {
 
-  IdentifierService identifierService;
+  private final IdentifierService identifierService;
   private final JwtUtil jwtUtil;
+  private static final Logger log = LoggerFactory.getLogger(IdentifierController.class);
 
   public IdentifierController(IdentifierService identifierService, JwtUtil jwtUtil) {
     this.identifierService = identifierService;
