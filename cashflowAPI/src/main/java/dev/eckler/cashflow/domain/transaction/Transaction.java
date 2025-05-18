@@ -15,96 +15,96 @@ import jakarta.validation.constraints.Digits;
 @Entity
 public class Transaction {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-  @Column(name = "date", nullable = false)
-  private LocalDate date;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
-  @Digits(integer = 9, fraction = 2)
-  @Column(name = "amount", nullable = false)
-  private BigDecimal amount;
+    @Digits(integer = 9, fraction = 2)
+    @Column(name = "amount", nullable = false)
+    private BigDecimal amount;
 
-  @Column(name = "user_id", nullable = false)
-  private String userID;
+    @Column(name = "user_id", nullable = false)
+    private String userID;
 
-  @Column(name = "purpose", nullable = false)
-  private String purpose;
+    @Column(name = "purpose", nullable = false)
+    private String purpose;
 
-  @Column(name = "source", nullable = false)
-  private String source;
+    @Column(name = "source", nullable = false)
+    private String source;
 
-  @ManyToOne
-  private Identifier identifier;
+    @ManyToOne
+    private Identifier identifier;
 
-  public Transaction(LocalDate date, BigDecimal amount, String userID, String purpose, String source,
-      Identifier identifier) {
-    this.date = date;
-    this.amount = amount;
-    this.userID = userID;
-    this.source = source;
-    this.purpose = purpose;
-    this.identifier = identifier;
-  }
+    public Transaction(LocalDate date, BigDecimal amount, String userID, String purpose, String source,
+            Identifier identifier) {
+        this.date = date;
+        this.amount = amount;
+        this.userID = userID;
+        this.source = source;
+        this.purpose = purpose;
+        this.identifier = identifier;
+    }
 
-  public Transaction() {
-  }
+    public Transaction() {
+    }
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public Identifier getIdentifier() {
-    return identifier;
-  }
+    public Identifier getIdentifier() {
+        return identifier;
+    }
 
-  public void setIdentifier(Identifier identifier) {
-    this.identifier = identifier;
-  }
+    public void setIdentifier(Identifier identifier) {
+        this.identifier = identifier;
+    }
 
-  public LocalDate getDate() {
-    return date;
-  }
+    public LocalDate getDate() {
+        return date;
+    }
 
-  public void setDate(LocalDate date) {
-    this.date = date;
-  }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
-  public BigDecimal getAmount() {
-    return amount;
-  }
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
-  public void setAmount(BigDecimal amount) {
-    this.amount = amount;
-  }
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 
-  public String getUserID() {
-    return userID;
-  }
+    public String getUserID() {
+        return userID;
+    }
 
-  public void setUserID(String userID) {
-    this.userID = userID;
-  }
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
-  public String getPurpose() {
-    return purpose;
-  }
+    public String getPurpose() {
+        return purpose;
+    }
 
-  public void setPurpose(String purpose) {
-    this.purpose = purpose;
-  }
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
 
-  public String getSource() {
-    return source;
-  }
+    public String getSource() {
+        return source;
+    }
 
-  public void setSource(String source) {
-    this.source = source;
-  }
+    public void setSource(String source) {
+        this.source = source;
+    }
 }
