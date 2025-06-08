@@ -12,21 +12,21 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SecurityConfigTest{
+public class SecurityConfigTest {
 
-  @Autowired
-  private MockMvc mockMvc;
-  
- @Test
-  void testUnauthorized() throws Exception {
-    mockMvc.perform(get("/api/transaction/uncategorized"))
-      .andExpect(status().isUnauthorized());
-  }
+    @Autowired
+    private MockMvc mockMvc;
 
-  @Test
-  void testAuthorized() throws Exception {
-    mockMvc.perform(get("/api/transaction/uncategorized").with(SecurityMockMvcRequestPostProcessors.jwt()))
-        .andExpect(status().isOk());
-  }
+    @Test
+    void testUnauthorized() throws Exception {
+        mockMvc.perform(get("/v1/api/transaction/uncategorized"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void testAuthorized() throws Exception {
+        mockMvc.perform(get("/v1/api/transaction/uncategorized").with(SecurityMockMvcRequestPostProcessors.jwt()))
+                .andExpect(status().isOk());
+    }
 
 }

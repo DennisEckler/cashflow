@@ -9,29 +9,29 @@ spring:
       resourceserver:
         jwt:
           # issuer-uri: http://localhost:8099/realms/cashflow_realm
-          issuer-uri: http://eckler.local:9000/realms/cashflow_realm
+          issuer-uri: http://192.168.2.65:9000/realms/cashflow_realm
   flyway:
     enabled: true
 # debug: true
 ---
 # dev
-# spring:
-#   config:
-#     activate:
-#       on-profile: dev
-#   datasource:
-#     url: jdbc:h2:file:./cashflowdb
-#     username: dev
-#     password:
-#   h2:
-#     console:
-#       enabled: true
-#       path: /h2
-#   flyway:
-#     password:
-#     user: dev
-#     url: jdbc:h2:file:./cashflowdb
-#     locations: classpath:db/migration
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:file:./cashflowdb
+    username: dev
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  flyway:
+    password:
+    user: dev
+    url: jdbc:h2:file:./cashflowdb
+    locations: classpath:db/migration
 
 ---
 # prod

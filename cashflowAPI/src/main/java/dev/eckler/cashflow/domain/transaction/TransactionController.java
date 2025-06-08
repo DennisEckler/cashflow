@@ -20,7 +20,7 @@ import dev.eckler.cashflow.openapi.model.TransactionResponse;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/api/transaction")
+@RequestMapping(path = "/v1/api")
 public class TransactionController implements TransactionApi {
 
     private final TransactionService ts;
@@ -42,18 +42,8 @@ public class TransactionController implements TransactionApi {
 
     @Override
     public ResponseEntity<Void> categorizeTransactions(@Valid List<TransactionRequest> transactionRequest) {
-        // @PatchMapping("/categorize")
-        // public ResponseEntity<String> categorizeTransactions(
-        // @RequestBody List<Transaction> patchValues) {
-        // patchValues.forEach(entry -> transactionRepository.findById(entry.getId())
-        // .ifPresentOrElse(transaction -> transaction.setIdentifier(
-        // identifierService.findIdentifierByID(entry.getIdentifier().getId())),
-        // () -> logger.info("Cant find Transaction with ID: {}", entry)));
-        // transactionRepository.saveAll(patchValues);
-        // return ResponseEntity.ok("updated values successfully");
-        // }
-        // TODO Auto-generated method stub
-        return TransactionApi.super.categorizeTransactions(transactionRequest);
+        ts.categorizeTransactions(transactionRequest);
+        return ResponseEntity.ok().build();
     }
 
     @Override

@@ -18,31 +18,40 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-  String issuer;
+    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+    String issuer;
 
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http
-      .cors(Customizer.withDefaults())
-      .authorizeHttpRequests(auth -> auth
-        .requestMatchers("v3/**", "swagger-ui/**").permitAll()
-        .anyRequest().authenticated())
-        .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
-    return http.build();
-  }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("v3/**", "swagger-ui/**").permitAll()
+                        .anyRequest().authenticated())
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+        return http.build();
+    }
 
-  @Bean
-  public WebSecurityCustomizer webSecurityCustomizer() {
-    return (web) -> web.ignoring().requestMatchers("/h2/**", "/v3/**", "/swagger-ui.html");
-  }
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/h2/**", "/v3/**", "/swagger-ui.html");
+    }
 
-  @Bean
-  @Profile("prod")
-  public JwtDecoder jwtDecoderProd() {
-    NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
-        .fromIssuerLocation("http://cashflow-auth:9000/realms/cashflow_realm");
-    jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
-    return jwtDecoder;
-  }
+    @Bean
+    @Profile("prod")
+    public JwtDecoder jwtDecoderProd() {
+        NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
+                .fromIssuerLocation("http://cashflow-auth:9000/realms/cashflow_realm");
+        jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
+        return jwtDecoder;
+    }
+
+    @Bean
+    @Profile("dev")
+    public JwtDecoder jwtDecoderDev() {
+        NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
+                .fromIssuerLocation("http://192.168.2.65:9000/realms/cashflow_realm");
+        jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
+        return jwtDecoder;
+    }
 }
