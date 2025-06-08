@@ -22,54 +22,55 @@ import jakarta.validation.Valid;
 @RequestMapping(path = "/v1/api")
 public class CategoryController implements CategoryApi {
 
-  private final CategoryService categoryService;
-  private final JwtUtil jwtUtil;
-  private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
+    private final CategoryService categoryService;
+    private final JwtUtil jwtUtil;
+    private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
 
-  public CategoryController(CategoryService categoryService, JwtUtil jwtUtil) {
-    this.categoryService = categoryService;
-    this.jwtUtil = jwtUtil;
-  }
+    public CategoryController(CategoryService categoryService, JwtUtil jwtUtil) {
+        this.categoryService = categoryService;
+        this.jwtUtil = jwtUtil;
+    }
 
-  @ExceptionHandler({ CategoryNotFoundException.class })
-  public ResponseEntity<CashflowErrorResponse> error(CategoryNotFoundException ex) {
-    CashflowErrorResponse error = new CashflowErrorResponse();
-    error.setStatusCode(HttpStatus.NOT_FOUND.value());
-    error.setMessage(ex.getMessage());
-    return ResponseEntity.status(error.getStatusCode()).body(error);
-  }
+    @ExceptionHandler({ CategoryNotFoundException.class })
+    public ResponseEntity<CashflowErrorResponse> error(CategoryNotFoundException ex) {
+        CashflowErrorResponse error = new CashflowErrorResponse();
+        error.setStatusCode(HttpStatus.NOT_FOUND.value());
+        error.setMessage(ex.getMessage());
+        return ResponseEntity.status(error.getStatusCode()).body(error);
+    }
 
-  @Override
-  public ResponseEntity<List<CategoryResponse>> getCategories() {
-    String userID = jwtUtil.readSubjectFromSecurityContext();
-    log.debug("Get Categories as user: {}", userID);
-    List<CategoryResponse> categories = categoryService.getCategoriesByUser(userID);
-    return ResponseEntity.ok(categories);
-  }
+    @Override
+    public ResponseEntity<List<CategoryResponse>> getCategories() {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Get Categories as user: {}", userID);
+        List<CategoryResponse> categories = categoryService.getCategoriesByUser(userID);
+        return ResponseEntity.ok(categories);
+    }
 
-  @Override
-  public ResponseEntity<CategoryResponse> addCategory(@Valid CategoryCreateRequest categoryCreateRequest) {
-    String userID = jwtUtil.readSubjectFromSecurityContext();
-    log.debug("Creating Category: {} for userID: {}", categoryCreateRequest.getLabel(), userID);
-    categoryCreateRequest.setUserID(userID);
-    CategoryResponse response = categoryService.createCategory(categoryCreateRequest);
-    return ResponseEntity.status(HttpStatus.CREATED).body(response);
-  }
+    @Override
+    public ResponseEntity<CategoryResponse> addCategory(@Valid CategoryCreateRequest categoryCreateRequest) {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Creating Category: {} for userID: {}", categoryCreateRequest.getLabel(), userID);
+        categoryCreateRequest.setUserID(userID);
+        CategoryResponse response = categoryService.createCategory(categoryCreateRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
 
-  @Override
-  public ResponseEntity<Void> deleteCatgory(Long id) {
-    String userID = jwtUtil.readSubjectFromSecurityContext();
-    log.debug("Delete Category with ID: {} and userID: {}", id, userID);
-    categoryService.deleteCategory(id, userID);
-    return ResponseEntity.noContent().build();
-  }
+    @Override
+    public ResponseEntity<Void> deleteCatgory(Long id) {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Delete Category with ID: {} and userID: {}", id, userID);
+        categoryService.deleteCategory(id, userID);
+        return ResponseEntity.noContent().build();
+    }
 
-  @Override
-  public ResponseEntity<CategoryResponse> updateCategory(Long id, @Valid CategoryUpdateRequest categoryUpdateRequest) {
-    String userID = jwtUtil.readSubjectFromSecurityContext();
-    log.debug("Update Category with ID: {} and userID: {}", id, userID);
-    CategoryResponse response = categoryService.changeType(categoryUpdateRequest, userID);
-    return ResponseEntity.ok(response);
-  }
+    @Override
+    public ResponseEntity<CategoryResponse> updateCategory(Long id,
+            @Valid CategoryUpdateRequest categoryUpdateRequest) {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Update Category with ID: {} and userID: {}", id, userID);
+        CategoryResponse response = categoryService.changeType(categoryUpdateRequest, userID);
+        return ResponseEntity.ok(response);
+    }
 
 }

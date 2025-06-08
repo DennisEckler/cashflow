@@ -19,38 +19,38 @@ import jakarta.validation.Valid;
 @RequestMapping(path = "/v1/api")
 public class IdentifierController implements IdentifierApi {
 
-  private final IdentifierService identifierService;
-  private final JwtUtil jwtUtil;
-  private static final Logger log = LoggerFactory.getLogger(IdentifierController.class);
+    private final IdentifierService identifierService;
+    private final JwtUtil jwtUtil;
+    private static final Logger log = LoggerFactory.getLogger(IdentifierController.class);
 
-  public IdentifierController(IdentifierService identifierService, JwtUtil jwtUtil) {
-    this.identifierService = identifierService;
-    this.jwtUtil = jwtUtil;
-  }
+    public IdentifierController(IdentifierService identifierService, JwtUtil jwtUtil) {
+        this.identifierService = identifierService;
+        this.jwtUtil = jwtUtil;
+    }
 
-  @ExceptionHandler({ IdentifierNotFoundException.class })
-  public ResponseEntity<CashflowErrorResponse> error(IdentifierNotFoundException ex) {
-    CashflowErrorResponse error = new CashflowErrorResponse();
-    error.setStatusCode(HttpStatus.NOT_FOUND.value());
-    error.setMessage(ex.getMessage());
-    return ResponseEntity.status(error.getStatusCode()).body(error);
-  }
+    @ExceptionHandler({ IdentifierNotFoundException.class })
+    public ResponseEntity<CashflowErrorResponse> error(IdentifierNotFoundException ex) {
+        CashflowErrorResponse error = new CashflowErrorResponse();
+        error.setStatusCode(HttpStatus.NOT_FOUND.value());
+        error.setMessage(ex.getMessage());
+        return ResponseEntity.status(error.getStatusCode()).body(error);
+    }
 
-  @Override
-  public ResponseEntity<Void> deleteIdentifier(Long categoryID, Long identifierID) {
-    String userID = jwtUtil.readSubjectFromSecurityContext();
-    log.debug("Delete identifier: {} for category: {} as user: {}", identifierID, categoryID, userID);
-    identifierService.deleteIdentifier(identifierID, categoryID, userID);
-    return ResponseEntity.noContent().build();
-  }
+    @Override
+    public ResponseEntity<Void> deleteIdentifier(Long categoryID, Long identifierID) {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Delete identifier: {} for category: {} as user: {}", identifierID, categoryID, userID);
+        identifierService.deleteIdentifier(identifierID, categoryID, userID);
+        return ResponseEntity.noContent().build();
+    }
 
-  @Override
-  public ResponseEntity<IdentifierResponse> addIdentifier(Long categoryID,
-      @Valid IdentifierCreateRequest identifierCreateRequest) {
-    String userID = jwtUtil.readSubjectFromSecurityContext();
-    log.debug("Create Identifier as user: {}", userID);
-    IdentifierResponse identifierResponse = identifierService.addIdentifier(identifierCreateRequest, userID);
-    return ResponseEntity.status(HttpStatus.CREATED).body(identifierResponse);
-  }
+    @Override
+    public ResponseEntity<IdentifierResponse> addIdentifier(Long categoryID,
+            @Valid IdentifierCreateRequest identifierCreateRequest) {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Create Identifier as user: {}", userID);
+        IdentifierResponse identifierResponse = identifierService.addIdentifier(identifierCreateRequest, userID);
+        return ResponseEntity.status(HttpStatus.CREATED).body(identifierResponse);
+    }
 
 }

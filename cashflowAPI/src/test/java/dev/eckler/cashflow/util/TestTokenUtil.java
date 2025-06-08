@@ -20,37 +20,37 @@ import dev.eckler.cashflow.model.TestJwtToken;
 @TestComponent
 public class TestTokenUtil {
 
-  static String CLIENT_ID = "cashflow";
-  static String CLIENT_SECRET = "T9zHMs2YRIgy5mMckbBNALo1URv7Dp55";
+    static String CLIENT_ID = "cashflow";
+    static String CLIENT_SECRET = "T9zHMs2YRIgy5mMckbBNALo1URv7Dp55";
 
-  @Autowired
-  OAuth2ResourceServerProperties oAuth2Properties;
+    @Autowired
+    OAuth2ResourceServerProperties oAuth2Properties;
 
-  @Bean
-  public TestJwtToken testJwtToken() {
-    RestTemplate restTemplate = new RestTemplate();
-    HttpHeaders httpHeaders = new HttpHeaders();
-    httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+    @Bean
+    public TestJwtToken testJwtToken() {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.put("grant_type", singletonList("client_credentials"));
-    map.put("client_id", singletonList(CLIENT_ID));
-    map.put("client_secret", singletonList(CLIENT_SECRET));
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.put("grant_type", singletonList("client_credentials"));
+        map.put("client_id", singletonList(CLIENT_ID));
+        map.put("client_secret", singletonList(CLIENT_SECRET));
 
-    String authServerUrl = oAuth2Properties.getJwt().getIssuerUri() +
-        "/protocol/openid-connect/token";
+        String authServerUrl = oAuth2Properties.getJwt().getIssuerUri() +
+                "/protocol/openid-connect/token";
 
-    var request = new HttpEntity<>(map, httpHeaders);
-    KeyCloakToken token = restTemplate.postForObject(
-        authServerUrl,
-        request,
-        KeyCloakToken.class);
+        var request = new HttpEntity<>(map, httpHeaders);
+        KeyCloakToken token = restTemplate.postForObject(
+                authServerUrl,
+                request,
+                KeyCloakToken.class);
 
-    assert token != null;
-    return new TestJwtToken(token.accessToken());
-  }
+        assert token != null;
+        return new TestJwtToken(token.accessToken());
+    }
 
-  record KeyCloakToken(@JsonProperty("access_token") String accessToken) {
-  }
+    record KeyCloakToken(@JsonProperty("access_token") String accessToken) {
+    }
 
 }

@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/overview")
 public class OverviewController {
 
-  OverviewService overviewService;
+    OverviewService overviewService;
 
-  OverviewController(OverviewService overviewService) {
-    this.overviewService = overviewService;
-  }
+    OverviewController(OverviewService overviewService) {
+        this.overviewService = overviewService;
+    }
 
-  @GetMapping("/")
-  public List<OverviewSummary> getOverview(@AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    return overviewService.getOverview(userID);
-  }
+    @GetMapping("/")
+    public List<OverviewSummary> getOverview(@AuthenticationPrincipal Jwt jwt) {
+        String userID = jwt.getSubject();
+        return overviewService.getOverview(userID);
+    }
 
 }

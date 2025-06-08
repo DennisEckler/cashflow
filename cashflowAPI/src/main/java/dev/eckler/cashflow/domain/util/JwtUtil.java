@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtil {
 
-  public String readSubjectFromSecurityContext() {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    if (auth != null && auth.getPrincipal() instanceof Jwt) {
-      Jwt jwt = (Jwt) auth.getPrincipal();
-      return jwt.getSubject();
-    } else {
-      throw new RuntimeException("Jwt is the only allowed authentication method");
+    public String readSubjectFromSecurityContext() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof Jwt) {
+            Jwt jwt = (Jwt) auth.getPrincipal();
+            return jwt.getSubject();
+        } else {
+            throw new RuntimeException("Jwt is the only allowed authentication method");
+        }
     }
-  }
 }
