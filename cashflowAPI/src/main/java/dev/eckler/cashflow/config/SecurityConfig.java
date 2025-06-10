@@ -41,7 +41,7 @@ public class SecurityConfig {
     @Profile("prod")
     public JwtDecoder jwtDecoderProd() {
         NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
-                .fromIssuerLocation("http://cashflow-auth:9000/realms/cashflow_realm");
+                .fromIssuerLocation("http://192.168.2.65:9000/realms/cashflow_realm");
         jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
         return jwtDecoder;
     }
