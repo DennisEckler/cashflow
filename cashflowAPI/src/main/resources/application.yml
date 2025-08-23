@@ -1,18 +1,31 @@
 spring:
+  output:
+    ansi:
+      enabled: always
   application:
     name: cashflow
   jpa:
     hibernate:
       ddl-auto: none
+    show-sql: true
   security:
     oauth2:
       resourceserver:
         jwt:
-          # issuer-uri: http://localhost:8099/realms/cashflow_realm
-          issuer-uri: http://192.168.2.65:9000/realms/cashflow_realm
+          issuer-uri: http://eckler:9000/realms/cashflow_realm
   flyway:
     enabled: true
-# debug: true
+logging:
+  level:
+    dev:
+      eckler:
+        cashflow: debug
+    org:
+      apache:
+        tomcat:
+          util:
+            net: INFO
+
 ---
 # dev
 spring:

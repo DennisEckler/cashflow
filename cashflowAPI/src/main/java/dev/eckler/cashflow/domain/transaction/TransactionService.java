@@ -64,10 +64,13 @@ public class TransactionService {
 
     void categorizeTransactions(List<TransactionRequest> transactions) {
         transactions.forEach(transactionRequest -> {
-            tr.findById(transactionRequest.getId()).ifPresentOrElse(persistedTransaction -> {
-                persistedTransaction.setIdentifier(is.findIdentifierByID(transactionRequest.getIdentifier().getId()));
-                tr.save(persistedTransaction);
-            }, () -> logger.info("Cant find Transaction with ID: {}", transactionRequest));
+            long identifierId = transactionRequest.getIdentifier().getId();
+            Identifier newIdentifier = is.findIdentifierByID(identifierId);
+            tr.findById(transactionRequest.getId())
+                    .ifPresentOrElse(persistedTransaction -> {
+                        persistedTransaction.setIdentifier(newIdentifier);
+                        tr.save(persistedTransaction);
+                    }, () -> logger.info("Cant find Transaction with ID: {}", transactionRequest));
         });
     }
 

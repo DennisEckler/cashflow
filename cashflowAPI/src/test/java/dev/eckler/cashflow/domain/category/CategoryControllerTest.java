@@ -190,7 +190,7 @@ public class CategoryControllerTest {
 
         IdentifierResponse identifierResponse = new IdentifierResponse();
         identifierResponse.setId(1L);
-        identifierResponse.setLabel(CashflowConst.UNDEFINED);
+        identifierResponse.setLabel(CashflowConst.DEFAULT);
         List<IdentifierResponse> identifierList = new ArrayList<>();
 
         identifierList.add(identifierResponse);
@@ -209,7 +209,7 @@ public class CategoryControllerTest {
 
         IdentifierResponse identifierResponse = new IdentifierResponse();
         identifierResponse.setId(1L);
-        identifierResponse.setLabel(CashflowConst.UNDEFINED);
+        identifierResponse.setLabel(CashflowConst.DEFAULT);
         List<IdentifierResponse> identifierList = new ArrayList<>();
 
         identifierList.add(identifierResponse);

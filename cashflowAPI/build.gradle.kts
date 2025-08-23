@@ -80,7 +80,7 @@ tasks.named("compileJava") {
 
 openApiGenerate {
     generatorName.set("spring")
-    inputSpec.set("src/main/resources/cashflow-api.yml")
+    inputSpec.set("../cashflow-api.yml")
     ignoreFileOverride.set("src/main/resources/.openapi-generator-ignore")
     modelPackage.set("dev.eckler.cashflow.openapi.model")
     apiPackage.set("dev.eckler.cashflow.openapi.api")

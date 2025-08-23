@@ -42,12 +42,14 @@ public class TransactionController implements TransactionApi {
 
     @Override
     public ResponseEntity<Void> categorizeTransactions(@Valid List<TransactionRequest> transactionRequest) {
+        logger.debug("categorizeTransactions");
         ts.categorizeTransactions(transactionRequest);
         return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<Void> createTransactions(MultipartFile file, @Valid FileDescription fileDescription) {
+        logger.debug("createTransactions");
         String userID = jwtUtil.readSubjectFromSecurityContext();
         ts.createTransactions(file, fileDescription, userID);
         return ResponseEntity.ok().build();

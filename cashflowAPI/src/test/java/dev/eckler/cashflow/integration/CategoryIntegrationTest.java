@@ -70,8 +70,8 @@ public class CategoryIntegrationTest {
                 .body("id", notNullValue())
                 .body("label", is("lebensmittel"))
                 .body("userID", notNullValue())
-                .body("type", is(TransactionType.FIXED.toString().toLowerCase()))
-                .body("identifier[0].label", is(CashflowConst.UNDEFINED));
+                .body("type", is(TransactionType.IGNORE.toString()))
+                .body("identifier[0].label", is("lebensmittel_" + CashflowConst.DEFAULT));
     }
 
     @Test

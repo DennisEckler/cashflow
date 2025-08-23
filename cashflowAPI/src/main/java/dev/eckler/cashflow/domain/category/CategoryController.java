@@ -68,7 +68,8 @@ public class CategoryController implements CategoryApi {
     public ResponseEntity<CategoryResponse> updateCategory(Long id,
             @Valid CategoryUpdateRequest categoryUpdateRequest) {
         String userID = jwtUtil.readSubjectFromSecurityContext();
-        log.debug("Update Category with ID: {} and userID: {}", id, userID);
+        log.debug("Update Category with ID: {} and userID: {} with request", id, userID,
+                categoryUpdateRequest.toString());
         CategoryResponse response = categoryService.changeType(categoryUpdateRequest, userID);
         return ResponseEntity.ok(response);
     }

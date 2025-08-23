@@ -47,8 +47,9 @@ public class Category {
     public Category(String label, String userID) {
         this.label = label;
         this.userID = userID;
-        this.type = TransactionType.FIXED;
-        this.identifier = new HashSet<>(Arrays.asList(new Identifier(CashflowConst.UNDEFINED, this)));
+        this.type = TransactionType.IGNORE;
+        String defaultIdentifierLabel = label + "_" + CashflowConst.DEFAULT;
+        this.identifier = new HashSet<>(Arrays.asList(new Identifier(defaultIdentifierLabel, this)));
     }
 
     public Long getId() {
@@ -89,6 +90,12 @@ public class Category {
 
     public void setIdentifier(Set<Identifier> identifier) {
         this.identifier = identifier;
+    }
+
+    @Override
+    public String toString() {
+        return "Category [id=" + id + ", label=" + label + ", userID=" + userID + ", type=" + type + ", identifier="
+                + identifier + "]";
     }
 
 }

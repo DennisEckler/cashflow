@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -57,19 +56,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    @Profile("prod")
-    public JwtDecoder jwtDecoderProd() {
-        NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
-                .fromIssuerLocation("http://192.168.2.65:9000/realms/cashflow_realm");
-        jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
-        return jwtDecoder;
-    }
-
-    @Bean
-    @Profile("dev")
     public JwtDecoder jwtDecoderDev() {
         NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
-                .fromIssuerLocation("http://192.168.2.65:9000/realms/cashflow_realm");
+                .fromIssuerLocation(issuer);
         jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
         return jwtDecoder;
     }
