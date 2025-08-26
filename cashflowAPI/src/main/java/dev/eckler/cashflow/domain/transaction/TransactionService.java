@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +96,14 @@ public class TransactionService {
     }
 
     private void throwIfPeriodAlreadyExist(String year, String month) throws PeriodExistsException {
-        if (tr.getNumberOfYearMonthMatches(year, month) > 0) {
+        int yearInt = Integer.valueOf(year);
+        int monthInt = Integer.valueOf(month);
+        LocalDate startDate = LocalDate.of(yearInt, monthInt, 1);
+        LocalDate endDate = YearMonth.of(yearInt, monthInt).atEndOfMonth();
+        int transactionsCount = tr.findByDateBetween(startDate, endDate).size();
+        logger.debug("transactionsCount {} found between {} and {}", transactionsCount, startDate.toString(),
+                endDate.toString());
+        if (transactionsCount > 0) {
             throw new PeriodExistsException(
                     "This Period exists with year: " + year + " and month: " + month);
         }

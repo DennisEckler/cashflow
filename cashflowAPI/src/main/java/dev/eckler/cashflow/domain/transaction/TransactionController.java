@@ -49,8 +49,9 @@ public class TransactionController implements TransactionApi {
 
     @Override
     public ResponseEntity<Void> createTransactions(MultipartFile file, @Valid FileDescription fileDescription) {
-        logger.debug("createTransactions");
         String userID = jwtUtil.readSubjectFromSecurityContext();
+        logger.info(String.join("User: ", userID, " is calling /transaction/uncategorized"));
+        logger.debug("createTransactions");
         ts.createTransactions(file, fileDescription, userID);
         return ResponseEntity.ok().build();
     }
