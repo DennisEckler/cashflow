@@ -2,26 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { OAuthService } from 'angular-oauth2-oidc';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class OverviewService {
-  constructor(
-    private http: HttpClient,
-    private oauth: OAuthService,
-  ) {}
-
-  token = this.oauth.getAccessToken();
-
-  httpHeader = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`,
-  });
-
+  constructor(private http: HttpClient) {}
   getOverview(): Observable<any> {
-    return this.http.get(environment.cashflowUrl + '/overview/', {
-      headers: this.httpHeader,
-    });
+    return this.http.get('http://localhost:8080/v1/api/overview');
   }
 }

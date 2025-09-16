@@ -9,7 +9,7 @@
 @if (categories && categories.length !== 0) {
   @for (category of categories; track category.id) {
     <app-category-card
-      (categoryDelete)="deleteCategory($event)"
+      (categoryDeleteEvent)="deleteCategory($event)"
       [category]="category"
     ></app-category-card>
   }

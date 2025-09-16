@@ -1,33 +1,34 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryCardComponent } from 'src/app/shared/category-card/category-card.component';
-import { IdentifierChipComponent } from 'src/app/shared/identifier-chip/identifier-chip.component';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
-import { Category } from 'src/app/core/model/category';
-import { CategoryService } from 'src/app/core/services/category.service';
 import { FormsModule } from '@angular/forms';
-import { TransactionType } from 'src/app/core/model/transactionType';
+import {
+  CategoryCreateRequest,
+  CategoryResponse,
+  CategoryService,
+  TransactionType,
+} from 'generated-sources/openapi';
 
 @Component({
-    selector: 'app-settings',
-    imports: [
-        CommonModule,
-        CategoryCardComponent,
-        IdentifierChipComponent,
-        NavigationButtonComponent,
-        FormsModule,
-    ],
-    templateUrl: './settings.component.html',
-    styleUrl: './settings.component.scss'
+  selector: 'app-settings',
+  imports: [
+    CommonModule,
+    CategoryCardComponent,
+    NavigationButtonComponent,
+    FormsModule,
+  ],
+  templateUrl: './settings.component.html',
+  styleUrl: './settings.component.scss',
 })
 export class SettingsComponent implements OnInit {
   private categoryService = inject(CategoryService);
 
-  categories: Category[] = [];
+  categories: CategoryResponse[] = [];
   categoryInput: string = '';
 
   ngOnInit() {
-    this.categoryService.get().subscribe({
+    this.categoryService.getCategories().subscribe({
       next: (v) => {
         if (v !== null) {
           this.categories = v;
@@ -44,14 +45,14 @@ export class SettingsComponent implements OnInit {
       if (labelExist || this.categoryInput.trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');
       } else {
-        let category: Category = {
-          id: null,
+        let category: CategoryCreateRequest = {
+          id: undefined,
           label: this.categoryInput,
-          userID: null,
+          userID: undefined,
           type: TransactionType.FIXED,
           identifier: [],
         };
-        this.categoryService.add(category).subscribe({
+        this.categoryService.addCategory(category).subscribe({
           next: (response) => this.categories.push(response),
           error: (err) => console.log(err),
         });
@@ -60,12 +61,12 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  deleteCategory(category: Category) {
+  deleteCategory(category: CategoryResponse) {
     this.categories = this.categories?.filter(
       (ele) => ele.label !== category.label,
     );
     if (category.id !== null) {
-      this.categoryService.delete(category).subscribe({
+      this.categoryService.deleteCatgory(category.id as number).subscribe({
         next: (v) => console.log(v),
       });
     }

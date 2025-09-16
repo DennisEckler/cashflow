@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate-code": "openapi-generator-cli generate -i ../cashflow-api.yml -g typescript-angular -o generated-sources/openapi --additional-properties=enumPropertyNaming=UPPERCASE"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
     "@angular-devkit/build-angular": "^19.0.6",
     "@angular/cli": "~19.0.6",
     "@angular/compiler-cli": "^19.0.5",
+    "@openapitools/openapi-generator-cli": "^2.20.2",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",

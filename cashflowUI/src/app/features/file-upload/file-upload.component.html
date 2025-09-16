@@ -13,17 +13,17 @@
 @if (fileName) {
   <div class="file-structure">
     <label for="dateIdx">DateIdx: </label>
-    <input id="dateIdx" [(ngModel)]="fileStructure.dateIdx" type="text" />
+    <input id="dateIdx" [(ngModel)]="fileDescription.dateIdx" type="text" />
     <label for="amountIdx">AmountIdx: </label>
-    <input id="amountIdx" [(ngModel)]="fileStructure.amountIdx" type="text" />
+    <input id="amountIdx" [(ngModel)]="fileDescription.amountIdx" type="text" />
     <label for="purposeIdx">PurposeIdx: </label>
-    <input id="purposeIdx" [(ngModel)]="fileStructure.purposeIdx" type="text" />
+    <input id="purposeIdx" [(ngModel)]="fileDescription.purposeIdx" type="text" />
     <label for="sourceIdx">Source: </label>
-    <input id="sourceIdx" [(ngModel)]="fileStructure.sourceIdx" type="text" />
+    <input id="sourceIdx" [(ngModel)]="fileDescription.sourceIdx" type="text" />
     <label for="year">Year: </label>
-    <input id="year" [(ngModel)]="fileStructure.year" type="text" />
+    <input id="year" [(ngModel)]="fileDescription.year" type="text" />
     <label for="month">Month: </label>
-    <input id="month" [(ngModel)]="fileStructure.month" type="text" />
+    <input id="month" [(ngModel)]="fileDescription.month" type="text" />
   </div>
   <navigation-button class="send-button" label="Send" (click)="onUpload()" />
   {{ message }}

@@ -18,6 +18,7 @@ import dev.eckler.cashflow.openapi.model.FileDescription;
 import dev.eckler.cashflow.openapi.model.TransactionRequest;
 import dev.eckler.cashflow.openapi.model.TransactionResponse;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
 
 @RestController
 @RequestMapping(path = "/v1/api")
@@ -41,8 +42,10 @@ public class TransactionController implements TransactionApi {
     }
 
     @Override
-    public ResponseEntity<Void> categorizeTransactions(@Valid List<TransactionRequest> transactionRequest) {
+    public ResponseEntity<Void> categorizeTransactions(
+            @Valid @Size(min = 1) List<TransactionRequest> transactionRequest) {
         logger.debug("categorizeTransactions");
+        transactionRequest.forEach(ele -> logger.debug(ele.toString()));
         ts.categorizeTransactions(transactionRequest);
         return ResponseEntity.ok().build();
     }

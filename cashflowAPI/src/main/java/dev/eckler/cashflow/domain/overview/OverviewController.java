@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/overview")
+@RequestMapping(path = "/v1/api/overview")
 public class OverviewController {
 
     OverviewService overviewService;
@@ -18,7 +18,7 @@ public class OverviewController {
         this.overviewService = overviewService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<OverviewSummary> getOverview(@AuthenticationPrincipal Jwt jwt) {
         String userID = jwt.getSubject();
         return overviewService.getOverview(userID);

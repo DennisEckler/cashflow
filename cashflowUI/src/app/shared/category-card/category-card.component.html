@@ -8,7 +8,7 @@
           name="type"
           id="type"
           [(ngModel)]="category.type"
-          (ngModelChange)="changeType()"
+          (ngModelChange)="changeCategoryType()"
         >
           @for (type of enumValues; track $index) {
             <option>{{ type }}</option>

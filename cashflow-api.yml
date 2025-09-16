@@ -1,0 +1,479 @@
+openapi: 3.0.3
+info:
+  title: Cashflow API
+  description: |-
+    A simple api to monitor and organize your transactions and get an overview
+  version: 1.0.11
+servers:
+  - url: http://localhost:8080/v1/api
+tags:
+  - name: category
+    description: Create categories to group transactions
+  - name: identifier
+    description: Identifier are used to categorize transactions automatically
+  - name: transaction
+    description: manage your transactions
+paths:
+  /category:
+    get:
+      tags:
+        - category
+      summary: Get all Categories
+      operationId: getCategories
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CategoryResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags:
+        - category
+      summary: Add a new Category
+      operationId: addCategory
+      requestBody:
+        description: Requestbody has only the label property required other values should be not defined yet
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryCreateRequest"
+            example:
+              label: Lebensmittel
+        required: true
+      responses:
+        "201":
+          description: Successful create Category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryResponse"
+              example:
+                id: 1
+                userID: 1234
+                type: FIXED
+                label: Lebensmittel
+                identifier:
+                  - id: 1
+                    label: "undefined"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /category/{id}:
+    put:
+      tags:
+        - category
+      summary: Update Category
+      description: Updates a specific category where the path id must match the id from the body
+      operationId: updateCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Requestbody is holding a Category which needs to be updated
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryUpdateRequest"
+        required: true
+      responses:
+        "200":
+          description: Successfully updated a Category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryResponse"
+              example:
+                id: 1
+                userID: 1234
+                type: FIXED
+                label: Lebensmittel
+                identifier:
+                  - id: 1
+                    label: "undefined"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - category
+      summary: Delete Category
+      operationId: deleteCatgory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: deleted
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /category/{categoryID}/identifier:
+    post:
+      tags:
+        - identifier
+      summary: create an identifier related to an category
+      operationId: addIdentifier
+      parameters:
+        - name: categoryID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Create an identifier with an label and related to an categoryID
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IdentifierCreateRequest"
+            example:
+              label: Tankstelle
+              categoryID: 1
+        required: true
+      responses:
+        "201":
+          description: Successfully created an identifier
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdentifierResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /category/{categoryID}/identifier/{identifierID}:
+    delete:
+      tags:
+        - identifier
+      summary: Delete an identifier
+      operationId: deleteIdentifier
+      parameters:
+        - name: categoryID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: identifierID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: deleted
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /transaction/uncategorized:
+    get:
+      tags:
+        - transaction
+      summary: Get uncategorized Transactions
+      description: |-
+        Get a List of uncategorized Transactions to assign manually an category.
+
+        - `uncategorized Transactions` has identifer set to `null`
+      operationId: getUncategorizedTransactions
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TransactionResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /transaction/upload:
+    post:
+      tags:
+        - transaction
+      summary: Upload an csv file with an description
+      operationId: createTransactions
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                fileDescription:
+                  $ref: "#/components/schemas/FileDescription"
+              required:
+                - file
+                - fileDescription
+      responses:
+        "204":
+          description: successful operation
+        "400":
+          description: File Structure is wrong or not defined
+  /transaction/categorize:
+    put:
+      tags:
+        - transaction
+      summary: Categorize manually an Transaction
+      operationId: categorizeTransactions
+      requestBody:
+        description: Transaction with identifier unknown due to manual set
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/TransactionRequest"
+              minItems: 1
+            example:
+              - id: 1
+                date: "2025-01-19"
+                amount: 45.08
+                userID: "gojo"
+                purpose: "abheben"
+                source: "Automat"
+                identifier:
+                  id: 1
+                  label: "unknown"
+      responses:
+        "204":
+          description: Categorized
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /transaction/recategorize:
+    get:
+      tags:
+        - transaction
+      summary: Trigger recategorize for uncategorized Transactions
+      operationId: recategorizeTransactions
+      responses:
+        "204":
+          description: Successfully recategorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+components:
+  #-------------------------------
+  # Requests
+  #-------------------------------
+
+  #-------------------------------
+  # Responses
+  #-------------------------------
+  responses:
+    BadRequest:
+      description: Invalid Data
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CashflowValidationErrorResponse"
+    NotFound:
+      description: Ressource not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CashflowErrorResponse"
+
+  #-------------------------------
+  # Schemas
+  #-------------------------------
+  schemas:
+    CategoryResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        label:
+          type: string
+          example: Mobility
+        userID:
+          type: string
+          example: 1234
+        type:
+          $ref: "#/components/schemas/TransactionType"
+        identifier:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdentifierResponse"
+    CategoryCreateRequest:
+      allOf:
+        - $ref: "#/components/schemas/CategoryResponse"
+      required:
+        - label
+    CategoryUpdateRequest:
+      allOf:
+        - $ref: "#/components/schemas/CategoryResponse"
+      example:
+        id: 1
+        label: Lebensmittel
+        userID: 1234
+        type: fixed
+      required:
+        - label
+        - id
+        - userID
+        - type
+
+    IdentifierResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        label:
+          type: string
+          example: Tankstelle
+    IdentifierCreateRequest:
+      allOf:
+        - $ref: "#/components/schemas/IdentifierResponse"
+      properties:
+        categoryID:
+          type: integer
+          format: int64
+          example: 1
+      required:
+        - label
+        - categoryID
+
+    TransactionResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        date:
+          type: string
+          format: date
+        amount:
+          type: number
+        userID:
+          type: string
+        purpose:
+          type: string
+        source:
+          type: string
+        identifier:
+          $ref: "#/components/schemas/IdentifierResponse"
+    TransactionRequest:
+      allOf:
+        - $ref: "#/components/schemas/TransactionResponse"
+      required:
+        - id
+        - date
+        - amount
+        - userID
+        - purpose
+        - source
+        - identifier
+
+    TransactionType:
+      type: string
+      enum:
+        - FIXED
+        - VARIABLE
+        - UNIQUE
+        - INCOME
+        - IGNORE
+
+    FileDescription:
+      type: object
+      properties:
+        dateIdx:
+          type: integer
+          format: int32
+          example: 1
+        amountIdx:
+          type: integer
+          format: int32
+          example: 2
+        purposeIdx:
+          type: integer
+          format: int32
+          example: 3
+        sourceIdx:
+          type: integer
+          format: int32
+          example: 4
+        year:
+          type: string
+          example: 2024
+        month:
+          type: string
+          example: 02
+
+    CashflowErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+
+    CashflowValidationErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 400
+        message:
+          type: string
+          example: Object is invalid see sub-errors
+        datetime:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        subError:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                example: label
+              fieldError:
+                type: string
+                example: label cant be null or empty
+  #-------------------------------
+  # Security-Schemas
+  #-------------------------------
+  securitySchemes:
+    oauth2: # arbitrary name for the security scheme
+      type: oauth2
+      flows:
+        authorizationCode:
+          tokenUrl: https://api.example.com/oauth/authorize
+          authorizationUrl: https://api.example.com/oauth/authorize
+          scopes:
+            openid: openid
+            profile: profile
+            email: email
+            offline_access: offline_access
+
+# Apply the security globally to all operations
+security:
+  - oauth2: [] # use the same name as above

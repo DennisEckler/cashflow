@@ -49,26 +49,23 @@ export class CategorizeComponent implements OnInit {
   onSave() {
     this.update.length = 0;
     console.log('onSave');
-    // for (let transaction of this.transactions!) {
-    //   console.log(transaction);
-    // }
+    for (let transaction of this.transactions!) {
+      console.log(transaction);
+    }
     if (this.transactions) {
       for (let transaction of this.transactions!) {
         if (transaction.identifier) {
-          var identifierRequest = JSON.parse(transaction.identifier as string);
-          console.log('the id is ' + identifierRequest.id);
-          if (identifierRequest.id !== null) {
-            var transactionRequest: TransactionRequest = {
-              amount: transaction.amount!,
-              date: transaction.date!,
-              id: transaction.id!,
-              purpose: transaction.purpose!,
-              source: transaction.source!,
-              userID: transaction.userID!,
-              identifier: identifierRequest,
-            };
-            this.update.push(transactionRequest);
-          }
+          var identifierRequest: IdentifierResponse = transaction.identifier;
+          var transactionRequest: TransactionRequest = {
+            amount: transaction.amount!,
+            date: transaction.date!,
+            id: transaction.id!,
+            purpose: transaction.purpose!,
+            source: transaction.source!,
+            userID: transaction.userID!,
+            identifier: identifierRequest,
+          };
+          this.update.push(transactionRequest);
         }
       }
       if (this.update.length > 0) {
@@ -100,9 +97,15 @@ export class CategorizeComponent implements OnInit {
   }
 
   getUndefined(category: CategoryResponse): string {
+    // return JSON.stringify(
+    //   category.identifier?.find(
+    //     (ele) => ele.label === category.label + '_default',
+    //   ),
+    // );
     var identifier = category.identifier!.find(
       (ele) => ele.label === category.label + '_default',
     );
+    // console.log(identifier);
     if (identifier === undefined) {
       throw new Error(
         'Cant find undefined identifier for category' + category.label,

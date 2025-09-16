@@ -1,21 +1,21 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
-import { TransactionService } from 'src/app/core/services/transaction.service';
 import { FormsModule } from '@angular/forms';
-import { FileStructure } from 'src/app/core/model/fileStructure';
+import { FileDescription, TransactionService } from 'generated-sources/openapi';
 
 @Component({
-    selector: 'app-file-upload',
-    templateUrl: './file-upload.component.html',
-    styleUrls: ['./file-upload.component.scss'],
-    imports: [NavigationButtonComponent, FormsModule]
+  selector: 'app-file-upload',
+  templateUrl: './file-upload.component.html',
+  styleUrls: ['./file-upload.component.scss'],
+  imports: [NavigationButtonComponent, FormsModule],
 })
 export class FileUploadComponent implements OnInit {
   private transactionService = inject(TransactionService);
   csvFile: File | null = null;
   fileName: string = '';
   message: any;
-  fileStructure: FileStructure = {
+
+  fileDescription: FileDescription = {
     dateIdx: 1,
     amountIdx: 5,
     purposeIdx: 4,
@@ -36,14 +36,14 @@ export class FileUploadComponent implements OnInit {
   }
 
   updateJson(event: any) {
-    this.fileStructure = event.target;
+    this.fileDescription = event.target;
   }
 
   onUpload() {
     if (this.csvFile) {
       console.log('uploading this file: ' + this.csvFile.name);
       this.transactionService
-        .upload(this.csvFile, this.fileStructure)
+        .createTransactions(this.csvFile, this.fileDescription)
         .subscribe({
           next: (response) => {
             this.message = response;

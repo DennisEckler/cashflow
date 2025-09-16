@@ -1,13 +1,13 @@
-@import "../../../styles.scss";
+@use "../../../styles.scss";
 .identifier {
   &-container {
     display: flex;
     align-items: center;
     gap: 3px;
     padding: 3px;
-    background-color: $myGreen;
+    background-color: styles.$myGreen;
     color: white;
-    border: 3px $myPurple solid;
+    border: 3px styles.$myPurple solid;
     border-radius: 90px;
     margin: 0.1rem;
   }
