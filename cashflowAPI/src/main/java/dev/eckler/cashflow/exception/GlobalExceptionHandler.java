@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.domain;
+package dev.eckler.cashflow.exception;
 
 import java.time.OffsetDateTime;
 

@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.domain.util;
+package dev.eckler.cashflow.util;
 
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;

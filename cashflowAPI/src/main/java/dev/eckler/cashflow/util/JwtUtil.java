@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.domain.util;
+package dev.eckler.cashflow.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

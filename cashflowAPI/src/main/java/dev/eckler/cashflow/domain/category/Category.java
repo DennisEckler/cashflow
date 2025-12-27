@@ -1,12 +1,13 @@
 package dev.eckler.cashflow.domain.category;
 
+import static dev.eckler.cashflow.constants.CashflowConst.DEFAULT;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import dev.eckler.cashflow.domain.identifier.Identifier;
 import dev.eckler.cashflow.openapi.model.TransactionType;
-import dev.eckler.cashflow.shared.CashflowConst;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,7 +49,7 @@ public class Category {
         this.label = label;
         this.userID = userID;
         this.type = TransactionType.IGNORE;
-        String defaultIdentifierLabel = label + "_" + CashflowConst.DEFAULT;
+        String defaultIdentifierLabel = label + "_" + DEFAULT;
         this.identifier = new HashSet<>(Arrays.asList(new Identifier(defaultIdentifierLabel, this)));
     }
 
