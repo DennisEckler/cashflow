@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Input } from '@angular/core';
 import { IdentifierChipComponent } from '../identifier-chip/identifier-chip.component';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { catResToCatUpReq } from 'src/app/core/mapper/category.mapper';
 
 @Component({
   selector: 'app-category-card',
-  imports: [CommonModule, IdentifierChipComponent, FormsModule],
+  imports: [IdentifierChipComponent, FormsModule],
   templateUrl: './category-card.component.html',
   styleUrl: './category-card.component.scss',
 })

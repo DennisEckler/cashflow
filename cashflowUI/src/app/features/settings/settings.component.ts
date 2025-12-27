@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { CategoryCardComponent } from 'src/app/shared/category-card/category-card.component';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import { FormsModule } from '@angular/forms';
@@ -13,11 +13,10 @@ import {
 @Component({
   selector: 'app-settings',
   imports: [
-    CommonModule,
     CategoryCardComponent,
     NavigationButtonComponent,
-    FormsModule,
-  ],
+    FormsModule
+],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })

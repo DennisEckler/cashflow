@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from 'src/app/core/auth/auth.config';
@@ -6,7 +6,7 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, NavigationButtonComponent],
+  imports: [NavigationButtonComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
