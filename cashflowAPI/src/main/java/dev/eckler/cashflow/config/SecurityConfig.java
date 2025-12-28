@@ -32,7 +32,7 @@ public class SecurityConfig {
             throws Exception {
         http
                 .cors(cors -> cors.configurationSource(customCorsConfig))
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2/**"))
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/v3/**", "/swagger-ui/**", "/h2/**").permitAll()
