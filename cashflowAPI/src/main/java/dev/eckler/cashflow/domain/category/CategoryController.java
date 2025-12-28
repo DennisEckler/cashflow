@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.eckler.cashflow.domain.util.JwtUtil;
 import dev.eckler.cashflow.openapi.api.CategoryApi;
 import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
 import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
 import dev.eckler.cashflow.openapi.model.CategoryResponse;
 import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
+import dev.eckler.cashflow.util.JwtUtil;
 import jakarta.validation.Valid;
 
 @RestController

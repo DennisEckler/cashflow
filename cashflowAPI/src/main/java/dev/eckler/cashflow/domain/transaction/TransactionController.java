@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import dev.eckler.cashflow.domain.util.JwtUtil;
 import dev.eckler.cashflow.openapi.api.TransactionApi;
 import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
 import dev.eckler.cashflow.openapi.model.FileDescription;
 import dev.eckler.cashflow.openapi.model.TransactionRequest;
 import dev.eckler.cashflow.openapi.model.TransactionResponse;
+import dev.eckler.cashflow.util.JwtUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 

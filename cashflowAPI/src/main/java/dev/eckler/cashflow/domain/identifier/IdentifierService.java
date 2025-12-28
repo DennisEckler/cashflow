@@ -7,11 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import dev.eckler.cashflow.constants.CashflowConst;
 import dev.eckler.cashflow.domain.category.Category;
 import dev.eckler.cashflow.domain.category.CategoryRepository;
 import dev.eckler.cashflow.openapi.model.IdentifierCreateRequest;
 import dev.eckler.cashflow.openapi.model.IdentifierResponse;
-import dev.eckler.cashflow.shared.CashflowConst;
 
 @Service
 public class IdentifierService {

@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.eckler.cashflow.domain.util.JwtUtil;
 import dev.eckler.cashflow.openapi.api.IdentifierApi;
 import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
 import dev.eckler.cashflow.openapi.model.IdentifierCreateRequest;
 import dev.eckler.cashflow.openapi.model.IdentifierResponse;
+import dev.eckler.cashflow.util.JwtUtil;
 import jakarta.validation.Valid;
 
 @RestController
