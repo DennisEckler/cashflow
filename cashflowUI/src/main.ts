@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
+import { importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -11,7 +11,7 @@ import { authInterceptor } from './app/core/auth/auth.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, FormsModule, NgOptimizedImage),
+    provideZoneChangeDetection(),importProvidersFrom(BrowserModule, FormsModule, NgOptimizedImage),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideOAuthClient(),
     appConfig.providers,
