@@ -1,60 +1,77 @@
 package dev.eckler.cashflow.domain.category;
 
-import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.exc.StreamReadException;
+import dev.eckler.cashflow.openapi.api.CategoryApi;
+import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
+import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
+import dev.eckler.cashflow.openapi.model.CategoryResponse;
+import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
+import dev.eckler.cashflow.util.JwtUtil;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/api/category")
-public class CategoryController {
+@RequestMapping(path = "/v1/api")
+public class CategoryController implements CategoryApi {
 
-  private final CategoryService categoryService;
+    private final CategoryService categoryService;
+    private final JwtUtil jwtUtil;
+    private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
 
-  public CategoryController(CategoryService categoryService) {
-    this.categoryService = categoryService;
-  }
+    public CategoryController(CategoryService categoryService, JwtUtil jwtUtil) {
+        this.categoryService = categoryService;
+        this.jwtUtil = jwtUtil;
+    }
 
-  @GetMapping
-  public ResponseEntity<List<Category>> getCategories(@AuthenticationPrincipal Jwt jwt)
-      throws StreamReadException, IOException {
-    String userID = jwt.getSubject();
-    List<Category> categories = categoryService.getCategoriesByUser(userID);
-    HttpStatus status = categories.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
-    return new ResponseEntity<>(categories, status);
-  }
+    @ExceptionHandler({ CategoryNotFoundException.class })
+    public ResponseEntity<CashflowErrorResponse> error(CategoryNotFoundException ex) {
+        CashflowErrorResponse error = new CashflowErrorResponse();
+        error.setStatusCode(HttpStatus.NOT_FOUND.value());
+        error.setMessage(ex.getMessage());
+        return ResponseEntity.status(error.getStatusCode()).body(error);
+    }
 
-  @PostMapping
-  public ResponseEntity<Category> createCategory(@RequestBody Category category, @AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    category.setUserID(userID);
-    return categoryService.createCategory(category);
-  }
+    @Override
+    public ResponseEntity<List<CategoryResponse>> getCategories() {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Get Categories as user: {}", userID);
+        List<CategoryResponse> categories = categoryService.getCategoriesByUser(userID);
+        return ResponseEntity.ok(categories);
+    }
 
-  @PatchMapping
-  public ResponseEntity<Category> changeType(
-      @RequestBody Category category, @AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    return categoryService.changeType(category, userID);
-  }
+    @Override
+    public ResponseEntity<CategoryResponse> addCategory(@Valid CategoryCreateRequest categoryCreateRequest) {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Creating Category: {} for userID: {}", categoryCreateRequest.getLabel(), userID);
+        categoryCreateRequest.setUserID(userID);
+        CategoryResponse response = categoryService.createCategory(categoryCreateRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<String> deleteCategory(@PathVariable(name = "id") Long id, @AuthenticationPrincipal Jwt jwt) {
-    String userID = jwt.getSubject();
-    return categoryService.deleteCategory(id, userID);
-  }
+    @Override
+    public ResponseEntity<Void> deleteCatgory(Long id) {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Delete Category with ID: {} and userID: {}", id, userID);
+        categoryService.deleteCategory(id, userID);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<CategoryResponse> updateCategory(Long id,
+            @Valid CategoryUpdateRequest categoryUpdateRequest) {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
+        log.debug("Update Category with ID: {} and userID: {} with request", id, userID,
+                categoryUpdateRequest.toString());
+        CategoryResponse response = categoryService.changeType(categoryUpdateRequest, userID);
+        return ResponseEntity.ok(response);
+    }
 
 }

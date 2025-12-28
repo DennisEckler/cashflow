@@ -1,95 +1,102 @@
 package dev.eckler.cashflow.domain.category;
 
+import static dev.eckler.cashflow.constants.CashflowConst.DEFAULT;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import dev.eckler.cashflow.domain.identifier.Identifier;
-import dev.eckler.cashflow.shared.CashflowConst;
-import dev.eckler.cashflow.shared.TransactionType;
+import dev.eckler.cashflow.openapi.model.TransactionType;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "category")
 public class Category {
 
-  public Category() {
-  }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-  public Category(String label, String userID, TransactionType type) {
-    this.label = label;
-    this.userID = userID;
-    this.type = type;
-    this.identifier = new HashSet<>(Arrays.asList(new Identifier(CashflowConst.UNDEFINED, this)));
-  }
+    @Column(name = "label", unique = true, nullable = false)
+    private String label;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Column(name = "user_id", nullable = false)
+    private String userID;
 
-  @NotNull
-  private String label;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private TransactionType type;
 
-  @NotNull
-  private String userID;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Identifier> identifier;
 
-  @NotNull
-  @Enumerated(value = EnumType.STRING)
-  private TransactionType type;
+    public Category() {
+    }
 
-  @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-  private Set<Identifier> identifier;
+    public Category(String label, String userID) {
+        this.label = label;
+        this.userID = userID;
+        this.type = TransactionType.IGNORE;
+        String defaultIdentifierLabel = label + "_" + DEFAULT;
+        this.identifier = new HashSet<>(Arrays.asList(new Identifier(defaultIdentifierLabel, this)));
+    }
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getLabel() {
-    return label;
-  }
+    public String getLabel() {
+        return label;
+    }
 
-  public void setLabel(String label) {
-    this.label = label;
-  }
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-  public String getUserID() {
-    return userID;
-  }
+    public String getUserID() {
+        return userID;
+    }
 
-  public void setUserID(String userID) {
-    this.userID = userID;
-  }
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
-  public TransactionType getType() {
-    return type;
-  }
+    public TransactionType getType() {
+        return type;
+    }
 
-  public void setType(TransactionType type) {
-    this.type = type;
-  }
+    public void setType(TransactionType type) {
+        this.type = type;
+    }
 
-  @JsonManagedReference
-  public Set<Identifier> getIdentifier() {
-    return identifier;
-  }
+    public Set<Identifier> getIdentifier() {
+        return identifier;
+    }
 
-  public void setIdentifier(Set<Identifier> identifier) {
-    this.identifier = identifier;
-  }
+    public void setIdentifier(Set<Identifier> identifier) {
+        this.identifier = identifier;
+    }
+
+    @Override
+    public String toString() {
+        return "Category [id=" + id + ", label=" + label + ", userID=" + userID + ", type=" + type + ", identifier="
+                + identifier + "]";
+    }
 
 }

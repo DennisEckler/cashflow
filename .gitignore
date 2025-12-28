@@ -8,6 +8,7 @@
 bin/
 build/
 kls_database.db
+cashflowdb*
 ############## Package Files ##############
 *.jar
 *.zip

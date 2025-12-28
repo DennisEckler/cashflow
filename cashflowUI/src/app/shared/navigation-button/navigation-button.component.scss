@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@use "../../../styles.scss";
 
 .btn {
   display: inline-block;
@@ -8,7 +8,7 @@
   text-align: center;
   text-decoration: none;
   color: #fff;
-  background-color: $myGreen;
+  background-color: styles.$myGreen;
   border: 2px solid #000;
   border-radius: 10px;
   box-shadow: 5px 5px 0px #000;
@@ -16,15 +16,15 @@
 }
 
 .btn:hover {
-  background-color: $myPurple;
-  color: $myBlue;
-  border: 2px solid $myPurple;
-  box-shadow: 5px 5px 0px $myBlue;
+  background-color: styles.$myPurple;
+  color: styles.$myBlue;
+  border: 2px solid styles.$myPurple;
+  box-shadow: 5px 5px 0px styles.$myBlue;
 }
 
 .btn:active {
-  background-color: $myBlue;
-  color: $myPurple;
+  background-color: styles.$myBlue;
+  color: styles.$myPurple;
   box-shadow: none;
   transform: translateY(4px);
 }

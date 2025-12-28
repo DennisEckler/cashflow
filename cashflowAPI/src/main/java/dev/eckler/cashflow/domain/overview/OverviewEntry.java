@@ -3,12 +3,12 @@ package dev.eckler.cashflow.domain.overview;
 import java.math.BigDecimal;
 
 public interface OverviewEntry {
-  String getYear();
+    String getYear();
 
-  String getMonth();
+    String getMonth();
 
-  String getType();
+    String getType();
 
-  BigDecimal getAmount();
+    BigDecimal getAmount();
 
 }

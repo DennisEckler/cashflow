@@ -1,143 +1,154 @@
 package dev.eckler.cashflow.domain.transaction;
 
-import dev.eckler.cashflow.exception.PeriodExistsException;
-import dev.eckler.cashflow.domain.category.Category;
-import dev.eckler.cashflow.domain.category.CategoryRepository;
-import dev.eckler.cashflow.domain.identifier.Identifier;
-import dev.eckler.cashflow.shared.FileStructure;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import dev.eckler.cashflow.domain.category.Category;
+import dev.eckler.cashflow.domain.category.CategoryRepository;
+import dev.eckler.cashflow.domain.identifier.Identifier;
+import dev.eckler.cashflow.domain.identifier.IdentifierService;
+import dev.eckler.cashflow.exception.PeriodExistsException;
+import dev.eckler.cashflow.openapi.model.FileDescription;
+import dev.eckler.cashflow.openapi.model.TransactionRequest;
+import dev.eckler.cashflow.openapi.model.TransactionResponse;
+import dev.eckler.cashflow.util.CsvFileHandler;
+import dev.eckler.cashflow.util.ParserUtil;
 
 @Service
 public class TransactionService {
-    
-    private final TransactionRepository transactionRepository;
-    private final CategoryRepository categoryRepository;
-    private final Logger logger = LoggerFactory.getLogger(TransactionService.class);
-    
-    
-    private TransactionService(TransactionRepository transactionRepository,
-        CategoryRepository categoryRepository) {
-        this.transactionRepository = transactionRepository;
-        this.categoryRepository = categoryRepository;
+
+    private final TransactionRepository tr;
+    private final CategoryRepository cr;
+    private final IdentifierService is;
+    private final CsvFileHandler csvFileHandler;
+    private final ParserUtil parser;
+    private static final Logger logger = LoggerFactory.getLogger(TransactionService.class);
+
+    private TransactionService(TransactionRepository tr, CategoryRepository cr, CsvFileHandler csvFileHandler,
+            ParserUtil parser, IdentifierService is) {
+        this.tr = tr;
+        this.cr = cr;
+        this.csvFileHandler = csvFileHandler;
+        this.parser = parser;
+        this.is = is;
     }
-    
-    List<Transaction> parseCsv(InputStream is, final String USERID, FileStructure fs) {
+
+    List<TransactionResponse> findAllByIdentifierIsNullAndUserID(String userID) {
+        List<Transaction> transactions = tr.findAllByIdentifierIsNullAndUserID(userID);
+        return TransactionMapper.transactionToTransactionResponse(transactions);
+    }
+
+    void createTransactions(MultipartFile file, FileDescription fileDescription, String userID) {
+        try {
+            InputStream stream = file.getInputStream();
+            List<Transaction> transactions = parseCsv(stream, userID, fileDescription);
+            tr.saveAll(transactions);
+            logger.info("FileUpload done");
+        } catch (IOException e) {
+            logger.error("Cant handle this case");
+        }
+
+    }
+
+    void categorizeTransactions(List<TransactionRequest> transactions) {
+        transactions.forEach(transactionRequest -> {
+            long identifierId = transactionRequest.getIdentifier().getId();
+            Identifier newIdentifier = is.findIdentifierByID(identifierId);
+            tr.findById(transactionRequest.getId())
+                    .ifPresentOrElse(persistedTransaction -> {
+                        persistedTransaction.setIdentifier(newIdentifier);
+                        tr.save(persistedTransaction);
+                    }, () -> logger.info("Cant find Transaction with ID: {}", transactionRequest));
+        });
+    }
+
+    List<Transaction> parseCsv(InputStream is, final String USERID, FileDescription fs) {
         List<Transaction> transactions = new ArrayList<>();
-        List<Category> categories = categoryRepository.findAllByUserID(USERID);
+        List<Category> categories = cr.findAllByUserID(USERID);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-            
-            throwIfPeriodAlreadyExist(fs.year(), fs.month());
+
+            throwIfPeriodAlreadyExist(fs.getYear(), fs.getMonth());
             List<String> lines = reader.lines().toList();
-            int skipRowsCount = identifyParsableRow(lines, fs.dateIdx(), fs.amountIdx());
-            
+            int skipRowsCount = csvFileHandler.identifyParsableRow(lines, fs.getDateIdx(), fs.getAmountIdx());
+
             lines.stream().skip(skipRowsCount).forEach(row -> {
-                    Transaction transaction = createTransaction(USERID, row, fs, categories);
-                    transactions.add(transaction);
-                }
-            );
-            
+                Transaction transaction = createTransaction(USERID, row, fs, categories);
+                transactions.add(transaction);
+            });
+
             return transactions;
         } catch (IOException | PeriodExistsException e) {
             throw new RuntimeException(e);
         }
     }
-    
-    
+
     private void throwIfPeriodAlreadyExist(String year, String month) throws PeriodExistsException {
-        if (transactionRepository.getNumberOfYearMonthMatches(year, month) > 0) {
+        int yearInt = Integer.valueOf(year);
+        int monthInt = Integer.valueOf(month);
+        LocalDate startDate = LocalDate.of(yearInt, monthInt, 1);
+        LocalDate endDate = YearMonth.of(yearInt, monthInt).atEndOfMonth();
+        int transactionsCount = tr.findByDateBetween(startDate, endDate).size();
+        logger.debug("transactionsCount {} found between {} and {}", transactionsCount, startDate.toString(),
+                endDate.toString());
+        if (transactionsCount > 0) {
             throw new PeriodExistsException(
-                "This Period exists with year: " + year + " and month: " + month);
+                    "This Period exists with year: " + year + " and month: " + month);
         }
     }
-    
-    private int identifyParsableRow(List<String> lines, int dateIdx, int amountIdx) {
-        int skipLines = 0;
-        int maxIdx = Math.max(dateIdx, amountIdx);
-        for (String line : lines) {
-            String[] col = line.split(";");
-            try {
-                if (col.length > maxIdx) {
-                    parseDate(col[dateIdx]);
-                    parseAmount(col[amountIdx]);
-                    logger.info("skipped {} lines", skipLines);
-                    return skipLines;
-                }
-                skipLines++;
-            } catch (DateTimeParseException | ParseException e) {
-                skipLines++;
-            }
-        }
-        return skipLines;
-    }
-    
-    private LocalDate parseDate(String date) throws DateTimeParseException {
-        String format = "dd.MM.yyyy";
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
-    }
-    
-    public static BigDecimal parseAmount(String amount) throws ParseException {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        symbols.setGroupingSeparator('.');
-        symbols.setDecimalSeparator(',');
-        DecimalFormat df = new DecimalFormat("#,###.00", symbols);
-        return new BigDecimal(String.valueOf(df.parse(amount)));
-    }
-    
-    private Transaction createTransaction(String USERID, String row, FileStructure fs,
-        List<Category> categories) {
+
+    private Transaction createTransaction(String USERID, String row, FileDescription fs,
+            List<Category> categories) {
         try {
             String[] col = row.split(";");
-            LocalDate date = parseDate(col[fs.dateIdx()]);
-            BigDecimal amount = parseAmount(col[fs.amountIdx()]);
-            String source = col[fs.sourceIdx()];
-            String purpose = col[fs.purposeIdx()];
+            LocalDate date = parser.parseDate(col[fs.getDateIdx()]);
+            BigDecimal amount = parser.parseAmount(col[fs.getAmountIdx()]);
+            String source = col[fs.getSourceIdx()];
+            String purpose = col[fs.getPurposeIdx()];
             Identifier identifier = categorize(categories, source, purpose);
             return new Transaction(date, amount, USERID, purpose, source,
-                identifier);
+                    identifier);
         } catch (ParseException e) {
             logger.info("Error in creating Transaction");
             throw new RuntimeException();
         }
     }
-    
+
     private Identifier categorize(List<Category> categories, String source, String purpose) {
         for (Category category : categories) {
             for (Identifier identifier : category.getIdentifier()) {
                 if (source.trim().toLowerCase()
-                    .contains(identifier.getLabel().trim().toLowerCase())
-                    || purpose.trim().toLowerCase()
-                    .contains(identifier.getLabel().trim().toLowerCase())) {
+                        .contains(identifier.getLabel().trim().toLowerCase())
+                        || purpose.trim().toLowerCase()
+                                .contains(identifier.getLabel().trim().toLowerCase())) {
                     return identifier;
                 }
             }
         }
         return null;
     }
-    
-    void recategorize(String USERID){
-        List<Transaction> transactions = transactionRepository.findAllByUserID(USERID);
-        List<Category> categories = categoryRepository.findAllByUserID(USERID);
+
+    void recategorize(String USERID) {
+        List<Transaction> transactions = tr.findAllByUserID(USERID);
+        List<Category> categories = cr.findAllByUserID(USERID);
         transactions.forEach(t -> {
-            if (t.getIdentifier() == null){
+            if (t.getIdentifier() == null) {
                 t.setIdentifier(categorize(categories, t.getSource(), t.getPurpose()));
             }
         });
-        transactionRepository.saveAll(transactions);
+        tr.saveAll(transactions);
     }
-    
+
 }

@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@use "../../../styles.scss";
 
 :host {
   display: grid;
@@ -6,7 +6,7 @@
   .category {
     margin-top: 1rem;
     padding: 5px;
-    border: 4px $myBlue solid;
+    border: 4px styles.$myBlue solid;
     border-radius: 10px;
     width: 50%;
     justify-self: center;
@@ -18,7 +18,7 @@
       &-c1 {
         display: flex;
         &-label {
-          color: $myPurple;
+          color: styles.$myPurple;
           margin: 0;
           margin-left: 0.5rem;
         }
@@ -37,7 +37,7 @@
           height: 20px;
           &-icon:hover circle,
           &-icon:hover line {
-            stroke: $myBlue;
+            stroke: styles.$myBlue;
           }
         }
       }

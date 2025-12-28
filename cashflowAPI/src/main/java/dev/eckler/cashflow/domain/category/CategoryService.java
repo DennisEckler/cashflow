@@ -1,53 +1,58 @@
 package dev.eckler.cashflow.domain.category;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import dev.eckler.cashflow.domain.identifier.IdentifierService;
+import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
+import dev.eckler.cashflow.openapi.model.CategoryResponse;
+import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
 
 @Service
 public class CategoryService {
 
-  private final CategoryRepository categoryRepository;
-  private final IdentifierService identifierService;
+    private final CategoryRepository cr;
+    private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
 
-  public CategoryService(CategoryRepository categoryRepository,
-      IdentifierService identifierService) {
-    this.categoryRepository = categoryRepository;
-    this.identifierService = identifierService;
-  }
-
-  public List<Category> getCategoriesByUser(String userID) {
-    return categoryRepository.findAllByUserID(userID);
-  }
-
-  public ResponseEntity<Category> createCategory(Category category) {
-    Category response = categoryRepository.save(category);
-    return response.getId() != null ? ResponseEntity.ok(response)
-        : ResponseEntity.badRequest().build();
-  }
-
-  public ResponseEntity<Category> changeType(Category category, String userID) {
-    Category dbCategory = categoryRepository.findByIdAndUserID(category.getId(), userID)
-        .orElseThrow(() -> new CategoryNotFoundException(""));
-    dbCategory.setType(category.getType());
-    return ResponseEntity.ok(categoryRepository.save(dbCategory));
-  }
-
-  public ResponseEntity<String> deleteCategory(Long id, String userID) {
-    Optional<Category> category = categoryRepository.findByIdAndUserID(id, userID);
-    boolean allowDeleteUndefined = true;
-    if (category.isPresent()) {
-      category.get().getIdentifier()
-          .forEach(identifier -> identifierService.deleteIdentifier(identifier.getId(),
-              allowDeleteUndefined));
-      categoryRepository.delete(category.get());
-      return ResponseEntity.ok(String.join(" ", "Category with id:", id.toString(), "deleted"));
+    public CategoryService(CategoryRepository cr) {
+        this.cr = cr;
     }
-    throw new CategoryNotFoundException("Category with id not found");
-  }
+
+    public List<CategoryResponse> getCategoriesByUser(String userID) {
+        List<CategoryResponse> categoryResponses = cr.findAllByUserID(userID).stream()
+                .map(CategoryMapper::categoryToCategoryResponse)
+                .toList();
+        if (categoryResponses.isEmpty()) {
+            throw new CategoryNotFoundException(userID);
+        }
+        return categoryResponses;
+    }
+
+    public CategoryResponse createCategory(CategoryCreateRequest categoryCreateRequest) {
+        Category category = CategoryMapper.categoryCreateRequestToCategory(categoryCreateRequest);
+        logger.debug(category.toString());
+
+        Category response = cr.save(category);
+        return CategoryMapper.categoryToCategoryResponse(response);
+    }
+
+    public CategoryResponse changeType(CategoryUpdateRequest categoryUpdateRequest, String userID) {
+        Category category = cr.findByIdAndUserID(categoryUpdateRequest.getId(), userID)
+                .orElseThrow(() -> new CategoryNotFoundException(userID));
+        category.setType(categoryUpdateRequest.getType());
+        CategoryResponse response = CategoryMapper.categoryToCategoryResponse(cr.save(category));
+        return response;
+    }
+
+    public void deleteCategory(Long id, String userID) {
+        cr.findByIdAndUserID(id, userID)
+                .ifPresentOrElse(
+                        c -> cr.delete(c),
+                        () -> {
+                            throw new CategoryNotFoundException("Category with id not found");
+                        });
+    }
 
 }

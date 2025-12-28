@@ -2,18 +2,23 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     java
-    id("org.springframework.boot") version "3.4.1"
+    id("org.springframework.boot") version "4.0.1"
+    id("io.spring.dependency-management") version "1.1.7"
     id("org.openapi.generator") version "7.10.0"
     id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
 }
-apply(plugin = "io.spring.dependency-management")
 
 group = "dev.eckler"
 version = "0.0.1"
 
+object Versions {
+    const val java = 21
+    const val lombok = "1.18.36"
+}
+
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -22,26 +27,45 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-h2console")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-    implementation("org.apache.commons:commons-lang3:3.17.0")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0")
-
-    compileOnly("org.projectlombok:lombok:1.18.36")
-    annotationProcessor("org.projectlombok:lombok:1.18.36")
+    implementation("org.springframework.boot:spring-boot-starter-flyway")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server")
+    implementation("org.springframework.boot:spring-boot-starter-session-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-webmvc")
+    implementation("org.flywaydb:flyway-database-postgresql")
 
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-security-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-session-jdbc-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-validation-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.testcontainers:testcontainers-junit-jupiter")
+    testImplementation("org.testcontainers:testcontainers-postgresql")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testCompileOnly("org.projectlombok:lombok:1.18.36")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
+
+
+
+    implementation("org.apache.commons:commons-lang3:3.17.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0")
+
+    testImplementation("com.github.dasniko:testcontainers-keycloak:4.0.1")
+    testImplementation("io.rest-assured:rest-assured:6.0.0")
+
+    compileOnly("org.projectlombok:lombok:${Versions.lombok}")
+    annotationProcessor("org.projectlombok:lombok:${Versions.lombok}")
+    testCompileOnly("org.projectlombok:lombok:${Versions.lombok}")
+    testAnnotationProcessor("org.projectlombok:lombok:${Versions.lombok}")
+
 }
 
 sourceSets {
@@ -73,7 +97,7 @@ tasks.named("compileJava") {
 
 openApiGenerate {
     generatorName.set("spring")
-    inputSpec.set("src/main/resources/cashflow-api.yml")
+    inputSpec.set("../cashflow-api.yml")
     ignoreFileOverride.set("src/main/resources/.openapi-generator-ignore")
     modelPackage.set("dev.eckler.cashflow.openapi.model")
     apiPackage.set("dev.eckler.cashflow.openapi.api")
@@ -82,12 +106,26 @@ openApiGenerate {
             "useSpringBoot3" to "true",
             "openApiNullable" to "false",
             "interfaceOnly" to "true",
+            "useTags" to "true",
         ),
     )
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    testLogging {
+        events(
+            org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
+        )
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
+        // TODO: keep this uncommented to clean up the logs in ci/cd
+        showStandardStreams = true
+    }
     // testLogging {
     //     lifecycle {
     //         events =

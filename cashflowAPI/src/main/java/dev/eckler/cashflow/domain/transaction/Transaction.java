@@ -1,103 +1,110 @@
 package dev.eckler.cashflow.domain.transaction;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import dev.eckler.cashflow.domain.identifier.Identifier;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 public class Transaction {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  @NotNull
-  private LocalDate date;
-  @NotNull
-  @Digits(integer = 9, fraction = 2)
-  private BigDecimal amount;
-  @NotNull
-  private String userID;
-  @NotNull
-  private String purpose;
-  @NotNull
-  private String source;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-  @ManyToOne
-  private Identifier identifier;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
-  public Transaction(LocalDate date, BigDecimal amount, String userID, String purpose, String source,
-      Identifier identifier) {
-    this.date = date;
-    this.amount = amount;
-    this.userID = userID;
-    this.source = source;
-    this.purpose = purpose;
-    this.identifier = identifier;
-  }
+    @Digits(integer = 9, fraction = 2)
+    @Column(name = "amount", nullable = false)
+    private BigDecimal amount;
 
-  public Transaction() {
-  }
+    @Column(name = "user_id", nullable = false)
+    private String userID;
 
-  public Long getId() {
-    return id;
-  }
+    @Column(name = "purpose", nullable = false)
+    private String purpose;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    @Column(name = "source", nullable = false)
+    private String source;
 
-  public Identifier getIdentifier() {
-    return identifier;
-  }
+    @ManyToOne
+    private Identifier identifier;
 
-  public void setIdentifier(Identifier identifier) {
-    this.identifier = identifier;
-  }
+    public Transaction(LocalDate date, BigDecimal amount, String userID, String purpose, String source,
+            Identifier identifier) {
+        this.date = date;
+        this.amount = amount;
+        this.userID = userID;
+        this.source = source;
+        this.purpose = purpose;
+        this.identifier = identifier;
+    }
 
-  public LocalDate getDate() {
-    return date;
-  }
+    public Transaction() {
+    }
 
-  public void setDate(LocalDate date) {
-    this.date = date;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public BigDecimal getAmount() {
-    return amount;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setAmount(BigDecimal amount) {
-    this.amount = amount;
-  }
+    public Identifier getIdentifier() {
+        return identifier;
+    }
 
-  public String getUserID() {
-    return userID;
-  }
+    public void setIdentifier(Identifier identifier) {
+        this.identifier = identifier;
+    }
 
-  public void setUserID(String userID) {
-    this.userID = userID;
-  }
+    public LocalDate getDate() {
+        return date;
+    }
 
-  public String getPurpose() {
-    return purpose;
-  }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
-  public void setPurpose(String purpose) {
-    this.purpose = purpose;
-  }
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
-  public String getSource() {
-    return source;
-  }
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 
-  public void setSource(String source) {
-    this.source = source;
-  }
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 }

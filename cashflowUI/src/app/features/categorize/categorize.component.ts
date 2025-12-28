@@ -1,12 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Transaction } from 'src/app/core/model/transaction';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
-import { TransactionService } from 'src/app/core/services/transaction.service';
-import { CategoryService } from 'src/app/core/services/category.service';
-import { Category } from 'src/app/core/model/category';
-import { OAuthModule } from 'angular-oauth2-oidc';
+import {
+  CategoryResponse,
+  CategoryService,
+  IdentifierResponse,
+  TransactionRequest,
+  TransactionResponse,
+  TransactionService,
+} from 'generated-sources/openapi';
 
 @Component({
   selector: 'app-categorize',
@@ -17,14 +20,15 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 export class CategorizeComponent implements OnInit {
   private transactionService = inject(TransactionService);
   private categorySerivce = inject(CategoryService);
-  transactions?: Transaction[];
-  categories?: Category[];
-  update: Transaction[] = [];
+  transactions?: TransactionResponse[];
+  categories?: CategoryResponse[];
+  update: TransactionRequest[] = [];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.transactionService.getList().subscribe({
+    console.log('ngOnInit');
+    this.transactionService.getUncategorizedTransactions().subscribe({
       next: (v) => {
         this.transactions = v;
       },
@@ -32,7 +36,7 @@ export class CategorizeComponent implements OnInit {
         console.log(`error: ${error.message}`);
       },
     });
-    this.categorySerivce.get().subscribe({
+    this.categorySerivce.getCategories().subscribe({
       next: (v) => {
         this.categories = v;
       },
@@ -43,17 +47,35 @@ export class CategorizeComponent implements OnInit {
   }
 
   onSave() {
+    this.update.length = 0;
+    console.log('onSave');
+    // for (let transaction of this.transactions!) {
+    //   console.log(transaction);
+    // }
     if (this.transactions) {
-      for (let transaction of this.transactions) {
+      for (let transaction of this.transactions!) {
         if (transaction.identifier) {
-          transaction.identifier = JSON.parse(transaction.identifier as string);
-          this.update.push(transaction);
+          var identifierRequest = JSON.parse(transaction.identifier as string);
+          console.log('the id is ' + identifierRequest.id);
+          if (identifierRequest.id !== null) {
+            var transactionRequest: TransactionRequest = {
+              amount: transaction.amount!,
+              date: transaction.date!,
+              id: transaction.id!,
+              purpose: transaction.purpose!,
+              source: transaction.source!,
+              userID: transaction.userID!,
+              identifier: identifierRequest,
+            };
+            this.update.push(transactionRequest);
+          }
         }
       }
       if (this.update.length > 0) {
+        throw new Error('get out length is ' + this.update.length);
         console.log('sending');
         console.log(this.update);
-        this.transactionService.saveList(this.update).subscribe({
+        this.transactionService.categorizeTransactions(this.update).subscribe({
           next: (v) => {
             console.log(v);
             this.ngOnInit();
@@ -68,7 +90,8 @@ export class CategorizeComponent implements OnInit {
   }
 
   recategorize() {
-    this.transactionService.recategorize().subscribe({
+    console.log('recategorize');
+    this.transactionService.recategorizeTransactions().subscribe({
       next: (v) => {
         console.log(v);
         this.ngOnInit();
@@ -76,9 +99,15 @@ export class CategorizeComponent implements OnInit {
     });
   }
 
-  getUndefined(category: Category): string {
-    return JSON.stringify(
-      category.identifier.find((ele) => ele.label === 'undefined'),
+  getUndefined(category: CategoryResponse): string {
+    var identifier = category.identifier!.find(
+      (ele) => ele.label === category.label + '_default',
     );
+    if (identifier === undefined) {
+      throw new Error(
+        'Cant find undefined identifier for category' + category.label,
+      );
+    }
+    return JSON.stringify(identifier);
   }
 }
