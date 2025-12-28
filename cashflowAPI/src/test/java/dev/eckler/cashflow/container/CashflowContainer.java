@@ -13,7 +13,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 public class CashflowContainer {
 
     static String POSTGRES_IMAGE = "postgres:16-alpine";
-    static String KEYCLOAK_IMAGE = "quay.io/keycloak/keycloak:26.1.2";
+    static String KEYCLOAK_IMAGE = "quay.io/keycloak/keycloak:26.4.7";
     static String realmImportFile = "/cashflow_realm-realm.json";
     static String realmName = "cashflow_realm";
 
