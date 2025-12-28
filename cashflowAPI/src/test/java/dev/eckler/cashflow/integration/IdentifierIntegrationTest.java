@@ -3,9 +3,6 @@ package dev.eckler.cashflow.integration;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.transaction.annotation.Transactional;
 
 import dev.eckler.cashflow.container.CashflowContainer;
 import dev.eckler.cashflow.domain.category.Category;
@@ -23,7 +19,6 @@ import dev.eckler.cashflow.domain.identifier.Identifier;
 import dev.eckler.cashflow.domain.identifier.IdentifierRepository;
 import dev.eckler.cashflow.model.TestJwtToken;
 import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
-import dev.eckler.cashflow.openapi.model.IdentifierCreateRequest;
 import dev.eckler.cashflow.util.TestTokenUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

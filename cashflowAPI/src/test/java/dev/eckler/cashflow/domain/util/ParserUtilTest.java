@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import dev.eckler.cashflow.util.ParserUtil;
+
 @SpringJUnitConfig
 @Import(ParserUtil.class)
 public class ParserUtilTest {

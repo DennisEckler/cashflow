@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import dev.eckler.cashflow.domain.util.JwtUtil;
+import dev.eckler.cashflow.constants.CashflowConst;
 import dev.eckler.cashflow.openapi.model.CashflowValidationErrorResponse;
 import dev.eckler.cashflow.openapi.model.CashflowValidationErrorResponseSubErrorInner;
 import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
@@ -38,7 +38,7 @@ import dev.eckler.cashflow.openapi.model.CategoryResponse;
 import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
 import dev.eckler.cashflow.openapi.model.IdentifierResponse;
 import dev.eckler.cashflow.openapi.model.TransactionType;
-import dev.eckler.cashflow.shared.CashflowConst;
+import dev.eckler.cashflow.util.JwtUtil;
 
 @WebMvcTest(CategoryController.class)
 public class CategoryControllerTest {

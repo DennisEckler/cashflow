@@ -7,8 +7,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
-import dev.eckler.cashflow.domain.util.DefaultLabelBuilder;
-import dev.eckler.cashflow.shared.CashflowConst;
+import dev.eckler.cashflow.util.DefaultLabelBuilder;
 
 public class CategoryTest {
     @Test

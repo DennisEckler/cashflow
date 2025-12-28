@@ -17,6 +17,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 
+import dev.eckler.cashflow.constants.CashflowConst;
 import dev.eckler.cashflow.container.CashflowContainer;
 import dev.eckler.cashflow.domain.category.Category;
 import dev.eckler.cashflow.domain.category.CategoryRepository;
@@ -25,7 +26,6 @@ import dev.eckler.cashflow.domain.identifier.IdentifierRepository;
 import dev.eckler.cashflow.model.TestJwtToken;
 import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
 import dev.eckler.cashflow.openapi.model.TransactionType;
-import dev.eckler.cashflow.shared.CashflowConst;
 import dev.eckler.cashflow.util.TestTokenUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
