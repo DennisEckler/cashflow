@@ -5,7 +5,7 @@ info:
     A simple api to monitor and organize your transactions and get an overview
   version: 1.0.11
 servers:
-  - url: http://localhost:8080/v1/api
+  - url: http://eckler:8080/v1/api
 tags:
   - name: category
     description: Create categories to group transactions
