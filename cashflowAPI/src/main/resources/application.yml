@@ -12,7 +12,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://eckler:9000/realms/cashflow_realm
+          issuer-uri: https://eckler:9999/realms/cashflow_realm
   flyway:
     enabled: true
 logging:
