@@ -2,7 +2,6 @@ package dev.eckler.cashflow.config;
 
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
@@ -23,13 +21,11 @@ public class SecurityConfig {
     String issuer;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http,
-            @Qualifier("customCorsConfig") CorsConfigurationSource customCorsConfig)
+    public SecurityFilterChain filterChain(HttpSecurity http)
             throws Exception {
         http
-                .cors(cors -> cors.configurationSource(customCorsConfig))
+                .cors(cors -> cors.configurationSource(customCorsConfig()))
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2/**"))
-                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/v3/**", "/swagger-ui/**", "/h2/**").permitAll()
@@ -38,15 +34,12 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    CorsConfigurationSource customCorsConfig() {
+    UrlBasedCorsConfigurationSource customCorsConfig() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
                 "https://cashflow.eckler",
                 "http://localhost:4200"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
