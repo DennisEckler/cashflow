@@ -25,6 +25,9 @@ logging:
         tomcat:
           util:
             net: INFO
+      springframework:
+        security: trace
+        web: trace
 
 ---
 # dev

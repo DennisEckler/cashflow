@@ -6,14 +6,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtDecoders;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -44,20 +39,23 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource customCorsConfig() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedOrigins(Arrays.asList(
+                "https://cashflow.eckler",
+                "http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 
-    @Bean
-    @Profile("dev")
-    public JwtDecoder jwtDecoderDev() {
-        NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
-                .fromIssuerLocation(issuer);
-        jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
-        return jwtDecoder;
-    }
+    // @Bean
+    // @Profile("dev")
+    // public JwtDecoder jwtDecoderDev() {
+    // NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
+    // .fromIssuerLocation(issuer);
+    // jwtDecoder.setJwtValidator(jwt -> OAuth2TokenValidatorResult.success());
+    // return jwtDecoder;
+    // }
 }
