@@ -7,6 +7,6 @@ import { environment } from '../../../environments/environment';
 export class OverviewService {
   constructor(private http: HttpClient) {}
   getOverview(): Observable<any> {
-    return this.http.get('http://eckler:8089/v1/api/overview');
+    return this.http.get('http://cashflow-api:8080/v1/api/overview');
   }
 }
