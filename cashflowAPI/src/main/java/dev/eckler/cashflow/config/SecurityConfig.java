@@ -43,7 +43,7 @@ public class SecurityConfig {
     UrlBasedCorsConfigurationSource customCorsConfig() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
-                "https://cashflow.eckler",
+                "https://cashflow.eckler.dev",
                 "http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
@@ -56,17 +56,13 @@ public class SecurityConfig {
     @Bean
     @Profile("prod")
     public JwtDecoder jwtDecoder() {
-        // Fetch JWKS keys via internal container network (no Traefik needed)
         NimbusJwtDecoder decoder = NimbusJwtDecoder
                 .withJwkSetUri(
                         "http://keycloak-auth:8080/realms/cashflow_realm/protocol/openid-connect/certs")
                 .build();
 
-        // But validate the issuer against the PUBLIC url (matches the token's iss
-        // claim)
         OAuth2TokenValidator<Jwt> issuerValidator = JwtValidators
-                .createDefaultWithIssuer("https://keycloak.eckler/realms/cashflow_realm");
-
+                .createDefaultWithIssuer("https://keycloak.eckler.dev/realms/cashflow_realm");
         decoder.setJwtValidator(issuerValidator);
         return decoder;
     }
