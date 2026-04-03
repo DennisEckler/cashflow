@@ -32,7 +32,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-flyway")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server")
-    implementation("org.springframework.boot:spring-boot-starter-session-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.flywaydb:flyway-database-postgresql")
@@ -45,7 +44,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
     testImplementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server-test")
     testImplementation("org.springframework.boot:spring-boot-starter-security-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-session-jdbc-test")
     testImplementation("org.springframework.boot:spring-boot-starter-validation-test")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
@@ -55,7 +53,7 @@ dependencies {
 
 
 
-    implementation("org.apache.commons:commons-lang3:3.17.0")
+    implementation("org.apache.commons:commons-lang3:3.18.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0")
 
     testImplementation("com.github.dasniko:testcontainers-keycloak:4.0.1")
@@ -89,6 +87,15 @@ tasks.register("bootRunDev") {
         }
     }
     finalizedBy("bootRun")
+}
+tasks.register("bootRunProd"){
+    group = "application"
+    description = "prod mode"
+    doFirst {
+        tasks.bootRun.configure {
+            systemProperty("spring.profiles.active", "prod")
+        }
+    }
 }
 
 tasks.named("compileJava") {

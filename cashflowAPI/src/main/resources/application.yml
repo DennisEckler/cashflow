@@ -1,7 +1,4 @@
 spring:
-  output:
-    ansi:
-      enabled: always
   application:
     name: cashflow
   jpa:
@@ -15,19 +12,6 @@ spring:
           issuer-uri: https://keycloak.eckler.dev/realms/cashflow_realm
   flyway:
     enabled: true
-logging:
-  level:
-    dev:
-      eckler:
-        cashflow: debug
-    org:
-      apache:
-        tomcat:
-          util:
-            net: INFO
-      springframework:
-        security: trace
-        web: trace
 
 ---
 # dev

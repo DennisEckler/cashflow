@@ -1,7 +1,12 @@
 package dev.eckler.cashflow.domain.category;
 
-import java.util.List;
-
+import dev.eckler.cashflow.openapi.api.CategoryApi;
+import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
+import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
+import dev.eckler.cashflow.openapi.model.CategoryResponse;
+import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
+import dev.eckler.cashflow.util.JwtUtil;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,13 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.eckler.cashflow.openapi.api.CategoryApi;
-import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
-import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
-import dev.eckler.cashflow.openapi.model.CategoryResponse;
-import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
-import dev.eckler.cashflow.util.JwtUtil;
-import jakarta.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/v1/api")
@@ -68,7 +67,7 @@ public class CategoryController implements CategoryApi {
     public ResponseEntity<CategoryResponse> updateCategory(Long id,
             @Valid CategoryUpdateRequest categoryUpdateRequest) {
         String userID = jwtUtil.readSubjectFromSecurityContext();
-        log.debug("Update Category with ID: {} and userID: {} with request", id, userID,
+        log.debug("Update Category with ID: {} and userID: {} with request: {}", id, userID,
                 categoryUpdateRequest.toString());
         CategoryResponse response = categoryService.changeType(categoryUpdateRequest, userID);
         return ResponseEntity.ok(response);
