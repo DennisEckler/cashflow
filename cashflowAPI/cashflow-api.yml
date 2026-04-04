@@ -5,7 +5,8 @@ info:
     A simple api to monitor and organize your transactions and get an overview
   version: 1.0.11
 servers:
-  - url: https://cashflow.api.eckler.dev/v1/api
+  - url: https://cashflow.api.eckler.dev/api/v1
+  - url: http://localhost:8080/api/v1
 tags:
   - name: category
     description: Create categories to group transactions
@@ -13,6 +14,8 @@ tags:
     description: Identifier are used to categorize transactions automatically
   - name: transaction
     description: manage your transactions
+  - name: overview
+    description: preprocessed monthly summary
 paths:
   /category:
     get:
@@ -271,6 +274,21 @@ paths:
           description: Successfully recategorized
         "404":
           $ref: "#/components/responses/NotFound"
+  /overview:
+    get:
+      tags:
+        - overview
+      summary: Provides an endpoint for the monthly summary of all expenses
+      operationId: getOverview
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OverviewSummaryResponse"
 components:
   #-------------------------------
   # Requests
@@ -397,6 +415,27 @@ components:
         - UNIQUE
         - INCOME
         - IGNORE
+
+    OverviewSummaryResponse:
+      type: object
+      properties:
+        year:
+          type: string
+          example: 2012
+        month:
+          type: string
+          example: 07
+        fixed:
+          type: number
+        variable:
+          type: number
+        income:
+          type: number
+        unique:
+          type: number
+        diff:
+          type: number
+
 
     FileDescription:
       type: object

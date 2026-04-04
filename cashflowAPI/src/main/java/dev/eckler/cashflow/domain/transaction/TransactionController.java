@@ -1,16 +1,5 @@
 package dev.eckler.cashflow.domain.transaction;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
 import dev.eckler.cashflow.openapi.api.TransactionApi;
 import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
 import dev.eckler.cashflow.openapi.model.FileDescription;
@@ -19,9 +8,17 @@ import dev.eckler.cashflow.openapi.model.TransactionResponse;
 import dev.eckler.cashflow.util.JwtUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(path = "/v1/api")
 public class TransactionController implements TransactionApi {
 
     private final TransactionService ts;

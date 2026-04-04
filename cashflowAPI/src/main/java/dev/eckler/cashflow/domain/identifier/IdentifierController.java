@@ -1,22 +1,19 @@
 package dev.eckler.cashflow.domain.identifier;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import dev.eckler.cashflow.openapi.api.IdentifierApi;
 import dev.eckler.cashflow.openapi.model.CashflowErrorResponse;
 import dev.eckler.cashflow.openapi.model.IdentifierCreateRequest;
 import dev.eckler.cashflow.openapi.model.IdentifierResponse;
 import dev.eckler.cashflow.util.JwtUtil;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/v1/api")
 public class IdentifierController implements IdentifierApi {
 
     private final IdentifierService identifierService;
