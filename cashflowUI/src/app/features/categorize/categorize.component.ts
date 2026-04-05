@@ -48,15 +48,10 @@ export class CategorizeComponent implements OnInit {
 
   onSave() {
     this.update.length = 0;
-    console.log('onSave');
-    // for (let transaction of this.transactions!) {
-    //   console.log(transaction);
-    // }
     if (this.transactions) {
       for (let transaction of this.transactions!) {
-        if (transaction.identifier) {
+        if (transaction.identifier?.id !== null) {
           var identifierRequest = JSON.parse(transaction.identifier as string);
-          console.log('the id is ' + identifierRequest.id);
           if (identifierRequest.id !== null) {
             var transactionRequest: TransactionRequest = {
               amount: transaction.amount!,
@@ -69,10 +64,10 @@ export class CategorizeComponent implements OnInit {
             };
             this.update.push(transactionRequest);
           }
-        }
+       }
       }
+      console.log(`updating ${this.update.length} transactions`);
       if (this.update.length > 0) {
-        throw new Error('get out length is ' + this.update.length);
         console.log('sending');
         console.log(this.update);
         this.transactionService.categorizeTransactions(this.update).subscribe({

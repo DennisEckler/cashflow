@@ -1,21 +1,10 @@
 package dev.eckler.cashflow.domain.category;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import dev.eckler.cashflow.constants.CashflowConst;
+import dev.eckler.cashflow.openapi.model.*;
+import dev.eckler.cashflow.util.JwtUtil;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,18 +16,18 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import java.util.ArrayList;
+import java.util.List;
 
-import dev.eckler.cashflow.constants.CashflowConst;
-import dev.eckler.cashflow.openapi.model.CashflowValidationErrorResponse;
-import dev.eckler.cashflow.openapi.model.CashflowValidationErrorResponseSubErrorInner;
-import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
-import dev.eckler.cashflow.openapi.model.CategoryResponse;
-import dev.eckler.cashflow.openapi.model.CategoryUpdateRequest;
-import dev.eckler.cashflow.openapi.model.IdentifierResponse;
-import dev.eckler.cashflow.openapi.model.TransactionType;
-import dev.eckler.cashflow.util.JwtUtil;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CategoryController.class)
 public class CategoryControllerTest {
@@ -52,7 +41,7 @@ public class CategoryControllerTest {
     static ObjectMapper objectMapper;
 
     private String USER_ID = "gojo";
-    private String PATH = "/v1/api/category";
+    private String PATH = "/api/v1/category";
 
     @BeforeAll
     static void setUp() {

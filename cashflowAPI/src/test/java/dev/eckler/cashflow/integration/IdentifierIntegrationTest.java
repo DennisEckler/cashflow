@@ -1,17 +1,5 @@
 package dev.eckler.cashflow.integration;
 
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Lazy;
-
 import dev.eckler.cashflow.container.CashflowContainer;
 import dev.eckler.cashflow.domain.category.Category;
 import dev.eckler.cashflow.domain.category.CategoryRepository;
@@ -22,6 +10,17 @@ import dev.eckler.cashflow.openapi.model.CategoryCreateRequest;
 import dev.eckler.cashflow.util.TestTokenUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Lazy;
+
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({ CashflowContainer.class, TestTokenUtil.class })
@@ -41,7 +40,7 @@ public class IdentifierIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        RestAssured.baseURI = "http://localhost:" + port + "/v1/api/";
+        RestAssured.baseURI = "http://localhost:" + port + "/api/v1/";
     }
 
     @AfterEach

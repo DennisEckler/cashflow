@@ -1,27 +1,27 @@
 package dev.eckler.cashflow.domain.overview;
 
-import java.util.List;
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import dev.eckler.cashflow.openapi.api.OverviewApi;
+import dev.eckler.cashflow.openapi.model.OverviewSummaryResponse;
+import dev.eckler.cashflow.util.JwtUtil;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(path = "/v1/api/overview")
-public class OverviewController {
+public class OverviewController implements OverviewApi {
 
-    OverviewService overviewService;
+    private final OverviewService overviewService;
+    private final JwtUtil jwtUtil;
 
-    OverviewController(OverviewService overviewService) {
+    OverviewController(OverviewService overviewService, JwtUtil jwtUtil) {
         this.overviewService = overviewService;
+        this.jwtUtil = jwtUtil;
     }
 
-    @GetMapping
-    public List<OverviewSummary> getOverview(@AuthenticationPrincipal Jwt jwt) {
-        String userID = jwt.getSubject();
+    @Override
+    public ResponseEntity<List<OverviewSummaryResponse>> getOverview() {
+        String userID = jwtUtil.readSubjectFromSecurityContext();
         return overviewService.getOverview(userID);
     }
-
 }

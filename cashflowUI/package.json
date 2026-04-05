@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "generate-code": "openapi-generator-cli generate -i ../cashflow-api.yml -g typescript-angular -o generated-sources/openapi --additional-properties=enumPropertyNaming=UPPERCASE"
+    "generate-code": "openapi-generator-cli generate -i https://raw.githubusercontent.com/DennisEckler/cashflow/refs/heads/main/cashflowAPI/cashflow-api.yml -g typescript-angular -o generated-sources/openapi --additional-properties=enumPropertyNaming=UPPERCASE"
   },
   "private": true,
   "dependencies": {

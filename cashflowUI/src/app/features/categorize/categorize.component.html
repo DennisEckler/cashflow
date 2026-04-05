@@ -25,7 +25,7 @@
       <td>
         <select [(ngModel)]="transaction.identifier">
           <option value="---">---</option>
-          @for (category of categories; track category) {
+          @for (category of categories; track category.id) {
           <option [value]="getUndefined(category)">
             {{ category.label}}
           </option>
