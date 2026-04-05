@@ -7,6 +7,7 @@ export * from './categoryUpdateRequest';
 export * from './fileDescription';
 export * from './identifierCreateRequest';
 export * from './identifierResponse';
+export * from './overviewSummaryResponse';
 export * from './transactionRequest';
 export * from './transactionResponse';
 export * from './transactionType';

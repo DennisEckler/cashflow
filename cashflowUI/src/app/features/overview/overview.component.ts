@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { OverviewService, OverviewSummaryResponse } from 'generated-sources/openapi';
 
-import { OverviewService } from 'src/app/core/services/overview.service';
-import { OverviewSummary } from 'src/app/core/model/overview';
+
+
 
 @Component({
   selector: 'app-overview',
@@ -10,7 +11,7 @@ import { OverviewSummary } from 'src/app/core/model/overview';
   styleUrl: './overview.component.scss',
 })
 export class OverviewComponent implements OnInit {
-  overviews: OverviewSummary[] = [];
+  overviews: OverviewSummaryResponse[] = [];
 
   constructor(private overviewService: OverviewService) {}
 

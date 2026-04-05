@@ -27,11 +27,24 @@ public class OverviewService {
         Map<String, List<Overview>> list = tr.getOverview(userID).stream()
                 .map(this::createOverview)
                 .collect(groupYearMonthNaturalOrder());
-        return ResponseEntity.ok(createOverviewRows(list));
+        List<OverviewSummary> overviewSummaries = createOverviewRows(list);
+        return ResponseEntity.ok(overviewSummaries.stream().map(this::overviewMapper).toList());
     }
 
-    private List<OverviewSummaryResponse> createOverviewRows(Map<String, List<Overview>> mapOfOverview) {
-        List<OverviewSummaryResponse> rows = new ArrayList<>();
+    private OverviewSummaryResponse overviewMapper(OverviewSummary overviewSummary) {
+        OverviewSummaryResponse response = new OverviewSummaryResponse();
+        response.setDiff(overviewSummary.getDiff());
+        response.setFixed(overviewSummary.getFixed());
+        response.setIncome(overviewSummary.getIncome());
+        response.setUnique(overviewSummary.getUnique());
+        response.setVariable(overviewSummary.getVariable());
+        response.setYear(overviewSummary.getYear());
+        response.setMonth(overviewSummary.getMonth());
+        return response;
+    }
+
+    private List<OverviewSummary> createOverviewRows(Map<String, List<Overview>> mapOfOverview) {
+        List<OverviewSummary> rows = new ArrayList<>();
         mapOfOverview.forEach((period, list) -> {
             OverviewSummary row = new OverviewSummary();
             row.setMonth(list.get(0).month());
