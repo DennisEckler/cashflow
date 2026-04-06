@@ -2,10 +2,16 @@ package dev.eckler.cashflow.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -42,17 +48,17 @@ public class SecurityConfig {
         return source;
     }
 
-//    @Bean
-//    @Profile("prod")
-//    public JwtDecoder jwtDecoder() {
-//        NimbusJwtDecoder decoder = NimbusJwtDecoder
-//            .withJwkSetUri(
-//                "http://keycloak-auth:8080/realms/cashflow_realm/protocol/openid-connect/certs")
-//            .build();
-//
-//        OAuth2TokenValidator<Jwt> issuerValidator = JwtValidators
-//            .createDefaultWithIssuer("https://keycloak.eckler.dev/realms/cashflow_realm");
-//        decoder.setJwtValidator(issuerValidator);
-//        return decoder;
-//    }
+    @Bean
+    @Profile("prod")
+    public JwtDecoder jwtDecoder() {
+        NimbusJwtDecoder decoder = NimbusJwtDecoder
+            .withJwkSetUri(
+                "http://keycloak-auth:8080/realms/cashflow_realm/protocol/openid-connect/certs")
+            .build();
+
+        OAuth2TokenValidator<Jwt> issuerValidator = JwtValidators
+            .createDefaultWithIssuer("https://keycloak.eckler.dev/realms/cashflow_realm");
+        decoder.setJwtValidator(issuerValidator);
+        return decoder;
+    }
 }
