@@ -53,7 +53,7 @@ public class TransactionController implements TransactionApi {
         logger.info(String.join("User: ", userID, " is calling /transaction/uncategorized"));
         logger.debug("createTransactions");
         ts.createTransactions(file, fileDescription, userID);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @Override

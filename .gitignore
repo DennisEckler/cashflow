@@ -7,10 +7,10 @@
 .settings
 bin/
 build/
+target/
 kls_database.db
 cashflowdb*
 ############## Package Files ##############
-*.jar
 *.zip
 *.tar.gz
 *.log
