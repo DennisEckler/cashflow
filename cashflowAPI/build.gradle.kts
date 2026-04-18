@@ -115,6 +115,7 @@ openApiGenerate {
             "interfaceOnly" to "true",
             "useTags" to "true",
             "requestMappingMode" to "api_interface",
+            "generateBuilders" to "true",
         ),
     )
 }
