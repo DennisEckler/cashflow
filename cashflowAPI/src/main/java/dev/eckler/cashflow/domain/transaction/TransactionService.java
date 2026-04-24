@@ -1,21 +1,5 @@
 package dev.eckler.cashflow.domain.transaction;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import dev.eckler.cashflow.domain.category.Category;
 import dev.eckler.cashflow.domain.category.CategoryRepository;
 import dev.eckler.cashflow.domain.identifier.Identifier;
@@ -26,6 +10,21 @@ import dev.eckler.cashflow.openapi.model.TransactionRequest;
 import dev.eckler.cashflow.openapi.model.TransactionResponse;
 import dev.eckler.cashflow.util.CsvFileHandler;
 import dev.eckler.cashflow.util.ParserUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -38,7 +37,7 @@ public class TransactionService {
     private static final Logger logger = LoggerFactory.getLogger(TransactionService.class);
 
     private TransactionService(TransactionRepository tr, CategoryRepository cr, CsvFileHandler csvFileHandler,
-            ParserUtil parser, IdentifierService is) {
+                               ParserUtil parser, IdentifierService is) {
         this.tr = tr;
         this.cr = cr;
         this.csvFileHandler = csvFileHandler;
@@ -68,10 +67,10 @@ public class TransactionService {
             long identifierId = transactionRequest.getIdentifier().getId();
             Identifier newIdentifier = is.findIdentifierByID(identifierId);
             tr.findById(transactionRequest.getId())
-                    .ifPresentOrElse(persistedTransaction -> {
-                        persistedTransaction.setIdentifier(newIdentifier);
-                        tr.save(persistedTransaction);
-                    }, () -> logger.info("Cant find Transaction with ID: {}", transactionRequest));
+                .ifPresentOrElse(persistedTransaction -> {
+                    persistedTransaction.setIdentifier(newIdentifier);
+                    tr.save(persistedTransaction);
+                }, () -> logger.info("Cant find Transaction with ID: {}", transactionRequest));
         });
     }
 
@@ -102,15 +101,15 @@ public class TransactionService {
         LocalDate endDate = YearMonth.of(yearInt, monthInt).atEndOfMonth();
         int transactionsCount = tr.findByDateBetween(startDate, endDate).size();
         logger.debug("transactionsCount {} found between {} and {}", transactionsCount, startDate.toString(),
-                endDate.toString());
+            endDate.toString());
         if (transactionsCount > 0) {
             throw new PeriodExistsException(
-                    "This Period exists with year: " + year + " and month: " + month);
+                "This Period exists with year: " + year + " and month: " + month);
         }
     }
 
     private Transaction createTransaction(String USERID, String row, FileDescription fs,
-            List<Category> categories) {
+                                          List<Category> categories) {
         try {
             String[] col = row.split(";");
             LocalDate date = parser.parseDate(col[fs.getDateIdx()]);
@@ -119,7 +118,7 @@ public class TransactionService {
             String purpose = col[fs.getPurposeIdx()];
             Identifier identifier = categorize(categories, source, purpose);
             return new Transaction(date, amount, USERID, purpose, source,
-                    identifier);
+                identifier);
         } catch (ParseException e) {
             logger.info("Error in creating Transaction");
             throw new RuntimeException();
@@ -129,10 +128,9 @@ public class TransactionService {
     private Identifier categorize(List<Category> categories, String source, String purpose) {
         for (Category category : categories) {
             for (Identifier identifier : category.getIdentifier()) {
-                if (source.trim().toLowerCase()
-                        .contains(identifier.getLabel().trim().toLowerCase())
-                        || purpose.trim().toLowerCase()
-                                .contains(identifier.getLabel().trim().toLowerCase())) {
+                if (source.contains(identifier.getLabel())
+                    || purpose
+                    .contains(identifier.getLabel())) {
                     return identifier;
                 }
             }
