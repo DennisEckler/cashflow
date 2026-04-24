@@ -20,7 +20,7 @@ public class PivotService {
 
 
     public List<MonthlySummary> getMonthlyPivot(String userId) {
-        List<CategoryMonthRow> rows = categoryRepository.getRawMonthlySummary(userId);
+        List<CategoryMonthRow> rows = categoryRepository.getMonthlyTotalExpensesPerCategory(userId);
 
         List<String> allCategories = categoryRepository.findAllByUserID(userId).stream()
             .filter(c -> c.getType() != TransactionType.IGNORE && c.getType() != TransactionType.INCOME)

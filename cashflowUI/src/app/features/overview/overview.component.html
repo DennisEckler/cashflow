@@ -3,24 +3,25 @@
     <tr>
       <th>Year</th>
       <th>Month</th>
-      <th>Fixed</th>
-      <th>Variable</th>
-      <th>Income</th>
-      <th>Unique</th>
-      <th>Diff</th>
+      @for (category of categoryKeys; track $index) {
+        <th>{{ category }}</th>
+      }
+      <th>Total</th>
     </tr>
   </thead>
   <tbody>
-    @for (row of overviews; track $index) {
-      <tr>
-        <td>{{ row.year }}</td>
-        <td>{{ row.month }}</td>
-        <td>{{ row.fixed }}</td>
-        <td>{{ row.variable }}</td>
-        <td>{{ row.income }}</td>
-        <td>{{ row.unique }}</td>
-        <td>{{ row.diff }}</td>
-      </tr>
-    }
-  </tbody>
+  @for (row of monthlySummary; track $index) {
+    <tr>
+      <td>{{ row.year }}</td>
+      <td>{{ row.month }}</td>
+
+      @for (category of categoryKeys; track $index) {
+        <td>{{ row.categoryTotals[category] ?? 0 }}</td>
+      }
+
+      <td>{{ row.totalExpenses }}</td>
+    </tr>
+  }
+</tbody>
 </table>
+
