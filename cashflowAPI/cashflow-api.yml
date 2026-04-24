@@ -289,6 +289,21 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/OverviewSummaryResponse"
+  /expenses:
+    get:
+      tags:
+        - expenses
+      summary: Provides an endpoint for the monthly summary of all expenses
+      operationId: getExpenses
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MonthlySummaryTest"
 components:
   #-------------------------------
   # Requests
@@ -435,7 +450,37 @@ components:
           type: number
         diff:
           type: number
-
+    MonthlySummaryTest:
+      type: object
+      properties:
+        year:
+          type: integer
+          format: int32
+          example: 2025
+        month:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 12
+          example: 4
+        categoryTotals:
+          type: object
+          additionalProperties:
+            type: number
+            format: decimal
+          example:
+            food: 320.50
+            transport: 85.00
+            entertainment: 150.75
+        totalExpenses:
+          type: number
+          format: decimal
+          example: 556.25
+      required:
+        - year
+        - month
+        - categoryTotals
+        - totalExpenses
 
     FileDescription:
       type: object

@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     this.oauth.initCodeFlow();
+    this.oauth.setupAutomaticSilentRefresh();
   }
   onLogout() {
     this.oauth.revokeTokenAndLogout();

@@ -4,6 +4,7 @@ api.base.service.ts
 api.module.ts
 api/api.ts
 api/category.service.ts
+api/expenses.service.ts
 api/identifier.service.ts
 api/overview.service.ts
 api/transaction.service.ts
@@ -21,6 +22,7 @@ model/fileDescription.ts
 model/identifierCreateRequest.ts
 model/identifierResponse.ts
 model/models.ts
+model/monthlySummaryTest.ts
 model/overviewSummaryResponse.ts
 model/transactionRequest.ts
 model/transactionResponse.ts

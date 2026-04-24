@@ -1,9 +1,11 @@
 export * from './category.service';
 import { CategoryService } from './category.service';
+export * from './expenses.service';
+import { ExpensesService } from './expenses.service';
 export * from './identifier.service';
 import { IdentifierService } from './identifier.service';
 export * from './overview.service';
 import { OverviewService } from './overview.service';
 export * from './transaction.service';
 import { TransactionService } from './transaction.service';
-export const APIS = [CategoryService, IdentifierService, OverviewService, TransactionService];
+export const APIS = [CategoryService, ExpensesService, IdentifierService, OverviewService, TransactionService];
