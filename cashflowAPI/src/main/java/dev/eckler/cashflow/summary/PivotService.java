@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.pivot;
+package dev.eckler.cashflow.summary;
 
 import dev.eckler.cashflow.domain.category.Category;
 import dev.eckler.cashflow.domain.category.CategoryRepository;

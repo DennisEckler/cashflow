@@ -16,7 +16,7 @@
       <td>{{ row.month }}</td>
 
       @for (category of categoryKeys; track $index) {
-        <td>{{ row.categoryTotals[category] ?? 0 }}</td>
+        <td>{{ row.categoryTotals[category] }}</td>
       }
 
       <td>{{ row.totalExpenses }}</td>

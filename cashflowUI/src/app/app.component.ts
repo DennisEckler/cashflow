@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/layout/header/header.component';
 import {authCodeFlowConfig} from "./core/auth/auth.config";
 import {OAuthService} from "angular-oauth2-oidc";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  `,
   styleUrls: ['./app.component.scss'],
-  imports: [HeaderComponent, RouterOutlet, RouterLink],
+  imports: [HeaderComponent, RouterOutlet],
 })
 export class AppComponent {
   title = 'Cashflow';

@@ -1,15 +1,15 @@
 INSERT INTO category (label, type, user_id)
-VALUES ('Income', 'INCOME', 'gojo'),
-       ('Miete', 'FIXED', 'gojo'),
-       ('Fun', 'VARIABLE', 'gojo'),
-       ('Insurance', 'FIXED', 'gojo'),
-       ('Handy', 'FIXED', 'gojo'),
-       ('Internet', 'FIXED', 'gojo'),
-       ('Strom', 'FIXED', 'gojo'),
-       ('Groceries', 'VARIABLE', 'gojo'),
-       ('Transport', 'VARIABLE', 'gojo'),
-       ('Abonnements', 'FIXED', 'gojo'),
-       ('Ignore', 'IGNORE', 'gojo');
+VALUES ('Income', 'INCOME', 'kelsier'),
+       ('Miete', 'FIXED', 'kelsier'),
+       ('Fun', 'VARIABLE', 'kelsier'),
+       ('Insurance', 'FIXED', 'kelsier'),
+       ('Handy', 'FIXED', 'kelsier'),
+       ('Internet', 'FIXED', 'kelsier'),
+       ('Strom', 'FIXED', 'kelsier'),
+       ('Groceries', 'VARIABLE', 'kelsier'),
+       ('Transport', 'VARIABLE', 'kelsier'),
+       ('Abonnements', 'FIXED', 'kelsier'),
+       ('Ignore', 'IGNORE', 'kelsier');
 
 INSERT INTO identifier (label, category_id)
 VALUES ('Musterfirma GmbH', (SELECT id FROM category WHERE label = 'Income')),

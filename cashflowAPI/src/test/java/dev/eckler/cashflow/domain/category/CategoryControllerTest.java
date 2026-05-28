@@ -2,7 +2,7 @@ package dev.eckler.cashflow.domain.category;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import dev.eckler.cashflow.constants.CashflowConst;
+import dev.eckler.cashflow.common.DefaultValueSupplier;
 import dev.eckler.cashflow.openapi.model.*;
 import dev.eckler.cashflow.util.JwtUtil;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CategoryController.class)
-public class CategoryControllerTest {
+class CategoryControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -40,8 +40,7 @@ public class CategoryControllerTest {
     JwtUtil jwtUtil;
     static ObjectMapper objectMapper;
 
-    private String USER_ID = "gojo";
-    private String PATH = "/api/v1/category";
+    private static final String PATH = "/api/v1/category";
 
     @BeforeAll
     static void setUp() {
@@ -57,13 +56,13 @@ public class CategoryControllerTest {
 
     @Test
     void getCategories_whenNoCategeriesFound_shouldThrowErrorWithNotFoundStatus() throws Exception {
-        Mockito.when(jwtUtil.readSubjectFromSecurityContext()).thenReturn(USER_ID);
-        Mockito.when(cs.getCategoriesByUser(USER_ID))
-                .thenThrow(new CategoryNotFoundException(USER_ID));
+        Mockito.when(jwtUtil.readSubjectFromSecurityContext()).thenReturn(DefaultValueSupplier.TEST_USER);
+        Mockito.when(cs.getCategoriesByUser(DefaultValueSupplier.TEST_USER))
+                .thenThrow(new CategoryNotFoundException(DefaultValueSupplier.TEST_USER));
         mockMvc.perform(get(PATH)
                 .with(SecurityMockMvcRequestPostProcessors.jwt()))
                 .andExpect(status().isNotFound())
-                .andExpect(result -> assertEquals("The user: " + USER_ID + " dont have this category",
+                .andExpect(result -> assertEquals("The user: " + DefaultValueSupplier.TEST_USER + " dont have this category",
                         result.getResolvedException().getMessage()));
     }
 
@@ -73,8 +72,8 @@ public class CategoryControllerTest {
         response.setId(1L);
         List<CategoryResponse> categories = new ArrayList<>();
         categories.add(response);
-        Mockito.when(jwtUtil.readSubjectFromSecurityContext()).thenReturn(USER_ID);
-        Mockito.when(cs.getCategoriesByUser(USER_ID)).thenReturn(categories);
+        Mockito.when(jwtUtil.readSubjectFromSecurityContext()).thenReturn(DefaultValueSupplier.TEST_USER);
+        Mockito.when(cs.getCategoriesByUser(DefaultValueSupplier.TEST_USER)).thenReturn(categories);
 
         mockMvc.perform(get(PATH)
                 .with(SecurityMockMvcRequestPostProcessors.jwt()))
@@ -114,7 +113,7 @@ public class CategoryControllerTest {
 
     @Test
     void deleteCategory_whenIDNotExist_throwCategoryNotFound() throws Exception {
-        Mockito.doThrow(new CategoryNotFoundException(USER_ID))
+        Mockito.doThrow(new CategoryNotFoundException(DefaultValueSupplier.TEST_USER))
                 .when(cs).deleteCategory(anyLong(), any());
         mockMvc.perform(delete(PATH + "/{id}", 1L)
                 .with(SecurityMockMvcRequestPostProcessors.jwt()))
@@ -179,7 +178,7 @@ public class CategoryControllerTest {
 
         IdentifierResponse identifierResponse = new IdentifierResponse();
         identifierResponse.setId(1L);
-        identifierResponse.setLabel(CashflowConst.DEFAULT);
+        identifierResponse.setLabel(Category.CATEGORY_LABEL_SUFFIX);
         List<IdentifierResponse> identifierList = new ArrayList<>();
 
         identifierList.add(identifierResponse);
@@ -198,7 +197,7 @@ public class CategoryControllerTest {
 
         IdentifierResponse identifierResponse = new IdentifierResponse();
         identifierResponse.setId(1L);
-        identifierResponse.setLabel(CashflowConst.DEFAULT);
+        identifierResponse.setLabel(Category.CATEGORY_LABEL_SUFFIX);
         List<IdentifierResponse> identifierList = new ArrayList<>();
 
         identifierList.add(identifierResponse);
