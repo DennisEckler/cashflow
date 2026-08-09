@@ -12,7 +12,6 @@ export const apiConfig = new Configuration({
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(),
     { provide: Configuration, useValue: apiConfig },
   ],
 };

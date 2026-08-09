@@ -1,7 +1,6 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { authCodeFlowConfig } from 'src/app/core/auth/auth.config';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 
 @Component({
@@ -10,17 +9,11 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   constructor(private oauth: OAuthService) {}
-
-  ngOnInit(): void {
-    this.oauth.configure(authCodeFlowConfig);
-    this.oauth.loadDiscoveryDocumentAndTryLogin();
-  }
 
   onLogin() {
     this.oauth.initCodeFlow();
-    this.oauth.setupAutomaticSilentRefresh();
   }
   onLogout() {
     this.oauth.revokeTokenAndLogout();
