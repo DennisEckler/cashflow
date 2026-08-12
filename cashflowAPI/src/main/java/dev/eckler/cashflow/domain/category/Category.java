@@ -1,11 +1,5 @@
 package dev.eckler.cashflow.domain.category;
 
-import static dev.eckler.cashflow.constants.CashflowConst.DEFAULT;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import dev.eckler.cashflow.domain.identifier.Identifier;
 import dev.eckler.cashflow.openapi.model.TransactionType;
 import jakarta.persistence.CascadeType;
@@ -19,10 +13,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
 public class Category {
+
+    public static final String CATEGORY_LABEL_SUFFIX = "default";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +48,9 @@ public class Category {
         this.label = label;
         this.userID = userID;
         this.type = TransactionType.IGNORE;
-        String defaultIdentifierLabel = label + "_" + DEFAULT;
-        this.identifier = new HashSet<>(Arrays.asList(new Identifier(defaultIdentifierLabel, this)));
+        String defaultIdentifierLabel = label + "_" + CATEGORY_LABEL_SUFFIX;
+        this.identifier = new HashSet<>(
+            Arrays.asList(new Identifier(defaultIdentifierLabel, this)));
     }
 
     public Long getId() {
@@ -95,8 +95,9 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category [id=" + id + ", label=" + label + ", userID=" + userID + ", type=" + type + ", identifier="
-                + identifier + "]";
+        return "Category [id=" + id + ", label=" + label + ", userID=" + userID + ", type=" + type
+            + ", identifier="
+            + identifier + "]";
     }
 
 }

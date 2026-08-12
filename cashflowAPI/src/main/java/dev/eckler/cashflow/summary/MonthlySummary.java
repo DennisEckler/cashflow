@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.pivot;
+package dev.eckler.cashflow.summary;
 
 import java.math.BigDecimal;
 import java.util.Map;

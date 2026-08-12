@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.pivot;
+package dev.eckler.cashflow.summary;
 
 import dev.eckler.cashflow.openapi.api.ExpensesApi;
 import dev.eckler.cashflow.openapi.model.MonthlySummaryTest;

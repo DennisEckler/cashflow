@@ -1,19 +1,17 @@
 package dev.eckler.cashflow.domain.category;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-
-import org.apache.commons.lang3.StringUtils;
+import dev.eckler.cashflow.common.DefaultValueSupplier;
 import org.junit.jupiter.api.Test;
 
-import dev.eckler.cashflow.util.DefaultLabelBuilder;
+class CategoryTest {
 
-public class CategoryTest {
     @Test
     void testGetCategoryDefaultName() {
-        Category c = new Category();
-        String result = Arrays.asList(DefaultLabelBuilder.createLabelFor(c).split("\\.")).getLast();
-        assertTrue(StringUtils.equals("Category_default", result));
+        String label = "Haushalt";
+        Category c = new Category(label, DefaultValueSupplier.TEST_USER);
+        assertThat(c.getIdentifier().iterator().next().getLabel()).isEqualTo(
+            label + "_" + Category.CATEGORY_LABEL_SUFFIX);
     }
 }

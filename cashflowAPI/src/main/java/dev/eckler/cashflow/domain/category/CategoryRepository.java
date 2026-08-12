@@ -1,6 +1,6 @@
 package dev.eckler.cashflow.domain.category;
 
-import dev.eckler.cashflow.pivot.CategoryMonthRow;
+import dev.eckler.cashflow.summary.CategoryMonthRow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

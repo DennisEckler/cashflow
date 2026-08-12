@@ -1,4 +1,4 @@
-package dev.eckler.cashflow.container;
+package dev.eckler.cashflow.testcontainer;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
