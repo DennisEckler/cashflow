@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import { FormsModule } from '@angular/forms';
 import { FileDescription, TransactionService } from 'generated-sources/openapi';
@@ -7,6 +7,7 @@ import { FileDescription, TransactionService } from 'generated-sources/openapi';
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NavigationButtonComponent, FormsModule],
 })
 export class FileUploadComponent implements OnInit {

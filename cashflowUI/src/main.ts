@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import { authInterceptor } from './app/core/auth/auth.interceptor';
 bootstrapApplication(AppComponent, {
   providers: [
     provideZoneChangeDetection(),importProvidersFrom(BrowserModule, FormsModule, NgOptimizedImage),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withXhr(), withInterceptors([authInterceptor])),
     provideOAuthClient(),
     appConfig.providers,
     provideAnimations(),

@@ -1,11 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 import {
   CategoryResponse,
   CategoryService,
-  IdentifierResponse,
   TransactionRequest,
   TransactionResponse,
   TransactionService,
@@ -15,6 +14,7 @@ import {
   selector: 'app-categorize',
   templateUrl: './categorize.component.html',
   styleUrls: ['./categorize.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormsModule, NavigationButtonComponent],
 })
 export class CategorizeComponent implements OnInit {

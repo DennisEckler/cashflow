@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ExpensesService, MonthlySummaryTest, OverviewService, OverviewSummaryResponse } from 'generated-sources/openapi';
 
 
@@ -8,6 +8,7 @@ import { ExpensesService, MonthlySummaryTest, OverviewService, OverviewSummaryRe
   selector: 'app-overview',
   imports: [],
   templateUrl: './overview.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './overview.component.scss',
 })
 export class OverviewComponent implements OnInit {

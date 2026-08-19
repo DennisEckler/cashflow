@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { trigger, style, animate, transition } from '@angular/animations';
 
@@ -7,6 +7,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger('showMe', [
       transition(':enter', [

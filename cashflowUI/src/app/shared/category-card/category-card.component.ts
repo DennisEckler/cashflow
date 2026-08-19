@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { Input } from '@angular/core';
 import { IdentifierChipComponent } from '../identifier-chip/identifier-chip.component';
@@ -17,6 +17,7 @@ import { catResToCatUpReq } from 'src/app/core/mapper/category.mapper';
   selector: 'app-category-card',
   imports: [IdentifierChipComponent, FormsModule],
   templateUrl: './category-card.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './category-card.component.scss',
 })
 export class CategoryCardComponent {

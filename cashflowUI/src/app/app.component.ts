@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/layout/header/header.component';
 import {authCodeFlowConfig} from "./core/auth/auth.config";
@@ -11,6 +11,7 @@ import {OAuthService} from "angular-oauth2-oidc";
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [HeaderComponent, RouterOutlet],
 })
 export class AppComponent {

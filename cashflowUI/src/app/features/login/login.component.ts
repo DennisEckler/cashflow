@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
 
@@ -7,6 +7,7 @@ import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navi
   selector: 'app-login',
   imports: [NavigationButtonComponent],
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
