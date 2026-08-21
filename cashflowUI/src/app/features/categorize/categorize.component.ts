@@ -1,15 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
+import { NavigationButtonComponent } from '@src/app/shared/navigation-button/navigation-button.component';
 import {
   CategoryResponse,
   CategoryService,
-  IdentifierResponse,
   TransactionRequest,
   TransactionResponse,
   TransactionService,
-} from 'generated-sources/openapi';
+} from '@generated/openapi';
 
 @Component({
   selector: 'app-categorize',
@@ -64,7 +63,7 @@ export class CategorizeComponent implements OnInit {
             };
             this.update.push(transactionRequest);
           }
-       }
+        }
       }
       console.log(`updating ${this.update.length} transactions`);
       if (this.update.length > 0) {

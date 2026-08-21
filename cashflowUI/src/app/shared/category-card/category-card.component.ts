@@ -10,8 +10,8 @@ import {
   IdentifierResponse,
   IdentifierService,
   TransactionType,
-} from 'generated-sources/openapi';
-import { catResToCatUpReq } from 'src/app/core/mapper/category.mapper';
+} from '@generated/openapi';
+import { catResToCatUpReq } from '@src/app/core/mapper/category.mapper';
 
 @Component({
   selector: 'app-category-card',

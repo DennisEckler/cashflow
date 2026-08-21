@@ -1,14 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 
-import { CategoryCardComponent } from 'src/app/shared/category-card/category-card.component';
-import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
+import { CategoryCardComponent } from '@src/app/shared/category-card/category-card.component';
+import { NavigationButtonComponent } from '@src/app/shared/navigation-button/navigation-button.component';
 import { FormsModule } from '@angular/forms';
 import {
   CategoryCreateRequest,
   CategoryResponse,
   CategoryService,
   TransactionType,
-} from 'generated-sources/openapi';
+} from '@generated/openapi';
 
 @Component({
   selector: 'app-settings',

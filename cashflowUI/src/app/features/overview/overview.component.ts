@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpensesService, MonthlySummaryTest, OverviewService, OverviewSummaryResponse } from 'generated-sources/openapi';
+import { ExpensesService, MonthlySummaryTest, OverviewService, OverviewSummaryResponse } from '@generated/openapi';
 
 
 

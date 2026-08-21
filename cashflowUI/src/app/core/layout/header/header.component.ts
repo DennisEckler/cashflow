@@ -33,5 +33,5 @@ import {NavigationButtonComponent} from '../../../shared/navigation-button/navig
   imports: [NgOptimizedImage, RouterLink, NavigationButtonComponent]
 })
 export class HeaderComponent {
-  logo = '../../../assets/cashes2.png';
+  logo = '../../../assets/cashes-logo.png';
 }

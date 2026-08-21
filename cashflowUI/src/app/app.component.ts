@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/layout/header/header.component';
 import {authCodeFlowConfig} from "./core/auth/auth.config";
@@ -14,10 +14,11 @@ import {OAuthService} from "angular-oauth2-oidc";
   imports: [HeaderComponent, RouterOutlet],
 })
 export class AppComponent {
+  private authService =  inject(OAuthService);
   title = 'Cashflow';
-  constructor(private oauth: OAuthService) {
-    this.oauth.configure(authCodeFlowConfig);
-    this.oauth.loadDiscoveryDocumentAndTryLogin();
-    this.oauth.setupAutomaticSilentRefresh();
+  constructor() {
+    this.authService.configure(authCodeFlowConfig);
+    this.authService.loadDiscoveryDocumentAndTryLogin();
+    this.authService.setupAutomaticSilentRefresh();
   }
 }

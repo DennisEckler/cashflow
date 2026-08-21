@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { NavigationButtonComponent } from 'src/app/shared/navigation-button/navigation-button.component';
+import { NavigationButtonComponent } from '@src/app/shared/navigation-button/navigation-button.component';
 import { FormsModule } from '@angular/forms';
-import { FileDescription, TransactionService } from 'generated-sources/openapi';
+import { FileDescription, TransactionService } from '@generated/openapi';
 
 @Component({
   selector: 'app-file-upload',
