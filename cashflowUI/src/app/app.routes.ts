@@ -1,17 +1,29 @@
-import { Routes } from '@angular/router';
-import { FileUploadComponent } from './features/file-upload/file-upload.component';
-import { CategorizeComponent } from './features/categorize/categorize.component';
-import { HomeComponent } from './features/home/home.component';
-import { OverviewComponent } from './features/overview/overview.component';
-import { SettingsComponent } from './features/settings/settings.component';
-import { LoginComponent } from './features/login/login.component';
+import {Routes} from '@angular/router';
+import {HomeComponent} from './features/home/home.component';
+import {LoginComponent} from './features/login/login.component';
 
 export const routes: Routes = [
-  { path: 'file-upload', title: 'FileUpload', component: FileUploadComponent },
-  { path: 'categorize', component: CategorizeComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'overview', component: OverviewComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', title: 'Home', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
+  {
+    path: 'file-upload',
+    title: 'FileUpload',
+    loadComponent: () => import('./features/file-upload/file-upload.component').then(m => m.FileUploadComponent)
+  },
+  {
+    path: 'categorize',
+    title: 'Categorize',
+    loadComponent: () => import('./features/categorize/categorize.component').then(m => m.CategorizeComponent)
+  },
+  {
+    path: 'overview',
+    title: 'Overview',
+    loadComponent: () => import('./features/overview/overview.component').then(m => m.OverviewComponent)
+  },
+  {
+    path: 'settings',
+    title: 'Settings',
+    loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent),
+  },
 ];

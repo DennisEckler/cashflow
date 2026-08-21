@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
 import {NavigationButtonComponent} from '../../../shared/navigation-button/navigation-button.component';
@@ -30,9 +30,8 @@ import {NavigationButtonComponent} from '../../../shared/navigation-button/navig
       padding: 10px;
     }
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgOptimizedImage, RouterLink, NavigationButtonComponent]
 })
 export class HeaderComponent {
-  logo = '../../../assets/cashes2.png';
+  logo = '../../../assets/cashes-logo.png';
 }
