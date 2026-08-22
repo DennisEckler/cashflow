@@ -507,6 +507,13 @@ components:
         month:
           type: string
           example: 02
+      required:
+        - amountIdx
+        - dateIdx
+        - month
+        - purposeIdx
+        - sourceIdx
+        - year
 
     CashflowErrorResponse:
       type: object
