@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { CategorizeComponent } from './categorize.component';
 
-import { UpdateListComponent } from './update-list.component';
-
-describe('UpdateListComponent', () => {
-  let component: UpdateListComponent;
-  let fixture: ComponentFixture<UpdateListComponent>;
+describe('CategorizeComponent', () => {
+  let component: CategorizeComponent;
+  let fixture: ComponentFixture<CategorizeComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [UpdateListComponent]
-});
-    fixture = TestBed.createComponent(UpdateListComponent);
+      imports: [CategorizeComponent],
+    });
+    fixture = TestBed.createComponent(CategorizeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

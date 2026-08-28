@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { beforeEach, describe, expect, it } from 'vitest';
 import { OverviewComponent } from './overview.component';
 
 describe('OverviewComponent', () => {
@@ -8,10 +8,9 @@ describe('OverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OverviewComponent]
-    })
-    .compileComponents();
-    
+      imports: [OverviewComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(OverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
