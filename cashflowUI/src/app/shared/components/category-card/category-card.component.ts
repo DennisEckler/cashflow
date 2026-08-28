@@ -1,6 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-
-import { Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { IdentifierChipComponent } from '../identifier-chip/identifier-chip.component';
 import { FormsModule } from '@angular/forms';
 import {
@@ -11,7 +9,7 @@ import {
   IdentifierService,
   TransactionType,
 } from '@generated/openapi';
-import { catResToCatUpReq } from '@src/app/core/mapper/category.mapper';
+import { catResToCatUpReq } from '@src/app/shared/mapper/category.mapper';
 
 @Component({
   selector: 'app-category-card',
@@ -20,20 +18,18 @@ import { catResToCatUpReq } from '@src/app/core/mapper/category.mapper';
   styleUrl: './category-card.component.scss',
 })
 export class CategoryCardComponent {
-  constructor() {
-    this.enumValues = Object.keys(this.transactionType);
-  }
-
-  private identifierSerice = inject(IdentifierService);
-  private categoryService = inject(CategoryService);
   dialog!: HTMLDialogElement;
-
   @Input() category!: CategoryResponse;
   @Output() categoryDeleteEvent = new EventEmitter<CategoryResponse>();
-
   identifierInput: string = '';
   transactionType = TransactionType;
   enumValues: string[];
+  private identifierSerice = inject(IdentifierService);
+  private categoryService = inject(CategoryService);
+
+  constructor() {
+    this.enumValues = Object.keys(this.transactionType);
+  }
 
   changeCategoryType() {
     var catUpdateReq = catResToCatUpReq(this.category);

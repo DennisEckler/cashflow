@@ -4,7 +4,7 @@
   "compilerOptions": {
     "paths": {
       "@src/*": ["./src/*"],
-      "@generated/*": ["./generated-sources/*"],
+      "@generated/*": ["./generated-sources/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

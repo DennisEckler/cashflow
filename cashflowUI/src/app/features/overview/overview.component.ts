@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpensesService, MonthlySummaryTest, OverviewService, OverviewSummaryResponse } from '@generated/openapi';
-
-
-
+import {
+  ExpensesService,
+  MonthlySummaryTest,
+  OverviewService,
+  OverviewSummaryResponse,
+} from '@generated/openapi';
 
 @Component({
   selector: 'app-overview',
@@ -15,8 +17,10 @@ export class OverviewComponent implements OnInit {
   monthlySummary: MonthlySummaryTest[] = [];
   categoryKeys: string[] = [];
 
-
-  constructor(private overviewService: OverviewService, private expenseService: ExpensesService) { }
+  constructor(
+    private overviewService: OverviewService,
+    private expenseService: ExpensesService,
+  ) {}
 
   ngOnInit() {
     this.overviewService.getOverview().subscribe({
@@ -25,16 +29,15 @@ export class OverviewComponent implements OnInit {
     });
     this.expenseService.getExpenses().subscribe({
       next: (x) => {
-        console.log('EXPENSES OK', x)
+        console.log('EXPENSES OK', x);
         this.monthlySummary = x;
         const keySet = new Set<string>();
 
-
         if (this.monthlySummary.length > 0) {
-          Object.keys(this.monthlySummary[0].categoryTotals)
-            .forEach(key => keySet.add(key));
+          Object.keys(this.monthlySummary[0].categoryTotals).forEach((key) =>
+            keySet.add(key),
+          );
         }
-
 
         this.categoryKeys = Array.from(keySet);
       },

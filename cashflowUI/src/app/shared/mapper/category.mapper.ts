@@ -1,7 +1,4 @@
-import {
-  CategoryResponse,
-  CategoryUpdateRequest,
-} from '@generated/openapi';
+import { CategoryResponse, CategoryUpdateRequest } from '@generated/openapi';
 
 export function catResToCatUpReq(catRes: CategoryResponse) {
   var catCreateReq: CategoryUpdateRequest = {

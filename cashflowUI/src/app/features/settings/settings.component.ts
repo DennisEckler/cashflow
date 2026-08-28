@@ -1,68 +1,65 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 
-import { CategoryCardComponent } from '@src/app/shared/category-card/category-card.component';
-import { NavigationButtonComponent } from '@src/app/shared/navigation-button/navigation-button.component';
-import { FormsModule } from '@angular/forms';
+import { CategoryCardComponent } from '@src/app/shared/components/category-card/category-card.component';
+import { NavigationButtonComponent } from '@src/app/shared/components/navigation-button/navigation-button.component';
 import {
   CategoryCreateRequest,
   CategoryResponse,
   CategoryService,
   TransactionType,
 } from '@generated/openapi';
+import { form, FormField } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-settings',
-  imports: [
-    CategoryCardComponent,
-    NavigationButtonComponent,
-    FormsModule
-],
+  imports: [CategoryCardComponent, NavigationButtonComponent, FormField],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })
 export class SettingsComponent implements OnInit {
+  categories = signal<CategoryResponse[]>([]);
+  categoryLabel = signal('');
+  categoryLabelForm = form(this.categoryLabel);
   private categoryService = inject(CategoryService);
-
-  categories: CategoryResponse[] = [];
-  categoryInput: string = '';
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe({
       next: (v) => {
         if (v !== null) {
-          this.categories = v;
+          this.categories.set(v);
         }
       },
     });
   }
 
   addCategory() {
-    if (this.categoryInput !== '') {
-      const labelExist = this.categories.some(
-        (category) => category.label === this.categoryInput,
+    if (this.categoryLabel() !== '') {
+      const labelExist = this.categories().some(
+        (category) => category.label === this.categoryLabel(),
       );
-      if (labelExist || this.categoryInput.trim() === '') {
+      if (labelExist || this.categoryLabel().trim() === '') {
         window.alert('Can`t add duplicates or empty identifier');
       } else {
         let category: CategoryCreateRequest = {
           id: undefined,
-          label: this.categoryInput,
+          label: this.categoryLabel(),
           userID: undefined,
           type: TransactionType.FIXED,
           identifier: [],
         };
         this.categoryService.addCategory(category).subscribe({
-          next: (response) => this.categories.push(response),
+          next: (response) =>
+            this.categories.update((category) => [...category, response]),
           error: (err) => console.log(err),
         });
-        this.categoryInput = '';
+        this.categoryLabel.set('');
       }
     }
   }
 
   deleteCategory(category: CategoryResponse) {
-    this.categories = this.categories?.filter(
-      (ele) => ele.label !== category.label,
+    this.categories.set(
+      this.categories().filter((ele) => ele.label !== category.label),
     );
     if (category.id !== null) {
       this.categoryService.deleteCatgory(category.id as number).subscribe({

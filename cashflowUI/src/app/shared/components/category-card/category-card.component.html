@@ -1,0 +1,42 @@
+<div class="category">
+  @if (category) {
+    <div class="category-header-container">
+      <div class="category-header-container-c1">
+        <h1 class="category-header-container-c1-label">{{ category.label }}</h1>
+        <select (ngModelChange)="changeCategoryType()" [(ngModel)]="category.type" class="category-header-container-c1-selection" id="type" name="type">
+          @for (type of enumValues; track $index) {
+            <option>{{ type }}</option>
+          }
+        </select>
+      </div>
+      <div class="category-header-container-c2">
+        <button (click)="clickedEvent()" class="category-header-container-c2-button">
+          <svg class="category-header-container-c2-button-icon" height="20" viewBox="0 0 20 20" width="20">
+            <circle cx="10" cy="10" fill="none" r="9" stroke="white" stroke-width="2" />
+            <line stroke="white" stroke-width="2" x1="6" x2="14" y1="6" y2="14" />
+            <line stroke="white" stroke-width="2" x1="6" x2="14" y1="14" y2="6" />
+          </svg>
+        </button>
+        <dialog id="dialog">
+          <p>Do You really want to delete the Category?</p>
+          <button (click)="closeDialog()">no</button>
+          <button (click)="deleteCategory()">yes</button>
+        </dialog>
+      </div>
+    </div>
+
+    <div class="category-identifier">
+      <h4>Add Identifier:</h4>
+      <input [(ngModel)]="identifierInput" type="text" />
+      <button (click)="addIdentifier()">add</button>
+    </div>
+
+    <div class="category-content">
+      @for (identifier of category.identifier; track identifier.id) {
+        @if (identifier.label !== 'undefined') {
+          <app-identifier-chip (identifierDeleted)="deleteIdentifier($event)" [identifier]="identifier"></app-identifier-chip>
+        }
+      }
+    </div>
+  }
+</div>

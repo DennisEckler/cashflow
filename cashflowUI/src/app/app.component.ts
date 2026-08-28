@@ -1,8 +1,8 @@
-import {Component, inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/layout/header/header.component';
-import {authCodeFlowConfig} from "./core/auth/auth.config";
-import {OAuthService} from "angular-oauth2-oidc";
+import { authCodeFlowConfig } from './core/auth/auth.config';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ import {OAuthService} from "angular-oauth2-oidc";
   imports: [HeaderComponent, RouterOutlet],
 })
 export class AppComponent {
-  private authService =  inject(OAuthService);
+  private authService = inject(OAuthService);
   title = 'Cashflow';
   constructor() {
     this.authService.configure(authCodeFlowConfig);

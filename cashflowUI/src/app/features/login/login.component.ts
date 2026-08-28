@@ -1,7 +1,6 @@
-
 import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { NavigationButtonComponent } from '@src/app/shared/navigation-button/navigation-button.component';
+import { NavigationButtonComponent } from '@src/app/shared/components/navigation-button/navigation-button.component';
 
 @Component({
   selector: 'app-login',

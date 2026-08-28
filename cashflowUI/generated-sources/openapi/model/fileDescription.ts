@@ -10,11 +10,11 @@
 
 
 export interface FileDescription { 
-    dateIdx?: number;
-    amountIdx?: number;
-    purposeIdx?: number;
-    sourceIdx?: number;
-    year?: string;
-    month?: string;
+    dateIdx: number;
+    amountIdx: number;
+    purposeIdx: number;
+    sourceIdx: number;
+    year: string;
+    month: string;
 }
 

@@ -1,7 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NavigationButtonComponent } from '@src/app/shared/navigation-button/navigation-button.component';
+import { NavigationButtonComponent } from '@src/app/shared/components/navigation-button/navigation-button.component';
 import {
   CategoryResponse,
   CategoryService,
@@ -17,11 +17,11 @@ import {
   imports: [FormsModule, NavigationButtonComponent],
 })
 export class CategorizeComponent implements OnInit {
-  private transactionService = inject(TransactionService);
-  private categorySerivce = inject(CategoryService);
   transactions?: TransactionResponse[];
   categories?: CategoryResponse[];
   update: TransactionRequest[] = [];
+  private transactionService = inject(TransactionService);
+  private categorySerivce = inject(CategoryService);
 
   constructor() {}
 

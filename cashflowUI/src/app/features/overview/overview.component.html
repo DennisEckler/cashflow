@@ -10,18 +10,17 @@
     </tr>
   </thead>
   <tbody>
-  @for (row of monthlySummary; track $index) {
-    <tr>
-      <td>{{ row.year }}</td>
-      <td>{{ row.month }}</td>
+    @for (row of monthlySummary; track $index) {
+      <tr>
+        <td>{{ row.year }}</td>
+        <td>{{ row.month }}</td>
 
-      @for (category of categoryKeys; track $index) {
-        <td>{{ row.categoryTotals[category] }}</td>
-      }
+        @for (category of categoryKeys; track $index) {
+          <td>{{ row.categoryTotals[category] }}</td>
+        }
 
-      <td>{{ row.totalExpenses }}</td>
-    </tr>
-  }
-</tbody>
+        <td>{{ row.totalExpenses }}</td>
+      </tr>
+    }
+  </tbody>
 </table>
-

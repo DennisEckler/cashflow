@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { beforeEach, describe, expect, it } from 'vitest';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -8,8 +8,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [HeaderComponent]
-});
+      imports: [HeaderComponent],
+    });
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

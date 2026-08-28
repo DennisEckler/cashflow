@@ -1,4 +1,4 @@
-@use "../../../styles.scss";
+@use '../../../../styles';
 
 :host {
   display: grid;
@@ -17,6 +17,7 @@
 
       &-c1 {
         display: flex;
+
         &-label {
           color: styles.$myPurple;
           margin: 0;
@@ -35,6 +36,7 @@
           border: none;
           padding: 0;
           height: 20px;
+
           &-icon:hover circle,
           &-icon:hover line {
             stroke: styles.$myBlue;
@@ -49,6 +51,7 @@
         height: 30px;
         margin: 0;
       }
+
       display: flex;
       align-items: baseline;
       margin-left: 0.6rem;

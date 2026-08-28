@@ -1,30 +1,25 @@
-<input
-  type="file"
-  class="file-upload-hidden"
-  (change)="onChange($event)"
-  #fileUpload
-/>
+<input #fileUpload (change)="onChange($event)" class="file-upload-hidden" type="file" />
 
 <div class="file-upload">
-  {{ csvFile?.name || "No file uploaded yet." }}
-  <button (click)="fileUpload.click()">upload</button>
+  {{ fileNameDescription() }}
+  <navigation-button (click)="fileUpload.click()" label="Upload" />
 </div>
 
-@if (fileName) {
+@if (csvFile()) {
   <div class="file-structure">
     <label for="dateIdx">DateIdx: </label>
-    <input id="dateIdx" [(ngModel)]="fileDescription.dateIdx" type="text" />
+    <input [formField]="fileDescriptionForm.dateIdx" id="dateIdx" type="number" />
     <label for="amountIdx">AmountIdx: </label>
-    <input id="amountIdx" [(ngModel)]="fileDescription.amountIdx" type="text" />
+    <input [formField]="fileDescriptionForm.amountIdx" id="amountIdx" type="number" />
     <label for="purposeIdx">PurposeIdx: </label>
-    <input id="purposeIdx" [(ngModel)]="fileDescription.purposeIdx" type="text" />
+    <input [formField]="fileDescriptionForm.purposeIdx" id="purposeIdx" type="number" />
     <label for="sourceIdx">Source: </label>
-    <input id="sourceIdx" [(ngModel)]="fileDescription.sourceIdx" type="text" />
+    <input [formField]="fileDescriptionForm.sourceIdx" id="sourceIdx" type="number" />
     <label for="year">Year: </label>
-    <input id="year" [(ngModel)]="fileDescription.year" type="text" />
+    <input [formField]="fileDescriptionForm.year" id="year" type="text" />
     <label for="month">Month: </label>
-    <input id="month" [(ngModel)]="fileDescription.month" type="text" />
+    <input [formField]="fileDescriptionForm.month" id="month" type="text" />
   </div>
-  <navigation-button class="send-button" label="Send" (click)="onUpload()" />
-  {{ message }}
+  <navigation-button (click)="onUpload()" class="send-button" label="Send" />
+  {{ message() }}
 }
