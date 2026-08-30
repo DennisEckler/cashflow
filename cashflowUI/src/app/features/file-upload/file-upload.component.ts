@@ -21,9 +21,7 @@ export class FileUploadComponent {
     month: '08',
   });
   message = signal('');
-  fileNameDescription = computed(
-    () => this.csvFile()?.name ?? 'No file uploaded yet.',
-  );
+  fileNameDescription = computed(() => this.csvFile()?.name ?? 'No file uploaded yet.');
   fileDescriptionForm = form(this.fileDescription);
 
   private transactionService = inject(TransactionService);
@@ -40,17 +38,15 @@ export class FileUploadComponent {
     const file = this.csvFile();
     if (file) {
       console.log('uploading this file: ' + file.name);
-      this.transactionService
-        .createTransactions(file, this.fileDescription())
-        .subscribe({
-          next: () => {
-            this.message.set('Upload successful');
-          },
-          error: (err: HttpErrorResponse) => {
-            this.message.set(err.error?.message ?? err.message);
-            console.log(`error-msg: ${err.error?.message ?? err.message}`);
-          },
-        });
+      this.transactionService.createTransactions(file, this.fileDescription()).subscribe({
+        next: () => {
+          this.message.set('Upload successful');
+        },
+        error: (err: HttpErrorResponse) => {
+          this.message.set(err.error?.message ?? err.message);
+          console.log(`error-msg: ${err.error?.message ?? err.message}`);
+        },
+      });
     }
   }
 }

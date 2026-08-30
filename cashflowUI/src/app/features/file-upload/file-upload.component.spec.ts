@@ -16,9 +16,7 @@ describe('FileUploadComponent', () => {
   let transactionServiceMock: any;
 
   function selectFile(file: File) {
-    const input = fixture.debugElement.query(
-      By.css('input[type="file"]'),
-    ).nativeElement;
+    const input = fixture.debugElement.query(By.css('input[type="file"]')).nativeElement;
 
     Object.defineProperty(input, 'files', {
       value: [file],
@@ -36,9 +34,7 @@ describe('FileUploadComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [FileUploadComponent, FormField],
-      providers: [
-        { provide: TransactionService, useValue: transactionServiceMock },
-      ],
+      providers: [{ provide: TransactionService, useValue: transactionServiceMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FileUploadComponent);
@@ -57,16 +53,12 @@ describe('FileUploadComponent', () => {
     });
 
     it('should NOT render the file structure block initially', () => {
-      const fileStructureDiv = fixture.debugElement.query(
-        By.css('.file-structure'),
-      );
+      const fileStructureDiv = fixture.debugElement.query(By.css('.file-structure'));
       expect(fileStructureDiv).toBeNull();
     });
 
     it('should display the default file name description', () => {
-      const displayElement = fixture.debugElement.query(
-        By.css('.file-upload'),
-      ).nativeElement;
+      const displayElement = fixture.debugElement.query(By.css('.file-upload')).nativeElement;
       expect(displayElement.textContent).toContain('No file uploaded yet.');
     });
   });
@@ -83,9 +75,7 @@ describe('FileUploadComponent', () => {
     it('should render the file structure block after a file is selected', () => {
       selectFile(createMockFile('test.csv'));
 
-      const fileStructureDiv = fixture.debugElement.query(
-        By.css('.file-structure'),
-      );
+      const fileStructureDiv = fixture.debugElement.query(By.css('.file-structure'));
       expect(fileStructureDiv).toBeTruthy();
     });
 
@@ -93,9 +83,7 @@ describe('FileUploadComponent', () => {
       const mockFile = createMockFile('awesome.csv');
       selectFile(mockFile);
 
-      const displayElement = fixture.debugElement.query(
-        By.css('.file-upload'),
-      ).nativeElement;
+      const displayElement = fixture.debugElement.query(By.css('.file-upload')).nativeElement;
       expect(displayElement.textContent).toContain('awesome.csv');
     });
   });
@@ -108,9 +96,7 @@ describe('FileUploadComponent', () => {
 
       selectFile(mockFile);
 
-      const sendButton = fixture.debugElement.query(
-        By.css('navigation-button.send-button'),
-      );
+      const sendButton = fixture.debugElement.query(By.css('navigation-button.send-button'));
       expect(sendButton).toBeTruthy();
       sendButton.nativeElement.click();
       fixture.detectChanges();
@@ -134,15 +120,11 @@ describe('FileUploadComponent', () => {
         },
       };
 
-      transactionServiceMock.createTransactions.mockReturnValue(
-        throwError(() => error),
-      );
+      transactionServiceMock.createTransactions.mockReturnValue(throwError(() => error));
 
       selectFile(mockFile);
 
-      const sendButton = fixture.debugElement.query(
-        By.css('navigation-button.send-button'),
-      );
+      const sendButton = fixture.debugElement.query(By.css('navigation-button.send-button'));
       sendButton.nativeElement.click();
       fixture.detectChanges();
 
@@ -154,9 +136,7 @@ describe('FileUploadComponent', () => {
     it('should NOT call service if no file is selected', () => {
       expect(component.csvFile()).toBeUndefined();
 
-      const sendButton = fixture.debugElement.query(
-        By.css('navigation-button.send-button'),
-      );
+      const sendButton = fixture.debugElement.query(By.css('navigation-button.send-button'));
       expect(sendButton).toBeNull();
 
       component.onUpload();

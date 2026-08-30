@@ -10,32 +10,24 @@ export const routes: Routes = [
     path: 'file-upload',
     title: 'FileUpload',
     loadComponent: () =>
-      import('./features/file-upload/file-upload.component').then(
-        (m) => m.FileUploadComponent,
-      ),
+      import('./features/file-upload/file-upload.component').then((m) => m.FileUploadComponent),
   },
   {
     path: 'categorize',
     title: 'Categorize',
     loadComponent: () =>
-      import('./features/categorize/categorize.component').then(
-        (m) => m.CategorizeComponent,
-      ),
+      import('./features/categorize/categorize.component').then((m) => m.CategorizeComponent),
   },
   {
     path: 'overview',
     title: 'Overview',
     loadComponent: () =>
-      import('./features/overview/overview.component').then(
-        (m) => m.OverviewComponent,
-      ),
+      import('./features/overview/overview.component').then((m) => m.OverviewComponent),
   },
   {
     path: 'settings',
     title: 'Settings',
     loadComponent: () =>
-      import('./features/settings/settings.component').then(
-        (m) => m.SettingsComponent,
-      ),
+      import('./features/settings/settings.component').then((m) => m.SettingsComponent),
   },
 ];

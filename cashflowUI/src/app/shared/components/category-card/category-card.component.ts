@@ -34,12 +34,10 @@ export class CategoryCardComponent {
   changeCategoryType() {
     var catUpdateReq = catResToCatUpReq(this.category);
 
-    this.categoryService
-      .updateCategory(catUpdateReq.id, catUpdateReq)
-      .subscribe({
-        next: (response) => (this.category = response),
-        error: (err) => console.log('value not accepted'),
-      });
+    this.categoryService.updateCategory(catUpdateReq.id, catUpdateReq).subscribe({
+      next: (response) => (this.category = response),
+      error: (err) => console.log('value not accepted'),
+    });
   }
 
   deleteCategory() {
@@ -52,11 +50,9 @@ export class CategoryCardComponent {
         (identifer) => identifer.label !== deleteIdentifer.label,
       );
       if (deleteIdentifer.id !== null) {
-        this.identifierSerice
-          .deleteIdentifier(this.category.id!, deleteIdentifer.id!)
-          .subscribe({
-            next: (v) => console.log(v),
-          });
+        this.identifierSerice.deleteIdentifier(this.category.id!, deleteIdentifer.id!).subscribe({
+          next: (v) => console.log(v),
+        });
       }
     }
   }
@@ -73,11 +69,9 @@ export class CategoryCardComponent {
           label: this.identifierInput,
           categoryID: this.category.id!,
         };
-        this.identifierSerice
-          .addIdentifier(identifier.categoryID, identifier)
-          .subscribe({
-            next: (response) => this.category?.identifier?.push(response),
-          });
+        this.identifierSerice.addIdentifier(identifier.categoryID, identifier).subscribe({
+          next: (response) => this.category?.identifier?.push(response),
+        });
         this.identifierInput = '';
       }
     }

@@ -9,8 +9,5 @@ export const apiConfig = new Configuration({
 });
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(routes),
-    { provide: Configuration, useValue: apiConfig },
-  ],
+  providers: [provideRouter(routes), { provide: Configuration, useValue: apiConfig }],
 };

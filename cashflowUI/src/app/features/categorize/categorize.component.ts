@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NavigationButtonComponent } from '@src/app/shared/components/navigation-button/navigation-button.component';
@@ -9,6 +9,8 @@ import {
   TransactionResponse,
   TransactionService,
 } from '@generated/openapi';
+import { Category } from '@src/app/shared/model/category';
+import { responseToCategories } from '@src/app/shared/mapper/category.mapper';
 
 @Component({
   selector: 'app-categorize',
@@ -18,12 +20,10 @@ import {
 })
 export class CategorizeComponent implements OnInit {
   transactions?: TransactionResponse[];
-  categories?: CategoryResponse[];
+  categories = signal<Category[]>([]);
   update: TransactionRequest[] = [];
-  private transactionService = inject(TransactionService);
-  private categorySerivce = inject(CategoryService);
-
-  constructor() {}
+  private readonly transactionService = inject(TransactionService);
+  private readonly categorySerivce = inject(CategoryService);
 
   ngOnInit(): void {
     console.log('ngOnInit');
@@ -37,7 +37,7 @@ export class CategorizeComponent implements OnInit {
     });
     this.categorySerivce.getCategories().subscribe({
       next: (v) => {
-        this.categories = v;
+        this.categories.set(responseToCategories(v));
       },
       error: (error: HttpErrorResponse) => {
         console.log(`error ${error.message}`);
@@ -94,13 +94,9 @@ export class CategorizeComponent implements OnInit {
   }
 
   getUndefined(category: CategoryResponse): string {
-    var identifier = category.identifier!.find(
-      (ele) => ele.label === category.label + '_default',
-    );
+    var identifier = category.identifier!.find((ele) => ele.label === category.label + '_default');
     if (identifier === undefined) {
-      throw new Error(
-        'Cant find undefined identifier for category' + category.label,
-      );
+      throw new Error('Cant find undefined identifier for category' + category.label);
     }
     return JSON.stringify(identifier);
   }

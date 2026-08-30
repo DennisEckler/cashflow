@@ -34,9 +34,7 @@ export class OverviewComponent implements OnInit {
         const keySet = new Set<string>();
 
         if (this.monthlySummary.length > 0) {
-          Object.keys(this.monthlySummary[0].categoryTotals).forEach((key) =>
-            keySet.add(key),
-          );
+          Object.keys(this.monthlySummary[0].categoryTotals).forEach((key) => keySet.add(key));
         }
 
         this.categoryKeys = Array.from(keySet);

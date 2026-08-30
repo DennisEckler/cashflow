@@ -48,8 +48,7 @@ export class SettingsComponent implements OnInit {
           identifier: [],
         };
         this.categoryService.addCategory(category).subscribe({
-          next: (response) =>
-            this.categories.update((category) => [...category, response]),
+          next: (response) => this.categories.update((category) => [...category, response]),
           error: (err) => console.log(err),
         });
         this.categoryLabel.set('');
@@ -58,9 +57,7 @@ export class SettingsComponent implements OnInit {
   }
 
   deleteCategory(category: CategoryResponse) {
-    this.categories.set(
-      this.categories().filter((ele) => ele.label !== category.label),
-    );
+    this.categories.set(this.categories().filter((ele) => ele.label !== category.label));
     if (category.id !== null) {
       this.categoryService.deleteCatgory(category.id as number).subscribe({
         next: (v) => console.log(v),

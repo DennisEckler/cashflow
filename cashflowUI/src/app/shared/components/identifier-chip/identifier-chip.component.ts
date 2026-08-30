@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import {
-  IdentifierCreateRequest,
-  IdentifierResponse,
-} from '@generated/openapi';
+import { IdentifierCreateRequest, IdentifierResponse } from '@generated/openapi';
 
 @Component({
   selector: 'app-identifier-chip',
