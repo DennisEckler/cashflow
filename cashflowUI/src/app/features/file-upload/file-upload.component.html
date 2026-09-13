@@ -1,25 +1,25 @@
-<input #fileUpload (change)="onChange($event)" class="file-upload-hidden" type="file" />
+<input #fileUpload (change)="onChange($event)" class="file-upload-hidden" type="file"/>
 
 <div class="file-upload">
   {{ fileNameDescription() }}
-  <navigation-button (click)="fileUpload.click()" label="Upload" />
+  <cashflow-button (click)="fileUpload.click()" label="Upload"/>
 </div>
 
 @if (csvFile()) {
   <div class="file-structure">
     <label for="dateIdx">DateIdx: </label>
-    <input [formField]="fileDescriptionForm.dateIdx" id="dateIdx" type="number" />
+    <input [formField]="fileDescriptionForm.dateIdx" id="dateIdx" type="number"/>
     <label for="amountIdx">AmountIdx: </label>
-    <input [formField]="fileDescriptionForm.amountIdx" id="amountIdx" type="number" />
+    <input [formField]="fileDescriptionForm.amountIdx" id="amountIdx" type="number"/>
     <label for="purposeIdx">PurposeIdx: </label>
-    <input [formField]="fileDescriptionForm.purposeIdx" id="purposeIdx" type="number" />
+    <input [formField]="fileDescriptionForm.purposeIdx" id="purposeIdx" type="number"/>
     <label for="sourceIdx">Source: </label>
-    <input [formField]="fileDescriptionForm.sourceIdx" id="sourceIdx" type="number" />
+    <input [formField]="fileDescriptionForm.sourceIdx" id="sourceIdx" type="number"/>
     <label for="year">Year: </label>
-    <input [formField]="fileDescriptionForm.year" id="year" type="text" />
+    <input [formField]="fileDescriptionForm.year" id="year" type="text"/>
     <label for="month">Month: </label>
-    <input [formField]="fileDescriptionForm.month" id="month" type="text" />
+    <input [formField]="fileDescriptionForm.month" id="month" type="text"/>
   </div>
-  <navigation-button (click)="onUpload()" class="send-button" label="Send" />
+  <cashflow-button (click)="onUpload()" class="send-button" label="Send"/>
   {{ message() }}
 }

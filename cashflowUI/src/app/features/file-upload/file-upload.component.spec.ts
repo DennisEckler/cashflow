@@ -96,7 +96,7 @@ describe('FileUploadComponent', () => {
 
       selectFile(mockFile);
 
-      const sendButton = fixture.debugElement.query(By.css('navigation-button.send-button'));
+      const sendButton = fixture.debugElement.query(By.css('cashflow-button.send-button'));
       expect(sendButton).toBeTruthy();
       sendButton.nativeElement.click();
       fixture.detectChanges();
@@ -124,7 +124,7 @@ describe('FileUploadComponent', () => {
 
       selectFile(mockFile);
 
-      const sendButton = fixture.debugElement.query(By.css('navigation-button.send-button'));
+      const sendButton = fixture.debugElement.query(By.css('cashflow-button.send-button'));
       sendButton.nativeElement.click();
       fixture.detectChanges();
 
@@ -136,7 +136,7 @@ describe('FileUploadComponent', () => {
     it('should NOT call service if no file is selected', () => {
       expect(component.csvFile()).toBeUndefined();
 
-      const sendButton = fixture.debugElement.query(By.css('navigation-button.send-button'));
+      const sendButton = fixture.debugElement.query(By.css('cashflow-button.send-button'));
       expect(sendButton).toBeNull();
 
       component.onUpload();

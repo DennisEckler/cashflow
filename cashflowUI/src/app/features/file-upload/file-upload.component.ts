@@ -1,14 +1,14 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { NavigationButtonComponent } from '@src/app/shared/components/navigation-button/navigation-button.component';
 import { FileDescription, TransactionService } from '@generated/openapi';
 import { HttpErrorResponse } from '@angular/common/http';
 import { form, FormField } from '@angular/forms/signals';
+import { CashflowButtonComponent } from '@src/app/shared/components/cashflow-button/cashflow-button.component';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
-  imports: [NavigationButtonComponent, FormField],
+  imports: [FormField, CashflowButtonComponent],
 })
 export class FileUploadComponent {
   csvFile = signal<File | undefined>(undefined);

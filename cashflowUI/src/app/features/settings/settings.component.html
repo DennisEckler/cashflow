@@ -1,6 +1,6 @@
 <div>
-  <navigation-button class="header-button" (click)="addCategory()" label="Add Category"></navigation-button>
-  <input type="text" [formField]="categoryLabelForm" />
+  <cashflow-button (click)="addCategory()" class="header-button" label="Add Category"></cashflow-button>
+  <input [formField]="categoryLabelForm" type="text"/>
 </div>
 @if (categories() && categories().length !== 0) {
   @for (category of categories(); track category.id) {

@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 
 import { CategoryCardComponent } from '@src/app/shared/components/category-card/category-card.component';
-import { NavigationButtonComponent } from '@src/app/shared/components/navigation-button/navigation-button.component';
 import {
   CategoryCreateRequest,
   CategoryResponse,
@@ -9,10 +8,11 @@ import {
   TransactionType,
 } from '@generated/openapi';
 import { form, FormField } from '@angular/forms/signals';
+import { CashflowButtonComponent } from '@src/app/shared/components/cashflow-button/cashflow-button.component';
 
 @Component({
   selector: 'app-settings',
-  imports: [CategoryCardComponent, NavigationButtonComponent, FormField],
+  imports: [CategoryCardComponent, FormField, CashflowButtonComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })

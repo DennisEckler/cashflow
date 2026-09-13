@@ -23,9 +23,5 @@ export function responseToCategory(response: CategoryResponse): Category {
 }
 
 export function responseToCategories(response: CategoryResponse[]): Category[] {
-  let categories: Category[] = [];
-  for (var entry of response) {
-    categories.push(responseToCategory(entry));
-  }
-  return categories;
+  return response.map(responseToCategory);
 }

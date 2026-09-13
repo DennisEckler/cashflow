@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { NavigationButtonComponent } from '@src/app/shared/components/navigation-button/navigation-button.component';
+import { CashflowButtonComponent } from '@src/app/shared/components/cashflow-button/cashflow-button.component';
 
 @Component({
   selector: 'app-login',
-  imports: [NavigationButtonComponent],
+  imports: [CashflowButtonComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

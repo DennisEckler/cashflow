@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
-import { NavigationButtonComponent } from '@src/app/shared/components/navigation-button/navigation-button.component';
+import { CashflowButtonComponent } from '@src/app/shared/components/cashflow-button/cashflow-button.component';
 
 @Component({
   selector: 'app-header',
@@ -13,12 +13,12 @@ import { NavigationButtonComponent } from '@src/app/shared/components/navigation
       alt="Logo an open book"
       priority
     />
-    <navigation-button routerLink="/home" label="Home" />
-    <navigation-button routerLink="/overview" label="Overview" />
-    <navigation-button routerLink="/file-upload" label="FileUpload" />
-    <navigation-button routerLink="/categorize" label="Categorize" />
-    <navigation-button routerLink="/settings" label="Settings" />
-    <navigation-button routerLink="/login" label="Login" />`,
+    <cashflow-button routerLink="/home" label="Home" />
+    <cashflow-button routerLink="/overview" label="Overview" />
+    <cashflow-button routerLink="/file-upload" label="FileUpload" />
+    <cashflow-button routerLink="/categorize" label="Categorize" />
+    <cashflow-button routerLink="/settings" label="Settings" />
+    <cashflow-button routerLink="/login" label="Login" />`,
   styles: `
     .logo {
       position: absolute;
@@ -36,7 +36,7 @@ import { NavigationButtonComponent } from '@src/app/shared/components/navigation
       padding: 10px;
     }
   `,
-  imports: [NgOptimizedImage, RouterLink, NavigationButtonComponent],
+  imports: [NgOptimizedImage, RouterLink, CashflowButtonComponent],
 })
 export class HeaderComponent {
   logo = '../../../assets/cashes-logo.png';

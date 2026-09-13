@@ -3,12 +3,12 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'navigation-button',
-  templateUrl: './navigation-button.component.html',
-  styleUrl: './navigation-button.component.scss',
+  selector: 'cashflow-button',
+  templateUrl: './cashflow-button.component.html',
+  styleUrl: './cashflow-button.component.scss',
   imports: [RouterLink],
 })
-export class NavigationButtonComponent {
+export class CashflowButtonComponent {
   @Input() label = '';
   @Input() routerLink = '';
 }

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { NavigationButtonComponent } from './navigation-button.component';
+import { CashflowButtonComponent } from './cashflow-button.component';
 
-describe('NavigationButtonComponent', () => {
-  let component: NavigationButtonComponent;
-  let fixture: ComponentFixture<NavigationButtonComponent>;
+describe('CashflowButtonComponent', () => {
+  let component: CashflowButtonComponent;
+  let fixture: ComponentFixture<CashflowButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavigationButtonComponent],
+      imports: [CashflowButtonComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NavigationButtonComponent);
+    fixture = TestBed.createComponent(CashflowButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
