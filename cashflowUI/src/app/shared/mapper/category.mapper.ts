@@ -3,7 +3,7 @@ import { Category } from '@src/app/shared/model/category';
 import { responseToIdentifiers } from '@src/app/shared/mapper/identifier.mapper';
 
 export function catResToCatUpReq(catRes: CategoryResponse) {
-  var catCreateReq: CategoryUpdateRequest = {
+  const catCreateReq: CategoryUpdateRequest = {
     id: catRes.id!,
     label: catRes.label!,
     type: catRes.type!,

@@ -32,7 +32,7 @@ export class CategoryCardComponent {
   }
 
   changeCategoryType() {
-    var catUpdateReq = catResToCatUpReq(this.category);
+    const catUpdateReq = catResToCatUpReq(this.category);
 
     this.categoryService.updateCategory(catUpdateReq.id, catUpdateReq).subscribe({
       next: (response) => (this.category = response),
