@@ -37,7 +37,7 @@ dependencies {
     implementation("org.flywaydb:flyway-database-postgresql")
 
     runtimeOnly("org.postgresql:postgresql")
-    runtimeOnly("com.h2database:h2")
+    runtimeOnly("com.h2database:h2:2.3.232")
     runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
@@ -96,6 +96,16 @@ tasks.register("bootRunProd"){
             systemProperty("spring.profiles.active", "prod")
         }
     }
+}
+tasks.register("bootRunE2E") {
+    group = "application"
+    description = "e2e mode"
+    doFirst {
+        tasks.bootRun.configure {
+            systemProperty("spring.profiles.active", "e2e")
+        }
+    }
+    finalizedBy("bootRun")
 }
 
 tasks.named("compileJava") {

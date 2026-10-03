@@ -13,7 +13,27 @@ import { CashflowButtonComponent } from '@src/app/shared/components/cashflow-but
 @Component({
   selector: 'app-settings',
   imports: [CategoryCardComponent, FormField, CashflowButtonComponent],
-  templateUrl: './settings.component.html',
+  template: `
+    <div>
+      <cashflow-button
+        (click)="addCategory()"
+        class="header-button"
+        label="Add Category"
+        data-testid="add-category-button"
+      ></cashflow-button>
+      <input [formField]="categoryLabelForm" type="text" data-testid="add-category-input-field" />
+    </div>
+    @if (categories().length !== 0) {
+      @for (category of categories(); track category.id) {
+        <app-category-card
+          (categoryDeleteEvent)="deleteCategory($event)"
+          [category]="category"
+        ></app-category-card>
+      }
+    } @else {
+      <h2>Can\`t find Categories</h2>
+    }
+  `,
   styleUrl: './settings.component.scss',
 })
 export class SettingsComponent implements OnInit {

@@ -32,6 +32,7 @@ export class CategoryCardComponent {
   }
 
   changeCategoryType() {
+    console.log(JSON.stringify(this.category));
     const catUpdateReq = catResToCatUpReq(this.category);
 
     this.categoryService.updateCategory(catUpdateReq.id, catUpdateReq).subscribe({

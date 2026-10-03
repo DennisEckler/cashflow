@@ -46,3 +46,24 @@ spring:
     password: ${POSTGRES_PASSWORD}
     user: ${POSTGRES_USER}
     url: ${POSTGRES_URL}
+---
+# e2e
+spring:
+  config:
+    activate:
+      on-profile: e2e
+  datasource:
+    url: jdbc:h2:mem:cashflowdb;DB_CLOSE_DELAY=-1
+    username: dev
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  flyway:
+    password:
+    user: dev
+    url: jdbc:h2:mem:cashflowdb;DB_CLOSE_DELAY=-1
+    locations: classpath:db/migration
+
+
